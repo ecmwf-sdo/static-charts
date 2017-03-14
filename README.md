@@ -3,6 +3,8 @@ Full page web widget to display static charts from the European Centre for Mediu
 
 An example can be seen at http://atmosphere.copernicus.eu/s/charts/s2s/
 
+This repository contains a build of the application. The source files can be found in the [ECMWF repository](https://software.ecmwf.int/stash/projects/WEB/repos/node-modules/browse)
+
 ### setup
 
  * The widget will take over the whole page. By default the widget will look for two divs which the page must provide: '.column-1' and '.column-2'
