@@ -12,7 +12,7 @@
     return e.m = t, e.c = i, e.p = "/eccharts/cams/", e(0);
 }([ function(t, e, i) {
     /** @license
-	 *  ECMWF Ajax-queue
+	 *  ECMWF Static charts
 	 *  (C) Copyright ECMWF http://www.ecmwf.int
 	 *
 	 *  This software is licensed under the terms of the Apache Licence Version 2.0
@@ -32,6 +32,11 @@
                     q_width: 256
                 },
                 options: {
+                    ajax: {
+                        backend: {
+                            get_chart: "/plots/get-map/"
+                        }
+                    },
                     backend_host: "//apps.ecmwf.int",
                     dom: {
                         content_parent: "#content_"
@@ -42,12 +47,12 @@
                     }
                 }
             }, window.ECMWF), console.log("backend=", i(13).options.backend_host), i(64), !function() {
-                var t = [ i(14), i(270) ];
+                var t = [ i(14), i(273) ];
                 (function(t, e) {
                     e(t);
                 }).apply(null, t);
             }(), e(function(t) {
-                t("#othermenu").addClass("column-1"), i(262);
+                t("#othermenu").addClass("column-1"), i(264);
             });
         }).apply(null, t);
     }();
@@ -352,7 +357,7 @@
         }
         function g(t, e, i, n, o) {
             for (var r, a, s, l, c, u, h = e.createDocumentFragment(), d = [], p = 0, g = t.length; p < g; p++) if (r = t[p],
-            r || 0 === r) if ("object" === ct.type(r)) ct.merge(d, r.nodeType ? [ r ] : r); else if (Lt.test(r)) {
+            r || 0 === r) if ("object" === ct.type(r)) ct.merge(d, r.nodeType ? [ r ] : r); else if (zt.test(r)) {
                 for (a = a || h.appendChild(e.createElement("div")), s = (Rt.exec(r) || [ "", "" ])[1].toLowerCase(),
                 l = Nt[s] || Nt._default, a.innerHTML = l[1] + ct.htmlPrefilter(r) + l[2], u = l[0]; u--; ) a = a.lastChild;
                 ct.merge(d, a.childNodes), a = h.firstChild, a.textContent = "";
@@ -504,7 +509,7 @@
         function N(t, e, i) {
             for (var n, o = (G.tweeners[e] || []).concat(G.tweeners["*"]), r = 0, a = o.length; r < a; r++) if (n = o[r].call(i, e, t)) return n;
         }
-        function L(t, e, i) {
+        function z(t, e, i) {
             var n, o, r, a, s, l, c, u, h = this, d = {}, p = t.style, f = t.nodeType && Ht(t), m = Tt.get(t, "fxshow");
             i.queue || (s = ct._queueHooks(t, "fx"), null == s.unqueued && (s.unqueued = 0,
             l = s.empty.fire, s.empty.fire = function() {
@@ -539,7 +544,7 @@
                 a.start = "width" === n || "height" === n ? 1 : 0));
             }
         }
-        function z(t, e) {
+        function L(t, e) {
             var i, n, o, r, a;
             for (i in t) if (n = ct.camelCase(i), o = e[n], r = t[i], ct.isArray(r) && (o = r[1],
             r = t[i] = r[0]), i !== n && (t[n] = r, delete t[i]), a = ct.cssHooks[n], a && "expand" in a) {
@@ -579,7 +584,7 @@
                     this;
                 }
             }), u = c.props;
-            for (z(u, c.opts.specialEasing); r < a; r++) if (n = G.prefilters[r].call(c, t, u, c.opts)) return ct.isFunction(n.stop) && (ct._queueHooks(c.elem, c.opts.queue).stop = ct.proxy(n.stop, n)),
+            for (L(u, c.opts.specialEasing); r < a; r++) if (n = G.prefilters[r].call(c, t, u, c.opts)) return ct.isFunction(n.stop) && (ct._queueHooks(c.elem, c.opts.queue).stop = ct.proxy(n.stop, n)),
             n;
             return ct.map(u, N, c), ct.isFunction(c.opts.start) && c.opts.start.call(t, c),
             ct.fx.timer(ct.extend(l, {
@@ -898,15 +903,15 @@
                 return n;
             }
             function p(t, e, i) {
-                var n = e.dir, o = i && "parentNode" === n, r = z++;
+                var n = e.dir, o = i && "parentNode" === n, r = L++;
                 return e.first ? function(e, i, r) {
                     for (;e = e[n]; ) if (1 === e.nodeType || o) return t(e, i, r);
                 } : function(e, i, a) {
-                    var s, l, c, u = [ L, r ];
+                    var s, l, c, u = [ z, r ];
                     if (a) {
                         for (;e = e[n]; ) if ((1 === e.nodeType || o) && t(e, i, a)) return !0;
                     } else for (;e = e[n]; ) if (1 === e.nodeType || o) {
-                        if (c = e[O] || (e[O] = {}), l = c[e.uniqueID] || (c[e.uniqueID] = {}), (s = l[n]) && s[0] === L && s[1] === r) return u[2] = s[2];
+                        if (c = e[O] || (e[O] = {}), l = c[e.uniqueID] || (c[e.uniqueID] = {}), (s = l[n]) && s[0] === z && s[1] === r) return u[2] = s[2];
                         if (l[n] = u, u[2] = t(e, i, a)) return !0;
                     }
                 };
@@ -962,14 +967,14 @@
             }
             function A(t, i) {
                 var o = i.length > 0, r = t.length > 0, a = function(n, a, s, l, c) {
-                    var u, h, d, p = 0, f = "0", m = n && [], v = [], b = B, A = n || r && w.find.TAG("*", c), _ = L += null == b ? 1 : Math.random() || .1, y = A.length;
+                    var u, h, d, p = 0, f = "0", m = n && [], v = [], b = B, A = n || r && w.find.TAG("*", c), _ = z += null == b ? 1 : Math.random() || .1, y = A.length;
                     for (c && (B = a === j || a || c); f !== y && null != (u = A[f]); f++) {
                         if (r && u) {
                             for (h = 0, a || u.ownerDocument === j || (M(u), s = !D); d = t[h++]; ) if (d(u, a || j, s)) {
                                 l.push(u);
                                 break;
                             }
-                            c && (L = _);
+                            c && (z = _);
                         }
                         o && ((u = !d && u) && p--, n && m.push(u));
                     }
@@ -981,11 +986,11 @@
                         }
                         X.apply(l, v), c && !n && v.length > 0 && p + i.length > 1 && e.uniqueSort(l);
                     }
-                    return c && (L = _, B = b), m;
+                    return c && (z = _, B = b), m;
                 };
                 return o ? n(a) : a;
             }
-            var _, y, w, x, k, C, E, I, B, T, S, M, j, Q, D, P, H, F, R, O = "sizzle" + 1 * new Date(), N = t.document, L = 0, z = 0, G = i(), U = i(), W = i(), Y = function(t, e) {
+            var _, y, w, x, k, C, E, I, B, T, S, M, j, Q, D, P, H, F, R, O = "sizzle" + 1 * new Date(), N = t.document, z = 0, L = 0, G = i(), U = i(), W = i(), Y = function(t, e) {
                 return t === e && (S = !0), 0;
             }, q = 1 << 31, K = {}.hasOwnProperty, J = [], Z = J.pop, V = J.push, X = J.push, $ = J.slice, tt = function(t, e) {
                 for (var i = 0, n = t.length; i < n; i++) if (t[i] === e) return i;
@@ -1199,13 +1204,13 @@
                                 }
                                 if (f = [ a ? g.firstChild : g.lastChild ], a && b) {
                                     for (d = g, h = d[O] || (d[O] = {}), u = h[d.uniqueID] || (h[d.uniqueID] = {}),
-                                    c = u[t] || [], p = c[0] === L && c[1], A = p && c[2], d = p && g.childNodes[p]; d = ++p && d && d[m] || (A = p = 0) || f.pop(); ) if (1 === d.nodeType && ++A && d === e) {
-                                        u[t] = [ L, p, A ];
+                                    c = u[t] || [], p = c[0] === z && c[1], A = p && c[2], d = p && g.childNodes[p]; d = ++p && d && d[m] || (A = p = 0) || f.pop(); ) if (1 === d.nodeType && ++A && d === e) {
+                                        u[t] = [ z, p, A ];
                                         break;
                                     }
                                 } else if (b && (d = e, h = d[O] || (d[O] = {}), u = h[d.uniqueID] || (h[d.uniqueID] = {}),
-                                c = u[t] || [], p = c[0] === L && c[1], A = p), A === !1) for (;(d = ++p && d && d[m] || (A = p = 0) || f.pop()) && ((s ? d.nodeName.toLowerCase() !== v : 1 !== d.nodeType) || !++A || (b && (h = d[O] || (d[O] = {}),
-                                u = h[d.uniqueID] || (h[d.uniqueID] = {}), u[t] = [ L, A ]), d !== e)); ) ;
+                                c = u[t] || [], p = c[0] === z && c[1], A = p), A === !1) for (;(d = ++p && d && d[m] || (A = p = 0) || f.pop()) && ((s ? d.nodeName.toLowerCase() !== v : 1 !== d.nodeType) || !++A || (b && (h = d[O] || (d[O] = {}),
+                                u = h[d.uniqueID] || (h[d.uniqueID] = {}), u[t] = [ z, A ]), d !== e)); ) ;
                                 return A -= o, A === n || A % n === 0 && A / n >= 0;
                             }
                         };
@@ -1790,14 +1795,14 @@
         };
         Nt.optgroup = Nt.option, Nt.tbody = Nt.tfoot = Nt.colgroup = Nt.caption = Nt.thead,
         Nt.th = Nt.td;
-        var Lt = /<|&#?\w+;/;
+        var zt = /<|&#?\w+;/;
         !function() {
             var t = $.createDocumentFragment(), e = t.appendChild($.createElement("div")), i = $.createElement("input");
             i.setAttribute("type", "radio"), i.setAttribute("checked", "checked"), i.setAttribute("name", "t"),
             e.appendChild(i), st.checkClone = e.cloneNode(!0).cloneNode(!0).lastChild.checked,
             e.innerHTML = "<textarea>x</textarea>", st.noCloneChecked = !!e.cloneNode(!0).lastChild.defaultValue;
         }();
-        var zt = /^key/, Gt = /^(?:mouse|pointer|contextmenu|drag|drop)|click/, Ut = /^([^.]*)(?:\.(.+)|)/;
+        var Lt = /^key/, Gt = /^(?:mouse|pointer|contextmenu|drag|drop)|click/, Ut = /^([^.]*)(?:\.(.+)|)/;
         ct.event = {
             global: {},
             add: function(t, e, i, n, o) {
@@ -1883,7 +1888,7 @@
             fix: function(t) {
                 if (t[ct.expando]) return t;
                 var e, i, n, o = t.type, r = t, a = this.fixHooks[o];
-                for (a || (this.fixHooks[o] = a = Gt.test(o) ? this.mouseHooks : zt.test(o) ? this.keyHooks : {}),
+                for (a || (this.fixHooks[o] = a = Gt.test(o) ? this.mouseHooks : Lt.test(o) ? this.keyHooks : {}),
                 n = a.props ? this.props.concat(a.props) : this.props, t = new ct.Event(r), e = n.length; e--; ) i = n[e],
                 t[i] = r[i];
                 return t.target || (t.target = $), 3 === t.target.nodeType && (t.target = t.target.parentNode),
@@ -2296,7 +2301,7 @@
                 for (var i, n = 0, o = t.length; n < o; n++) i = t[n], G.tweeners[i] = G.tweeners[i] || [],
                 G.tweeners[i].unshift(e);
             },
-            prefilters: [ L ],
+            prefilters: [ z ],
             prefilter: function(t, e) {
                 e ? G.prefilters.unshift(t) : G.prefilters.push(t);
             }
@@ -2945,7 +2950,7 @@
                 };
             }
         });
-        var Ne = [], Le = /(=)\?(?=&|$)|\?\?/;
+        var Ne = [], ze = /(=)\?(?=&|$)|\?\?/;
         ct.ajaxSetup({
             jsonp: "callback",
             jsonpCallback: function() {
@@ -2953,9 +2958,9 @@
                 return this[t] = !0, t;
             }
         }), ct.ajaxPrefilter("json jsonp", function(t, e, n) {
-            var o, r, a, s = t.jsonp !== !1 && (Le.test(t.url) ? "url" : "string" == typeof t.data && 0 === (t.contentType || "").indexOf("application/x-www-form-urlencoded") && Le.test(t.data) && "data");
+            var o, r, a, s = t.jsonp !== !1 && (ze.test(t.url) ? "url" : "string" == typeof t.data && 0 === (t.contentType || "").indexOf("application/x-www-form-urlencoded") && ze.test(t.data) && "data");
             if (s || "jsonp" === t.dataTypes[0]) return o = t.jsonpCallback = ct.isFunction(t.jsonpCallback) ? t.jsonpCallback() : t.jsonpCallback,
-            s ? t[s] = t[s].replace(Le, "$1" + o) : t.jsonp !== !1 && (t.url += (we.test(t.url) ? "&" : "?") + t.jsonp + "=" + o),
+            s ? t[s] = t[s].replace(ze, "$1" + o) : t.jsonp !== !1 && (t.url += (we.test(t.url) ? "&" : "?") + t.jsonp + "=" + o),
             t.converters["script json"] = function() {
                 return a || ct.error(o + " was not called"), a[0];
             }, t.dataTypes[0] = "json", r = i[o], i[o] = function() {
@@ -2971,9 +2976,9 @@
             return n ? [ e.createElement(n[1]) ] : (n = g([ t ], e, o), o && o.length && ct(o).remove(),
             ct.merge([], n.childNodes));
         };
-        var ze = ct.fn.load;
+        var Le = ct.fn.load;
         ct.fn.load = function(t, e, i) {
-            if ("string" != typeof t && ze) return ze.apply(this, arguments);
+            if ("string" != typeof t && Le) return Le.apply(this, arguments);
             var n, o, r, a = this, s = t.indexOf(" ");
             return s > -1 && (n = ct.trim(t.slice(s)), t = t.slice(0, s)), ct.isFunction(e) ? (i = e,
             e = void 0) : e && "object" == typeof e && (o = "POST"), a.length > 0 && ct.ajax({
@@ -3103,14 +3108,14 @@
     i(11)(n, {});
     n.locals && (t.exports = n.locals);
 }, function(t, e, i) {
-    e = t.exports = i(3)(), e.push([ t.id, "#headertop .row{display:block}.column-1{width:264px}.main-column-wrapper{position:relative;max-width:830px;overflow:hidden;margin-left:20px}.column-2 .catalogue-grid{min-height:482px}.chart-column{max-width:830px}.column.chart-column h2{background-color:#fff;font-size:16px;font-family:sans;font-weight:700;padding:0 12px 10px;border:0}.column.chart-column .controls{padding:0 12px;border:0}.col2-control{display:none}#layout_plots{vertical-align:top}#othermenu .row .cell{display:block}#othermenu h2{font-family:sans;font-size:16px}#othermenu h3{font-family:sans;font-size:14px}.facets ul{list-style:none;padding-left:0}.facets li{padding-left:0;padding-bottom:0;overflow-x:hidden}.facets label{display:inline-block;float:none;font-weight:400;white-space:nowrap;text-overflow:ellipsis}.grid-items .title{font-size:12px;font-weight:400}#globalpageheaderwrapper #mainwrapper .catalogue-grid .grid-items .thumbnail-wrapper{border-color:#fff}.grid-items .thumbnail{margin-bottom:0;padding:0;border:0}.column-2{max-width:830px}.column-2 .catalogue-grid{max-width:830px;padding-top:12px}.column-2 .catalogue-grid .foot{background-color:transparent}#content_ ul{list-style:none;padding-left:0}#time-navigator{max-width:830px;box-sizing:border-box}.time-nav{max-width:830px}.time-nav .label{color:#000}.time-nav.container{width:auto}.product-text{padding:0 12px}.br-clear{clear:both;display:block;height:0}.float-left{float:left}#mainwrapper .controls .parameter-menu .ui-menu-item a{border:0}#mainwrapper .facets{padding-right:0;margin-right:-10px;width:232px}.results-menu{border-width:1px}.results-menu .catalogue-grid{max-height:514px}.results-menu .outer{max-height:100%}div.modal-backdrop{background-color:transparent}.modal.in{display:block!important;bottom:auto}", "" ]);
+    e = t.exports = i(3)(), e.push([ t.id, "#headertop .row{display:block}.column-1{width:264px}.main-column-wrapper{position:relative;max-width:830px;overflow:hidden;margin-left:20px}.column-2 .catalogue-grid{min-height:482px}.chart-column{max-width:830px}.column.chart-column h2{background-color:#fff;font-size:16px;font-family:sans;font-weight:700;padding:0 12px 10px;border:0}.column.chart-column .controls{padding:0 12px;border:0}.col2-control{display:none}#layout_plots{vertical-align:top}#othermenu .row .cell{display:block}#othermenu h2{font-family:sans;font-size:16px}#othermenu h3{font-family:sans;font-size:14px}.facets ul{list-style:none;padding-left:0}.facets li{padding-left:0;padding-bottom:0;overflow-x:hidden}.facets label{display:inline-block;float:none;font-weight:400;white-space:nowrap;text-overflow:ellipsis}.grid-items .title{font-size:12px;font-weight:400}#globalpageheaderwrapper #mainwrapper .catalogue-grid .grid-items .thumbnail-wrapper{border-color:#fff}.grid-items .thumbnail{margin-bottom:0;padding:0;border:0}.column-2{max-width:830px}.column-2 .catalogue-grid{max-width:830px;padding-top:12px}.column-2 .catalogue-grid .foot{background-color:transparent}#content_ ul{list-style:none;padding-left:0}#time-navigator{max-width:830px;box-sizing:border-box}.time-nav{max-width:830px}.time-nav .label{color:#000}.time-nav.container{width:auto}.product-text{padding:0 12px}.br-clear{clear:both;display:block;height:0}.float-left{float:left}#mainwrapper .controls .parameter-menu .ui-menu-item a{border:0}#mainwrapper .facets{padding-right:0;margin-right:-10px;width:232px}.results-menu{border-width:1px}.results-menu .catalogue-grid{max-height:514px}.results-menu .outer{max-height:100%}div.modal-backdrop{background-color:transparent}.modal.in{display:block!important;bottom:auto}.column-1 .thumbnail-list-filter{border:1px solid #777;padding:2px 0}", "" ]);
 }, function(t, e, i) {
     var n = i(18);
     "string" == typeof n && (n = [ [ t.id, n, "" ] ]);
     i(11)(n, {});
     n.locals && (t.exports = n.locals);
 }, function(t, e, i) {
-    e = t.exports = i(3)(), e.push([ t.id, ".www-chart-outer{margin:8px 0 15px;padding-top:48px}.basic .www-chart-image-wrapper{position:relative}.www-chart-container.basic{background-color:#fff}.www-chart,.www-chart-outer>img{display:block}.ui-dialog div.status{background-image:none;background-color:transparent}.ui-dialog input{border:1px solid #ccc;padding:2px}.modal-body .package-select,.modal-body .product-select{width:100%}.modal-body .form{margin-top:1.5em}.modal-body .form-row label{padding:0 .75em 0 .3em}.modal-body .disabled .form td,.modal-body .disabled .form td input.form-text,.modal-body .disabled .form td select{color:#bbb}.modal-body .legacy-selector label{font-weight:400;font-size:8pt;margin-top:1em}.modal-body .variables{min-height:24px;position:relative}.modal-body .loader{margin-left:4px}.modal-body .loader .active{background-image:url(/django/frontend/plugins/loader/activity-white.gif);background-color:#fff}.modal-body .not-available{color:#bbb}.modal-body div.error{background-repeat:no-repeat;padding:4px 5px 4px 32px;margin-top:15px}.thumbnail-popup{position:absolute;top:50px;left:10px;width:180px;height:120px;padding:10px;box-shadow:0 3px 7px rgba(0,0,0,.3);border-radius:6px 6px 6px 6px;background-color:#fff;z-index:20;-webkit-transition:opacity .3s;transition:opacity .3s}.thumbnail-popup .image-wrapper{width:100%;height:100%;overflow:hidden}.thumbnail-popup.hidden{opacity:0}.basic #time-navigator .canvas-slider{padding:0}.parameter-menu{background-color:#fff}.modal-body .variables{max-height:250px;-webkit-transition:max-height .5s;transition:max-height .5s;overflow:hidden}.modal-body .variables.empty{max-height:32px}.cke_dialog_contents_body .variables{clear:both}.float-left{float:left}.float-right{float:right}#chart-select .form td:last-child{border-right:0}#block-ecmwf-chart-country-cities,#block-ecmwf-chart-ecmwf-chart-metadata,#block-ecmwf-chart-history{display:none}#block-ecmwf-chart-related-products ul{list-style:none;padding-left:0}#block-ecmwf-chart-related-products a{text-decoration:none}.node-catalogue-page img.www-chart{max-width:none}.messages pre{background:none}.messages--error,.messages--warning{max-height:10em;overflow:auto}.ui-icon{width:16px;height:16px}.ui-state-default .ui-icon{background-image:url(" + i(7) + ')}.ui-icon-close{background-position:-80px -128px}.ui-icon-plus{background-position:-16px -128px}.ui-icon-triangle-1-s{background-position:-64px -16px}.ui-icon-triangle-1-e{background-position:-32px -16px}.ui-icon-arrow-1-n{background-position:0 -32px}.ui-icon-arrow-1-s{background-position:-64px -32px}.ui-icon-print{background-position:-160px -96px}.ui-icon-check{background-position:-64px -144px}.ui-icon-gear{background-position:-192px -112px}.ui-icon-arrowthick-1-w{background-position:-96px -48px}.styled input[type=checkbox]{opacity:0;position:absolute}.styled label{display:inline-block;vertical-align:middle;position:relative;padding-left:5px}.styled label:before{display:inline-block;position:absolute;content:"";width:17px;height:17px;left:0;margin:1px 0 0 -22px;border:1px solid #ccc;border-radius:3px}.styled input:focus+label:before{box-shadow:0 0 1.5px rgba(0,0,0,.4)}.styled input:checked+label:after{content:"";display:inline-block;position:absolute;left:0;margin:2px 0 0 -19px;width:16px;height:16px;background-image:url(' + i(7) + ');background-position:-64px -144px}.parameter-selector{float:right}.parameter-control .parameter-selector,.parameter-selector.ui-button{color:#fff;border:1px solid #333;border-radius:4px;background:linear-gradient(center top,#777,#555) repeat scroll #777;background:-webkit-linear-gradient(#777,#555) repeat scroll #777;background:-ms-linear-gradient(#777,#555) repeat scroll #777;filter:progid:DXImageTransform.Microsoft.Gradient(startColorstr="#777777",endColorstr="#555555")}.parameter-selector:hover{background:linear-gradient(center top,#888,#666) repeat scroll #888;background:-webkit-linear-gradient(#888,#666) repeat scroll #888;background:-ms-linear-gradient(#888,#666) repeat scroll #888}.chart-column .parameter-selector.ui-button-text-icon-secondary .ui-button-text{padding-top:.2em;padding-bottom:.2em}.parameter-selector.ui-state-hover span.ui-button-text{color:#fff}.parameter-selector>.ui-icon{background-image:url(' + i(19) + ")}.parameter-selector .ui-menu{border:1px solid #ddd}.parameter-selector .ui-selectmenu-button{height:24px;padding:0;margin:0;display:block}.parameter-selector .ui-selectmenu-button .ui-selectmenu-text{padding-bottom:0}.ui-selectmenu-menu{background-color:#fff;border:1px solid #ccc}.ui-selectmenu-menu li{padding:0 8px}.ui-menu .ui-state-disabled a{color:#bbb}.node-type-catalogue-page #edit-body-und-0-format-help,.node-type-catalogue-page .form-item-body-und-0-format,.page-node-add-catalogue-page #edit-body-und-0-format-help,.page-node-add-catalogue-page .form-item-body-und-0-format{display:none}.node-type-catalogue-page .filter-guidelines-item,.page-node-add-catalogue-page .filter-guidelines-item{display:none!important}.node-type-catalogue-page #edit-field-charts,.page-node-add-catalogue-page #edit-field-charts{display:none}", "" ]);
+    e = t.exports = i(3)(), e.push([ t.id, ".www-chart-outer{margin:8px 0 15px;padding-top:48px}.basic .www-chart-image-wrapper{position:relative}.www-chart-container.basic{background-color:#fff}.www-chart,.www-chart-outer>img{display:block}.ui-dialog div.status{background-image:none;background-color:transparent}.ui-dialog input{border:1px solid #ccc;padding:2px}.modal-body .package-select,.modal-body .product-select{width:100%}.modal-body .form{margin-top:1.5em}.modal-body .form-row label{padding:0 .75em 0 .3em}.modal-body .disabled .form td,.modal-body .disabled .form td input.form-text,.modal-body .disabled .form td select{color:#bbb}.modal-body .legacy-selector label{font-weight:400;font-size:8pt;margin-top:1em}.modal-body .variables{min-height:24px;position:relative}.modal-body .loader{margin-left:4px}.modal-body .loader .active{background-image:url(/django/frontend/plugins/loader/activity-white.gif);background-color:#fff}.modal-body .not-available{color:#bbb}.modal-body div.error{background-repeat:no-repeat;padding:4px 5px 4px 32px;margin-top:15px}.thumbnail-popup{position:absolute;top:50px;left:10px;width:180px;height:120px;padding:10px;box-shadow:0 3px 7px rgba(0,0,0,.3);border-radius:6px 6px 6px 6px;background-color:#fff;z-index:20;transition:opacity .3s}.thumbnail-popup .image-wrapper{width:100%;height:100%;overflow:hidden}.thumbnail-popup.hidden{opacity:0}.basic #time-navigator .canvas-slider{padding:0}.parameter-menu{background-color:#fff}.modal-body .variables{max-height:250px;transition:max-height .5s;overflow:hidden}.modal-body .variables.empty{max-height:32px}.cke_dialog_contents_body .variables{clear:both}.float-left{float:left}.float-right{float:right}#chart-select .form td:last-child{border-right:0}#block-ecmwf-chart-country-cities,#block-ecmwf-chart-ecmwf-chart-metadata,#block-ecmwf-chart-history{display:none}#block-ecmwf-chart-related-products ul{list-style:none;padding-left:0}#block-ecmwf-chart-related-products a{text-decoration:none}.node-catalogue-page img.www-chart{max-width:none}.messages pre{background:none}.messages--error,.messages--warning{max-height:10em;overflow:auto}.ui-icon{width:16px;height:16px}.ui-state-default .ui-icon{background-image:url(" + i(7) + ')}.ui-icon-close{background-position:-80px -128px}.ui-icon-plus{background-position:-16px -128px}.ui-icon-triangle-1-s{background-position:-64px -16px}.ui-icon-triangle-1-e{background-position:-32px -16px}.ui-icon-arrow-1-n{background-position:0 -32px}.ui-icon-arrow-1-s{background-position:-64px -32px}.ui-icon-print{background-position:-160px -96px}.ui-icon-check{background-position:-64px -144px}.ui-icon-gear{background-position:-192px -112px}.ui-icon-arrowthick-1-w{background-position:-96px -48px}.styled input[type=checkbox]{opacity:0;position:absolute}.styled label{display:inline-block;vertical-align:middle;position:relative;padding-left:5px}.styled label:before{display:inline-block;position:absolute;content:"";width:17px;height:17px;left:0;margin:1px 0 0 -22px;border:1px solid #ccc;border-radius:3px}.styled input:focus+label:before{box-shadow:0 0 1.5px rgba(0,0,0,.4)}.styled input:checked+label:after{content:"";display:inline-block;position:absolute;left:0;margin:2px 0 0 -19px;width:16px;height:16px;background-image:url(' + i(7) + ');background-position:-64px -144px}.parameter-selector{float:right}.parameter-control .parameter-selector,.parameter-selector.ui-button{color:#fff;border:1px solid #333;border-radius:4px;background:linear-gradient(center top,#777,#555) repeat scroll #777;background:-ms-linear-gradient(#777,#555) repeat scroll #777;filter:progid:DXImageTransform.Microsoft.Gradient(startColorstr="#777777",endColorstr="#555555")}.parameter-selector:hover{background:linear-gradient(center top,#888,#666) repeat scroll #888;background:-ms-linear-gradient(#888,#666) repeat scroll #888}.chart-column .parameter-selector.ui-button-text-icon-secondary .ui-button-text{padding-top:.2em;padding-bottom:.2em}.parameter-selector.ui-state-hover span.ui-button-text{color:#fff}.parameter-selector>.ui-icon{background-image:url(' + i(19) + ")}.parameter-selector .ui-menu{border:1px solid #ddd}.parameter-selector .ui-selectmenu-button{height:24px;padding:0;margin:0;display:block}.parameter-selector .ui-selectmenu-button .ui-selectmenu-text{padding-bottom:0}.ui-selectmenu-menu{background-color:#fff;border:1px solid #ccc}.ui-selectmenu-menu li{padding:0 8px}.ui-menu .ui-state-disabled a{color:#bbb}.node-type-catalogue-page #edit-body-und-0-format-help,.node-type-catalogue-page .form-item-body-und-0-format,.page-node-add-catalogue-page #edit-body-und-0-format-help,.page-node-add-catalogue-page .form-item-body-und-0-format{display:none}.node-type-catalogue-page .filter-guidelines-item,.page-node-add-catalogue-page .filter-guidelines-item{display:none!important}.node-type-catalogue-page #edit-field-charts,.page-node-add-catalogue-page #edit-field-charts{display:none}", "" ]);
 }, function(t, e) {
     t.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAADwCAMAAADYSUr5AAABF1BMVEX///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+UT8lBAAAAXHRSTlMAAQIDBAYICg0ODxASExYYGRocHyAiIyQnKSwvMTIzNDg8P0BCRUdISkxQUVNVWl9gYmNmaGptb3F9gIKFh4yPkZSZnJ+goqWoqautsLK1uLy+v8PExsjMz9/v/QXzmGMAAA79SURBVHja7V0LY9u2EUbaTFPLOoNjuXVLhcnKJmnUpdWsrvPcrKkTteu2rNuUbPLS+/+/YwApEneHl2TJtGzhk19HgATu4wG4A0BaiISEhC2ABLnj+sOWM7B29SSE9ZeYAZ25W0KYBYIGJYDXh6TrVImPANgqBgpg51d/dmoS3AJtAiSvD0nnd9AigJ9uF2Bllh0yYNXfrUIg3WZQBA0IQg1ikVkGM222gXMLtqvIb7BtIcE7bFtAoALdW4CblMAtDFqwM4PVB4RMsPs+4KpHAd6Euh8FkiOUkJCQkJCQkHBlnuAV+0HSitaAO+8yoBAAD/DlSvMB1oSQunqnlDgqYBFgZeDZabgorQI4ATIYPHYaDFn1d9c4kOyYUZGB00VkChAqAqC7Bg7OKSB/jeUy8wEyyGds+uDqw2EJlzkfIGNNcNvC4Zs+CiQkJCQkJCQkXKGntb4zv9b14WoVsEOfoEIXCJRgtfJtQiFyNQgfsdVjyWBnoaeDL81dQLACjtRw+a4rhAiy0q2LQYxAUiFgOcBxQbs+4FUQXOWFyrfDZYgRAMF4G0SEX9fpgSxUwUVu8BIEwrpgkD+3EYdMKNiAnBbCGHecHjbReAmrqBdt4449RBBOj1yR3Q6I3pBIARDs90BEmnD3o8Alnx8fJhMSEhISEhJ2FetvS13TzZCO3ej+S7r80OhSVaT41SqwVAHheB6WqABKF3hxagmvTmeGQOjiWt6PTREEy3fEt1yByPRDYEaiXlg0FNm1dWx2l0ECInvD3WYWYiDInwSImZdrQgh4OAw4mg1YkBUOO6Jx65ENsUQF3Knu6BggEM+Dwwb8p1sEWDWwq0fTeROLE+CugPcWLpUMEIyfw12EcK3QBy2INAHWRKJNwN3KpTeHtLe82AoE2ojDwFgTF9YKfYQAGZkPkOE+ANz9augehZPDY4mjDcfHXYClhznY+vkACWmHREJCQkJCglghAt3oMBwemMEZQW9UP1hpAX/DpUvX0+44+nOeISHsOa4yg8LWqsChMITS16ff9fw8EF1CT4dD7Ja6VsMt/oCeC0F+NsoA2AwI/n4DEXg/gGs+g65XiyWWXwWwc8F3+sYJaMJNHwESIuGzc/k6mO5anQavRTgzwwYpkI4a2k+EgP+Ox9ab7QkREesDLAJ4k9h4eGc6NT2ZYEVn9Pl+R7q/iTtMIvgI0RKd4mUMjHRGR4bmA+LRa2wTUGz+ITx/lPychISEhISErUJ2zQcyh9sBoeUq7g1fRP9tWgpwLrNQ7yuLrgZCJlb09uS2WkAbbxl6MshQMETjuwxqCwBMYPiRA9iq1Spwb9/G6Up/Ep0BDeDrNkDDPcGWwwG9Lm67CACIVEcrkzliPbBmMryxIT4m2yYmr48FWPnpjo2aII8F8P0KDd1btR4a7gNCt7eJzjNjJbwPAKfFbdcoGBwFnF0+HSAguE0s+HKKa+IHRC+QLZ9X3sDofxX9ExISEhJ2C4X2E4rl89/uKdzuqnYjVbnZKJTj24jnBi9qV6kI6Y+TizAft0UOkIvb7ALojEMlHgqPzBPF0wXYCY1KcFKWI+TsVX+PLFd34n+aerzQcEz0bWvMZWtl63CR3tS6l0OvB3mPuWngj97spUvq2E1cJbZBWlmWWQ1GyIwQgBgAbaI94BYwbj3pfYXWlYbGAnzr3fXlzAV70Pvgg3uACZjP5+EnMASAU3AScEgIBK06OqAIkZiQuoKU8H7/vX7fZwEwAvRLF7zoAwBVkNS4X53eNwR8cHj4W0LAnTt3rO3xfpkd4ARo/T/DBFCTAqU/tTF4P9MfVOAdDa8F7GvVYbRv5gGKyv5bAvT10RRbfTlzQdUEHj/GTWAu1C1QP9sTiupzQQK0/k+ffOYnQLID6oiU+xKFMHAwGPj7ANhXDCj9MQHVV0tA1QkiAg702QcHzYG9uhPc87Z5BwHCfp6CEvAlnp+YjJ+qn6WPAOsRlQ8roAKPjo7AmKhlAcX+aKR+mCZQyX4CjmosDsgcDvP8HuSSEFCgXvB31Qfr2+ME9BgBQCxgYvQPENBe7pMKzOR6PZ8FFPsVCvDIoPvYEZA2meftKJA35edeC7AJiDUBnF73gaWwCChoecwPgG9jfsCSw2BdnwmdgynM0A22wpFO76tK/Ep4DnACKgbKTTp6xbhCcfFLMNdlqXncNWp8uFH9ExISEhK2HM+ehdMzCM5r1//5KTrr0Q6D96th6j6eccAx9mQhT1h4dri0LMSfWX3K4Limoq0+O6SGbax/URgGZtqLPM1HKNhRVZ68AONne2Y9kP4CMaBO1mArTdSzybUruLRc349Wg1I7c1k7tmea2wm+p68BXjP9teM2MPpr37yNfqXbEUPhPPxBfU5whQp1nwuUn6wNWo+//1eci//g+DZXQk5kQeX3eu8hWdd/PPZVEBbOPlCDQxanKjvOYIz8UDxfYRNQzw4gAh4cPLz75GCE7/9IFGJZAv4F/1Sff2MFtevPZBx8qNi4h9LHtIILZz5zl/esEVE/MIOTseKgFl40MzYvfAQsegFkASfwJ3gGWH80ZRe3gL+Jn8VfzJTSEbOAI2YBR9oC+kYek9hDtYC6k2rjW1bed7X0XVvBKpiHMW5QBY5O4wQ8OPjyQ/Vx67/w1DEBGVSzTo38V/hJff6OdkyQNl7J95iM0qv2q/Chh4AmustoE6H2E+jloTcSAxIvMgIKxjDTv90RQQlA8uDnO7M7//h4Ie8DnRSNyWN69+wmsJCx+Pq1kbXtt/OdTgKsUVBdIwtsaeeT3PcXFb6PCbD2G5gJJ9Xc2eXCsmD62wF8RvasPfxFdX+TXx62BKj2nwXOtxSdWJ0oe8SHT/IzP4BPezPZ9QaYkDzm+vNhUNSbukxytSLwtBQ+C2LIr6OrV64Q4BMfKCEhISHhCjDCE9PalYMjK88t6qlcInK8DOHzdS5++Qym6ucUD82neGniM/jii48+go9RdU60/hXUH/eewIMH8OQe8UQLwacbmvmGVuYHRszxQfrPRqO3hIGVXvdvD7TqWjmKNkExMOXe+MB4Xr/W+JVxRacjdYGxFdyQ6NSxDxVI8GryKNexUMGOWRysE0xwpR3jKbyFjRGgXS10hta9+qYGYAh4591bt959x9RnJKAcG3fNJoBsGYFqMgpteMhEPVWRGV+70PMxiIC7eq0OFzjVrPsIiOynt5eycqBtalrJUx68tBWqbP2wPf253pyB3FXosQ0Z9PxqHRRlAB14qnhOYAuYTPB+9Xw41OGlIUDpL0b+GSDHjIsr3Kcmjt3NKdO/IMuTP8GhAjxHfi05H/phAvbUn3v6q0k+rRZfB8gCWPR69+7+3SGcthd8q2s32xwB3AJ+rOQ3VH+jYD6tMKCnG8Ige7/f7xMCSJsfDAYH6nvANjxMvX3AcKgbAO4E345Gsw12gqwP+HHRB7wxM3AlCUfv6foOzOnTEzhFDOgL7aFur5m8afT75JPFFzMQbx8wKobDIQwhMAxuehR4I97g+J+HbtPJ5DtUWKm+MsMAWGG6/vOwOcCHQW0RNTx9AIw0MAHulYAN+gH63r9p/ADHHkHawypreZvpnvJWk/r7B7+hr3URVa+xkHqFntIreuKifsDVY+/sbA9b0InmKruVeSZ87J2TCQkJCetFp3h39Oc/6C7mh893SP9XAK9a4Zum1/1mZ/R/rNV93Nx/aFaawNjAHOb4hP+5NtptbufZvOJ/3qUBKEezMYGXhoCXPkfI5UeUhhJr6YEf4DLM9Zg+D17/cg1Al/mYxzah131n/EBpjGIMbPGVHxjDo94jujobeACikx5Ah9CvSOG0DhO8MFbrPyO2X+Ldx/bW3XE2xvo9Uj8ekQzzKySgbO536SegZE0e4DzDaSVZTbYJyIjJVBvNeyScJgQUMJ/Pu/N0jcJ+AuxzMmL7pFNc2wK67QQrA6gfmql0ODMEnHktwLag0t/kV+4Duo3WeKf30IgPvZ0gEUs+KK49CnT6fr25UbiuwXEjHotAH+AZATd2W67SL/pUT8vC80+vsg7pDYsJCQkJCTuEEkLipQ+6s1JYfs6luqIvXljudEDswhumFBACqrQMZyhnmf4BlL/2BQN16GzS7ciqZL5zaSVDtULWZTxIKKAE1Gltnavbo9TjGQgBON0mwPWkry1CtwTgzcCcgGr6Y1HJ6tfMWh+fEQJmwRken8ZEhK4J6NACliKgYwvotg9wTSlcaR/Q8Shgz3dc8Siw835AQkJCQsJuA3b6OarsjwJOBxlxVE536D25+jlSOC3R8wx5+dzxAEXjm/D3H6wqbx2m8L0iQKDdyZqVmcWA9TL54mLy9hnAuRCnpTjHT1tPByqipc/XGkV6/Z76ardvQ5/uZ9cyULmnP70tdW+Lxb75U3OH8jHo3fYnHgKqV6PJfdm+bQ+k1AcaeV9/zPv3dLo6Ivdhiy1A4Rzfcd0vTIGq3xLwcY3WxFeUtw6zagwcoz0vKhgdwWDkIeDGdYI5wPnpOe726+mIEqj6NzdCzV+p+/MqFwkJCQkJuwj+fEBM5puoVpVXLW9dOQb+fEBM5tvoVpVXLW9dOXr/zT7Bz5eR+UbKVeVVy1tXjoI/H/DSXKCRj7VveLyQz9p3pdVbac9MfiQLb/pLk/7SW76AYPq8nrXB6YLXX+DnHYKzYWxzNN86W/06Psarw7H8drqV3yyRu9Lx6pn7N5D6iK+//lrQ+ggxXHJ9DT/T65F16z1mFRYQyC8shcL5GQHR+uDXx7vkYa3/5ggYo3fQOQhw/V5FoWj5DgsJWcBQ1PrD5pqAfvvWKiYeayIQIzDYpITLonD+Ya3/cgTw5wMcnVrTCZ55Oyngsr9TdXaSvHzeydL0hh+frNsAfd4hhK6HsXWH0VXlOLp2ZNZ1pFaV4+jalV3XlV5VTkhISEhISIiFAwCXJm8/AfRtbXH5BhIAYQKqD4mgwwQIENeLgOrfswVkRhAIspnalkEkC0h9wHUiYNdHgYSEhISEhIRNQ14fTyC6CxKK1Te6Svb/gbb6Xgm5NgH8fl8n/TdhAVzfa6U/tYBqe3v18RDg+n8DOj/X/8b2AUUDqr+09Jc7YwF1/uur/7oWcO31X3cU8Oi/q36A0f8G+QErsSnNd0LCluP/pAgcv7W7VbgAAAAASUVORK5CYII=";
 }, function(t, e, i) {
@@ -3119,15 +3124,17 @@
     i(11)(n, {});
     n.locals && (t.exports = n.locals);
 }, function(t, e, i) {
-    e = t.exports = i(3)(), e.push([ t.id, "html body{font-size:13px}a{color:#275992}.header-bar>#header{max-width:none}.language_menu{display:none}.column.chart-column{padding-top:0}.chart-column h2{display:none}.column{float:left;min-width:20em;margin-right:2em;background-color:#fff}.column ul{list-style:none}.column h2{font-size:18px}.fullscreen #main>.column.column-1{margin-top:0;border-top:1px dotted #333;padding-left:0;padding-right:0;margin-right:0}.main-column-wrapper{margin-bottom:20px}.facets{position:relative;padding-right:10px}.facets h2{display:none}.facets label{font-weight:400;display:inline}.facets input{margin-right:5px}.catalogue-grid{height:652px;max-height:1800px}.catalogue-grid .head{margin-top:0}.column-2{padding-bottom:20px}.column-2 .catalogue-grid .foot{margin-top:0;background-color:transparent}.catalogue-grid .outer .scrollable{margin-right:20px}.no-overlay .grid-container{margin-left:-2px}.no-overlay .grid-container h2{margin-left:2px;padding-top:8px;border-top:1px solid #eee;margin-bottom:10px;position:relative;top:10px}.results-menu .catalogue-grid{max-height:514px}.results-menu .outer{max-height:100%}.catalogue-grid{position:absolute}.column-1{min-width:0}.column-1 section.region-sidebar-first{padding:0;min-width:0;width:100%}.column-1 .cell{border:0;padding-top:0}.column-1 h2{padding-top:16px;margin:0 0 8px}.column-1 h2:first-child{border-top:1px dotted #333}.column-1 a{text-decoration:none}.column-1 .thumbnail-list-filter input,.modal input{border:0 solid #999;padding:.2em 0 .2em 8px;border:1px solid #777;margin-left:1px;box-sizing:border-box;width:100%}.column-1 .thumbnail-list-filter input:focus{border-color:#275992}.column1-wrapper>div>ul,.column-1>div>ul{padding-left:0}.column1-wrapper{float:left;width:264px}.column1-wrapper .column-1 section{float:none;margin-bottom:15px}#main .column1-wrapper div.column{padding-left:0}.col2-control,.col2-control h2{display:none}.thumbnail-list-filter{margin:8px 0 0}.www-chart-container img{max-width:none}.ui-icon{background-image:url(" + i(7) + ")}#admin-menu{background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAnCAIAAABBgrX1AAAACXBIWXMAAA5NAAAOnAHe9pxXAAAAB3RJTUUH3wUTDisvcs+eYQAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAANElEQVQI142NMQoAIBDDwv3/iwq+JA4VvEVwaigtYc1RQIGlSeCylLw4218G8/c4Ond3+g36+CnCvV0SWQAAAABJRU5ErkJggg==) #e1dedc;background-size:contain;color:#333}#admin-menu-account.dropdown>li>a,#admin-menu-menu.dropdown>li>a{color:#333}#admin-menu-menu.dropdown>li.admin-menu-toolbar-category>a:hover{background-color:transparent}body>div.messages{border:0;margin:0;padding:0 0 0 20px;position:absolute;top:100px}#chart-legends{margin:10px 0;padding:10px 0;border:solid #eee;border-width:1px 0}#chart-legends>div{margin-left:-28px}.column-tcyclone-filters label{font-weight:400}.column-tcyclone-filters .ui-selectmenu-button{min-width:100%;border:1px solid #ddd}.ui-selectmenu-menu li.ui-menu-item{padding-left:1em;box-sizing:border-box}.ui-selectmenu-menu .ui-menu-item.ui-state-focus{background-color:#f4f4f4}.facets li li{padding-left:20px;line-height:1.85}@media (max-width:699px){.fullscreen .main-column-wrapper{width:calc(100% - 10px)}.two-sidebars .bar #main div#content-heading{margin-left:0;padding-left:0}}@media (max-width:1280px){.column.column-1{width:220px}.two-sidebars #main div#content-heading{margin-left:258px}}p.disabled{color:#bbb}.submit{color:#fff;background-color:#2b619e}.submit.ui-state-hover{color:#fff;background-color:#3b71ae}#wrap>#main{max-width:none;margin:0 4em}.header-bar #header{padding-left:4em;padding-right:4em}.chart-column ul{margin:0;padding:0}.header-bar #navigation .block-menu-block.first .menu-block-wrapper>ul.menu>li>ul{z-index:110}#main .column .block.first{border-top:0}.two-sidebars #main #content-heading{margin:0 0 0 302px}#content-heading h1{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-bottom:2px}.ui-menu{background-color:#fff}.column-tcyclone-filters .ui-widget-content,.ui-menu{border:1px solid #ddd}.column-tcyclone-filters>.ui-menu{padding-left:10px;margin:15px 0}.column-tcyclone-filters>.ui-menu .ui-menu{width:100%;transform:translateX(-10px)}.column-tcyclone-filters>.ui-menu .ui-menu a.ui-state-focus{margin:0;background-color:#f0f0f0}", "" ]);
+    e = t.exports = i(3)(), e.push([ t.id, "html body{font-size:13px}a{color:#275992}.header-bar>#header{max-width:none}.language_menu{display:none}.column.chart-column{padding-top:0}.chart-column h2{display:none}.column{float:left;min-width:20em;margin-right:2em;background-color:#fff}.column ul{list-style:none}.column h2{font-size:18px}.fullscreen #main>.column.column-1{margin-top:0;border-top:1px dotted #333;padding-left:0;padding-right:0;margin-right:0}.main-column-wrapper{margin-bottom:20px}.facets{position:relative;padding-right:10px}.facets h2{display:none}.facets label{font-weight:400;display:inline}.facets input{margin-right:5px}.catalogue-grid{height:652px;max-height:1800px}.catalogue-grid .head{margin-top:0}.column-2{padding-bottom:20px}.column-2 .catalogue-grid .foot{margin-top:0;background-color:transparent}.catalogue-grid .outer .scrollable{margin-right:20px}.no-overlay .grid-container{margin-left:-2px}.no-overlay .grid-container h2{margin-left:2px;padding-top:8px;border-top:1px solid #eee;margin-bottom:10px;position:relative;top:10px}.results-menu .catalogue-grid{max-height:514px}.results-menu .outer{max-height:100%}.catalogue-grid{position:absolute}.column-1{min-width:0}.column-1 section.region-sidebar-first{padding:0;min-width:0;width:100%}.column-1 .cell{border:0;padding-top:0}.column-1 h2{padding-top:16px;margin:0 0 8px}.column-1 h2:first-child{border-top:1px dotted #333}.column-1 a{text-decoration:none}.column-1 .thumbnail-list-filter input,.modal input{padding:.2em 0 .2em 8px;margin-left:1px;box-sizing:border-box;width:100%}.column-1 .thumbnail-list-filter input{border:0}.modal input{border:1px solid #777}.column-1 .thumbnail-list-filter input:focus{border-color:#275992}.column1-wrapper>div>ul,.column-1>div>ul{padding-left:0}.column1-wrapper{float:left;width:264px}.column1-wrapper .column-1 section{float:none;margin-bottom:15px}#main .column1-wrapper div.column{padding-left:0}.col2-control,.col2-control h2{display:none}.thumbnail-list-filter{margin:8px 0 0}.www-chart-container img{max-width:none}.ui-icon{background-image:url(" + i(7) + ")}#admin-menu{background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAnCAIAAABBgrX1AAAACXBIWXMAAA5NAAAOnAHe9pxXAAAAB3RJTUUH3wUTDisvcs+eYQAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAANElEQVQI142NMQoAIBDDwv3/iwq+JA4VvEVwaigtYc1RQIGlSeCylLw4218G8/c4Ond3+g36+CnCvV0SWQAAAABJRU5ErkJggg==) #e1dedc;background-size:contain;color:#333}#admin-menu-account.dropdown>li>a,#admin-menu-menu.dropdown>li>a{color:#333}#admin-menu-menu.dropdown>li.admin-menu-toolbar-category>a:hover{background-color:transparent}body>div.messages{border:0;margin:0;padding:0 0 0 20px;position:absolute;top:100px}#chart-legends{margin:10px 0;padding:10px 0;border:solid #eee;border-width:1px 0}#chart-legends>div{margin-left:-28px}.column-tcyclone-filters label{font-weight:400}.column-tcyclone-filters .ui-selectmenu-button{min-width:100%;border:1px solid #ddd}.ui-selectmenu-menu li.ui-menu-item{padding-left:1em;box-sizing:border-box}.ui-selectmenu-menu .ui-menu-item.ui-state-focus{background-color:#f4f4f4}.facets li li{padding-left:20px;line-height:1.85}@media (max-width:699px){.fullscreen .main-column-wrapper{width:calc(100% - 10px)}.two-sidebars .bar #main div#content-heading{margin-left:0;padding-left:0}}@media (max-width:1280px){.column.column-1{width:220px}.two-sidebars #main div#content-heading{margin-left:258px}}p.disabled{color:#bbb}.submit{color:#fff;background-color:#2b619e}.submit.ui-state-hover{color:#fff;background-color:#3b71ae}#wrap>#main{max-width:none;margin:0 4em}.header-bar #header{padding-left:4em;padding-right:4em}.chart-column ul{margin:0;padding:0}.header-bar #navigation .block-menu-block.first .menu-block-wrapper>ul.menu>li>ul{z-index:110}#main .column .block.first{border-top:0}.two-sidebars #main #content-heading{margin:0 0 0 302px}#content-heading h1{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-bottom:2px}.ui-menu{background-color:#fff}.column-tcyclone-filters .ui-widget-content,.ui-menu{border:1px solid #ddd}.column-tcyclone-filters>.ui-menu{padding-left:10px;margin:15px 0}.column-tcyclone-filters>.ui-menu .ui-menu{width:100%;transform:translateX(-10px)}.column-tcyclone-filters>.ui-menu .ui-menu a.ui-state-focus{margin:0;background-color:#f0f0f0}", "" ]);
 }, function(t, e, i) {
     var n, o;
-    n = [ i(13), i(14), i(26), i(27), i(220), i(223), i(224), i(225), i(221), i(28), i(40), i(226), i(39), i(23), i(153), i(42), i(227), i(247), i(77), i(25), i(250), i(67), i(257), i(259) ],
+    n = [ i(13), i(14), i(26), i(31), i(220), i(223), i(224), i(225), i(221), i(32), i(40), i(226), i(39), i(23), i(162), i(42), i(227), i(249), i(77), i(25), i(252), i(67), i(259), i(261) ],
     o = function(t, e, n, o, r, a, s, l, c, u, h, d, p, f, m, g) {
         var v = !1, b = {
             show_view_buttons: !1
         }, A = u, _ = {}, y = function() {};
-        return y.prototype = o, e.extend(!0, new y(), {
+        y.prototype = o;
+        var w = 0;
+        return e.extend(!0, new y(), {
             config: {
                 col2: {
                     panel: {
@@ -3140,19 +3147,20 @@
                 use_column_width: !0
             },
             col1: function(t) {
-                var i = (this.widgets, this);
+                var i = this.widgets, n = this;
                 y.prototype.col1.apply(this, arguments), this.have_url.done(function() {
-                    c.set([ h.params.product_path ]), i.update_category_links();
+                    c.set([ h.params.product_path ]), n.update_category_links();
                 }), v && t.el.div(".show-results submit").text("Show product results").button().click(function() {
-                    i.widgets.col2.panel("show");
-                }), this.config.enable_hierarchy && (e.extend(i.widgets, {
+                    n.widgets.col2.panel("show");
+                }), this.config.enable_hierarchy && (e.extend(n.widgets, {
                     category_h2: t.el.h2("Categories"),
                     path_links: t.el.ul(".path-links").text("Path links")
                 }), c.events.bind("changed", function(t) {
-                    console.log("-> path_filter changed", t ? t[0][0] : ""), h.goto_list_page(t ? t[0][0].join("/") : i._package || ""),
-                    i.update_category_links(), i.scroll_to_col2();
-                })), t.el.find("h2:contains(Filters)").length || t.el.h2("Filters"), l.events.bind("changed", function() {
-                    i._package && l._active && (m[i._package] = JSON.stringify({
+                    console.log("-> path_filter changed", t ? t[0][0] : ""), h.goto_list_page(t ? t[0][0].join("/") : n._package || ""),
+                    n.update_category_links(), n.scroll_to_col2();
+                })), t.el.find("h2:contains(Filters)").length || t.el.section(".filters").h2("Filters"),
+                i.filters = t.el.find(".filters"), l.events.bind("changed", function() {
+                    n._package && l._active && (m[n._package] = JSON.stringify({
                         facet_selection: e.map(l._active, function(t, e) {
                             return e + "," + t.join(",");
                         }).join(";")
@@ -3169,45 +3177,44 @@
                 this.config.enable_hierarchy && d.push(c), e.map(d, function(t) {
                     e.isFunction(t.fn) && (t.init && t.init(), f.filters.push(t));
                 }), o.grid = i.el.find(".panel-content").grid({
-                    text_filter_parent: o.col1.find(".text-filter-row .cell").orelse(function() {
-                        return o.col1.div(".row text-filter-row").hide().div(".cell");
+                    text_filter_parent: o.col1.find(".text-filter-row").orelse(function() {
+                        return o.filters.div(".text-filter-row").hide();
                     }),
                     on_click: n._bind(n._on_thumbnail_click),
                     size_fits_content: !0,
                     on_model_change: function(t) {
                         o.package_select && r.packages(o.package_select.init);
                     },
-                    on_filter_change: function() {
-                        console.log(" >> filter change A"), o.facets && f.lookup_filter_by_name("facets") && (l.status() || o.facets.facets("clear"),
-                        o.facets.facets("on_filter_change")), o.package_select && o.package_select.on_filter_change(),
-                        this.n_filter_runs && n.col2.css.left && h.add_state(), n.on_filter_change();
-                        e.where(r.products, {
-                            filter_pass: !0
-                        }).length;
-                        v ? setTimeout(function() {
-                            o.col2.panel("show"), n.widgets.grid.grid("resize");
-                        }, 1e3) : (this.n_filter_runs && n.col2.css.left && h.goto_list_page(), n.do_layout(),
-                        setTimeout(function() {
-                            n.do_layout();
-                        }, 1e3));
-                    },
                     on_view_change: function() {
                         n.do_layout();
                     },
                     on_view_ready: function() {
-                        b.show_view_buttons && n.widgets.grid.find(".head").show(), f.items.length > 20 && o.col1.find(".text-filter-row").show(),
+                        b.show_view_buttons && o.grid.find(".head").show(), f.items.length > 20 && o.col1.find(".text-filter-row").show(),
                         n.do_layout();
                     }
                 }).each(function() {
                     var t = e(this);
                     t.find(".foot").prependTo(t);
                 }), f.subscribe(function() {
-                    console.log(" >> filter change B");
+                    o.facets && f.lookup_filter_by_name("facets") && (l.status() || o.facets.facets("clear"),
+                    o.facets.facets("on_filter_change")), o.package_select && o.package_select.on_filter_change(),
+                    w && n.col2.css.left && h.add_state(), n.on_filter_change();
+                    e.where(r.products, {
+                        filter_pass: !0
+                    }).length;
+                    v ? setTimeout(function() {
+                        o.col2.panel("show"), n.widgets.grid.grid("resize");
+                    }, 1e3) : (w && n.col2.css.left && h.goto_list_page(r.query.package), n.do_layout(),
+                    setTimeout(function() {
+                        n.do_layout();
+                    }, 1e3)), w++;
                 }), f.on.items.subscribe(function() {
                     console.log("%cpackage change:", "background-color:#ff9", r.query.package), a.get(n._package).then(function(t) {
-                        r.sorted_facets(t, function(t) {
-                            o.facets = o.col1.find(".facets").orelse(function() {
-                                return o.col1.div(".row").div(".cell").div();
+                        e.each(_, function(t, e) {
+                            "epsgram" === t && e.remove();
+                        }), r.sorted_facets(t, [ "Product group" ], function(t) {
+                            o.facets = o.filters.find(".facets").orelse(function() {
+                                return o.filters.div();
                             }).facets({
                                 products: r,
                                 facets: t,
@@ -3238,7 +3245,7 @@
                             name: r.query.package
                         });
                         i && (o.links = i.links && i.links.length ? e("#block-menu-block-2").empty().orelse(function() {
-                            return n.widgets.col1.div("#block-menu-block-2").addClass("links").prependTo(n.widgets.col1.parent());
+                            return n.widgets.col1.section("#block-menu-block-2").addClass("links").prependTo(n.widgets.col1);
                         }).show().ul(".menu").each(function() {
                             var t = e(this);
                             e.each(i.links, function(e, i) {
@@ -3253,19 +3260,20 @@
                     left: 0,
                     width: 400,
                     height: 400
-                }, this.col3.css = {}), this._package && a.get(this._package).then(function(t) {
-                    if (t && t.additional_links && t.additional_links.length) {
-                        var i = o.col2.div(".additional-links");
-                        i.h3("Additional charts");
-                        var n = i.ul();
-                        e.each(t.additional_links, function(t, e) {
-                            var i = 0 !== e.url.indexOf(h.base_path), o = n.li().a({
-                                href: e.url,
-                                rel: i ? "external" : ""
+                }, this.col3.css = {}), this._package && a.get(this._package).then(function(i) {
+                    if (i && i.additional_links && i.additional_links.length) {
+                        var n = o.col2.find("> .additional-links").orelse(function() {
+                            var t = o.col2.div(".additional-links");
+                            return t.h3("Additional charts"), t.ul(), t;
+                        }), r = n.find("> ul");
+                        e.each(i.additional_links, function(e, i) {
+                            var n = 0 !== i.url.indexOf(h.base_path), o = r.li().a({
+                                href: i.url.replace("@BACKEND", t.options.backend_host),
+                                rel: n ? "external" : ""
                             });
                             o.img({
-                                src: e.thumbnail
-                            }), o.div(".title").text(e.title);
+                                src: i.thumbnail.replace("@BACKEND", t.options.backend_host)
+                            }), o.div(".title").text(i.title);
                         });
                     }
                 });
@@ -3304,7 +3312,7 @@
                     }).click(function() {
                         h.add_state().goto_list_page(h._path.dir);
                     }), (n.button = A.widgets.controls.rhs.div(".results-button keep").button({
-                        label: "Chart results",
+                        label: "Filter results",
                         icons: {
                             secondary: "ui-icon-triangle-1-s"
                         }
@@ -3312,7 +3320,6 @@
                         return o.widgets.col3.find(".ui-menu").not(n.menu || null).hide(), n.menu = n.menu ? n.menu.toggle() : n.button.ul(".results-menu").menu({}).each(function() {
                             e(this).div().grid({
                                 collection: r,
-                                filters: [ l ],
                                 view_mode: "details",
                                 text_filter_parent: e(),
                                 size_fits_content: !0,
@@ -3342,7 +3349,9 @@
             },
             scroll_to_col3: function() {
                 v || (this.col2.css.left = -this.col2.css.width, this.col3.css.left = 0, this.widgets.col2.css(this.col2.css),
-                this.widgets.col3.css(this.col3.css));
+                this.widgets.col3.css(this.col3.css), setTimeout(function() {
+                    e(document).scrollTop() > 500 && e(document).scrollTop(e("h1").offset().top - 10);
+                }, 1e3));
             },
             q_size: function() {
                 var e = Math.max(512, Math.min(1536, Math.floor(this.widgets.col3.width() / t.chart.q_width) * t.chart.q_width));
@@ -3382,13 +3391,13 @@
                             }), e.each(_, function(t, e) {
                                 e.remove && e.remove();
                             }), _ = {}, e.each(t.data.widgets, function(t, n) {
-                                ~e.inArray(n, [ "epsgram" ]) && (_[n] = i(261));
+                                ~e.inArray(n, [ "epsgram" ]) && (_[n] = i(263));
                             });
                         });
                     } else s.update(t);
                 }
             },
-            do_layout: e.debounce(200, function() {
+            do_layout: window.is_node ? e.noop : e.debounce(200, function() {
                 var t = this, i = t.widgets.col2, n = t.widgets.col3, o = 50;
                 if (this.widgets.time_navigator && this.widgets.time_navigator.length || (this.widgets.time_navigator = e("#time-navigator, .time-nav")),
                 this.widgets.time_navigator.triggerHandler("layout", {
@@ -3476,7 +3485,6 @@
                 });
             },
             filter: t.debounce(200, function() {
-                console.log("filter");
                 var e = i.filtered ? i.filtered.length : -1;
                 if (i.changed = {
                     to_hide: [],
@@ -3489,8 +3497,7 @@
                     this.filtered_idx = n++) : o && i.changed.to_hide.push(this), this.filter_pass_no_facets = i.filter_item_without_facets(this);
                 }), i.sort_by && i.filtered.sort(function(t, e) {
                     return i.items[t].data[i.sort_by] > i.items[e].data[i.sort_by];
-                }), console.log("filter: filtered=", i.filtered), !e && !i.filtered.length || i.emit(),
-                t.inArray(+i.selection.value, i.filtered) < 0 && i.selection.set(i.selection.always && i.filtered.length ? i.filtered[0] : null),
+                }), !e && !i.filtered.length || i.emit(), t.inArray(+i.selection.value, i.filtered) < 0 && i.selection.set(i.selection.always && i.filtered.length ? i.filtered[0] : null),
                 i.have_filtering.resolve();
             }),
             filter_item: function(t) {
@@ -3626,13 +3633,13 @@
     }.apply(e, n), !(void 0 !== o && (t.exports = o));
 }, function(t, e, i) {
     var n, o;
-    n = [ i(14) ], o = function(t) {
+    n = [ i(14), i(27) ], o = function(t, e) {
         "use strict";
-        function e(t, e, o) {
-            n += 1, this.parent = o, this.id = n, this.past = {}, this.elem = e, this.name = t,
-            this.active = !0, this.listeners = new i();
+        function i(t, e, i) {
+            o += 1, this.parent = i, this.id = o, this.past = {}, this.elem = e, this.name = t,
+            this.active = !0, this.listeners = new n();
         }
-        function i() {
+        function n() {
             this.listeners = [], this.remove_object = function(e) {
                 this.listeners = t.grep(this.listeners, function(t) {
                     return t[0] !== e;
@@ -3648,8 +3655,8 @@
                 this.listeners = [];
             };
         }
-        var n = 0;
-        t.extend(e.prototype, {
+        var o = 0;
+        t.extend(i.prototype, {
             enable: function() {
                 this.active = !0;
             },
@@ -3708,17 +3715,17 @@
                 for (var n in i) e.elem.unbind(n), delete e.past[n];
                 this.listeners.clear();
             },
-            send: function(e, i) {
+            send: function(t, i) {
                 var n = this;
                 if (this.active) {
                     var o;
                     try {
-                        o = t.jsonSerialise(i), o && o.length > 80 && (o = o.substr(0, 77) + "...");
+                        o = e.serialise(i), o && o.length > 80 && (o = o.substr(0, 77) + "...");
                     } catch (t) {
                         o = t;
                     }
-                    return "chart-time-select" !== e && "event-start" !== e && console.info("BUS-SEND[" + (n.name || n.id) + "] " + e + " " + (o ? o : "")),
-                    n.past[e] = i, n.elem.triggerHandler("bus-" + e, i), n;
+                    return "chart-time-select" !== t && "event-start" !== t && console.info("BUS-SEND[" + (n.name || n.id) + "] " + t + " " + (o ? o : "")),
+                    n.past[t] = i, n.elem.triggerHandler("bus-" + t, i), n;
                 }
             },
             sendfn: function(t) {
@@ -3737,16 +3744,16 @@
                 t.parent && t.parent.forget_me(t);
             }
         });
-        var o = {
-            get_bus: function(i, n) {
-                var o, r, a = i;
-                return "string" == typeof i && (o = t("#" + i), i = o.length ? o : t("<div id='" + i + "'/>").hide().appendTo("body")),
-                i ? a = t(i).attr("id") : (a = "GLOBAL", i = t(document), n = null), r = i.data("message-bus"),
-                r || (r = new e(a, i, n), i.data("message-bus", r)), r;
+        var r = {
+            get_bus: function(e, n) {
+                var o, r, a = e;
+                return "string" == typeof e && (o = t("#" + e), e = o.length ? o : t("<div id='" + e + "'/>").hide().appendTo("body")),
+                e ? a = t(e).attr("id") : (a = "GLOBAL", e = t(document), n = null), r = e.data("message-bus"),
+                r || (r = new i(a, e, n), e.data("message-bus", r)), r;
             }
         };
         return t.fn.messageBus = function(t) {
-            return o.get_bus(this, t);
+            return r.get_bus(this, t);
         }, t.fn.bindBusMessage = function(e, i, n) {
             return this.each(function() {
                 var o = t(this);
@@ -3754,1012 +3761,11 @@
                     o.trigger(n, e);
                 });
             }), this;
-        }, t.getMessageBus = o.get_bus, o;
+        }, t.getMessageBus = r.get_bus, r;
     }.apply(e, n), !(void 0 !== o && (t.exports = o));
 }, function(t, e, i) {
     var n, o;
-    n = [ i(13), i(14), i(26), i(83), i(29), i(220), i(28), i(40), i(23), i(221) ],
-    o = function(t, e, n, o, r, a, s, l, c, u) {
-        var h = s, d = !1;
-        return {
-            config: {
-                page: {
-                    borderx: 52
-                },
-                col1: {
-                    width: [ [ 1e4, 264 ], [ 1280, 220 ], [ 1024, 200 ] ]
-                },
-                panel: {
-                    collapsible: !1
-                }
-            },
-            col1: function(t) {
-                function r() {
-                    e("body").removeClass("admin-menu"), e("#admin-menu").remove();
-                }
-                var s = this;
-                r(), setTimeout(r, 1e3), this.have_url = e.Deferred(), this._package && a.set_package(this._package),
-                c.subscribe(function() {
-                    a.products.length || d || o.info(function(t) {
-                        t.uid || !function() {
-                            var t = [ i(93) ];
-                            (function(t) {
-                                var i = "/auth/login?back=" + location.href;
-                                new t({
-                                    id: "no-products-warning",
-                                    title: "<h2>You are not logged in</h2>",
-                                    html: '<p>Please note that many charts have restricted access.</p><p>If you are an ECMWF partner, please <a href="' + i + '">log in</a> to get access to a larger range of products.</p><p>If the content you are trying to view is for licensed users only, such as a specific chart, you might still not be granted access once logged in'
-                                }), e("#no-products-warning").modal("show");
-                            }).apply(null, t);
-                        }(), d = !0;
-                    });
-                }), s.have_chart = e.Deferred(function(t) {
-                    n.get_bus().listen("chart-added", function() {
-                        t.resolve();
-                    });
-                });
-            },
-            scroll_to_col3: function() {},
-            change_package: function(t) {
-                var e = this;
-                a.set_package(t), c.set_collection(a, function() {
-                    e._package = t;
-                });
-            },
-            on_url_change: function(n, o) {
-                function d(t, e) {
-                    if (t && !e) return !0;
-                    if (!t && e) return !0;
-                    if (t.length !== e.length) return !0;
-                    for (var i in e) if (t[i] !== e[i]) return !0;
-                    return !1;
-                }
-                var p, f = this, m = s.basic, g = {};
-                g.name = l._path && l._path.page, g.product = g.name && a.product_by_name(g.name);
-                var v = !n.params.product, b = e.extend({
-                    product: {
-                        widget: n.params && (n.params.product && h.state.list_product && n.params.product !== g.name || h.state.list_product && !n.params.product)
-                    },
-                    page_product: n.params.product !== (f.prev && f.prev.product),
-                    path: d(g.path, n.params.product_path)
-                }, o);
-                if (b.pkg) console.log(">>> on_url_change: package has changed!", this._package, " --> ", [ n.params.package ]),
-                f.change_package(n.params.package); else if (b.product.url && (console.log("%con_url_change: product has changed!", "background-color:#bdf", [ g.name ], " --> ", [ n.params.product ]),
-                n.params.product ? c.have_items.then(function() {
-                    if (p = a.product_by_name(n.params.product)) h.state.params = n.query, f.on_product_select(p, n.query),
-                    c.selection.set(c.lookup_idx_by_name(n.params.product)); else {
-                        if (n.canonicalPath.replace(/\?.*/, "") !== l.original_path) return console.log("assuming external url. exiting application..."),
-                        void (location.href = n.canonicalPath);
-                        console.log("product not found but path is unchanged. not exiting"), !function() {
-                            var o = [ i(93) ];
-                            (function(i) {
-                                new i({
-                                    id: "product-not-found",
-                                    title: "<h2>Product not found</h2>",
-                                    html: "<p>Could not find the product <i>" + n.params.product + "</i>.</p>" + (~e.inArray(n.params.product, [ "obstat", "swdfp", "medium" ]) ? '<p><a href="' + n.pathname + '/">' + t.ucfirst(n.params.product) + " package</a></p>" : "")
-                                }), e("#product-not-found").modal("show").click(function() {
-                                    e("#product-not-found").modal("hide");
-                                });
-                            }).apply(null, o);
-                        }();
-                    }
-                }) : f.scroll_to_col2()), n.params.product && b.product.url && f.scroll_to_col3(),
-                b.path && (u.set([ l.params.product_path ]), f.update_category_links()), b.path || b.page_product || !n.params.product && !f.is_landing_page || n.params.product && f.is_landing_page) {
-                    var A;
-                    A = [], n.params.product && A.push(n.params.product), this.config.enable_text && a.content(A.join("/"), function(i) {
-                        i && i.id ? (f.widgets.content.html("<h2>" + i.title + "</h2><div>" + i.body + "</div>"),
-                        f.widgets.content.find("img").each(function() {
-                            var i = e(this), n = i.attr("src");
-                            1 === n.indexOf("ttp") || i.attr("src", t.options.ajax.chart_content.replace("/en", "") + n);
-                        })) : i && i.result ? (console.log("content: result=", i.result), f.widgets.content.html(i.result)) : (console.log("on_url_change: content: using fallback: changed.page_product=", b.page_product),
-                        v ? f.widgets.content.empty() : a.content_temp(l.params.product, function(t) {
-                            f.have_chart.done(function() {
-                                f.widgets.content.html(t.text || t.description);
-                            });
-                        }));
-                    });
-                }
-                f.is_landing_page = v, m.instance && (m.instance.set_parameters(n.query), m.instance.have.availability.done(function() {
-                    e.extend(h.state.params, r.map(m.instance.variables, function(t) {
-                        return t.to_string();
-                    }));
-                })), f.have_url.resolve();
-            },
-            on_product_select: function(t, e) {
-                return t.data && t.data.package ? (console.log("product_select: product=", t), void (t.has_widget("epsgram") && (console.log("****** product_select: yes, is_epsgram"),
-                c.remove_filter("facets")))) : console.error("on_product_select: unexpected product format");
-            },
-            h1: function(t) {
-                t && e("h1").text(t).addClass("ready");
-            },
-            _on_resize: function(t) {
-                var i = this;
-                if (h.widgets.chart) {
-                    t = t || {
-                        width: 32 * Math.floor(h.widgets.chart.find("img").width() / 32)
-                    };
-                    var n = e(window).width(), o = this._col1_width(), r = o + 186;
-                    console.log("page.size-changed: overriding page width: ", t.width, n - r - 10),
-                    i._width_override = t.width, i.do_layout();
-                }
-            },
-            update_category_links: function() {},
-            _col1_width: function() {
-                var e = window.innerWidth, i = t.options.col1 && t.options.col1.width || this.config.col1.width, n = i[0];
-                for (var o in i) {
-                    if (i[o][0] < e) break;
-                    n = i[o];
-                }
-                return n[1];
-            },
-            _bind: function(t) {
-                var e = this;
-                return function() {
-                    t.apply(e, arguments);
-                };
-            }
-        };
-    }.apply(e, n), !(void 0 !== o && (t.exports = o));
-}, function(t, e, i) {
-    var n, o;
-    n = [ i(14), i(29), i(26), i(32), i(39), i(40), i(24), i(41), i(42) ], o = function(t, e, n, o, r, a, s, l, c, u) {
-        var h = {
-            widgets: {
-                title: t(".chart-column").h2(),
-                chart: null
-            },
-            state: {
-                product: null,
-                params: {}
-            },
-            on: {
-                size_change: t.noop
-            },
-            product_change: new s(),
-            set_state: function(e) {
-                t.extend(h.state, e);
-            },
-            pre_build: function(t) {
-                var e = this;
-                this.el = t.el, h.widgets.controls = {
-                    outer: e.el.show().find(".chart-controls").orelse(function() {
-                        return e.el.div(".chart-controls");
-                    }),
-                    rhs: e.el.find(".chart-controls > .bar-2").orelse(function() {
-                        return e.el.find(".chart-controls").div(".bar-2");
-                    }),
-                    params: e.el.find(".chart-controls > .www-chart-parameter-bar").orelse(function() {
-                        return e.el.find(".chart-controls").div(".www-chart-parameter-bar");
-                    })
-                };
-            },
-            basic: new function o() {
-                this.scrollable = null, this.bus = null, this.build = function(t, n, o, s) {
-                    var l = this;
-                    !function() {
-                        var n = [ i(43), i(45), i(49), i(76), i(99), i(116), i(117), i(50) ];
-                        (function(n, c, d, p, f, m) {
-                            l.BasicInstance = c, l.Products = n, h.state.list_product = t, h.pre_build.call(l, o),
-                            l.scrollable = o.el.div(".scrollable"), l.plugins = [ {
-                                mixin: d,
-                                options: {
-                                    controls: h.widgets.controls.params
-                                }
-                            }, {
-                                mixin: p,
-                                options: {
-                                    parent: h.widgets.controls.rhs
-                                }
-                            }, {
-                                mixin: f
-                            }, {
-                                mixin: m
-                            } ], h.widgets.chart = l.scrollable.div(".www-chart-container").div(".www-chart-image-wrapper").attr({
-                                id: "basic-chart"
-                            }), l.bus = h.widgets.chart.messageBus().listen(o.el, "chart-content-update", function(i, n) {
-                                h.state.product = t = n.product, h.widgets.controls.outer.css({
-                                    minHeight: ""
-                                }), o.el.css({
-                                    minHeight: ""
-                                }), h.state.params = e.map(h.state.product.variables, function(t) {
-                                    return t.to_string();
-                                }), a.set_path(u, t.name(), r.get_string(h.state.params), t.title_());
-                            }).listen(o.el, "toggle-parameter-animate", function(t, e) {
-                                !function() {
-                                    var t = [ i(189) ];
-                                    (function(t) {
-                                        t.chart(h.widgets.chart.data("ui-basicChart")).parameter(e).toggle();
-                                    }).apply(null, t);
-                                }();
-                            }).listen(o.el, "size-changed", function(t, e) {
-                                e && h.widgets.chart && h.on.size_change(e);
-                            }).listen("new-history-state", function() {
-                                console.log("chart_handler: got new history state"), a.add_state();
-                            }), setTimeout(function() {
-                                l.post();
-                            }, 0), s && s();
-                        }).apply(null, n);
-                    }();
-                }, this.update = function(t) {
-                    var e = this;
-                    h.widgets.controls.outer.css({
-                        minHeight: h.widgets.controls.outer.find(".ui-button:first").height() + 3
-                    }), delete e.instance, e.bus.clear(), h.state.list_product = t, this.post();
-                }, this.post = function() {
-                    var e = this, i = h.state.list_product;
-                    if (h.widgets.chart) {
-                        var o = this.el.height();
-                        this.el.css({
-                            minHeight: o
-                        });
-                    }
-                    e.instance = this.BasicInstance.get_instance({
-                        product: i.data,
-                        modifiable: !0,
-                        priority: "high"
-                    }), e.instance.data.img ? t.each(h.state.params, function(t, i) {
-                        e.instance.variables[t] ? e.instance.variables[t].set(i) : console.log("ChartHandler: ignoring inapropriate variable:", t);
-                    }) : e.instance.set_parameters(h.state.params), h.widgets.chart.basicChart("instance") ? h.widgets.chart.basicChart("setProduct", {
-                        instance: e.instance
-                    }) : (h.widgets.chart.basicChart({
-                        instance: e.instance,
-                        plugins: e.plugins
-                    }), n.get_bus().send("chart-added")), h.widgets.title.text(e.instance.title_()),
-                    a.set_path(u, i.name(), r.get_string(h.state.params), i.long_title()), h.product_change.emit();
-                }, this.cleanup = function() {
-                    h.widgets.chart = null, h.widgets.title.show(), this.scrollable.remove(), delete this.scrollable,
-                    delete this.instance, this.bus.clear();
-                };
-            }(),
-            interactive: new function s() {
-                var l = this;
-                this.build = function(s, c, d, p) {
-                    o.load(), !function() {
-                        var o = [ i(176) ];
-                        (function() {
-                            !function() {
-                                var o = [ i(76), i(190), i(214), i(215), i(100), i(216), i(217), i(218) ];
-                                (function(i, o, f) {
-                                    d.el.show(), h.pre_build.call(this, d), h.widgets.chart = d.el.div({
-                                        css: d.size
-                                    }).attr({
-                                        sizor: "chart_handler"
-                                    }), h.widgets.chart.chart({
-                                        product: s.name(),
-                                        messageBus: l.bus = h.widgets.chart.messageBus(),
-                                        availability: !1,
-                                        editable: !1,
-                                        enable_undo: !1,
-                                        expand_on_resize: !1,
-                                        show_latlong: !0,
-                                        values: c,
-                                        plugins: [ {
-                                            mixin: o,
-                                            options: {
-                                                controls: ".chart-controls"
-                                            }
-                                        }, {
-                                            mixin: i,
-                                            options: {
-                                                parent: ".chart-controls .bar-2"
-                                            }
-                                        }, {
-                                            mixin: f
-                                        } ]
-                                    }), h.state.product = h.widgets.chart.data("ui-chart").product, h.widgets.chart.data("ui-chart")._set_mode("select", {
-                                        cursor: "pointer"
-                                    }), t("#time-navigator").length && (console.warn("FIXME unexpected time-navigator found - removing..."),
-                                    t("#time-navigator").remove()), h.widgets.time_navigator = d.el.div("#time-navigator").timeNavigator({
-                                        messageBus: l.bus,
-                                        show_bt: !1
-                                    }), l.bus.listen_once(d.el, "chart-content-update", function(t, e) {
-                                        h.widgets.time_navigator.show().find(".container").triggerHandler("layout", d.size);
-                                    }).listen(d.el, "chart-content-update", function(t, i) {
-                                        var n = h.state.product = i.product, o = n.name, s = n.title();
-                                        h.state.params = e.map(n.variables, function(t) {
-                                            return t.to_string();
-                                        }), a.set_path(u, o, r.get_string(h.state.params), s);
-                                    }).listen("tool-print-select", function() {
-                                        h.state.product.www_print(h.state.product.www_title, function(t) {
-                                            location.href = t.url;
-                                        });
-                                    }), n.get_bus().send("chart-added"), l.bus.send("product-swapped"), l.post(), p && p();
-                                }).apply(null, o);
-                            }();
-                        }).apply(null, o);
-                    }();
-                }, this.update = function(t) {
-                    h.widgets.chart && h.widgets.chart.chart("setProduct", t.name()), h.state.list_product = t,
-                    l.post();
-                }, this.post = function() {
-                    h.product_change.emit();
-                }, this.cleanup = function() {
-                    h.widgets.chart.remove(), h.widgets.chart = null, h.widgets.time_navigator.remove(),
-                    delete h.widgets.time_navigator;
-                };
-            }(),
-            current: null
-        };
-        return h;
-    }.apply(e, n), !(void 0 !== o && (t.exports = o));
-}, function(t, e, i) {
-    var n, o;
-    n = [ i(13), i(14), i(30) ], o = function(t, e) {
-        t.blank_gif = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
-        var i = function(t) {
-            for (var e = ""; t > 0; ) e += " ", t--;
-            return e;
-        }, n = function(t, e) {
-            if (e / 3 > 5) return "...";
-            if ("object" == typeof t) {
-                var o = [], r = i(e + 3);
-                if (t instanceof Array) {
-                    var a = "[", s = "]";
-                    for (var l in t) {
-                        var c = n(t[l], e + 3);
-                        o.push(r + c);
-                    }
-                } else {
-                    a = "{", s = "}";
-                    for (l in t) c = n(t[l], e + 3), o.push(r + '"' + l + '"=' + c);
-                }
-                return a + (o.length > 0 ? "\n" : "") + o.join(",\n") + (o.length > 0 ? "\n" + i(e) : "") + s;
-            }
-            return "string" == typeof t ? '"' + t + '"' : "" + t;
-        };
-        t.prettyJSON = function(t, e) {
-            return n(t, 0);
-        }, t.json_to_html = function(t) {
-            function i(t) {
-                function s(t) {
-                    a.push('<div style="margin-left:' + 10 * n + 'px">' + t + "</div>");
-                }
-                n++, r = Math.max(r, n);
-                var l = 0;
-                for (var c in t) n < o ? "object" == typeof t[c] ? e.isPlainObject(t[c]) ? (s(c),
-                i(t[c])) : s(c + " ***") : s(c) : (s(c), s("[max recursion!! " + n + "]")), l++;
-                l || s("[no properties]"), n--;
-            }
-            var n = 0, o = 10, r = 0, a = [];
-            return i(t), a.join("") + "depth=" + r;
-        }, t.print_element = function(e) {
-            if ("undefined" == typeof e) return "undefined";
-            if (null === e) return "null";
-            var i = "";
-            return i += e.length && t.isset(e.attr) ? " $tag=" + e[0].tagName + " id='" + e.attr("id") + "' class='" + e.attr("class") + "' parent_id='" + e.parent().attr("id") + "' parent_class='" + e.parent().attr("class") + "'" : "object" == typeof e && t.isset(e.scrollWidth) ? " html-element: " + e.tagName + ' class="' + e.className + '" id=' + e.id + ". nodeType=" + e.nodeType + "." : t.isset(e.nodeName) && "#document" == e.nodeName ? " #document." : e.parent && "[object Window]" == e.parent.constructor.toString() ? " window" : "object" == typeof e ? " object: contructor=" + e.constructor + ". " + t.list_properties(e) : "function" == typeof e ? " type=function" : "number" == typeof e ? " type=number (" + e + ")" : " dom element? len=" + e.length + " el=" + e;
-        }, t.fn_name = function(t) {
-            var e = /\W*function\s+([\w\$]+)\(/.exec(t);
-            return e ? e[1] : "anonymous";
-        }, t.pad = function(t, e, i) {
-            return "undefined" == typeof t && (t = ""), "string" != typeof t && (t = t.toString()),
-            "undefined" == typeof e && (e = 0), "undefined" == typeof i && (i = " "), e + 1 >= t.length && (t = Array(e + 1 - t.length).join(i) + t),
-            t;
-        }, t.truncate = function(t, e) {
-            if (t && t.length > e) {
-                var i = t.substring(0, e);
-                return i.replace(/\w+$/, "") + "&hellip;";
-            }
-            return t;
-        }, t.isset = function(t) {
-            return "undefined" != typeof t && (!("string" == typeof t && !t) && (("number" != typeof t || !isNaN(t)) && (null !== t && "undefined" != t)));
-        }, t.is_empty = function(t) {
-            var e;
-            for (e in t) return !1;
-            return !0;
-        }, t.format_date = function(e) {
-            if (!t.isset(e)) return "";
-            e = "" + e;
-            var i = e.substring(0, 8), n = e.substring(8, 12);
-            return i + " " + n + " UTC";
-        }, t.inflate = function(t, e) {
-            e = e || 1, t.padding = new Array(1e6 * e + 1).join("_");
-        }, t.add_links = function(t) {
-            return t.replace(/(ftp|http|https|file):\/\/[\S]+(\b|$)/gim, '<a href="$&" class="my_link" target="_blank">$&</a>').replace(/([^\/])(www[\S]+(\b|$))/gim, '$1<a href="http://$2" class="my_link" target="_blank">$2</a>');
-        }, t.remove = function(t, e) {
-            var i = t[e];
-            return delete t[e], i;
-        }, e.fn.shadowFix = function(t) {
-            return this.each(function() {
-                e(this).parent().addClass("titlebar-shadow");
-            });
-        }, t.get_user_catalogue = function(i) {
-            e.ajaxQueue(e.extend(i, {
-                url: t.options.ajax.backend.catalogue_items,
-                json: {
-                    type: i.kind || "product",
-                    user_items: !0,
-                    standard_items: !1
-                }
-            }));
-        }, t.timer = function(t) {
-            this.milliseconds = t, this.id = null, this.start = function(t) {
-                var e = this;
-                this.id && console.warn("timer.start: already started"), this.id = setTimeout(function() {
-                    e.id = null, t();
-                }, this.milliseconds);
-            }, this.clear = function(t) {
-                clearTimeout(this.id), this.id = null;
-            };
-        }, t.xhr_to_error_string = function(t) {
-            return t.error ? t.error.length ? t.error[0] : t.error : "Unknown error";
-        };
-        var o = {
-            same_origin: function() {
-                var e = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ":" + window.location.port : ""), i = !t.options.backend_host || e === t.options.backend_host;
-                return i || console.log("same_origin=", i, " backend=", e + " ", t.options.backend_host),
-                i;
-            },
-            list_properties: function(t) {
-                var e = "", i = 0;
-                for (var n in t) e += n + ", ", i++;
-                return i || (e += "[no properties]"), e;
-            },
-            n_properties: function(t) {
-                var e, i = 0;
-                for (e in t) i++;
-                return i;
-            },
-            ucfirst: function(t) {
-                return t += "", t.charAt(0).toUpperCase() + t.slice(1);
-            },
-            escape_regex: function(t) {
-                return t.replace(/[.*+?^${}()|[\]\/\\]/g, "\\$0");
-            },
-            run: function(t, i) {
-                var n = this;
-                return e.map(t, function(t) {
-                    return t.apply(n, i);
-                });
-            }
-        };
-        return e.extend(!0, t, o), e.fn.orelse = function(t) {
-            var i;
-            return e(this).length ? e(this) : "function" != typeof t ? t : (i = t()) ? i : e(this);
-        }, e.fn.ensure = function(t) {
-            var i = this;
-            return e(this).find("> " + t).orelse(function() {
-                return e(i).div(t);
-            });
-        }, e.fn.delayed = function(t, e) {
-            return this.delay(t).queue(function(t) {
-                e.apply(this), t();
-            });
-        }, e.fn.clear = function() {
-            return e(this).br({
-                class: "br-clear"
-            });
-        }, e.fn.pack = function(t) {
-            var i = e(this);
-            e(arguments).each(function(t, e) {
-                e.appendTo(i);
-            });
-        }, e.pluck = function(t, i) {
-            return e.map(t, function(t) {
-                return t[i];
-            });
-        }, e.where = function(t, i) {
-            return e.map(t, function(t) {
-                if (e.map(i, function(e, i) {
-                    if (t[i] === e) return !0;
-                }).length) return t;
-            });
-        }, e.findWhere = function(t, i) {
-            return e.where(t, i)[0];
-        }, o.map = function(t, i, n) {
-            n = n || this;
-            var o = {};
-            return e.each(Object.keys(t), function(e, r) {
-                var a = i.call(n, t[r], r, t);
-                "undefined" != typeof a && null !== a && (o[r] = a);
-            }), o;
-        }, Object.keys || (o.map = function(t, i, n) {
-            var o = {};
-            return e.each(t, function(e, n) {
-                if ("undefined" != typeof n && t.hasOwnProperty(e)) {
-                    var r = i(n);
-                    "undefined" != typeof r && null !== r && (o[e] = r);
-                }
-            }), o;
-        }), t.query = function() {
-            for (var t = {}, e = window.location.search.substring(1), i = e.split("&"), n = 0; n < i.length; n++) {
-                var o = i[n].split("=");
-                if ("undefined" == typeof t[o[0]]) o[0] && (t[o[0]] = o[1]); else if ("string" == typeof t[o[0]]) {
-                    var r = [ t[o[0]], o[1] ];
-                    t[o[0]] = r;
-                } else t[o[0]].push(o[1]);
-            }
-            return t;
-        }, t.get_host = function() {
-            return t.fix_host.to_backend(location.protocol + "//" + location.hostname + (location.port ? ":" + location.port : ""));
-        }, t.fix_host = {
-            to_backend: function(t) {
-                return t.replace(/www|eccharts/gi, "apps").replace(/stage|eccharts-test/gi, "apps-test");
-            },
-            to_frontend: function(t) {
-                return t.replace(/apps-test|eccharts-test/gi, "stage").replace(/apps|eccharts/gi, "www");
-            }
-        }, o;
-    }.apply(e, n), !(void 0 !== o && (t.exports = o));
-}, function(t, e, i) {
-    var n = i(31);
-    "string" == typeof n && (n = [ [ t.id, n, "" ] ]);
-    i(11)(n, {});
-    n.locals && (t.exports = n.locals);
-}, function(t, e, i) {
-    e = t.exports = i(3)(), e.push([ t.id, ".inform-dialogue{border:1px solid #f4a460;padding:.5em;font-size:10pt;background:#ffdead}.inform-dialogue .right{float:right}.inform-dialogue .highlight{font-weight:700;color:blue}.inform-dialogue .error{font-style:italic}.alert{padding:0;padding-bottom:0;border:0}.alert .ui-dialog-content{padding-bottom:0}.alert table{width:100%;border-style:dotted;margin-bottom:0}.alert table .form-buttons{text-align:right;padding-right:0}.alert .ui-dialog-titlebar{background-image:none;-moz-border-radius-topleft:4px;-moz-border-radius-topright:4px;-moz-border-radius-bottomleft:0;-moz-border-radius-bottomright:0;-webkit-border-radius-topleft:4px;-webkit-border-radius-topright:4px;-webkit-border-radius-bottomleft:0;-webkit-border-radius-bottomright:0}.alert td{border-top:1px dotted #b5b5b5;padding:12px}.alert .content{margin:25px 0}", "" ]);
-}, function(t, e, i) {
-    var n, o;
-    n = [ i(13), i(14), i(33) ], o = function(t, e, i) {
-        function n(t) {
-            return t = t || function() {}, a ? void t(a) : void i({
-                url: "/backend/unit-list/",
-                success: function(i) {
-                    e.each(i, function(t, e) {
-                        s[e.name] = new l.Unit(e);
-                    }), a = i, t(a);
-                },
-                error: function(e) {
-                    a = [], t(a);
-                }
-            });
-        }
-        function o(t, e) {
-            void 0 === e && (e = 2);
-            for (var i = 1; e < 0; ) i /= 10, e++;
-            for (;e > 0; ) i *= 10, e--;
-            return Math.floor(t * i + .5) / i;
-        }
-        function r(t, e, i) {
-            return i ? o(t) + " " + e : '<span class="latlon">' + o(t) + "</span>&deg;" + e;
-        }
-        var a, s = {};
-        e.frameworkRegister && e.frameworkRegister(n, "Load units");
-        var l = {
-            load: function() {
-                n();
-            },
-            get: function(t) {
-                return "string" == typeof t && s[t] ? s[t] : t ? new l.Unit(t) : null;
-            }
-        };
-        e.formatCelcius = function(t, e) {
-            var i = o(t, e);
-            return i + " &deg;C";
-        }, e.formatLatitude = function(t, e) {
-            var i = "N";
-            return "string" == typeof t && (t = parseFloat(t)), t < 0 && (i = "S", t = -t),
-            r(t, i, e);
-        }, e.formatLongitude = function(t, e) {
-            var i = "E";
-            for ("string" == typeof t && (t = parseFloat(t)); t < 0; ) t += 360;
-            for (;t > 360; ) t -= 360;
-            for (;t > 180; ) t -= 360;
-            return t < 0 && (i = "W", t = -t), r(t, i, e);
-        }, e.formatGeoLocation = function(t, i) {
-            if (void 0 === i) {
-                var n = e.isArray(t) ? {
-                    lat: t[0],
-                    lon: t[1]
-                } : t;
-                t = void 0 === n.latitude ? n.lat : n.latitude, i = void 0 === n.longitude ? n.lon : n.longitude;
-            }
-            return e.formatLatitude(t) + "&nbsp;" + e.formatLongitude(i);
-        }, e.formatGeoLocationPlain = function(t, i) {
-            if (void 0 === i) {
-                var n = e.isArray(t) ? {
-                    lat: t[0],
-                    lon: t[1]
-                } : t;
-                t = void 0 === n.latitude ? n.lat : n.latitude, i = void 0 === n.longitude ? n.lon : n.longitude;
-            }
-            return e.formatLatitude(t, !0) + " " + e.formatLongitude(i, !0);
-        }, e.formatFloat = function(t, e) {
-            return o(t, e);
-        };
-        var c = [ "N", "N-N-E", "N-E", "E-N-E", "E", "E-S-E", "S-E", "S-S-E", "S", "S-S-W", "S-W", "W-S-W", "W", "W-N-W", "N-W", "N-N-W" ];
-        return l.Unit = function t(e) {
-            if ("string" == typeof e && (e = {
-                name: e
-            }), this.offset = 0, this.factor = 1, e) for (var i in e) this[i] = e[i];
-            this.transform = function(t) {
-                return null === t ? null : t * this.factor + this.offset;
-            }, this.toDisplay = this.transform, this.fromDisplay = function(t) {
-                return (t - this.offset) / this.factor;
-            }, this.wind_direction = function(t) {
-                for (;t < 0; ) t += 360;
-                for (;t >= 360; ) t -= 360;
-                var e = Math.floor(t / 360 * c.length + .5);
-                return c[e];
-            }, this.wave_direction = function(t) {
-                return this.wind_direction(t);
-            }, this.symbolHTML = function() {
-                var t = this.html_symbol || this.name.replace(/\*\*(-?\d+)/g, "<sup>$1</sup>");
-                return t;
-            }, this.asHTML = function(t) {
-                if (null === t) return "-";
-                if (this.html_method) return this[this.html_method](t);
-                var e = this.symbolHTML();
-                return o(this.transform(t), this.precision) + " " + e;
-            };
-        }, l;
-    }.apply(e, n), !(void 0 !== o && (t.exports = o));
-}, function(t, e, i) {
-    var n, o;
-    n = [ i(13), i(14), i(34), i(38) ], o = function(t, e) {
-        function i(t, i) {
-            e.ajaxQueueLog && console.warn(t + ": " + i.url + " name:" + i.name + " cancel:" + e.jsonSerialise(i.cancelled_by) + " seqno:" + i._seqno + " image: " + i.image_load);
-        }
-        function n(t, e) {
-            if (i("cancel " + t, e), !e._canceled) {
-                if (e.canceled) try {
-                    e.canceled(t);
-                } catch (t) {
-                    console.error(t), e.exception = t;
-                }
-                C(e, "canceled");
-            }
-            e._canceled = !0, e.giveup && e.giveup();
-        }
-        function o() {
-            try {
-                l.length ? (y || g(), y = !0) : (y && v(), y = !1);
-            } catch (t) {
-                console.error(t);
-            }
-        }
-        function r(n, r, a, s) {
-            try {
-                n._canceled ? i("IGNORE CANCELED", n) : (i("NOTIFY " + s, n), C(n, s), r(a), n._complete(a));
-            } catch (t) {
-                console.error(t), n.exception = t;
-                try {
-                    console.trace();
-                } catch (t) {}
-            }
-            l = e.grep(l, function(t) {
-                return t !== n;
-            }), o(), d[n.queue]--, setTimeout(k, 0), t.options && t.options.settings && t.options.settings.collect_statistics && n.statistics && !n.from_cache && setTimeout(function() {
-                var i = e.extend(e.cloneObject(n, !0), {
-                    framework: {
-                        loaded_at: t.timestamp.format("yyyymmddhhMMss")
-                    }
-                });
-                e.ajaxQueue({
-                    url: t.options.ajax.backend.statistics,
-                    json: i,
-                    type: "POST",
-                    statistics: !1,
-                    priority: "very-low"
-                });
-            }, 10);
-        }
-        e.ajaxQueuePOST = 1;
-        var a = {
-            vip: 0,
-            one: -1,
-            "very-high": 1,
-            high: 10,
-            normal: 100,
-            low: 1e3,
-            "very-low": 1e4
-        }, s = [], l = [], c = 0, u = !1, h = [], d = {
-            vip: 0,
-            "very-high": 0,
-            high: 0,
-            normal: 0,
-            low: 0,
-            "very-low": 0,
-            one: 0
-        }, p = {
-            "very-low": !1,
-            low: "very-low",
-            normal: "low",
-            high: "normal",
-            "very-high": "high",
-            vip: "very-high",
-            one: !1
-        }, f = {
-            vip: 1,
-            "very-high": 1,
-            high: 1,
-            normal: 1,
-            low: 1,
-            "very-low": 1,
-            one: 1
-        }, m = e.noop, g = m, v = m;
-        e(window).bind("unload", function() {
-            s = null, l = null, e.ajaxQueue = null, e(document).unbind("debug");
-        });
-        var b = [];
-        e.ajaxQueueLimits = function(t) {
-            f = t;
-        }, e.ajaxQueueLog = !1;
-        var A = function(i) {
-            if (i = e.extend({
-                type: I.options.type,
-                dataType: I.options.dataType,
-                _seqno: c++,
-                _valid: !0,
-                name: null,
-                priority: "normal",
-                status: m,
-                statistics: !1,
-                cache: void 0,
-                tag: void 0,
-                image_load: !1,
-                logErrors: void 0,
-                cancelled: void 0,
-                cancelled_by: {},
-                timers: {
-                    queued: new Date()
-                },
-                timeout: I.options.timeout,
-                start: new Date().getTime() / 1e3,
-                xhrFields: {
-                    withCredentials: !0
-                },
-                contentType: "application/json"
-            }, i), t.token && (i.headers = {
-                "X-ECMWF-KEY": t.token
-            }), !i.url) {
-                i.error ? i.error(null, "ajaxQueue: URL is null", null) : console.error("ajaxQueue: URL is null", i),
-                console.trace();
-                try {
-                    throw Error();
-                } catch (t) {
-                    for (var n in t) console.error(t[n]);
-                }
-                throw Error("ajaxQueue: URL is null");
-            }
-            if (i.json && (e.ajaxQueuePOST ? (i.type = "POST", i.contentType = "application/json",
-            i.data = e.jsonSerialise(i.json)) : (i.type = "GET", i.url.indexOf("?") === -1 ? i.url += "?json=" + e.jsonSerialise(i.json) : i.url += "&json=" + e.jsonSerialise(i.json))),
-            I.options.noStreaming && (i.url.indexOf("?") === -1 ? i.url += "?_no_streaming=1" : i.url += "&_no_streaming=1"),
-            i.cache && (i._cache = i.cache, i.cache = void 0), i.queue = i.priority, i.priority = a[i.priority],
-            "object" == typeof i.cancelled_by && i.cancelled_by instanceof Array) {
-                var o = {};
-                for (var r in i.cancelled_by) o[r] = !0;
-                i.cancelled_by = o;
-            }
-            if ("string" == typeof i.cancelled_by) {
-                var s = i.cancelled_by;
-                i.cancelled_by = {}, i.cancelled_by[s] = !0;
-            }
-            return i.name && (i.cancelled_by[i.name] = !0), w(i), i;
-        }, _ = function(t, e, i) {
-            t.name && e.cancelled_by[t.name] && (n("CANCEL by newer [" + t._seqno + "] request (" + i + ") :", e),
-            e._canceled = !0);
-        }, y = !1;
-        setInterval(function() {
-            e.each(l, function(t, e) {
-                e.xhr && 4 === e.xhr.readyState && !e.xhr.responseText && (e._valid ? (e._valid = !1,
-                e._status = "invalid") : (console.warn("Invalid state for request", e.url, e.xhr.status),
-                e.error(e.xhr, "Invalid request state, Internet connection may be lost", null)));
-            });
-        }, 5e3);
-        var w = function(t) {
-            i("enqueue", t), t.name && (e.each(s, function(e, i) {
-                _(t, i, "queue");
-            }), e.each(l, function(e, i) {
-                _(t, i, "active");
-            })), C(t, "queued"), u ? h.push(t) : s.push(t), s = s.sort(function(t, e) {
-                return t.priority != e.priority ? t.priority - e.priority : t._seqno - e._seqno;
-            }), setTimeout(k, 0);
-        }, x = function(t) {
-            for (var e = t.queue; e; ) {
-                if (d[e] < f[e]) return t.queue = e, !0;
-                e = p[e];
-            }
-            return !1;
-        }, k = function n() {
-            u = !0;
-            var a = [];
-            if (e.each(s, function(n, s) {
-                if (s._canceled) return void i("canceled request not dispatched", s);
-                if (!x(s)) return void a.push(s);
-                var c = s.success || m, u = s.error || m;
-                if (s._complete = s.complete || m, delete s.complete, s.success = function i(n) {
-                    if (s.result = n, n && n.error && s.error(n.error, n.error), n && !s._canceled) {
-                        t.uid && n.uid && t.uid !== n.uid && setTimeout(function() {
-                            e.logError("User mismatch ui='" + t.uid + "', ajax='" + n.uid + "' (" + s.url + ")", s.log_error);
-                        }, 50);
-                        e.extend([], arguments, [ s ]);
-                        e.each(b, function(t, e) {
-                            setTimeout(function() {
-                                e(s, n);
-                            }, 0);
-                        }), s.timers && !s.timers.ajax && (s.timers.ajax = (new Date() - s.timers.ajax_start) / 1e3);
-                        var o = n && (n.cache || s._cache);
-                        if (o && e.cacheStore) try {
-                            e.cacheStore("ajax-queue", {
-                                url: s.url,
-                                data: s.json ? null : s.data,
-                                json: s.json
-                            }, n, o);
-                        } catch (t) {
-                            s.exception = t, console.warn(t);
-                        }
-                    }
-                    r(s, c, n, "complete");
-                }, s.error = function(i, n, o) {
-                    var a = {
-                        status: n,
-                        exception: o
-                    };
-                    if (i) {
-                        s.result = a;
-                        try {
-                            a = e.extend(a, JSON.parse(i.responseText)), s.result = a;
-                        } catch (t) {
-                            s.exception = t;
-                        }
-                        try {
-                            i.statusText && "error" === a.status && (a.status = i.status + " " + t.ucfirst(i.statusText.toLowerCase()));
-                        } catch (t) {}
-                    }
-                    try {
-                        s._error = e.formatError(a);
-                    } catch (t) {
-                        s.exception = t;
-                    }
-                    if (s.logErrors) try {
-                        e.logError(a, s.logErrors, s.log_bus);
-                    } catch (t) {
-                        s.exception = t;
-                    }
-                    r(s, u, a, "aborted");
-                }, s.img) {
-                    var h = s.success, p = s.error;
-                    s.success = function n(o) {
-                        function r() {
-                            d || (m++ >= f ? l() : a());
-                        }
-                        function a() {
-                            g = setTimeout(r, s.timeout / f);
-                        }
-                        function l() {
-                            s.ignore_image || s.image_load && (i("GIVING UP on " + c, s), s.ignore_image = !0,
-                            s._canceled ? h(o) : p.apply(o, [ null, "Timeout on " + c ]));
-                        }
-                        if (s._canceled) return void h(o);
-                        if (s.timers.ajax || (s.timers.ajax = (new Date() - s.timers.ajax_start) / 1e3),
-                        !o) return p.apply(o, [ null, "Failed to get image url: empty response" ]);
-                        if (o.error) return p.apply(o, [ null, "Failed to get image url: " + o.error ]);
-                        if (o.deferred) return void h(o);
-                        var c = o.result ? o.result.url : o.url;
-                        if (!c) return p.apply(o, [ null, "Failed to get image url" ]);
-                        var u = s.img.attr("src");
-                        if (i("IMAGE URL" + c, o), c === u) return void h(o);
-                        var d = !1;
-                        s.img.each(function() {
-                            i("BIND " + e(this).get(0).onload, s);
-                        }).unbind(".ajaxqueue").one("load.ajaxqueue", function() {
-                            return d = !0, clearTimeout(g), g = null, i("IMAGE IN-LOAD ", s), s.ignore_image ? void i("IGNORE IMAGE  ", s) : (i("ajaxqueue: IMAGE LOAD done: ", s),
-                            s.timers.image = (new Date() - s.timers.image_start) / 1e3, s.image_load = !1, s.ignore_image = !0,
-                            void h(o));
-                        }).one("error.ajaxqueue", function(e) {
-                            console.log("IMG ERROR EVENT RECEIVED"), s.ignore_image || (s._canceled || t && t.options && t.options.files && s.img.attr("src", t.options.files.failed_product_thumbnail),
-                            i("ajaxqueue: IMAGE LOAD failed: ", s), s.image_load = !1, s.ignore_image = !0,
-                            p.apply(o, [ null, "Failed to load image " + c ]));
-                        });
-                        var f = t.browser.msie ? 100 : 1, m = 0;
-                        s.img.each(function() {
-                            i("BIND 2 " + e(this).get(0).onload, s);
-                        }), s.timers.image_start = new Date(), s.image_load = c, s.giveup = l, i("IMAGE set to " + c, s),
-                        s.img.attr("src", c);
-                        var g;
-                        a();
-                    };
-                }
-                if (d[s.queue]++, s._cache && e.cacheFetch) {
-                    var f = null;
-                    try {
-                        f = e.cacheFetch("ajax-queue", {
-                            url: s.url,
-                            data: s.json ? null : s.data,
-                            json: s.json
-                        });
-                    } catch (t) {
-                        s.exception = t, console.warn(t);
-                    }
-                    if (f) return s.from_cache = !0, void s.success(f);
-                }
-                C(s, "active"), l.push(s), o();
-                var g = new Date();
-                s.timers.queued = (g - s.timers.queued) / 1e3, s.timers.ajax_start = g;
-                var v = s;
-                I.options.host && "/" === v.url[0] && (v = e.extend({}, v, {
-                    url: I.options.host + v.url
-                })), "application/json" === v.contentType && "json" === v.dataType && delete v.contentType,
-                s.xhr = e.ajax(v);
-            }), s = a, u = !1, h.length) for (var c = h.length, p = 0; p < c; p++) s.push(h.shift());
-            a = [];
-        }, C = function(t, e) {
-            if (t.status) try {
-                t._status = e, t.status(e, t);
-            } catch (e) {
-                t.exception = e, console.warn(e);
-            }
-        }, E = function(t) {
-            function i(t) {
-                var e = t.retry || 5;
-                a(t.status), setTimeout(function() {
-                    A({
-                        url: t.callback,
-                        json: t,
-                        priority: "vip",
-                        error: o,
-                        errorLog: s,
-                        status: a,
-                        img: r,
-                        success: function(t) {
-                            a(t.status), t && t.deferred ? i(t) : "complete" === t.status ? n(t) : o(t);
-                        }
-                    });
-                }, 1e3 * e);
-            }
-            var n = t.success || m, o = t.error || m, r = t.img, a = t.status || m, s = t.errorLog || m, l = e.extend({}, t, {
-                success: function(t) {
-                    t && t.deferred ? i(t) : n(t);
-                }
-            });
-            A(l);
-        }, I = e.ajaxQueue = E;
-        return I.options = {
-            type: "POST",
-            dataType: "json",
-            timeout: 6e4,
-            host: "",
-            noStreaming: !1
-        }, e.extend(I, {
-            info: function() {
-                return {
-                    queue: s,
-                    active: l,
-                    outstanding: d
-                };
-            },
-            start: function(t) {
-                g = t ? t : m;
-            },
-            stop: function(t) {
-                v = t ? t : m;
-            },
-            cancelRequest: function(t) {
-                n("by request", t);
-            },
-            cancelAll: function() {
-                e.each(s, function(t, e) {
-                    n("Cancel by cancel all", e);
-                }), e.each(l, function(t, e) {
-                    n("Cancel by cancel all", e);
-                }), setTimeout(k, 0);
-            },
-            cancelByTag: function(t) {
-                "object" != typeof t && (t = new RegExp(t)), e.each(s, function(e, i) {
-                    t.test(i.tag) && n("Cancel by tag " + t, i);
-                }), e.each(l, function(e, i) {
-                    t.test(i.tag) && n("Cancel by tag " + t, i);
-                }), setTimeout(k, 0);
-            },
-            add_callback: function(t) {
-                t && b.push(t);
-            }
-        }), I;
-    }.apply(e, n), /** @license
-	 *  ECMWF Ajax-queue
-	 *  (C) Copyright ECMWF http://www.ecmwf.int
-	 *
-	 *  This software is licensed under the terms of the Apache Licence Version 2.0
-	 *  which can be obtained at http://www.apache.org/licenses/LICENSE-2.0.
-	 *  In applying this licence, ECMWF does not waive the privileges and immunities
-	 *  granted to it by virtue of its status as an intergovernmental organisation nor
-	 *  does it submit to any jurisdiction.
-	 *
-	 */
-    !(void 0 !== o && (t.exports = o));
-}, function(t, e, i) {
-    var n, o;
-    n = [ i(14), i(35) ], o = function(t) {
+    n = [ i(14), i(28) ], o = function(t) {
         function e(n, o, r) {
             if (null === n) return null;
             if (void 0 !== n) {
@@ -4800,12 +3806,10 @@
             for (var i in e) t[i] = n(t[i], e[i]);
             return t;
         }
-        t.cloneObject = function(t) {
+        return t.cloneObject = function(t) {
             return e(t, [], 50);
         }, t.cleanupObject = function(t) {
             return e(t, [], 50);
-        }, t.jsonSerialise = function(e) {
-            return JSON.stringify(t.cleanupObject(e));
         }, t.makeCacheKey = function(e) {
             function i(e) {
                 if (t.isArray(e)) n.push("["), t.each(e, function(t, e) {
@@ -4821,7 +3825,11 @@
             }
             var n = [];
             return i(t.cleanupObject(e)), n.join(":");
-        }, t.deepMerge = n;
+        }, t.deepMerge = n, {
+            serialise: function(e) {
+                return JSON.stringify(t.cleanupObject(e));
+            }
+        };
     }.apply(e, n), /** @license
 	 *  ECMWF Clone
 	 *  (C) Copyright ECMWF http://www.ecmwf.int
@@ -4836,7 +3844,7 @@
     !(void 0 !== o && (t.exports = o));
 }, function(t, e, i) {
     var n, o;
-    n = [ i(14), i(36), i(37) ], o = function(t, e) {
+    n = [ i(14), i(29), i(30) ], o = function(t, e) {
         return Time = function() {
             function i(t) {
                 if (t instanceof e) return t;
@@ -5094,6 +4102,975 @@
     }.apply(e, n), !(void 0 !== o && (t.exports = o));
 }, function(t, e, i) {
     var n, o;
+    n = [ i(13), i(14), i(26), i(83), i(33), i(220), i(32), i(40), i(23), i(221) ],
+    o = function(t, e, n, o, r, a, s, l, c, u) {
+        var h = s, d = !1;
+        return {
+            config: {
+                page: {
+                    borderx: 52
+                },
+                col1: {
+                    width: [ [ 1e4, 264 ], [ 1280, 220 ], [ 1024, 200 ], [ 700, 0 ] ]
+                },
+                panel: {
+                    collapsible: !1
+                }
+            },
+            col1: function(t) {
+                function r() {
+                    e("body").removeClass("admin-menu"), e("#admin-menu").remove();
+                }
+                var s = this;
+                r(), setTimeout(r, 1e3), this.have_url = e.Deferred(), this._package && a.set_package(this._package),
+                c.subscribe(function() {
+                    a.products.length || d || o.info(function(t) {
+                        t.uid || !function() {
+                            var t = [ i(93) ];
+                            (function(t) {
+                                var i = "/auth/login?back=" + location.href;
+                                new t({
+                                    id: "no-products-warning",
+                                    title: "<h2>You are not logged in</h2>",
+                                    html: '<p>Please note that many charts have restricted access.</p><p>If you are an ECMWF partner, please <a href="' + i + '">log in</a> to get access to a larger range of products.</p><p>If the content you are trying to view is for licensed users only, such as a specific chart, you might still not be granted access once logged in'
+                                }), e("#no-products-warning").modal("show");
+                            }).apply(null, t);
+                        }(), d = !0;
+                    });
+                }), s.have_chart = e.Deferred(function(t) {
+                    n.get_bus().listen("chart-added", function() {
+                        t.resolve();
+                    });
+                });
+            },
+            scroll_to_col3: function() {},
+            change_package: function(t) {
+                var e = this;
+                a.set_package(t), c.set_collection(a, function() {
+                    e._package = t;
+                });
+            },
+            on_url_change: function(n, o) {
+                function d(t, e) {
+                    if (t && !e) return !0;
+                    if (!t && e) return !0;
+                    if (t.length !== e.length) return !0;
+                    for (var i in e) if (t[i] !== e[i]) return !0;
+                    return !1;
+                }
+                var p, f = this, m = s.basic, g = {};
+                g.name = l._path && l._path.page, g.product = g.name && a.product_by_name(g.name);
+                var v = !n.params.product, b = e.extend({
+                    product: {
+                        widget: n.params && (n.params.product && h.state.list_product && n.params.product !== g.name || h.state.list_product && !n.params.product)
+                    },
+                    page_product: n.params.product !== (f.prev && f.prev.product),
+                    path: d(g.path, n.params.product_path)
+                }, o);
+                if (b.pkg) console.log(">>> on_url_change: package has changed!", this._package, " --> ", [ n.params.package ]),
+                f.change_package(n.params.package); else if (b.product.url && (console.log("%con_url_change: product has changed!", "background-color:#bdf", [ g.name ], " --> ", [ n.params.product ]),
+                n.params.product ? c.have_items.then(function() {
+                    if (p = a.product_by_name(n.params.product)) h.state.params = n.query, f.on_product_select(p, n.query),
+                    c.selection.set(c.lookup_idx_by_name(n.params.product)); else {
+                        if (n.canonicalPath.replace(/\?.*/, "") !== l.original_path) return console.log("assuming external url. exiting application..."),
+                        void (location.href = n.canonicalPath);
+                        console.log("product not found but path is unchanged. not exiting"), !function() {
+                            var o = [ i(93) ];
+                            (function(i) {
+                                new i({
+                                    id: "product-not-found",
+                                    title: "<h2>Product not found</h2>",
+                                    html: "<p>Could not find the product <i>" + n.params.product + "</i>.</p>" + (~e.inArray(n.params.product, [ "obstat", "swdfp", "medium" ]) ? '<p><a href="' + n.pathname + '/">' + t.ucfirst(n.params.product) + " package</a></p>" : "")
+                                }), e("#product-not-found").modal("show").click(function() {
+                                    e("#product-not-found").modal("hide");
+                                });
+                            }).apply(null, o);
+                        }();
+                    }
+                }) : f.scroll_to_col2()), n.params.product && b.product.url && f.scroll_to_col3(),
+                b.path && (u.set([ l.params.product_path ]), f.update_category_links()), b.path || b.page_product || !n.params.product && !f.is_landing_page || n.params.product && f.is_landing_page) {
+                    var A;
+                    A = [], n.params.product && A.push(n.params.product), this.config.enable_text && a.content(A.join("/"), function(i) {
+                        i && i.id ? (f.widgets.content.html("<h2>" + i.title + "</h2><div>" + i.body + "</div>"),
+                        f.widgets.content.find("img").each(function() {
+                            var i = e(this), n = i.attr("src");
+                            1 === n.indexOf("ttp") || i.attr("src", t.options.ajax.chart_content.replace("/en", "") + n);
+                        })) : i && i.result ? (console.log("content: result=", i.result), f.widgets.content.html(i.result)) : (console.log("on_url_change: content: using fallback: changed.page_product=", b.page_product),
+                        v ? f.widgets.content.empty() : a.content_temp(l.params.product, function(t) {
+                            f.have_chart.done(function() {
+                                f.widgets.content.html(t.text || t.description);
+                            });
+                        }));
+                    });
+                }
+                f.is_landing_page = v, m.instance && (m.instance.set_parameters(n.query), m.instance.have.availability.done(function() {
+                    e.extend(h.state.params, r.map(m.instance.variables, function(t) {
+                        return t.to_string();
+                    }));
+                })), f.have_url.resolve();
+            },
+            on_product_select: function(t, e) {
+                return t.data && t.data.package ? (console.log("product_select: product=", t), void (t.has_widget("epsgram") && (console.log("****** product_select: yes, is_epsgram"),
+                c.remove_filter("facets")))) : console.error("on_product_select: unexpected product format");
+            },
+            h1: function(t) {
+                t && e("h1").text(t).addClass("ready");
+            },
+            _on_resize: function(t) {
+                var i = this;
+                if (h.widgets.chart) {
+                    t = t || {
+                        width: 32 * Math.floor(h.widgets.chart.find("img").width() / 32)
+                    };
+                    var n = e(window).width(), o = this._col1_width(), r = o + 186;
+                    console.log("page.size-changed: overriding page width: ", t.width, n - r - 10),
+                    i._width_override = t.width, i.do_layout(), e("#time-navigator").triggerHandler("container");
+                }
+            },
+            update_category_links: function() {},
+            _col1_width: function() {
+                var e = window.innerWidth, i = t.options.col1 && t.options.col1.width || this.config.col1.width, n = i[0];
+                for (var o in i) {
+                    if (i[o][0] < e) break;
+                    n = i[o];
+                }
+                return n[1];
+            },
+            _bind: function(t) {
+                var e = this;
+                return function() {
+                    t.apply(e, arguments);
+                };
+            }
+        };
+    }.apply(e, n), !(void 0 !== o && (t.exports = o));
+}, function(t, e, i) {
+    var n, o;
+    n = [ i(14), i(33), i(26), i(36), i(39), i(40), i(24), i(41), i(42) ], o = function(t, e, n, o, r, a, s, l, c, u) {
+        var h = {
+            widgets: {
+                title: t(".chart-column").h2(),
+                chart: null
+            },
+            state: {
+                product: null,
+                params: {}
+            },
+            on: {
+                size_change: t.noop
+            },
+            product_change: new s(),
+            set_state: function(e) {
+                t.extend(h.state, e);
+            },
+            pre_build: function(t) {
+                var e = this;
+                this.el = t.el, h.widgets.controls = {
+                    outer: e.el.show().find(".chart-controls").orelse(function() {
+                        return e.el.div(".chart-controls");
+                    }),
+                    rhs: e.el.find(".chart-controls > .bar-2").orelse(function() {
+                        return e.el.find(".chart-controls").div(".bar-2");
+                    }),
+                    params: e.el.find(".chart-controls > .www-chart-parameter-bar").orelse(function() {
+                        return e.el.find(".chart-controls").div(".www-chart-parameter-bar");
+                    })
+                };
+            },
+            basic: new function o() {
+                this.scrollable = null, this.bus = null, this.build = function(t, n, o, s) {
+                    var l = this;
+                    !function() {
+                        var n = [ i(43), i(45), i(49), i(76), i(99), i(116), i(117), i(50) ];
+                        (function(n, c, d, p, f, m) {
+                            l.BasicInstance = c, l.Products = n, h.state.list_product = t, h.pre_build.call(l, o),
+                            l.scrollable = o.el.div(".scrollable"), l.plugins = [ {
+                                mixin: d,
+                                options: {
+                                    controls: h.widgets.controls.params
+                                }
+                            }, {
+                                mixin: p,
+                                options: {
+                                    parent: h.widgets.controls.rhs
+                                }
+                            }, {
+                                mixin: f
+                            }, {
+                                mixin: m
+                            } ], h.widgets.chart = l.scrollable.div(".www-chart-container").div(".www-chart-image-wrapper").attr({
+                                id: "basic-chart"
+                            }), l.bus = h.widgets.chart.messageBus().listen(o.el, "chart-content-update", function(i, n) {
+                                h.state.product = t = n.product, h.widgets.controls.outer.css({
+                                    minHeight: ""
+                                }), o.el.css({
+                                    minHeight: ""
+                                }), h.state.params = e.map(h.state.product.variables, function(t) {
+                                    return t.to_string();
+                                }), a.set_path(u, t.name(), r.get_string(h.state.params), t.title_());
+                            }).listen(o.el, "toggle-parameter-animate", function(t, e) {
+                                !function() {
+                                    var t = [ i(189) ];
+                                    (function(t) {
+                                        t.chart(h.widgets.chart.data("ui-basicChart")).parameter(e).toggle();
+                                    }).apply(null, t);
+                                }();
+                            }).listen(o.el, "size-changed", function(t, e) {
+                                e && h.widgets.chart && h.on.size_change(e);
+                            }).listen("new-history-state", function() {
+                                console.log("chart_handler: got new history state"), a.add_state();
+                            }), setTimeout(function() {
+                                l.post();
+                            }, 0), s && s();
+                        }).apply(null, n);
+                    }();
+                }, this.update = function(t) {
+                    var e = this;
+                    h.widgets.controls.outer.css({
+                        minHeight: h.widgets.controls.outer.find(".ui-button:first").height() + 3
+                    }), delete e.instance, e.bus.clear(), h.state.list_product = t, this.post();
+                }, this.post = function() {
+                    var e = this, i = h.state.list_product;
+                    if (h.widgets.chart) {
+                        var o = this.el.height();
+                        this.el.css({
+                            minHeight: o
+                        });
+                    }
+                    e.instance = this.BasicInstance.get_instance({
+                        product: i.data,
+                        modifiable: !0,
+                        priority: "high"
+                    }), e.instance.data.img ? t.each(h.state.params, function(t, i) {
+                        e.instance.variables[t] ? e.instance.variables[t].set(i) : console.log("ChartHandler: ignoring inapropriate variable:", t);
+                    }) : e.instance.set_parameters(h.state.params), h.widgets.chart.basicChart("instance") ? h.widgets.chart.basicChart("setProduct", {
+                        instance: e.instance
+                    }) : (h.widgets.chart.basicChart({
+                        instance: e.instance,
+                        plugins: e.plugins
+                    }), n.get_bus().send("chart-added")), h.widgets.title.text(e.instance.title_()),
+                    a.set_path(u, i.name(), r.get_string(h.state.params), i.long_title()), h.product_change.emit();
+                }, this.cleanup = function() {
+                    h.widgets.chart = null, h.widgets.title.show(), this.scrollable.remove(), delete this.scrollable,
+                    delete this.instance, this.bus.clear();
+                };
+            }(),
+            interactive: new function s() {
+                var l = this;
+                this.build = function(s, c, d, p) {
+                    o.load(), !function() {
+                        var o = [ i(176) ];
+                        (function() {
+                            !function() {
+                                var o = [ i(76), i(190), i(214), i(215), i(100), i(216), i(217), i(218) ];
+                                (function(i, o, f) {
+                                    d.el.show(), h.pre_build.call(this, d), h.widgets.chart = d.el.div({
+                                        css: d.size
+                                    }).attr({
+                                        sizor: "chart_handler"
+                                    }), h.widgets.chart.chart({
+                                        product: s.name(),
+                                        messageBus: l.bus = h.widgets.chart.messageBus(),
+                                        availability: !1,
+                                        editable: !1,
+                                        enable_undo: !1,
+                                        expand_on_resize: !1,
+                                        show_latlong: !0,
+                                        values: c,
+                                        plugins: [ {
+                                            mixin: o,
+                                            options: {
+                                                controls: ".chart-controls"
+                                            }
+                                        }, {
+                                            mixin: i,
+                                            options: {
+                                                parent: ".chart-controls .bar-2"
+                                            }
+                                        }, {
+                                            mixin: f
+                                        } ]
+                                    }), h.state.product = h.widgets.chart.data("ui-chart").product, h.widgets.chart.data("ui-chart")._set_mode("select", {
+                                        cursor: "pointer"
+                                    }), t("#time-navigator").length && (console.warn("FIXME unexpected time-navigator found - removing..."),
+                                    t("#time-navigator").remove()), h.widgets.time_navigator = d.el.div("#time-navigator").timeNavigator({
+                                        messageBus: l.bus,
+                                        show_bt: !1
+                                    }), l.bus.listen_once(d.el, "chart-content-update", function(t, e) {
+                                        h.widgets.time_navigator.show().find(".container").triggerHandler("layout", d.size);
+                                    }).listen(d.el, "chart-content-update", function(t, i) {
+                                        var n = h.state.product = i.product, o = n.name, s = n.title();
+                                        h.state.params = e.map(n.variables, function(t) {
+                                            return t.to_string();
+                                        }), a.set_path(u, o, r.get_string(h.state.params), s);
+                                    }).listen("tool-print-select", function() {
+                                        h.state.product.www_print(h.state.product.www_title, function(t) {
+                                            location.href = t.url;
+                                        });
+                                    }), n.get_bus().send("chart-added"), l.bus.send("product-swapped"), l.post(), p && p();
+                                }).apply(null, o);
+                            }();
+                        }).apply(null, o);
+                    }();
+                }, this.update = function(t) {
+                    h.widgets.chart && h.widgets.chart.chart("setProduct", t.name()), h.state.list_product = t,
+                    l.post();
+                }, this.post = function() {
+                    h.product_change.emit();
+                }, this.cleanup = function() {
+                    h.widgets.chart.remove(), h.widgets.chart = null, h.widgets.time_navigator.remove(),
+                    delete h.widgets.time_navigator;
+                };
+            }(),
+            current: null
+        };
+        return h;
+    }.apply(e, n), !(void 0 !== o && (t.exports = o));
+}, function(t, e, i) {
+    var n, o;
+    n = [ i(13), i(14), i(34) ], o = function(t, e) {
+        t.blank_gif = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
+        var i = function(t) {
+            for (var e = ""; t > 0; ) e += " ", t--;
+            return e;
+        }, n = function(t, e) {
+            if (e / 3 > 5) return "...";
+            if ("object" == typeof t) {
+                var o = [], r = i(e + 3);
+                if (t instanceof Array) {
+                    var a = "[", s = "]";
+                    for (var l in t) {
+                        var c = n(t[l], e + 3);
+                        o.push(r + c);
+                    }
+                } else {
+                    a = "{", s = "}";
+                    for (l in t) c = n(t[l], e + 3), o.push(r + '"' + l + '"=' + c);
+                }
+                return a + (o.length > 0 ? "\n" : "") + o.join(",\n") + (o.length > 0 ? "\n" + i(e) : "") + s;
+            }
+            return "string" == typeof t ? '"' + t + '"' : "" + t;
+        };
+        t.prettyJSON = function(t, e) {
+            return n(t, 0);
+        }, t.json_to_html = function(t) {
+            function i(t) {
+                function s(t) {
+                    a.push('<div style="margin-left:' + 10 * n + 'px">' + t + "</div>");
+                }
+                n++, r = Math.max(r, n);
+                var l = 0;
+                for (var c in t) n < o ? "object" == typeof t[c] ? e.isPlainObject(t[c]) ? (s(c),
+                i(t[c])) : s(c + " ***") : s(c) : (s(c), s("[max recursion!! " + n + "]")), l++;
+                l || s("[no properties]"), n--;
+            }
+            var n = 0, o = 10, r = 0, a = [];
+            return i(t), a.join("") + "depth=" + r;
+        }, t.print_element = function(e) {
+            if ("undefined" == typeof e) return "undefined";
+            if (null === e) return "null";
+            var i = "";
+            return i += e.length && t.isset(e.attr) ? " $tag=" + e[0].tagName + " id='" + e.attr("id") + "' class='" + e.attr("class") + "' parent_id='" + e.parent().attr("id") + "' parent_class='" + e.parent().attr("class") + "'" : "object" == typeof e && t.isset(e.scrollWidth) ? " html-element: " + e.tagName + ' class="' + e.className + '" id=' + e.id + ". nodeType=" + e.nodeType + "." : t.isset(e.nodeName) && "#document" == e.nodeName ? " #document." : e.parent && "[object Window]" == e.parent.constructor.toString() ? " window" : "object" == typeof e ? " object: contructor=" + e.constructor + ". " + t.list_properties(e) : "function" == typeof e ? " type=function" : "number" == typeof e ? " type=number (" + e + ")" : " dom element? len=" + e.length + " el=" + e;
+        }, t.fn_name = function(t) {
+            var e = /\W*function\s+([\w\$]+)\(/.exec(t);
+            return e ? e[1] : "anonymous";
+        }, t.pad = function(t, e, i) {
+            return "undefined" == typeof t && (t = ""), "string" != typeof t && (t = t.toString()),
+            "undefined" == typeof e && (e = 0), "undefined" == typeof i && (i = " "), e + 1 >= t.length && (t = Array(e + 1 - t.length).join(i) + t),
+            t;
+        }, t.truncate = function(t, e) {
+            if (t && t.length > e) {
+                var i = t.substring(0, e);
+                return i.replace(/\w+$/, "") + "&hellip;";
+            }
+            return t;
+        }, t.isset = function(t) {
+            return "undefined" != typeof t && (!("string" == typeof t && !t) && (("number" != typeof t || !isNaN(t)) && (null !== t && "undefined" != t)));
+        }, t.is_empty = function(t) {
+            var e;
+            for (e in t) return !1;
+            return !0;
+        }, t.format_date = function(e) {
+            if (!t.isset(e)) return "";
+            e = "" + e;
+            var i = e.substring(0, 8), n = e.substring(8, 12);
+            return i + " " + n + " UTC";
+        }, t.inflate = function(t, e) {
+            e = e || 1, t.padding = new Array(1e6 * e + 1).join("_");
+        }, t.add_links = function(t) {
+            return t.replace(/(ftp|http|https|file):\/\/[\S]+(\b|$)/gim, '<a href="$&" class="my_link" target="_blank">$&</a>').replace(/([^\/])(www[\S]+(\b|$))/gim, '$1<a href="http://$2" class="my_link" target="_blank">$2</a>');
+        }, t.remove = function(t, e) {
+            var i = t[e];
+            return delete t[e], i;
+        }, e.fn.shadowFix = function(t) {
+            return this.each(function() {
+                e(this).parent().addClass("titlebar-shadow");
+            });
+        }, t.get_user_catalogue = function(i) {
+            e.ajaxQueue(e.extend(i, {
+                url: t.options.ajax.backend.catalogue_items,
+                json: {
+                    type: i.kind || "product",
+                    user_items: !0,
+                    standard_items: !1
+                }
+            }));
+        }, t.timer = function(t) {
+            this.milliseconds = t, this.id = null, this.start = function(t) {
+                var e = this;
+                this.id && console.warn("timer.start: already started"), this.id = setTimeout(function() {
+                    e.id = null, t();
+                }, this.milliseconds);
+            }, this.clear = function(t) {
+                clearTimeout(this.id), this.id = null;
+            };
+        }, t.xhr_to_error_string = function(t) {
+            return t.error ? t.error.length ? t.error[0] : t.error : "Unknown error";
+        };
+        var o = {
+            same_origin: function() {
+                var e = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ":" + window.location.port : ""), i = !t.options.backend_host || e === t.options.backend_host;
+                return i || console.log("same_origin=", i, " backend=", e + " ", t.options.backend_host),
+                i;
+            },
+            list_properties: function(t) {
+                var e = "", i = 0;
+                for (var n in t) e += n + ", ", i++;
+                return i || (e += "[no properties]"), e;
+            },
+            n_properties: function(t) {
+                var e, i = 0;
+                for (e in t) i++;
+                return i;
+            },
+            ucfirst: function(t) {
+                return t += "", t.charAt(0).toUpperCase() + t.slice(1);
+            },
+            escape_regex: function(t) {
+                return t.replace(/[.*+?^${}()|[\]\/\\]/g, "\\$0");
+            },
+            run: function(t, i) {
+                var n = this;
+                return e.map(t, function(t) {
+                    return t.apply(n, i);
+                });
+            }
+        };
+        return e.extend(!0, t, o), e.fn.orelse = function(t) {
+            var i;
+            return e(this).length ? e(this) : "function" != typeof t ? t : (i = t()) ? i : e(this);
+        }, e.fn.ensure = function(t) {
+            var i = this;
+            return e(this).find("> " + t).orelse(function() {
+                return e(i).div(t);
+            });
+        }, e.fn.delayed = function(t, e) {
+            return this.delay(t).queue(function(t) {
+                e.apply(this), t();
+            });
+        }, e.fn.clear = function() {
+            return e(this).br({
+                class: "br-clear"
+            });
+        }, e.fn.pack = function(t) {
+            var i = e(this);
+            e(arguments).each(function(t, e) {
+                e.appendTo(i);
+            });
+        }, e.pluck = function(t, i) {
+            return e.map(t, function(t) {
+                return t[i];
+            });
+        }, e.where = function(t, i) {
+            return e.map(t, function(t) {
+                if (e.map(i, function(e, i) {
+                    if (t[i] === e) return !0;
+                }).length) return t;
+            });
+        }, e.findWhere = function(t, i) {
+            return e.where(t, i)[0];
+        }, o.map = function(t, i, n) {
+            n = n || this;
+            var o = {};
+            return e.each(Object.keys(t), function(e, r) {
+                var a = i.call(n, t[r], r, t);
+                "undefined" != typeof a && null !== a && (o[r] = a);
+            }), o;
+        }, Object.keys || (o.map = function(t, i, n) {
+            var o = {};
+            return e.each(t, function(e, n) {
+                if ("undefined" != typeof n && t.hasOwnProperty(e)) {
+                    var r = i(n);
+                    "undefined" != typeof r && null !== r && (o[e] = r);
+                }
+            }), o;
+        }), t.query = function() {
+            for (var t = {}, e = window.location.search.substring(1), i = e.split("&"), n = 0; n < i.length; n++) {
+                var o = i[n].split("=");
+                if ("undefined" == typeof t[o[0]]) o[0] && (t[o[0]] = o[1]); else if ("string" == typeof t[o[0]]) {
+                    var r = [ t[o[0]], o[1] ];
+                    t[o[0]] = r;
+                } else t[o[0]].push(o[1]);
+            }
+            return t;
+        }, t.get_host = function() {
+            return t.fix_host.to_backend(location.protocol + "//" + location.hostname + (location.port ? ":" + location.port : ""));
+        }, t.fix_host = {
+            to_backend: function(t) {
+                return t.replace(/www|eccharts/gi, "apps").replace(/stage|eccharts-test/gi, "apps-test");
+            },
+            to_frontend: function(t) {
+                return t.replace(/apps-test|eccharts-test/gi, "stage").replace(/apps|eccharts/gi, "www");
+            }
+        }, o;
+    }.apply(e, n), !(void 0 !== o && (t.exports = o));
+}, function(t, e, i) {
+    var n = i(35);
+    "string" == typeof n && (n = [ [ t.id, n, "" ] ]);
+    i(11)(n, {});
+    n.locals && (t.exports = n.locals);
+}, function(t, e, i) {
+    e = t.exports = i(3)(), e.push([ t.id, ".inform-dialogue{border:1px solid #f4a460;padding:.5em;font-size:10pt;background:#ffdead}.inform-dialogue .right{float:right}.inform-dialogue .highlight{font-weight:700;color:blue}.inform-dialogue .error{font-style:italic}.alert{padding:0;padding-bottom:0;border:0}.alert .ui-dialog-content{padding-bottom:0}.alert table{width:100%;border-style:dotted;margin-bottom:0}.alert table .form-buttons{text-align:right;padding-right:0}.alert .ui-dialog-titlebar{background-image:none;-moz-border-radius-topleft:4px;-moz-border-radius-topright:4px;-moz-border-radius-bottomleft:0;-moz-border-radius-bottomright:0;-webkit-border-radius-topleft:4px;-webkit-border-radius-topright:4px;-webkit-border-radius-bottomleft:0;-webkit-border-radius-bottomright:0}.alert td{border-top:1px dotted #b5b5b5;padding:12px}.alert .content{margin:25px 0}", "" ]);
+}, function(t, e, i) {
+    var n, o;
+    n = [ i(13), i(14), i(37) ], o = function(t, e, i) {
+        function n(t) {
+            return t = t || function() {}, a ? void t(a) : void i({
+                url: "/backend/unit-list/",
+                success: function(i) {
+                    e.each(i, function(t, e) {
+                        s[e.name] = new l.Unit(e);
+                    }), a = i, t(a);
+                },
+                error: function(e) {
+                    a = [], t(a);
+                }
+            });
+        }
+        function o(t, e) {
+            void 0 === e && (e = 2);
+            for (var i = 1; e < 0; ) i /= 10, e++;
+            for (;e > 0; ) i *= 10, e--;
+            return Math.floor(t * i + .5) / i;
+        }
+        function r(t, e, i) {
+            return i ? o(t) + " " + e : '<span class="latlon">' + o(t) + "</span>&deg;" + e;
+        }
+        var a, s = {};
+        e.frameworkRegister && e.frameworkRegister(n, "Load units");
+        var l = {
+            load: function() {
+                n();
+            },
+            get: function(t) {
+                return "string" == typeof t && s[t] ? s[t] : t ? new l.Unit(t) : null;
+            }
+        };
+        e.formatCelcius = function(t, e) {
+            var i = o(t, e);
+            return i + " &deg;C";
+        }, e.formatLatitude = function(t, e) {
+            var i = "N";
+            return "string" == typeof t && (t = parseFloat(t)), t < 0 && (i = "S", t = -t),
+            r(t, i, e);
+        }, e.formatLongitude = function(t, e) {
+            var i = "E";
+            for ("string" == typeof t && (t = parseFloat(t)); t < 0; ) t += 360;
+            for (;t > 360; ) t -= 360;
+            for (;t > 180; ) t -= 360;
+            return t < 0 && (i = "W", t = -t), r(t, i, e);
+        }, e.formatGeoLocation = function(t, i) {
+            if (void 0 === i) {
+                var n = e.isArray(t) ? {
+                    lat: t[0],
+                    lon: t[1]
+                } : t;
+                t = void 0 === n.latitude ? n.lat : n.latitude, i = void 0 === n.longitude ? n.lon : n.longitude;
+            }
+            return e.formatLatitude(t) + "&nbsp;" + e.formatLongitude(i);
+        }, e.formatGeoLocationPlain = function(t, i) {
+            if (void 0 === i) {
+                var n = e.isArray(t) ? {
+                    lat: t[0],
+                    lon: t[1]
+                } : t;
+                t = void 0 === n.latitude ? n.lat : n.latitude, i = void 0 === n.longitude ? n.lon : n.longitude;
+            }
+            return e.formatLatitude(t, !0) + " " + e.formatLongitude(i, !0);
+        }, e.formatFloat = function(t, e) {
+            return o(t, e);
+        };
+        var c = [ "N", "N-N-E", "N-E", "E-N-E", "E", "E-S-E", "S-E", "S-S-E", "S", "S-S-W", "S-W", "W-S-W", "W", "W-N-W", "N-W", "N-N-W" ];
+        return l.Unit = function t(e) {
+            if ("string" == typeof e && (e = {
+                name: e
+            }), this.offset = 0, this.factor = 1, e) for (var i in e) this[i] = e[i];
+            this.transform = function(t) {
+                return null === t ? null : t * this.factor + this.offset;
+            }, this.toDisplay = this.transform, this.fromDisplay = function(t) {
+                return (t - this.offset) / this.factor;
+            }, this.wind_direction = function(t) {
+                for (;t < 0; ) t += 360;
+                for (;t >= 360; ) t -= 360;
+                var e = Math.floor(t / 360 * c.length + .5);
+                return c[e];
+            }, this.wave_direction = function(t) {
+                return this.wind_direction(t);
+            }, this.symbolHTML = function() {
+                var t = this.html_symbol || this.name.replace(/\*\*(-?\d+)/g, "<sup>$1</sup>");
+                return t;
+            }, this.asHTML = function(t) {
+                if (null === t) return "-";
+                if (this.html_method) return this[this.html_method](t);
+                var e = this.symbolHTML();
+                return o(this.transform(t), this.precision) + " " + e;
+            };
+        }, l;
+    }.apply(e, n), !(void 0 !== o && (t.exports = o));
+}, function(t, e, i) {
+    var n, o;
+    n = [ i(13), i(14), i(27), i(38) ], o = function(t, e, i) {
+        function n(t, e) {
+            if (!e._canceled) {
+                if (e.canceled) try {
+                    e.canceled(t);
+                } catch (t) {
+                    console.error(t), e.exception = t;
+                }
+                C(e, "canceled");
+            }
+            e._canceled = !0, e.giveup && e.giveup();
+        }
+        function o() {
+            try {
+                l.length ? (y || g(), y = !0) : (y && v(), y = !1);
+            } catch (t) {
+                console.error(t);
+            }
+        }
+        function r(t, i, n, r) {
+            try {
+                t._canceled || (C(t, r), i(n), t._complete(n));
+            } catch (e) {
+                console.error(e), t.exception = e;
+                try {
+                    console.trace();
+                } catch (t) {}
+            }
+            l = e.grep(l, function(e) {
+                return e !== t;
+            }), o(), d[t.queue]--, setTimeout(k, 0);
+        }
+        e.ajaxQueuePOST = 1;
+        var a = {
+            vip: 0,
+            one: -1,
+            "very-high": 1,
+            high: 10,
+            normal: 100,
+            low: 1e3,
+            "very-low": 1e4
+        }, s = [], l = [], c = 0, u = !1, h = [], d = {
+            vip: 0,
+            "very-high": 0,
+            high: 0,
+            normal: 0,
+            low: 0,
+            "very-low": 0,
+            one: 0
+        }, p = {
+            "very-low": !1,
+            low: "very-low",
+            normal: "low",
+            high: "normal",
+            "very-high": "high",
+            vip: "very-high",
+            one: !1
+        }, f = {
+            vip: 1,
+            "very-high": 1,
+            high: 1,
+            normal: 1,
+            low: 1,
+            "very-low": 1,
+            one: 1
+        }, m = e.noop, g = m, v = m;
+        e(window).bind("unload", function() {
+            s = null, l = null, e(document).unbind("debug");
+        });
+        var b = [];
+        e.ajaxQueueLimits = function(t) {
+            f = t;
+        }, e.ajaxQueueLog = !1;
+        var A = function(n) {
+            n = e.extend({
+                type: I.options.type,
+                dataType: I.options.dataType,
+                _seqno: c++,
+                _valid: !0,
+                name: null,
+                priority: "normal",
+                status: m,
+                statistics: !1,
+                cache: void 0,
+                tag: void 0,
+                image_load: !1,
+                logErrors: void 0,
+                cancelled: void 0,
+                cancelled_by: {},
+                timers: {
+                    queued: new Date()
+                },
+                timeout: I.options.timeout,
+                start: new Date().getTime() / 1e3,
+                xhrFields: {
+                    withCredentials: !0
+                },
+                contentType: "application/json"
+            }, n), t.token && (n.headers = {
+                "X-ECMWF-KEY": t.token
+            });
+            if (n.json && (e.ajaxQueuePOST ? (n.type = "POST", n.contentType = "application/json",
+            n.data = i.serialise(n.json)) : (n.type = "GET", n.url.indexOf("?") === -1 ? n.url += "?json=" + i.serialise(n.json) : n.url += "&json=" + i.serialise(n.json))),
+            I.options.noStreaming && (n.url.indexOf("?") === -1 ? n.url += "?_no_streaming=1" : n.url += "&_no_streaming=1"),
+            n.cache && (n._cache = n.cache, n.cache = void 0), n.queue = n.priority, n.priority = a[n.priority],
+            "object" == typeof n.cancelled_by && n.cancelled_by instanceof Array) {
+                var o = {};
+                for (var r in n.cancelled_by) o[r] = !0;
+                n.cancelled_by = o;
+            }
+            if ("string" == typeof n.cancelled_by) {
+                var s = n.cancelled_by;
+                n.cancelled_by = {}, n.cancelled_by[s] = !0;
+            }
+            return n.name && (n.cancelled_by[n.name] = !0), w(n), n;
+        }, _ = function(t, e, i) {
+            t.name && e.cancelled_by[t.name] && (n("CANCEL by newer [" + t._seqno + "] request (" + i + ") :", e),
+            e._canceled = !0);
+        }, y = !1;
+        setInterval(function() {
+            e.each(l, function(t, e) {
+                e.xhr && 4 === e.xhr.readyState && !e.xhr.responseText && (e._valid ? (e._valid = !1,
+                e._status = "invalid") : (console.warn("Invalid state for request", e.url, e.xhr.status),
+                e.error(e.xhr, "Invalid request state, Internet connection may be lost", null)));
+            });
+        }, 5e3);
+        var w = function(t) {
+            t.name && (e.each(s, function(e, i) {
+                _(t, i, "queue");
+            }), e.each(l, function(e, i) {
+                _(t, i, "active");
+            })), C(t, "queued"), u ? h.push(t) : s.push(t), s = s.sort(function(t, e) {
+                return t.priority != e.priority ? t.priority - e.priority : t._seqno - e._seqno;
+            }), setTimeout(k, 0);
+        }, x = function(t) {
+            for (var e = t.queue; e; ) {
+                if (d[e] < f[e]) return t.queue = e, !0;
+                e = p[e];
+            }
+            return !1;
+        }, k = function i() {
+            u = !0;
+            var n = [];
+            if (e.each(s, function(i, a) {
+                if (!a._canceled) {
+                    if (!x(a)) return void n.push(a);
+                    var s = a.success || m, c = a.error || m;
+                    if (a._complete = a.complete || m, delete a.complete, a.success = function i(n) {
+                        if (a.result = n, n && n.error && a.error(n.error, n.error), n && !a._canceled) {
+                            t.uid && n.uid && t.uid !== n.uid && setTimeout(function() {
+                                e.logError("User mismatch ui='" + t.uid + "', ajax='" + n.uid + "' (" + a.url + ")", a.log_error);
+                            }, 50);
+                            e.extend([], arguments, [ a ]);
+                            e.each(b, function(t, e) {
+                                setTimeout(function() {
+                                    e(a, n);
+                                }, 0);
+                            }), a.timers && !a.timers.ajax && (a.timers.ajax = (new Date() - a.timers.ajax_start) / 1e3);
+                            var o = n && (n.cache || a._cache);
+                            if (o && I.options.cache) try {
+                                I.options.cache.put("ajax-queue", {
+                                    url: a.url,
+                                    data: a.json ? null : a.data,
+                                    json: a.json
+                                }, n, o);
+                            } catch (t) {
+                                a.exception = t, console.warn(t);
+                            }
+                        }
+                        r(a, s, n, "complete");
+                    }, a.error = function(i, n, o) {
+                        var s = {
+                            status: n,
+                            exception: o
+                        };
+                        if (i) {
+                            a.result = s;
+                            try {
+                                s = e.extend(s, JSON.parse(i.responseText)), a.result = s;
+                            } catch (t) {
+                                a.exception = t;
+                            }
+                            try {
+                                i.statusText && "error" === s.status && (s.status = i.status + " " + t.ucfirst(i.statusText.toLowerCase()));
+                            } catch (t) {}
+                        }
+                        try {
+                            a._error = e.formatError(s);
+                        } catch (t) {
+                            a.exception = t;
+                        }
+                        if (a.logErrors) try {
+                            e.logError(s, a.logErrors, a.log_bus);
+                        } catch (t) {
+                            a.exception = t;
+                        }
+                        r(a, c, s, "aborted");
+                    }, a.img) {
+                        var u = a.success, h = a.error;
+                        a.success = function e(i) {
+                            function n() {
+                                c || (p++ >= d ? r() : o());
+                            }
+                            function o() {
+                                f = setTimeout(n, a.timeout / d);
+                            }
+                            function r() {
+                                a.ignore_image || a.image_load && (a.ignore_image = !0, a._canceled ? u(i) : h.apply(i, [ null, "Timeout on " + s ]));
+                            }
+                            if (a._canceled) return void u(i);
+                            if (a.timers.ajax || (a.timers.ajax = (new Date() - a.timers.ajax_start) / 1e3),
+                            !i) return h.apply(i, [ null, "Failed to get image url: empty response" ]);
+                            if (i.error) return h.apply(i, [ null, "Failed to get image url: " + i.error ]);
+                            if (i.deferred) return void u(i);
+                            var s = i.result ? i.result.url : i.url;
+                            if (!s) return h.apply(i, [ null, "Failed to get image url" ]);
+                            var l = a.img.attr("src");
+                            if (s === l) return void u(i);
+                            var c = !1;
+                            a.img.each(function() {}).unbind(".ajaxqueue").one("load.ajaxqueue", function() {
+                                c = !0, clearTimeout(f), f = null, a.ignore_image || (a.timers.image = (new Date() - a.timers.image_start) / 1e3,
+                                a.image_load = !1, a.ignore_image = !0, u(i));
+                            }).one("error.ajaxqueue", function(e) {
+                                a.ignore_image || (a._canceled || t && t.options && t.options.files && a.img.attr("src", t.options.files.failed_product_thumbnail),
+                                a.image_load = !1, a.ignore_image = !0, h.apply(i, [ null, "Failed to load image " + s ]));
+                            });
+                            var d = t.browser.msie ? 100 : 1, p = 0;
+                            a.timers.image_start = new Date(), a.image_load = s, a.giveup = r, a.img.attr("src", s);
+                            var f;
+                            o();
+                        };
+                    }
+                    if (d[a.queue]++, a._cache && I.options.cache) {
+                        var p = null;
+                        try {
+                            p = I.options.cache.get("ajax-queue", {
+                                url: a.url,
+                                data: a.json ? null : a.data,
+                                json: a.json
+                            });
+                        } catch (t) {
+                            a.exception = t, console.warn(t);
+                        }
+                        if (p) return a.from_cache = !0, void a.success(p);
+                    }
+                    C(a, "active"), l.push(a), o();
+                    var f = new Date();
+                    a.timers.queued = (f - a.timers.queued) / 1e3, a.timers.ajax_start = f;
+                    var g = a;
+                    I.options.host && "/" === g.url[0] && (g = e.extend({}, g, {
+                        url: I.options.host + g.url
+                    })), "application/json" === g.contentType && "json" === g.dataType && delete g.contentType,
+                    a.xhr = e.ajax(g);
+                }
+            }), s = n, u = !1, h.length) for (var a = h.length, c = 0; c < a; c++) s.push(h.shift());
+            n = [];
+        }, C = function(t, e) {
+            if (t.status) try {
+                t._status = e, t.status(e, t);
+            } catch (e) {
+                t.exception = e, console.warn(e);
+            }
+        }, E = function(t) {
+            function i(t) {
+                var e = t.retry || 5;
+                a(t.status), setTimeout(function() {
+                    A({
+                        url: t.callback,
+                        json: t,
+                        priority: "vip",
+                        error: o,
+                        errorLog: s,
+                        status: a,
+                        img: r,
+                        success: function(t) {
+                            a(t.status), t && t.deferred ? i(t) : "complete" === t.status ? n(t) : o(t);
+                        }
+                    });
+                }, 1e3 * e);
+            }
+            var n = t.success || m, o = t.error || m, r = t.img, a = t.status || m, s = t.errorLog || m, l = e.extend({}, t, {
+                success: function(t) {
+                    t && t.deferred ? i(t) : n(t);
+                }
+            });
+            return A(l);
+        }, I = E;
+        return I.options = {
+            type: "POST",
+            dataType: "json",
+            timeout: 6e4,
+            host: "",
+            noStreaming: !1
+        }, e.extend(I, {
+            info: function() {
+                return {
+                    queue: s,
+                    active: l,
+                    outstanding: d
+                };
+            },
+            start: function(t) {
+                g = t ? t : m;
+            },
+            stop: function(t) {
+                v = t ? t : m;
+            },
+            cancelRequest: function(t) {
+                n("by request", t);
+            },
+            cancelAll: function() {
+                e.each(s, function(t, e) {
+                    n("Cancel by cancel all", e);
+                }), e.each(l, function(t, e) {
+                    n("Cancel by cancel all", e);
+                }), setTimeout(k, 0);
+            },
+            cancelByTag: function(t) {
+                "object" != typeof t && (t = new RegExp(t)), e.each(s, function(e, i) {
+                    t.test(i.tag) && n("Cancel by tag " + t, i);
+                }), e.each(l, function(e, i) {
+                    t.test(i.tag) && n("Cancel by tag " + t, i);
+                }), setTimeout(k, 0);
+            },
+            add_callback: function(t) {
+                t && b.push(t);
+            }
+        }), I;
+    }.apply(e, n), /** @license
+	 *  ECMWF Ajax-queue
+	 *  (C) Copyright ECMWF http://www.ecmwf.int
+	 *
+	 *  This software is licensed under the terms of the Apache Licence Version 2.0
+	 *  which can be obtained at http://www.apache.org/licenses/LICENSE-2.0.
+	 *  In applying this licence, ECMWF does not waive the privileges and immunities
+	 *  granted to it by virtue of its status as an intergovernmental organisation nor
+	 *  does it submit to any jurisdiction.
+	 *
+	 */
+    !(void 0 !== o && (t.exports = o));
+}, function(t, e, i) {
+    var n, o;
     n = [ i(13) ], o = function(t) {
         function e(t) {
             t = t.toLowerCase();
@@ -5106,7 +5083,8 @@
         var i, n;
         return window.ECMWF || (window.ECMWF = {}), t.browser || function() {
             i = e(navigator.userAgent), n = {}, i.browser && (n[i.browser] = !0, n.version = i.version),
-            n.chrome ? n.webkit = !0 : n.webkit && (n.safari = !0), t.browser = n;
+            n.chrome ? n.webkit = !0 : n.webkit && (n.safari = !0), window.navigator.userAgent = window.navigator.userAgent || "node",
+            t.browser = n;
         }(), t.browser.supports_svg = function() {
             return !!document.createElementNS && !!document.createElementNS("http://www.w3.org/2000/svg", "svg").createSVGRect;
         }, t.browser.supports_svg_img = function(e) {
@@ -5237,7 +5215,7 @@
             if ("function" == typeof e) for (var i = new l(t), n = 1; n < arguments.length; ++n) o.callbacks.push(i.middleware(arguments[n])); else "string" == typeof t ? o["string" == typeof e ? "redirect" : "show"](t, e) : o.start(t);
         }
         function r(t) {
-            if (!t.handled) {
+            if (console.log("unhandled"), !t.handled) {
                 var e;
                 e = w ? y + b.hash.replace("#!", "") : b.pathname + b.search, e !== t.canonicalPath && (o.stop(),
                 t.handled = !1, b.href = t.canonicalPath);
@@ -5261,7 +5239,8 @@
             e = e || {}, this.path = "*" === t ? "(.*)" : t, this.method = "GET", this.regexp = m(this.path, this.keys = [], e.sensitive, e.strict);
         }
         function c(t) {
-            if (t.state) {
+            if (console.log("> onpopstate"), t.state) {
+                console.log("> onpopstate A");
                 var i = t.state.path, n = o.parse_path(), r = n[0].join("/"), a = e.extend({}, o._path, {
                     dir: r,
                     page: n[1],
@@ -5271,7 +5250,7 @@
                 var s = o.replace(i, t.state);
                 if (~e.inArray(s.canonicalPath, o._exit_routes)) return void (b.href = s.canonicalPath);
                 o._path = a, o.path = i;
-            } else o.show(b.pathname + b.hash, void 0, void 0, !1);
+            } else console.log("> onpopstate B"), o.show(b.pathname + b.hash, void 0, void 0, !1);
         }
         function u(t) {
             if (1 === h(t) && !(t.metaKey || t.ctrlKey || t.shiftKey || t.defaultPrevented)) {
@@ -5390,7 +5369,7 @@
         }, o.route = function(t, e) {
             return o(t, e), this;
         }, o.set_path = function(t, n, r, a) {
-            console.log("controller.set_path: ", [ t, n, r ]), "object" == typeof r && (r = i.get_string(r));
+            console.log("router.set_path: ", [ t, n, r ]), "object" == typeof r && (r = i.get_string(r));
             var s = e.extend({}, this._new_path, {
                 dir: t,
                 page: n,
@@ -5398,8 +5377,8 @@
             }), l = [ s.page ];
             s.dir && l.unshift(s.dir);
             var c = this.app_path + (l.join("/") + (r || this._new_path && this._new_path.q || "")).replace(/%2C/g, ",");
-            this._first === !1 && c === this.path && console.log("controller.set_path: unchanged"),
-            c !== this.path && (console.log("controller.set_path: path has changed:"), console.log("       ", this.path),
+            this._first === !1 && c === this.path && console.log("router.set_path: unchanged"),
+            c !== this.path && (console.log("router.set_path: path has changed:"), console.log("       ", this.path),
             console.log("       ", c)), (this._first !== !1 || c !== this.path) && (this._new_path = s,
             this._first = !1, o[this._state_id > this.current.state_id ? "show" : "replace"](this.path = c),
             this._path = s, this.set_title(a));
@@ -5411,7 +5390,7 @@
             var n = this._path.q, o = e.extend(i.parse((n || "?").split("?")[1]), t);
             this.set_path(void 0, void 0, o);
         }, o.goto_list_page = function(e) {
-            e = e || this._path.dir, (e !== this._path.dir || this._path.page) && this.set_path(e, null, void 0, t.ucfirst(this._path.dir));
+            console.log("router.goto_list_page: dir=", e), e = e || this._path.dir, (e !== this._path.dir || this._path.page) && this.set_path(e, null, void 0, t.ucfirst(this._path.dir));
         }, o.set_title = function(e) {
             var n = this.path.split("?"), o = t.options.title_prefix || "ECMWF";
             if (2 === n.length) var r = i.parse(n[1]), a = (r.area ? r.area + " " : "") + (r.time || ""), s = [ o, t.truncate(e || this._path.page || "Charts", 32), a ]; else s = [ o, e ];
@@ -5420,8 +5399,7 @@
                 document.getElementsByTagName("title")[0].innerHTML = s.replace("<", "&lt;").replace(">", "&gt;").replace(" & ", " &amp; ");
             } catch (t) {}
         }, o.add_state = function() {
-            return this._state_id++, console.log("* controller.add_state:", this._state_id),
-            this;
+            return this._state_id++, console.log("* router.add_state:", this._state_id), this;
         }, o.dispatch = function(t) {
             function i() {
                 var s = o.exits[l++];
@@ -5659,8 +5637,8 @@
     !(void 0 !== o && (t.exports = o));
 }, function(t, e, i) {
     var n, o;
-    n = [ i(13), i(14), i(29) ], o = function(t, e, i) {
-        function n(i, n, o) {
+    n = [ i(13), i(14), i(33), i(37) ], o = function(t, e, i, n) {
+        function o(i, n, o) {
             var r = n && "string" != typeof n ? n : {}, a = t.remove(r, "className");
             a && (r.class = a);
             var s = e("<" + i + ">", "string" == typeof n ? void 0 : r).appendTo(e(o));
@@ -5671,39 +5649,39 @@
             }), s;
         }
         e.fn.div = function(t) {
-            return n("div", t, this);
+            return o("div", t, this);
         }, e.fn.section = function(t) {
-            return n("section", t, this);
+            return o("section", t, this);
         }, e.fn.ul = function(t) {
-            return n("ul", t, this);
+            return o("ul", t, this);
         }, e.fn.li = function(t) {
-            return n("li", t, this);
+            return o("li", t, this);
         }, e.fn.p = function(t) {
-            return n("p", t, this);
+            return o("p", t, this);
         }, e.fn.a = function(t) {
-            return n("a", t, this);
+            return o("a", t, this);
         }, e.fn.span = function(t) {
-            return n("span", t, this);
+            return o("span", t, this);
         }, e.fn.br = function(t) {
-            return n("br", t, this);
+            return o("br", t, this);
         }, e.fn.hr = function(t) {
             return e("<hr/>", t).appendTo(e(this));
         }, e.fn.img = function(i) {
             i = i || {};
-            var n = t.remove(i, "json_url"), o = e("<img/>", e.extend({}, i)).appendTo(e(this));
-            return n && e.ajaxQueue({
-                url: n,
-                img: o
-            }), o;
+            var o = t.remove(i, "json_url"), r = e("<img/>", e.extend({}, i)).appendTo(e(this));
+            return o && n({
+                url: o,
+                img: r
+            }), r;
         }, e.fn.h2 = function(t) {
-            return n("h2", t, this);
+            return o("h2", t, this);
         }, e.fn.h3 = function(t) {
             var i = t && "string" != typeof t ? t : {}, n = e("<h3>", e.extend({}, i || {})).appendTo(e(this));
             return "string" != typeof t && "number" != typeof t || n.html(t), n;
         }, e.fn.h4 = function(t) {
-            return n("h4", t, this);
+            return o("h4", t, this);
         }, e.fn.h5 = function(t) {
-            return n("h5", t, this);
+            return o("h5", t, this);
         }, e.fn.table = function(t) {
             var i = t || {}, n = i.headers;
             delete i.headers;
@@ -5714,49 +5692,49 @@
             }
             return o;
         }, e.fn.tbody = function(t) {
-            return n("tbody", t, this);
+            return o("tbody", t, this);
         }, e.fn.tr = function(t) {
-            return n("tr", t, this);
+            return o("tr", t, this);
         }, e.fn.th = function(t) {
-            return n("th", t, this);
+            return o("th", t, this);
         }, e.fn.td = function(t) {
-            return n("td", t, this);
+            return o("td", t, this);
         }, e.fn.canvas = function(t) {
-            return n("canvas", t, this);
+            return o("canvas", t, this);
         }, e.fn.object = function(t) {
-            return n("object", t, this);
+            return o("object", t, this);
         }, e.fn.iframe = function(t) {
-            return n("iframe", t, this);
+            return o("iframe", t, this);
         }, e.fn.formElement = function(t) {
             var i = e.extend({}, t || {});
             return e("<form/>", i).appendTo(e(this));
         }, e.fn.input = function(t) {
-            return n("input", e.extend({
+            return o("input", e.extend({
                 type: "text"
             }, t || {}), this);
         };
-        var o = 0;
+        var r = 0;
         e.fn.radio = function(t) {
-            var i = e.extend({}, t || {}), n = this, r = -1;
+            var i = e.extend({}, t || {}), n = this, o = -1;
             if (i.user_setting) {
                 var a = e.getUserSetting(i.user_setting);
                 e(i.buttons).each(function(t) {
-                    i.buttons[t] === a && (r = t);
+                    i.buttons[t] === a && (o = t);
                 });
             }
-            "undefined" != typeof t.checked && (r = t.checked), r < 0 && (r = 0);
-            var s = i.group || "radio-" + o;
+            "undefined" != typeof t.checked && (o = t.checked), o < 0 && (o = 0);
+            var s = i.group || "radio-" + r;
             return e(i.buttons).each(function(t) {
-                var a = s + "-" + o + "-" + Math.floor(1e8 * Math.random()), l = {
+                var a = s + "-" + r + "-" + Math.floor(1e8 * Math.random()), l = {
                     type: "radio",
                     id: a,
                     name: s,
                     value: this
                 };
-                r > -1 && t === r && (l = e.extend(l, {
+                o > -1 && t === o && (l = e.extend(l, {
                     checked: !0
                 })), n.input(l), i.labels && n.append('<label for="' + a + '">' + (i.labels[t] || this) + "</label>");
-            }), o++, i.user_setting && n.click(function(t) {
+            }), r++, i.user_setting && n.click(function(t) {
                 e.setUserSetting(i.user_setting, e(this).find("input:radio:checked").val()), t.stopPropagation();
             }), this;
         }, e.fn.formSelect = function(i) {
@@ -5772,16 +5750,16 @@
             return s && this.append('<label for="' + r.id + '">' + s + "</label>"), o = e('<select class="form-select">'),
             n().appendTo(e(this));
         };
-        var r = 0;
+        var a = 0;
         e.fn.checkbox = function(i) {
-            var o = e.extend({
+            var n = e.extend({
                 type: "checkbox",
                 checked: !1,
-                id: "checkbox-" + r++
-            }, i || {}), a = t.remove(o, "label"), s = t.remove(o, "user_setting"), l = t.remove(o, "changed");
-            s && (o.checked = e.getUserSetting(s, !1));
-            var c = t.remove(o, "checked"), u = n("input", o, this).prop("checked", c);
-            if (a && this.append('<label for="' + o.id + '">' + a + "</label>"), s) {
+                id: "checkbox-" + a++
+            }, i || {}), r = t.remove(n, "label"), s = t.remove(n, "user_setting"), l = t.remove(n, "changed");
+            s && (n.checked = e.getUserSetting(s, !1));
+            var c = t.remove(n, "checked"), u = o("input", n, this).prop("checked", c);
+            if (r && this.append('<label for="' + n.id + '">' + r + "</label>"), s) {
                 var h = e.getUserSetting(s, !1);
                 u.click(function() {
                     h = !h, e.setUserSetting(s, h), l && l(h);
@@ -5789,11 +5767,11 @@
             }
             return u;
         }, e.fn.textArea = function(t) {
-            return n("textarea", t, this);
+            return o("textarea", t, this);
         }, e.fn.label = function(t) {
-            return n("label", t, this);
+            return o("label", t, this);
         };
-        var a = {
+        var s = {
             div: function(t) {
                 return e("<div>").div(t);
             },
@@ -5828,11 +5806,11 @@
                 return e("<div>").textArea(t);
             }
         };
-        return a;
+        return s;
     }.apply(e, n), !(void 0 !== o && (t.exports = o));
 }, function(t, e, i) {
     var n, o;
-    n = [ i(13), i(14), i(33), i(44), i(45), i(29) ], o = function(t, e, i, n, o) {
+    n = [ i(13), i(14), i(37), i(44), i(45), i(33) ], o = function(t, e, i, n, o) {
         var r;
         return r || (r = new function r() {
             this.fetch = function(t, i) {
@@ -5977,7 +5955,7 @@
     }.call(e, i, e, t), !(void 0 !== n && (t.exports = n));
 }, function(t, e, i) {
     var n, o;
-    n = [ i(13), i(14), i(29), i(33), i(47), i(46), i(24), i(44), i(48) ], o = function(t, e, i, n, o, r, a, s, l) {
+    n = [ i(13), i(14), i(33), i(37), i(47), i(46), i(24), i(44), i(48) ], o = function(t, e, i, n, o, r, a, s, l) {
         function c(i) {
             e.extend(this, s), this.options = {
                 values: t.remove(i, "values") || {},
@@ -6372,7 +6350,7 @@
                 i = new c(t), f.push({
                     name: t.product.name,
                     instance: i
-                }), i)) : (f.length > 10 && f.shift(), i = new c(t), f.push({
+                }), i)) : (f.length > 20 && f.shift(), i = new c(t), f.push({
                     name: t.product.name,
                     instance: i
                 }), i);
@@ -6423,7 +6401,7 @@
     }.apply(e, n), !(void 0 !== o && (t.exports = o));
 }, function(t, e, i) {
     var n, o;
-    n = [ i(13), i(14), i(48), i(33) ], o = function(t, e, i, n) {
+    n = [ i(13), i(14), i(48), i(37) ], o = function(t, e, i, n) {
         function o() {
             this.data = {
                 product: {}
@@ -6492,7 +6470,7 @@
                     }
                 });
             }, this.download_url = function(t, i) {
-                var n = location.protocol + "//" + location.hostname + (location.port ? ":" + location.port : ""), o = n.replace(/http:/, "https:").replace(/www|eccharts/gi, "apps").replace(/stage|eccharts-test/gi, "apps-test"), r = "function" == typeof this.name ? this.name() : this.name, a = o + "/plots/product-download/" + (this.data.product.package || "chart-catalogue") + "/" + r + "/?" + e.map(this.variables, function(t) {
+                var n = location.protocol + "//" + location.hostname + (location.port ? ":" + location.port : ""), o = n.replace(/http:/, "https:").replace(/www|eccharts/gi, "apps").replace(/stage|eccharts-test/gi, "apps-test"), r = "function" == typeof this.name ? this.name() : this.name, a = o + "/plots/product-download/" + (this.data.product.package || "catalogue") + "/" + r + "/?" + e.map(this.variables, function(t) {
                     return t.name + "=" + t.to_string();
                 }).join("&");
                 return encodeURI(a + "&token=" + t + "&email=" + i);
@@ -6644,7 +6622,7 @@
     }.apply(e, n), !(void 0 !== o && (t.exports = o));
 }, function(t, e, i) {
     var n, o;
-    n = [ i(13), i(14), i(51), i(59), i(70), i(71), i(72), i(73), i(29) ], o = function(t, e) {
+    n = [ i(13), i(14), i(51), i(59), i(70), i(71), i(72), i(73), i(33) ], o = function(t, e) {
         e.fn.controlFactory = function(n) {
             var o = n.parameter[0];
             "choice" == o.type && o.multi !== !0 && (o.menu = !0);
@@ -8375,7 +8353,7 @@
                             a.scrollTop(a.scrollTop() - r), a.scrollLeft(a.scrollLeft() + o), i = R(o, r), i && n.preventDefault();
                         }
                     });
-                }, L = function() {
+                }, z = function() {
                     var t = function(t) {
                         t.stopPropagation();
                     };
@@ -8386,7 +8364,7 @@
                         var e = parseInt(p / 2, 10), i = t.pageX - v.offset().left - e, n = c - p, o = i / n;
                         o < 0 ? o = 0 : o > 1 && (o = 1), a.scrollLeft((h - c) * o);
                     });
-                }, z = function() {
+                }, L = function() {
                     var e = function(t, e) {
                         a.scrollTop(a.scrollTop() - e), a.scrollLeft(a.scrollLeft() - t), P();
                     }, i = {}, n = 0, o = {}, r = null, s = !1;
@@ -8425,7 +8403,7 @@
                     a.addClass("ie").addClass("ie" + t);
                 }, Y = "ontouchstart" in window || window.DocumentTouch && document instanceof window.DocumentTouch, q = function() {
                     var t = navigator.userAgent.toLowerCase().match(/(msie) ([\w.]+)/);
-                    t && "msie" === t[1] && W(parseInt(t[2], 10)), P(), G(), H(), F(), L(), O(), Y && z(),
+                    t && "msie" === t[1] && W(parseInt(t[2], 10)), P(), G(), H(), F(), z(), O(), Y && L(),
                     r.useKeyboard && N(), a.data("perfect-scrollbar", a), a.data("perfect-scrollbar-update", P),
                     a.data("perfect-scrollbar-destroy", U);
                 };
@@ -8439,7 +8417,7 @@
     i(11)(n, {});
     n.locals && (t.exports = n.locals);
 }, function(t, e, i) {
-    e = t.exports = i(3)(), e.push([ t.id, ".ps-container .ps-scrollbar-x-rail{position:absolute;bottom:3px;height:8px;border-radius:4px;opacity:0;filter:alpha(opacity = 0);-webkit-transition:background-color .2s linear,opacity .2s linear;transition:background-color .2s linear,opacity .2s linear}.ps-container.hover .ps-scrollbar-x-rail,.ps-container:hover .ps-scrollbar-x-rail{opacity:.6;filter:alpha(opacity = 60)}.ps-container .ps-scrollbar-x-rail.hover,.ps-container .ps-scrollbar-x-rail.in-scrolling,.ps-container .ps-scrollbar-x-rail:hover{background-color:#eee;opacity:.9;filter:alpha(opacity = 90)}.ps-container .ps-scrollbar-y-rail{position:absolute;right:3px;width:8px;border-radius:4px;opacity:0;filter:alpha(opacity = 0);-webkit-transition:background-color .2s linear,opacity .2s linear;transition:background-color .2s linear,opacity .2s linear;max-height:100%}.ps-container.hover>.ps-scrollbar-y-rail,.ps-container:hover>.ps-scrollbar-y-rail{opacity:.6;filter:alpha(opacity = 60)}.ps-container .ps-scrollbar-y-rail.hover,.ps-container .ps-scrollbar-y-rail.in-scrolling,.ps-container .ps-scrollbar-y-rail:hover{background-color:#eee;opacity:.9;filter:alpha(opacity = 90)}.ps-container .ps-scrollbar-x{position:absolute;bottom:0;height:8px;background-color:#aaa;border-radius:4px;-webkit-transition:background-color.2s linear;transition:background-color .2s linear}.ps-container.ie6 .ps-scrollbar-x{font-size:0}.ps-container .ps-scrollbar-x-rail.hover .ps-scrollbar-x,.ps-container .ps-scrollbar-x-rail:hover .ps-scrollbar-x{background-color:#999}.ps-container .ps-scrollbar-y{position:absolute;right:0;width:8px;background-color:#aaa;border-radius:4px;-webkit-transition:background-color.2s linear;transition:background-color .2s linear;min-height:4px}.ps-container.ie6 .ps-scrollbar-y{font-size:0}.ps-container .ps-scrollbar-y-rail.hover .ps-scrollbar-y,.ps-container .ps-scrollbar-y-rail:hover .ps-scrollbar-y{background-color:#999}.ps-container.ie .ps-scrollbar-x,.ps-container.ie .ps-scrollbar-y{visibility:hidden}.ps-container.ie.hover .ps-scrollbar-x,.ps-container.ie.hover .ps-scrollbar-y,.ps-container.ie:hover .ps-scrollbar-x,.ps-container.ie:hover .ps-scrollbar-y{visibility:visible}", "" ]);
+    e = t.exports = i(3)(), e.push([ t.id, ".ps-container .ps-scrollbar-x-rail{position:absolute;bottom:3px;height:8px;border-radius:4px;opacity:0;filter:alpha(opacity = 0);transition:background-color .2s linear,opacity .2s linear}.ps-container.hover .ps-scrollbar-x-rail,.ps-container:hover .ps-scrollbar-x-rail{opacity:.6;filter:alpha(opacity = 60)}.ps-container .ps-scrollbar-x-rail.hover,.ps-container .ps-scrollbar-x-rail.in-scrolling,.ps-container .ps-scrollbar-x-rail:hover{background-color:#eee;opacity:.9;filter:alpha(opacity = 90)}.ps-container .ps-scrollbar-y-rail{position:absolute;right:3px;width:8px;border-radius:4px;opacity:0;filter:alpha(opacity = 0);transition:background-color .2s linear,opacity .2s linear;max-height:100%}.ps-container.hover>.ps-scrollbar-y-rail,.ps-container:hover>.ps-scrollbar-y-rail{opacity:.6;filter:alpha(opacity = 60)}.ps-container .ps-scrollbar-y-rail.hover,.ps-container .ps-scrollbar-y-rail.in-scrolling,.ps-container .ps-scrollbar-y-rail:hover{background-color:#eee;opacity:.9;filter:alpha(opacity = 90)}.ps-container .ps-scrollbar-x{position:absolute;bottom:0;height:8px;background-color:#aaa;border-radius:4px;transition:background-color .2s linear}.ps-container.ie6 .ps-scrollbar-x{font-size:0}.ps-container .ps-scrollbar-x-rail.hover .ps-scrollbar-x,.ps-container .ps-scrollbar-x-rail:hover .ps-scrollbar-x{background-color:#999}.ps-container .ps-scrollbar-y{position:absolute;right:0;width:8px;background-color:#aaa;border-radius:4px;transition:background-color .2s linear;min-height:4px}.ps-container.ie6 .ps-scrollbar-y{font-size:0}.ps-container .ps-scrollbar-y-rail.hover .ps-scrollbar-y,.ps-container .ps-scrollbar-y-rail:hover .ps-scrollbar-y{background-color:#999}.ps-container.ie .ps-scrollbar-x,.ps-container.ie .ps-scrollbar-y{visibility:hidden}.ps-container.ie.hover .ps-scrollbar-x,.ps-container.ie.hover .ps-scrollbar-y,.ps-container.ie:hover .ps-scrollbar-x,.ps-container.ie:hover .ps-scrollbar-y{visibility:visible}", "" ]);
 }, function(t, e, i) {
     var n, o;
     n = [ i(14), i(52) ], o = function(t) {
@@ -8591,7 +8569,7 @@
     e = t.exports = i(3)(), e.push([ t.id, '.chart-controls .parameter-control{display:inline-block}.chart-controls:after{content:"";clear:both;display:block}.chart-controls .ui-menu{position:absolute;z-index:100;background-color:#fff;max-height:800px;overflow-x:hidden;overflow-y:auto}.chart-controls .ui-menu .ui-menu-item{position:relative}.chart-controls .ui-menu .ui-menu-item a{border:1px solid transparent;white-space:nowrap;text-align:left;color:#333;padding-right:1.8em}.chart-controls .ui-menu .ui-menu-item a.ui-state-focus{border:1px solid transparent;border-radius:0;margin:0}.chart-controls .ui-state-hover .ui-button-text,.chart-controls .ui-state-hover .ui-menu-item a{color:#333}.chart-controls .ui-menu .ui-menu-item .ui-icon{top:50%;margin-top:-8px}.chart-controls .parameter-control .ui-button>.ui-icon{background-image:url(' + i(19) + ")}.chart-controls .weekly{min-width:2em}.chart-controls .weekly .year{min-width:3em}.chart-controls .weekly .month{min-width:3.5em}.chart-controls .weekly div{min-width:2.2em;display:inline-block}.chart-controls .weekly.ui-menu-item a{padding:0 0 0 4px;line-height:1.9;border:0}.chart-controls .weekly.ui-state-disabled{clear:both}.chart-controls .weekly{float:left;width:auto;line-height:1.9;border:1px solid #fff}.chart-controls .weekly.selected{border-color:#bbb}.chart-controls .weekly.ui-state-disabled{margin:0}#base_time-weekly-menu{width:17em;padding:8px}#base_time-weekly-menu .ui-icon{display:none}", "" ]);
 }, function(t, e, i) {
     var n, o;
-    n = [ i(13), i(14), i(42), i(33), i(77), i(78) ], o = function(t, e, n, o) {
+    n = [ i(13), i(14), i(42), i(37), i(77), i(78) ], o = function(t, e, n, o) {
         return function(r, a) {
             this.name = "tools";
             r.bus.listen_once("product-swapped", function() {
@@ -8668,10 +8646,6 @@
                                         enabled: function() {
                                             return t.options.enable_sharing !== !1 && s.uid && !r.product.is_eccharts();
                                         },
-                                        activatable: function() {
-                                            var t = !!r.product.layerByID;
-                                            return !t;
-                                        },
                                         select: function() {
                                             !function() {
                                                 var a = [ i(93) ];
@@ -8699,7 +8673,7 @@
                                         icon: "ui-icon-gear",
                                         classes: [ "open-in-admin" ],
                                         enabled: function() {
-                                            return u.is("ecmwf") && !r.product.is_eccharts();
+                                            return t.options.site.chart_admin && u.is("ecmwf") && !r.product.is_eccharts();
                                         },
                                         select: function(e) {
                                             var i = "function" == typeof r.product.name ? r.product.name() : r.product.name;
@@ -8944,7 +8918,7 @@
     }.apply(e, n), !(void 0 !== o && (t.exports = o));
 }, function(t, e, i) {
     var n, o;
-    n = [ i(14), i(33) ], o = function(t, e) {
+    n = [ i(14), i(37) ], o = function(t, e) {
         var i;
         return {
             info: function(t) {
@@ -10533,14 +10507,14 @@
     i(11)(n, {});
     n.locals && (t.exports = n.locals);
 }, function(t, e, i) {
-    e = t.exports = i(3)(), e.push([ t.id, '/*!\n * Bootstrap v1.4.0\n *\n * Copyright 2011 Twitter, Inc\n * Licensed under the Apache License v2.0\n * http://www.apache.org/licenses/LICENSE-2.0\n *\n * Designed and built with all the love in the world @twitter by @mdo and @fat.\n * Date: Sat Nov 12 01:04:51 PST 2011\n */.hide{display:none}.show{display:block}.bootstrap-close{float:right;color:#000;font-size:20px;font-weight:700;line-height:13.5px;text-shadow:0 1px 0 #fff;filter:alpha(opacity=25);-khtml-opacity:.25;-moz-opacity:.25;opacity:.25}.bootstrap-close:hover{color:#000;text-decoration:none;filter:alpha(opacity=40);-khtml-opacity:.4;-moz-opacity:.4;opacity:.4}.modal{position:fixed;top:50%;left:50%;z-index:11000;width:560px;margin:-250px 0 0 -280px;background-color:#fff;border:1px solid #999;border:1px solid rgba(0,0,0,.3);*border:1px solid #999;border-radius:6px;box-shadow:0 3px 7px rgba(0,0,0,.3);background-clip:padding-box}.modal .close{margin-top:7px}.modal.fade{-webkit-transition:opacity .3s linear,top .3s ease-out;transition:opacity .3s linear,top .3s ease-out;top:-25%}.modal.fade.in{top:50%}.modal-header{border-bottom:1px solid #eee;padding:5px 15px}.modal-body{padding:15px}.modal-body form,.modal-footer{margin-bottom:0}.modal-footer{background-color:#f5f5f5;padding:14px 15px 15px;border-top:1px solid #ddd;border-radius:0 0 6px 6px;box-shadow:inset 0 1px 0 #fff;zoom:1}.modal-footer:after,.modal-footer:before{display:table;content:"";zoom:1}.modal-footer:after{clear:both}.modal-footer .btn{float:right;margin-left:5px}.modal .popover,.modal .twipsy{z-index:12000}.fade{-webkit-transition:opacity .15s linear;transition:opacity .15s linear;opacity:0}.fade.in{opacity:1}.label.important{background-color:#c43c35}.label.warning{background-color:#f89406}.label.success{background-color:#46a546}.label.notice{background-color:#62cffc}.modal form{margin:0}.modal-header{padding-left:25px}.modal-header .close{text-decoration:none}.modal-footer .btn{font-size:15px;padding:.35em}.modal-header h2{background-color:transparent;font-size:18px;color:navy}.modal-body{font-size:13px;padding-left:25px}.modal-body>div{margin:8px 0}', "" ]);
+    e = t.exports = i(3)(), e.push([ t.id, '/*!\n * Bootstrap v1.4.0\n *\n * Copyright 2011 Twitter, Inc\n * Licensed under the Apache License v2.0\n * http://www.apache.org/licenses/LICENSE-2.0\n *\n * Designed and built with all the love in the world @twitter by @mdo and @fat.\n * Date: Sat Nov 12 01:04:51 PST 2011\n */.hide{display:none}.show{display:block}.bootstrap-close{float:right;color:#000;font-size:20px;font-weight:700;line-height:13.5px;text-shadow:0 1px 0 #fff;filter:alpha(opacity=25);-khtml-opacity:.25;-moz-opacity:.25;opacity:.25}.bootstrap-close:hover{color:#000;text-decoration:none;filter:alpha(opacity=40);-khtml-opacity:.4;-moz-opacity:.4;opacity:.4}.modal{position:fixed;top:50%;left:50%;z-index:11000;width:560px;margin:-250px 0 0 -280px;background-color:#fff;border:1px solid #999;border:1px solid rgba(0,0,0,.3);*border:1px solid #999;border-radius:6px;box-shadow:0 3px 7px rgba(0,0,0,.3);background-clip:padding-box}.modal .close{margin-top:7px}.modal.fade{transition:opacity .3s linear,top .3s ease-out;top:-25%}.modal.fade.in{top:50%}.modal-header{border-bottom:1px solid #eee;padding:5px 15px}.modal-body{padding:15px}.modal-body form,.modal-footer{margin-bottom:0}.modal-footer{background-color:#f5f5f5;padding:14px 15px 15px;border-top:1px solid #ddd;border-radius:0 0 6px 6px;box-shadow:inset 0 1px 0 #fff;zoom:1}.modal-footer:after,.modal-footer:before{display:table;content:"";zoom:1}.modal-footer:after{clear:both}.modal-footer .btn{float:right;margin-left:5px}.modal .popover,.modal .twipsy{z-index:12000}.fade{transition:opacity .15s linear;opacity:0}.fade.in{opacity:1}.label.important{background-color:#c43c35}.label.warning{background-color:#f89406}.label.success{background-color:#46a546}.label.notice{background-color:#62cffc}.modal form{margin:0}.modal-header{padding-left:25px}.modal-header .close{text-decoration:none}.modal-footer .btn{font-size:15px;padding:.35em}.modal-header h2{background-color:transparent;font-size:18px;color:navy}.modal-body{font-size:13px;padding-left:25px}.modal-body>div{margin:8px 0}', "" ]);
 }, function(t, e, i) {
     var n = i(98);
     "string" == typeof n && (n = [ [ t.id, n, "" ] ]);
     i(11)(n, {});
     n.locals && (t.exports = n.locals);
 }, function(t, e, i) {
-    e = t.exports = i(3)(), e.push([ t.id, '/*!\n * Bootstrap v1.4.0\n *\n * Copyright 2011 Twitter, Inc\n * Licensed under the Apache License v2.0\n * http://www.apache.org/licenses/LICENSE-2.0\n *\n * Designed and built with all the love in the world @twitter by @mdo and @fat.\n * Date: Sat Nov 12 01:04:51 PST 2011\n */.hide{display:none}.show{display:block}.bootstrap-close{float:right;color:#000;font-size:20px;font-weight:700;line-height:13.5px;text-shadow:0 1px 0 #fff;filter:alpha(opacity=25);-khtml-opacity:.25;-moz-opacity:.25;opacity:.25}.bootstrap-close:hover{color:#000;text-decoration:none;filter:alpha(opacity=40);-khtml-opacity:.4;-moz-opacity:.4;opacity:.4}.modal{position:fixed;top:50%;left:50%;z-index:11000;width:560px;margin:-250px 0 0 -280px;background-color:#fff;border:1px solid #999;border:1px solid rgba(0,0,0,.3);*border:1px solid #999;border-radius:6px;box-shadow:0 3px 7px rgba(0,0,0,.3);background-clip:padding-box}.modal .close{margin-top:7px}.modal.fade{-webkit-transition:opacity .3s linear,top .3s ease-out;transition:opacity .3s linear,top .3s ease-out;top:-25%}.modal.fade.in{top:50%}.modal-header{border-bottom:1px solid #eee;padding:5px 15px}.modal-body{padding:15px}.modal-body form,.modal-footer{margin-bottom:0}.modal-footer{background-color:#f5f5f5;padding:14px 15px 15px;border-top:1px solid #ddd;border-radius:0 0 6px 6px;box-shadow:inset 0 1px 0 #fff;zoom:1}.modal-footer:after,.modal-footer:before{display:table;content:"";zoom:1}.modal-footer:after{clear:both}.modal-footer .btn{float:right;margin-left:5px}.modal .popover,.modal .twipsy{z-index:12000}.fade{-webkit-transition:opacity .15s linear;transition:opacity .15s linear;opacity:0}.fade.in{opacity:1}.label.important{background-color:#c43c35}.label.warning{background-color:#f89406}.label.success{background-color:#46a546}.label.notice{background-color:#62cffc}', "" ]);
+    e = t.exports = i(3)(), e.push([ t.id, '/*!\n * Bootstrap v1.4.0\n *\n * Copyright 2011 Twitter, Inc\n * Licensed under the Apache License v2.0\n * http://www.apache.org/licenses/LICENSE-2.0\n *\n * Designed and built with all the love in the world @twitter by @mdo and @fat.\n * Date: Sat Nov 12 01:04:51 PST 2011\n */.hide{display:none}.show{display:block}.bootstrap-close{float:right;color:#000;font-size:20px;font-weight:700;line-height:13.5px;text-shadow:0 1px 0 #fff;filter:alpha(opacity=25);-khtml-opacity:.25;-moz-opacity:.25;opacity:.25}.bootstrap-close:hover{color:#000;text-decoration:none;filter:alpha(opacity=40);-khtml-opacity:.4;-moz-opacity:.4;opacity:.4}.modal{position:fixed;top:50%;left:50%;z-index:11000;width:560px;margin:-250px 0 0 -280px;background-color:#fff;border:1px solid #999;border:1px solid rgba(0,0,0,.3);*border:1px solid #999;border-radius:6px;box-shadow:0 3px 7px rgba(0,0,0,.3);background-clip:padding-box}.modal .close{margin-top:7px}.modal.fade{transition:opacity .3s linear,top .3s ease-out;top:-25%}.modal.fade.in{top:50%}.modal-header{border-bottom:1px solid #eee;padding:5px 15px}.modal-body{padding:15px}.modal-body form,.modal-footer{margin-bottom:0}.modal-footer{background-color:#f5f5f5;padding:14px 15px 15px;border-top:1px solid #ddd;border-radius:0 0 6px 6px;box-shadow:inset 0 1px 0 #fff;zoom:1}.modal-footer:after,.modal-footer:before{display:table;content:"";zoom:1}.modal-footer:after{clear:both}.modal-footer .btn{float:right;margin-left:5px}.modal .popover,.modal .twipsy{z-index:12000}.fade{transition:opacity .15s linear;opacity:0}.fade.in{opacity:1}.label.important{background-color:#c43c35}.label.warning{background-color:#f89406}.label.success{background-color:#46a546}.label.notice{background-color:#62cffc}', "" ]);
 }, function(t, e, i) {
     var n, o;
     n = [ i(14), i(50) ], o = function(t) {
@@ -10589,7 +10563,7 @@
     }.apply(e, n), !(void 0 !== o && (t.exports = o));
 }, function(t, e, i) {
     var n, o;
-    n = [ i(13), i(14), i(26), i(37), i(41), i(102), i(103), i(105), i(101), i(106), i(107), i(110), i(113), i(115), i(56) ],
+    n = [ i(13), i(14), i(26), i(30), i(41), i(102), i(103), i(105), i(101), i(106), i(107), i(110), i(113), i(115), i(56) ],
     o = function(t, e, i, n, o) {
         var r = "valid_time", a = "base_time";
         n.masks.ecmwfFull = 'dd mmmm yyyy, HH"Z"', e.widget("ui.timeNavigator", {
@@ -10770,7 +10744,8 @@
                         dates: t[s].values,
                         index: t[s].index
                     }, this._set_selectlist(), this.secondary.dates.length && o.show_bt || (this.selector.hide(),
-                    this.secondary_label.hide()), this._enable(), n.slider.setDates({
+                    this.secondary_label.hide()), n.dates.length > 1 ? this._enable() : this._disable(),
+                    n.slider.setDates({
                         dates: n.dates ? e.map(n.dates, function(t) {
                             return t[n.primary_axis_name];
                         }) : null,
@@ -10912,7 +10887,7 @@
     }.apply(e, n), !(void 0 !== o && (t.exports = o));
 }, function(t, e, i) {
     var n, o;
-    n = [ i(13), i(14), i(104), i(64), i(35), i(37), i(25) ], o = function(t, e) {
+    n = [ i(13), i(14), i(104), i(64), i(28), i(30), i(25) ], o = function(t, e) {
         e.widget("ui.canvasSlider", e.ui.mouse, {
             dates: null,
             current_date: null,
@@ -10967,10 +10942,8 @@
                 function r(t) {
                     (a.cursor || a.dates && !a.options.disabled) && (a.cursor = null, a._draw());
                 }
-                this._mouseInit();
                 var a = this, s = this.options;
-                a.dimensions = {}, a.stepBar = null, a.drag = null, a.range = {};
-                var l = t.browser.msie7 ? 5e3 : 10;
+                this._mouseInit(), a.dimensions = {}, a.stepBar = null, a.drag = null, a.range = {},
                 setTimeout(function l() {
                     if (t.browser.msie && "undefined" != typeof G_vmlCanvasManager) {
                         var c = a.canvas = document.createElement("canvas");
@@ -10989,12 +10962,14 @@
                     a.ctx.lineWidth = "2", a.ctx.strokeStyle = "rgb(255, 255, 255)", a.ctx.font = t.browser.msie ? "9px Arial" : "6pt sans-serif",
                     a.stepBar = new i(a), a.loadComplete = !0, a.dates ? (a.stepBar.update(), a._draw()) : a._draw_welcome(),
                     a.$canvas.click(n).mousemove(o).mouseout(r);
-                }, l), a.element.bind("container", function(t, e) {
-                    a.dimensions = {
-                        element_width: e.width,
-                        paddingLeft: parseInt(a.element.css("padding-left"), 10),
-                        paddingRight: parseInt(a.element.css("padding-right"), 10)
-                    }, a.stepBar && (a._clear(), a.stepBar.update(), a._draw());
+                }, 10);
+                var l = e.throttle(300, function() {
+                    a.stepBar && (a._clear(), a.stepBar.update(), a._draw());
+                });
+                a.element.bind("container", function(t, e) {
+                    e.width !== a.dimensions.element_width && (a.dimensions = {
+                        element_width: e.width
+                    }, l());
                 }), t.browser.msie && this.element.mousedown(function(t) {
                     if (t.ctrlKey || t.shiftKey) {
                         this.onselectstart = function() {
@@ -11029,8 +11004,7 @@
                     return e;
                 }
                 var o = this;
-                return e.isArray(t.dates) ? (t.dates.length || console.warn("CanvasSlider.setDates: bad arg: dates is empty array"),
-                "number" != typeof t.index ? void console.warn("CanvasSlider.setDates: bad arg: dates.index") : (t.dates.length < 2 && this.element.canvasSlider("disable"),
+                return e.isArray(t.dates) ? (!t.dates.length, "number" != typeof t.index ? void console.warn("CanvasSlider.setDates: bad arg: dates.index") : (t.dates.length < 2 && this.element.canvasSlider("disable"),
                 o.dates = t.dates, o.current_date = t.dates[t.index], o.ref_date = t.ref ? t.ref : this.dates[0],
                 o.format = t.format, o.min_step = n(), void (i() && (o.animation_start_date && o.animation_start_date.getTime() > o.dates[o.dates.length - 1] || o.animation_end_date && o.animation_end_date.getTime() < o.dates[0] ? (console.log("canvasSlider.update: no overlap in animation selection. resetting..."),
                 o._set_animation_start_date(), o._set_animation_end_date()) : o.animation_start_date && o.animation_start_date.getTime() < o.dates[0] ? console.log("canvasSlider.update: animation start is before new date range. ignoring...") : o.animation_end_date && o.animation_end_date.getTime() > o.dates[o.dates.length - 1] && console.log("canvasSlider.update: animation end is after new date range. ignoring..."),
@@ -11655,9 +11629,9 @@
     }.apply(e, n), !(void 0 !== o && (t.exports = o));
 }, function(t, e, i) {
     var n, o;
-    n = [ i(13), i(14), i(26), i(38), i(45), i(118), i(167), i(56), i(168), i(170), i(176), i(185), i(186) ],
-    o = function(t, e, n, o, r, a, s) {
-        function l(t) {
+    n = [ i(13), i(14), i(26), i(37), i(38), i(45), i(127), i(118), i(56), i(168), i(170), i(176), i(185), i(186) ],
+    o = function(t, e, n, o, r, a, s, l) {
+        function c(t) {
             var i = t, n = t.stop, o = t.spin;
             return t.spin = function() {
                 var t = o.apply(i, arguments);
@@ -11672,7 +11646,7 @@
                 });
             }, t;
         }
-        function c(t, i, n, o) {
+        function u(t, i, n, o) {
             var r = this, a = e.map(i, function(t, i) {
                 return e.Deferred();
             }), s = {};
@@ -11684,7 +11658,7 @@
                 s.cancelled || ("resolved" !== c.state() && o && o(), c.resolve());
             }, t), s.promise = c, s;
         }
-        var u = null;
+        var h = null;
         e.widget("ui.basicChart", {
             options: {
                 instance: [],
@@ -11754,24 +11728,24 @@
                 i.instance.on.image.value = null), i.instance.load && (t.time = i.instance.variables.time && i.instance.variables.time.value),
                 t.instance && (t.instance.events.unbind("parameters-changed"), e.each(t.instance.variables, function(e, i) {
                     i.unsubscribe(t);
-                }), t._disconnect()), t.instance = i.instance.load ? i.instance : new r.get_instance(i.instance),
+                }), t._disconnect()), t.instance = i.instance.load ? i.instance : new a.get_instance(i.instance),
                 t.on.product_swap && "resolved" !== t.on.product_swap.promise.state() && (t.on.product_swap.cancelled = !0),
-                t.on.product_swap = c.call(t, 2e4, [ "product_swap", "plot" ], function() {
+                t.on.product_swap = u.call(t, 2e4, [ "product_swap", "plot" ], function() {
                     t.bus.send("chart-content-update", {
                         product: t.instance
                     });
                 }, function() {
                     console.warn("timeout waiting for product load");
-                }), t.instance.is_from_cache && t.on.product_swap.plot.resolve(), u = u || e.import_("chartAnimator"),
-                t.product = t.instance, t.name = t.instance.data.name, t.instance.has_widget("epsgram") && (e.extend(t, new a()),
-                t.epsgram_init()), e.each({
+                }), t.instance.is_from_cache && t.on.product_swap.plot.resolve(), h = h || e.import_("chartAnimator"),
+                t.product = t.instance, t.name = t.instance.data.name, t.instance.has_widget("epsgram") ? (e.extend(t, new s()),
+                t.epsgram_init()) : t.epsgram_destroy && t.epsgram_destroy(), e.each({
                     tcyclone: "Tcyclone"
                 }, function(i, n) {
-                    "tcyclone" === t.instance.data.product.package ? t.tcyclone_init || (e.extend(t, new s()),
+                    "tcyclone" === t.instance.data.product.package ? t.tcyclone_init || (e.extend(t, new l()),
                     t.tcyclone_init()) : t.tcyclone_init;
                 }), t._set_parameters(i.params), 1 === n && t.instance.have.availability.done(function() {
                     t._listen_once("tool-animation-toggle", function() {
-                        t.animation = new u.Controller(t, !0).animation(), t.animation.toggle();
+                        t.animation = new h.Controller(t, !0).animation(), t.animation.toggle();
                     })._listen("chart-animation-stop", function() {
                         t.instance.variables.time && t.time.key !== t.instance.variables.time.value.key && t.instance.variables.time.set(t.time);
                     });
@@ -11904,7 +11878,7 @@
                     !function() {
                         var e = [ i(188) ];
                         (function(e) {
-                            (t.spinner || (t.spinner = l(new e({
+                            (t.spinner || (t.spinner = c(new e({
                                 left: 12,
                                 top: 10,
                                 lines: 13,
@@ -11934,9 +11908,9 @@
                 n.on.product_swap.promise.done(function(t) {
                     n.product.print(e.extend({
                         json: n.product.as_json(t, null, n.mail, "pdf"),
-                        success: function(o) {
-                            console.log("print: success.", o, n.time), o && (o.result && o.result.url ? location.href = o.result.url : o.redirect && e.ajaxQueue(e.extend({
-                                url: o.redirect,
+                        success: function(r) {
+                            console.log("print: success.", r, n.time), r && (r.result && r.result.url ? location.href = r.result.url : r.redirect && o(e.extend({
+                                url: r.redirect,
                                 priority: "very-high",
                                 json: n.product.as_json(t, null, n.mail, "pdf"),
                                 success: function(t) {
@@ -11972,15 +11946,15 @@
                 if (!e.findWhere(this.plugins, {
                     name: t
                 })) {
-                    var i = new h[t](this);
+                    var i = new d[t](this);
                     return i && (i.name = t, this.plugins.push(i)), !0;
                 }
                 return !1;
             }
         });
-        var h = {};
+        var d = {};
         e.chartRegisterPlugin = function(t, e) {
-            h[t] = e;
+            d[t] = e;
         }, e.widget("ui.locationMap", {
             options: {},
             _init: function() {
@@ -11990,148 +11964,66 @@
     }.apply(e, n), !(void 0 !== o && (t.exports = o));
 }, function(t, e, i) {
     var n, o;
-    n = [ i(14), i(153), i(48), i(119), i(137), i(143), i(152), i(29), i(32), i(40), i(42) ],
-    o = function(t, e, n, o, r, a, s, l, c, u) {
-        function h() {}
-        function d(e, i) {
-            this.element = e, this.sections = {}, this.dom_tree = o("div.vdom-root"), this.element.append(this.dom_tree_root = s(this.dom_tree)),
-            this.render = t.throttle(300, this._render);
-        }
-        var p = [];
-        return h.prototype = {
-            epsgram_init: function() {
-                console.log("epsgrams_init");
-                var r = this, a = r.instance.has_widget("wmo_locations");
-                setTimeout(function() {
-                    switch (a) {
-                      case !0:
-                        i(154);
-                        break;
-
-                      case !1:
-                        i(158);
-                    }
-                }, 0), this.left = new d(t(".column-1")), a && this.left.add("location", function e(i) {
-                    return o("div.country-cities-content", [ o("h2", i.title), o("ul.country-cities", t.map(i.result, function(t) {
-                        return o("li", {
-                            onclick: function() {
-                                u.set_parameter({
-                                    meteogram_location: t[6]
-                                });
-                            }
-                        }, t[0]);
-                    })) ]);
-                }).set_state("location", JSON.parse(e.ensgram_wmo_country || "{}")), r._history.init.call(r, a),
-                r.location_handler = function(n) {
-                    console.log("location.click"), !function() {
-                        var n = [ i(93) ];
-                        (function(i) {
-                            new i({
-                                id: "location-select",
-                                title: "<h2>Location</h2>"
-                            });
-                            var n = t("#location-select").each(function() {
-                                t("#location-select").hasClass("in") && t("#location-select").modal("hide");
-                            }).modal("show"), o = {
-                                lat: -50,
-                                lon: -9
-                            }, s = t.extend(o, l.map(r.instance.variables, function(e, i) {
-                                if (~t.inArray(i, [ "lat", "lon" ])) return e.value;
-                            })), c = n.find(".modal-body");
-                            c.each(function i() {
-                                c.empty();
-                                var o = n.find(".modal-footer").empty();
-                                c.form({
-                                    items: [ {
-                                        type: a ? "country_location" : "location",
-                                        name: "location",
-                                        title: "Location",
-                                        value: s
-                                    } ],
-                                    ok: function(i) {
-                                        var o = i.location;
-                                        a ? (console.log("basicChart.location.ok: location=", o), o.country && (n.modal("hide"),
-                                        r.left.on_render(function() {
-                                            var e = t(".country-cities-content");
-                                            e.css({
-                                                backgroundColor: "#ffc"
-                                            }).delayed(1e3, function() {
-                                                e.css({
-                                                    backgroundColor: ""
-                                                });
-                                            }), r.left.on_render();
-                                        }), e.ensgram_wmo_country = JSON.stringify(o.country), r.left.set_state("location", o.country))) : (console.log("basicChart.location.ok: lat=", o.lat, " lon=", o.lon),
-                                        o && (n.modal("hide"), r._set_parameter("lat", o.lat + "")._set_parameter("lon", o.lon + "")._set_parameter("altitude", o.altitude + "")._set_parameter("station_name", o.city || "")));
-                                    },
-                                    cancel: function(t) {
-                                        n.modal("hide");
-                                    }
-                                }), c.find(".form-help, .form-item-title").remove(), c.find(".form-buttons input#_ok").addClass("btn").appendTo(o),
-                                c.find(".form-buttons input#_cancel").addClass("btn").appendTo(o), c.find(".form-buttons").remove(),
-                                c.find(".form-row").css({
-                                    background: "none"
-                                });
-                            });
-                        }).apply(null, n);
-                    }();
-                }, r.instance.on.image.subscribe(r, function() {
-                    r._history.update.call(r), r._metadata.update.call(r), r.instance.variables.location = r.instance.variables.location || new n.dynamic({
-                        name: "location",
-                        title: "Location",
-                        type: "location",
-                        values: []
-                    });
-                }), r.instance.events.bind("load-end", function() {
-                    r._stop_spinner(), r.instance.error_msg ? r.bus.send("log-error", {
+    n = [ i(14), i(36) ], o = function(t, e) {
+        function n() {}
+        n.prototype = {
+            tcyclone_init: function() {
+                console.log("tcyclone_init");
+                var e = this;
+                e.instance.events.bind("image-changed", function() {
+                    t.fn.wwwChartParameterBar && e.parameter_bar.wwwChartParameterBar("setItems", t.extend(o.forecast_base_time, {
+                        values: t.map(e.instance.data.availability.availability, function(t) {
+                            return t[0];
+                        }),
+                        labels: t.map(e.instance.data.availability.availability, function(t) {
+                            return new Time(t).asText();
+                        })
+                    })), e._history.update.call(e), e._metadata.update.call(e);
+                }).bind("load-end", function() {
+                    e._stop_spinner(), e.instance.error_msg ? e.bus.send("log-error", {
                         title: "Plot failed",
-                        message: r.instance.error_msg
-                    }) : r.instance.data.is_fall_back && r.bus.send("log-warning", {
+                        message: e.instance.error_msg
+                    }) : e.instance.data.is_fall_back && e.bus.send("log-warning", {
                         title: "Fallback plot",
                         message: "The requested plot is not available. A fallback is displayed."
                     });
                 });
             },
             _history: {
-                block: t(".column-1"),
-                init: function(i) {
-                    var n = this, r = n._history;
-                    r.storage = i ? "ensgram_history_wmo" : "ensgram_history", p = JSON.parse(e[r.storage] || "[]"),
-                    n.left.add("history", function e() {
-                        return o("div.history-content", [ o("h2", [ "Recently viewed" ]), o("ul.chart-history", t.map(p, n._bind(r._render_item))) ]);
-                    }), n.left.set_state("history", {});
-                },
+                block: t("#block-ecmwf-chart-history"),
+                content: t("#block-ecmwf-chart-history .history-content").empty().ul(".chart-history"),
                 update: function() {
-                    var t, i = this, n = i._history, o = this.instance.as_json().product;
-                    (t = this.history_exists(o)) && (p.length >= 20 && p.pop(), t > -1 && p.splice(t, 1),
-                    delete o.values.location, p.unshift({
-                        values: o.values
-                    }), e[n.storage] = JSON.stringify(p), this.left.render());
+                    var e = this, i = e._history;
+                    this.instance.has_widget("epsgram") && (i.block.show(), i.content.html(t.map(e.instance.data.history, e._bind(i._render))),
+                    localStorage["ensgram-history"] = JSON.stringify(e.instance.data.history));
                 },
-                _render_item: function(e, i) {
-                    var n = this;
-                    e.values || (e = e.product);
-                    var r = e.values.station_name || e.values.meteogram_location;
-                    e = e.values;
-                    var a = (r || t.formatLatitude(e.lat) + " " + t.formatLongitude(e.lon)).replace("_", " "), s = new Time(e.time), l = s.base_time.format("dd mmm HH:MM"), c = e.epsgram.replace("classical_", "");
-                    return o("li", {
-                        title: a + " - " + c + (l ? " - " + s.base_time.toString() : ""),
-                        onclick: function(i) {
-                            t(i.currentTarget).tipsy("hide"), n._set_parameters(e);
-                        }
-                    }, [ o("div", [ o("div", [ a ]) ]), o("div", [ o("div", [ l ]) ]), o("div.epsgram-type", [ o("div", [ c ]) ]) ]);
+                _render: function(e, n) {
+                    var o = this, r = e.axis.station_name || t.formatLatitude(e.axis.lat) + " " + t.formatLongitude(e.axis.lon), a = new Time([ e.axis.base_time, 0, e.axis.base_time ]), s = e.axis.base_time ? a.base_time.format("dd mmm HH:MM") : "", l = e.axis.epsgram.replace("classical_", "");
+                    l = l.charAt(0).toUpperCase() + l.slice(1);
+                    var c = t("<li>");
+                    return c.div().div(r), c.div().div(s), c.div().addClass("epsgram-type").div(l),
+                    !function() {
+                        var t = [ i(56) ];
+                        (function() {
+                            c.modeTooltip({
+                                maxWidth: "auto",
+                                content: function() {
+                                    return r + " - " + l + (s ? " - " + a.base_time.toString() : "");
+                                }
+                            });
+                        }).apply(null, t);
+                    }(), c.click(function() {
+                        t(this).modeTooltip("close"), o._set_parameters(e.axis), o._update_page();
+                    });
                 }
             },
             _metadata: {
                 update: function() {
                     var e = this, n = e._metadata;
                     !function() {
-                        var o = [ i(159), i(85) ];
+                        var o = [ i(119), i(85) ];
                         (function() {
-                            n.block || (n.block = t("#block-ecmwf-chart-ecmwf-chart-metadata").css({
-                                position: "absolute",
-                                top: 40,
-                                zIndex: 5
-                            }), e.element.helpProvider({
+                            n.block || (n.block = t("#block-ecmwf-chart-ecmwf-chart-metadata"), e.element.helpProvider({
                                 getContent: function() {
                                     return {
                                         content: n.get_epsgram_help.call(e)
@@ -12144,1166 +12036,44 @@
                     }();
                 },
                 get_epsgram_help: function() {
-                    var e = this, i = [];
-                    if (console.log("metadata.get_epsgram_help: metadata=", e.instance.data.metadata),
-                    !e.instance.data.metadata) return "Cannot get help information.";
-                    var n = e.instance.data.metadata;
-                    if (!n.distance) return "Cannot display help information. Missing Distance data.";
-                    var o = c.get("m"), r = c.get(n.distance.distance_unit || "km"), a = n.land_sea_mask < .5 ? "sea" : "land";
-                    return n.title && i.push("### " + n.title), i.push("Location requested: **" + t.formatGeoLocation(n.requested_location) + "**.  "),
-                    i.push("Nearest ENS grid point: **" + t.formatGeoLocation(n.location) + "**."),
-                    i.push(""), "" !== n.height && n.height !== -9999 && "10_days_wave" !== n.db && (console.log("metadata.height:<", n.height, ">"),
-                    i.push("Height of requested location (based on the GTOPO30 dataset): **" + o.asHTML(n.height) + "**, "),
-                    "plumes" != n.db && (i.push("height of ENS orography at nearest grid point: **" + o.asHTML(n.eps_height) + "**, "),
-                    i.push("height of high resolution orography interpolated to ENS resolution at nearest grid point: **" + o.asHTML(n.deterministic_height) + "**.")),
-                    n.temperature_correction && (i.push(""), n.temperature_adjustment ? i.push("Temperature parameter is adjusted to the requested location by **" + t.formatCelcius(n.temperature_adjustment.deterministic_adjustement, 1) + "** in high resolution forecast curve and **" + t.formatCelcius(n.temperature_adjustment.eps_adjustement, 1) + "** in ENS forecast curves.") : i.push("Temperature parameter is adjusted to the requested location"),
-                    i.push(""))), i.push(""), i.push(""), "10_days_wave" === n.db ? i.push("The nearest ENS grid point is located at **" + r.asHTML(n.distance.distance) + " " + n.distance.direction + "** of the selected location.") : (i.push("The nearest ENS grid point is a **" + a + " point**, "),
-                    i.push("located at **" + r.asHTML(n.distance.distance) + " " + n.distance.direction + "** of the selected location.")),
-                    i.join("\n");
+                    var i = this, n = [];
+                    if (console.log("metadata.get_epsgram_help: metadata=", i.instance.data.metadata),
+                    !i.instance.data.metadata) return "Cannot get help information.";
+                    var o = i.instance.data.metadata;
+                    if (!o.distance) return "Cannot display help information. Missing Distance data.";
+                    var r = e.get("m"), a = e.get(o.distance.distance_unit || "km"), s = o.land_sea_mask < .5 ? "sea" : "land";
+                    return o.title && n.push("### " + o.title), n.push("Location requested: **" + t.formatGeoLocation(o.requested_location) + "**.  "),
+                    n.push("Nearest ENS grid point: **" + t.formatGeoLocation(o.location) + "**."),
+                    n.push(""), "" !== o.height && o.height !== -9999 && "10_days_wave" !== o.db && (console.log("metadata.height:<", o.height, ">"),
+                    n.push("Height of requested location (based on the GTOPO30 dataset): **" + r.asHTML(o.height) + "**, "),
+                    "plumes" != o.db && (n.push("height of ENS orography at nearest grid point: **" + r.asHTML(o.eps_height) + "**, "),
+                    n.push("height of high resolution orography interpolated to ENS resolution at nearest grid point: **" + r.asHTML(o.deterministic_height) + "**.")),
+                    o.temperature_correction && (n.push(""), o.temperature_adjustment ? n.push("Temperature parameter is adjusted to the requested location by **" + t.formatCelcius(o.temperature_adjustment.deterministic_adjustement, 1) + "** in high resolution forecast curve and **" + t.formatCelcius(o.temperature_adjustment.eps_adjustement, 1) + "** in ENS forecast curves.") : n.push("Temperature parameter is adjusted to the requested location"),
+                    n.push(""))), n.push(""), n.push(""), "10_days_wave" === o.db ? n.push("The nearest ENS grid point is located at **" + a.asHTML(o.distance.distance) + " " + o.distance.direction + "** of the selected location.") : (n.push("The nearest ENS grid point is a **" + s + " point**, "),
+                    n.push("located at **" + a.asHTML(o.distance.distance) + " " + o.distance.direction + "** of the selected location.")),
+                    n.join("\n");
                 },
                 block: null
-            },
-            history_exists: function(t) {
-                var e = t.values, i = 0;
-                for (var n in p) {
-                    if (p[n].values) {
-                        var o = !0;
-                        for (var r in p[n].values) {
-                            var a = JSON.stringify(p[n].values[r]);
-                            if (a != JSON.stringify(e[r])) {
-                                o = !1;
-                                break;
-                            }
-                        }
-                        if (o) return i;
-                    } else ;
-                    i++;
-                }
-                return -1;
             }
-        }, t.widget("ui.parameterLocation", t.ui.parameterControl, {
-            options: {
-                title: "Location ..."
-            },
-            _make_html: function() {
-                var t = this.options, e = this.element.parents(".chart-column").find(".basic").basicChart("instance");
-                this.element.empty().addClass("parameter-selector").button({
-                    label: t.title
-                }).click(e.location_handler);
-            }
-        }), d.prototype = {
-            add: function(t, e) {
-                return this.sections[t] = {
-                    render: e
-                }, this;
-            },
-            set_state: function(t, e) {
-                return this.sections[t].state = e, this.render(), this;
-            },
-            _render: function() {
-                var e = o("div.vdom-root", t.map(this.sections, function(t) {
-                    return t.render(t.state);
-                }));
-                this.dom_tree_root = a(this.dom_tree_root, r(this.dom_tree, e)), this.dom_tree = e,
-                this._on_render && this._on_render();
-            },
-            on_render: function(t) {
-                return this._on_render = t, this;
-            }
-        }, h;
-    }.apply(e, n), !(void 0 !== o && (t.exports = o));
-}, function(t, e, i) {
-    var n = i(120);
-    t.exports = n;
-}, function(t, e, i) {
-    "use strict";
-    function n(t, e, i) {
-        var n, a, l, c, u = [];
-        return !i && s(e) && (i = e, a = {}), a = a || e || {}, n = b(t, a), a.hasOwnProperty("key") && (l = a.key,
-        a.key = void 0), a.hasOwnProperty("namespace") && (c = a.namespace, a.namespace = void 0),
-        "INPUT" !== n || c || !a.hasOwnProperty("value") || void 0 === a.value || g(a.value) || (a.value = A(a.value)),
-        r(a), void 0 !== i && null !== i && o(i, u, n, a), new h(n, a, u, l, c);
-    }
-    function o(t, e, i, n) {
-        if ("string" == typeof t) e.push(new d(t)); else if ("number" == typeof t) e.push(new d(String(t))); else if (a(t)) e.push(t); else {
-            if (!u(t)) {
-                if (null === t || void 0 === t) return;
-                throw l({
-                    foreignObject: t,
-                    parentVnode: {
-                        tagName: i,
-                        properties: n
-                    }
-                });
-            }
-            for (var r = 0; r < t.length; r++) o(t[r], e, i, n);
-        }
-    }
-    function r(t) {
-        for (var e in t) if (t.hasOwnProperty(e)) {
-            var i = t[e];
-            if (g(i)) continue;
-            "ev-" === e.substr(0, 3) && (t[e] = _(i));
-        }
-    }
-    function a(t) {
-        return p(t) || f(t) || m(t) || v(t);
-    }
-    function s(t) {
-        return "string" == typeof t || u(t) || a(t);
-    }
-    function l(t) {
-        var e = new Error();
-        return e.type = "virtual-hyperscript.unexpected.virtual-element", e.message = "Unexpected virtual child passed to h().\nExpected a VNode / Vthunk / VWidget / string but:\ngot:\n" + c(t.foreignObject) + ".\nThe parent vnode is:\n" + c(t.parentVnode),
-        e.foreignObject = t.foreignObject, e.parentVnode = t.parentVnode, e;
-    }
-    function c(t) {
-        try {
-            return JSON.stringify(t, null, "    ");
-        } catch (e) {
-            return String(t);
-        }
-    }
-    var u = i(121), h = i(122), d = i(128), p = i(124), f = i(129), m = i(125), g = i(127), v = i(126), b = i(130), A = i(132), _ = i(133);
-    t.exports = n;
-}, function(t, e) {
-    function i(t) {
-        return "[object Array]" === o.call(t);
-    }
-    var n = Array.isArray, o = Object.prototype.toString;
-    t.exports = n || i;
-}, function(t, e, i) {
-    function n(t, e, i, n, o) {
-        this.tagName = t, this.properties = e || c, this.children = i || u, this.key = null != n ? String(n) : void 0,
-        this.namespace = "string" == typeof o ? o : null;
-        var h, d = i && i.length || 0, p = 0, f = !1, m = !1, g = !1;
-        for (var v in e) if (e.hasOwnProperty(v)) {
-            var b = e[v];
-            l(b) && b.unhook && (h || (h = {}), h[v] = b);
-        }
-        for (var A = 0; A < d; A++) {
-            var _ = i[A];
-            r(_) ? (p += _.count || 0, !f && _.hasWidgets && (f = !0), !m && _.hasThunks && (m = !0),
-            g || !_.hooks && !_.descendantHooks || (g = !0)) : !f && a(_) ? "function" == typeof _.destroy && (f = !0) : !m && s(_) && (m = !0);
-        }
-        this.count = d + p, this.hasWidgets = f, this.hasThunks = m, this.hooks = h, this.descendantHooks = g;
-    }
-    var o = i(123), r = i(124), a = i(125), s = i(126), l = i(127);
-    t.exports = n;
-    var c = {}, u = [];
-    n.prototype.version = o, n.prototype.type = "VirtualNode";
-}, function(t, e) {
-    t.exports = "2";
-}, function(t, e, i) {
-    function n(t) {
-        return t && "VirtualNode" === t.type && t.version === o;
-    }
-    var o = i(123);
-    t.exports = n;
-}, function(t, e) {
-    function i(t) {
-        return t && "Widget" === t.type;
-    }
-    t.exports = i;
-}, function(t, e) {
-    function i(t) {
-        return t && "Thunk" === t.type;
-    }
-    t.exports = i;
-}, function(t, e) {
-    function i(t) {
-        return t && ("function" == typeof t.hook && !t.hasOwnProperty("hook") || "function" == typeof t.unhook && !t.hasOwnProperty("unhook"));
-    }
-    t.exports = i;
-}, function(t, e, i) {
-    function n(t) {
-        this.text = String(t);
-    }
-    var o = i(123);
-    t.exports = n, n.prototype.version = o, n.prototype.type = "VirtualText";
-}, function(t, e, i) {
-    function n(t) {
-        return t && "VirtualText" === t.type && t.version === o;
-    }
-    var o = i(123);
-    t.exports = n;
-}, function(t, e, i) {
-    "use strict";
-    function n(t, e) {
-        if (!t) return "DIV";
-        var i = !e.hasOwnProperty("id"), n = o(t, r), s = null;
-        a.test(n[1]) && (s = "DIV");
-        var l, c, u, h;
-        for (h = 0; h < n.length; h++) c = n[h], c && (u = c.charAt(0), s ? "." === u ? (l = l || [],
-        l.push(c.substring(1, c.length))) : "#" === u && i && (e.id = c.substring(1, c.length)) : s = c);
-        return l && (e.className && l.push(e.className), e.className = l.join(" ")), e.namespace ? s : s.toUpperCase();
-    }
-    var o = i(131), r = /([\.#]?[a-zA-Z0-9\u007F-\uFFFF_:-]+)/, a = /^\.|#/;
-    t.exports = n;
-}, function(t, e) {
-
-    t.exports = function t(e) {
-        var i, n = String.prototype.split, o = /()??/.exec("")[1] === e;
-        return i = function(t, i, r) {
-            if ("[object RegExp]" !== Object.prototype.toString.call(i)) return n.call(t, i, r);
-            var a, s, l, c, u = [], h = (i.ignoreCase ? "i" : "") + (i.multiline ? "m" : "") + (i.extended ? "x" : "") + (i.sticky ? "y" : ""), d = 0, i = new RegExp(i.source, h + "g");
-            for (t += "", o || (a = new RegExp("^" + i.source + "$(?!\\s)", h)), r = r === e ? -1 >>> 0 : r >>> 0; (s = i.exec(t)) && (l = s.index + s[0].length,
-            !(l > d && (u.push(t.slice(d, s.index)), !o && s.length > 1 && s[0].replace(a, function() {
-                for (var t = 1; t < arguments.length - 2; t++) arguments[t] === e && (s[t] = e);
-            }), s.length > 1 && s.index < t.length && Array.prototype.push.apply(u, s.slice(1)),
-            c = s[0].length, d = l, u.length >= r))); ) i.lastIndex === s.index && i.lastIndex++;
-            return d === t.length ? !c && i.test("") || u.push("") : u.push(t.slice(d)), u.length > r ? u.slice(0, r) : u;
         };
-    }();
-}, function(t, e) {
-    "use strict";
-    function i(t) {
-        return this instanceof i ? void (this.value = t) : new i(t);
-    }
-    t.exports = i, i.prototype.hook = function(t, e) {
-        t[e] !== this.value && (t[e] = this.value);
-    };
-}, function(t, e, i) {
-    "use strict";
-    function n(t) {
-        return this instanceof n ? void (this.value = t) : new n(t);
-    }
-    var o = i(134);
-    t.exports = n, n.prototype.hook = function(t, e) {
-        var i = o(t), n = e.substr(3);
-        i[n] = this.value;
-    }, n.prototype.unhook = function(t, e) {
-        var i = o(t), n = e.substr(3);
-        i[n] = void 0;
-    };
-}, function(t, e, i) {
-    "use strict";
-    function n(t) {
-        var e = t[a];
-        return e || (e = t[a] = {}), e;
-    }
-    var o = i(135), r = "7";
-    o("ev-store", r);
-    var a = "__EV_STORE_KEY@" + r;
-    t.exports = n;
-}, function(t, e, i) {
-    "use strict";
-    function n(t, e, i) {
-        var n = "__INDIVIDUAL_ONE_VERSION_" + t, r = n + "_ENFORCE_SINGLETON", a = o(r, e);
-        if (a !== e) throw new Error("Can only have one copy of " + t + ".\nYou already have version " + a + " installed.\nThis means you cannot install version " + e);
-        return o(n, i);
-    }
-    var o = i(136);
-    t.exports = n;
-}, function(t, e) {
-    (function(e) {
-        "use strict";
-        function i(t, e) {
-            return t in n ? n[t] : (n[t] = e, e);
-        }
-        var n = "undefined" != typeof window ? window : "undefined" != typeof e ? e : {};
-        t.exports = i;
-    }).call(e, function() {
-        return this;
-    }());
-}, function(t, e, i) {
-    var n = i(138);
-    t.exports = n;
-}, function(t, e, i) {
-    function n(t, e) {
-        var i = {
-            a: t
-        };
-        return o(t, e, i, 0), i;
-    }
-    function o(t, e, i, n) {
-        if (t !== e) {
-            var o = i[n], s = !1;
-            if (y(t) || y(e)) l(t, e, i, n); else if (null == e) _(t) || (a(t, i, n), o = i[n]),
-            o = m(o, new v(v.REMOVE, t, e)); else if (b(e)) if (b(t)) if (t.tagName === e.tagName && t.namespace === e.namespace && t.key === e.key) {
-                var c = x(t.properties, e.properties);
-                c && (o = m(o, new v(v.PROPS, t, c))), o = r(t, e, i, o, n);
-            } else o = m(o, new v(v.VNODE, t, e)), s = !0; else o = m(o, new v(v.VNODE, t, e)),
-            s = !0; else A(e) ? A(t) ? t.text !== e.text && (o = m(o, new v(v.VTEXT, t, e))) : (o = m(o, new v(v.VTEXT, t, e)),
-            s = !0) : _(e) && (_(t) || (s = !0), o = m(o, new v(v.WIDGET, t, e)));
-            o && (i[n] = o), s && a(t, i, n);
-        }
-    }
-    function r(t, e, i, n, r) {
-        for (var a = t.children, s = d(a, e.children), l = s.children, c = a.length, u = l.length, h = c > u ? c : u, p = 0; p < h; p++) {
-            var f = a[p], g = l[p];
-            r += 1, f ? o(f, g, i, r) : g && (n = m(n, new v(v.INSERT, null, g))), b(f) && f.count && (r += f.count);
-        }
-        return s.moves && (n = m(n, new v(v.ORDER, t, s.moves))), n;
-    }
-    function a(t, e, i) {
-        u(t, e, i), s(t, e, i);
-    }
-    function s(t, e, i) {
-        if (_(t)) "function" == typeof t.destroy && (e[i] = m(e[i], new v(v.REMOVE, t, null))); else if (b(t) && (t.hasWidgets || t.hasThunks)) for (var n = t.children, o = n.length, r = 0; r < o; r++) {
-            var a = n[r];
-            i += 1, s(a, e, i), b(a) && a.count && (i += a.count);
-        } else y(t) && l(t, null, e, i);
-    }
-    function l(t, e, i, o) {
-        var r = w(t, e), a = n(r.a, r.b);
-        c(a) && (i[o] = new v(v.THUNK, null, a));
-    }
-    function c(t) {
-        for (var e in t) if ("a" !== e) return !0;
-        return !1;
-    }
-    function u(t, e, i) {
-        if (b(t)) {
-            if (t.hooks && (e[i] = m(e[i], new v(v.PROPS, t, h(t.hooks)))), t.descendantHooks || t.hasThunks) for (var n = t.children, o = n.length, r = 0; r < o; r++) {
-                var a = n[r];
-                i += 1, u(a, e, i), b(a) && a.count && (i += a.count);
+        var o = {
+            forecast_base_time: {
+                name: "base_time",
+                title: "Forecast base time",
+                type: "retention",
+                values: []
             }
-        } else y(t) && l(t, null, e, i);
-    }
-    function h(t) {
-        var e = {};
-        for (var i in t) e[i] = void 0;
-        return e;
-    }
-    function d(t, e) {
-        var i = f(e), n = i.keys, o = i.free;
-        if (o.length === e.length) return {
-            children: e,
-            moves: null
         };
-        var r = f(t), a = r.keys, s = r.free;
-        if (s.length === t.length) return {
-            children: e,
-            moves: null
-        };
-        for (var l = [], c = 0, u = o.length, h = 0, d = 0; d < t.length; d++) {
-            var m, g = t[d];
-            g.key ? n.hasOwnProperty(g.key) ? (m = n[g.key], l.push(e[m])) : (m = d - h++, l.push(null)) : c < u ? (m = o[c++],
-            l.push(e[m])) : (m = d - h++, l.push(null));
-        }
-        for (var v = c >= o.length ? e.length : o[c], b = 0; b < e.length; b++) {
-            var A = e[b];
-            A.key ? a.hasOwnProperty(A.key) || l.push(A) : b >= v && l.push(A);
-        }
-        for (var _, y = l.slice(), w = 0, x = [], k = [], C = 0; C < e.length; ) {
-            var E = e[C];
-            for (_ = y[w]; null === _ && y.length; ) x.push(p(y, w, null)), _ = y[w];
-            _ && _.key === E.key ? (w++, C++) : E.key ? (_ && _.key && n[_.key] !== C + 1 ? (x.push(p(y, w, _.key)),
-            _ = y[w], _ && _.key === E.key ? w++ : k.push({
-                key: E.key,
-                to: C
-            })) : k.push({
-                key: E.key,
-                to: C
-            }), C++) : _ && _.key && x.push(p(y, w, _.key));
-        }
-        for (;w < y.length; ) _ = y[w], x.push(p(y, w, _ && _.key));
-        return x.length !== h || k.length ? {
-            children: l,
-            moves: {
-                removes: x,
-                inserts: k
-            }
-        } : {
-            children: l,
-            moves: null
-        };
-    }
-    function p(t, e, i) {
-        return t.splice(e, 1), {
-            from: e,
-            key: i
-        };
-    }
-    function f(t) {
-        for (var e = {}, i = [], n = t.length, o = 0; o < n; o++) {
-            var r = t[o];
-            r.key ? e[r.key] = o : i.push(o);
-        }
-        return {
-            keys: e,
-            free: i
-        };
-    }
-    function m(t, e) {
-        return t ? (g(t) ? t.push(e) : t = [ t, e ], t) : e;
-    }
-    var g = i(121), v = i(139), b = i(124), A = i(129), _ = i(125), y = i(126), w = i(140), x = i(141);
-    t.exports = n;
-}, function(t, e, i) {
-    function n(t, e, i) {
-        this.type = Number(t), this.vNode = e, this.patch = i;
-    }
-    var o = i(123);
-    n.NONE = 0, n.VTEXT = 1, n.VNODE = 2, n.WIDGET = 3, n.PROPS = 4, n.ORDER = 5, n.INSERT = 6,
-    n.REMOVE = 7, n.THUNK = 8, t.exports = n, n.prototype.version = o, n.prototype.type = "VirtualPatch";
-}, function(t, e, i) {
-    function n(t, e) {
-        var i = t, n = e;
-        return l(e) && (n = o(e, t)), l(t) && (i = o(t, null)), {
-            a: i,
-            b: n
-        };
-    }
-    function o(t, e) {
-        var i = t.vnode;
-        if (i || (i = t.vnode = t.render(e)), !(r(i) || a(i) || s(i))) throw new Error("thunk did not return a valid node");
-        return i;
-    }
-    var r = i(124), a = i(129), s = i(125), l = i(126);
-    t.exports = n;
-}, function(t, e, i) {
-    function n(t, e) {
-        var i;
-        for (var s in t) {
-            s in e || (i = i || {}, i[s] = void 0);
-            var l = t[s], c = e[s];
-            if (l !== c) if (r(l) && r(c)) if (o(c) !== o(l)) i = i || {}, i[s] = c; else if (a(c)) i = i || {},
-            i[s] = c; else {
-                var u = n(l, c);
-                u && (i = i || {}, i[s] = u);
-            } else i = i || {}, i[s] = c;
-        }
-        for (var h in e) h in t || (i = i || {}, i[h] = e[h]);
-        return i;
-    }
-    function o(t) {
-        return Object.getPrototypeOf ? Object.getPrototypeOf(t) : t.__proto__ ? t.__proto__ : t.constructor ? t.constructor.prototype : void 0;
-    }
-    var r = i(142), a = i(127);
-    t.exports = n;
-}, function(t, e) {
-    "use strict";
-    t.exports = function t(e) {
-        return "object" == typeof e && null !== e;
-    };
-}, function(t, e, i) {
-    var n = i(144);
-    t.exports = n;
-}, function(t, e, i) {
-    function n(t, e, i) {
-        return i = i || {}, i.patch = i.patch && i.patch !== n ? i.patch : o, i.render = i.render || c,
-        i.patch(t, e, i);
-    }
-    function o(t, e, i) {
-        var n = a(e);
-        if (0 === n.length) return t;
-        var o = u(t, e.a, n), l = t.ownerDocument;
-        i.document || l === s || (i.document = l);
-        for (var c = 0; c < n.length; c++) {
-            var h = n[c];
-            t = r(t, o[h], e[h], i);
-        }
-        return t;
-    }
-    function r(t, e, i, n) {
-        if (!e) return t;
-        var o;
-        if (l(i)) for (var r = 0; r < i.length; r++) o = h(i[r], e, n), e === t && (t = o); else o = h(i, e, n),
-        e === t && (t = o);
-        return t;
-    }
-    function a(t) {
-        var e = [];
-        for (var i in t) "a" !== i && e.push(Number(i));
-        return e;
-    }
-    var s = i(145), l = i(121), c = i(147), u = i(149), h = i(150);
-    t.exports = n;
-}, function(t, e, i) {
-    (function(e) {
-        var n = "undefined" != typeof e ? e : "undefined" != typeof window ? window : {}, o = i(146);
-        if ("undefined" != typeof document) t.exports = document; else {
-            var r = n["__GLOBAL_DOCUMENT_CACHE@4"];
-            r || (r = n["__GLOBAL_DOCUMENT_CACHE@4"] = o), t.exports = r;
-        }
-    }).call(e, function() {
-        return this;
-    }());
-}, function(t, e) {}, function(t, e, i) {
-    function n(t, e) {
-        var i = e ? e.document || o : o, u = e ? e.warn : null;
-        if (t = c(t).a, l(t)) return t.init();
-        if (s(t)) return i.createTextNode(t.text);
-        if (!a(t)) return u && u("Item is not a valid virtual dom node", t), null;
-        var h = null === t.namespace ? i.createElement(t.tagName) : i.createElementNS(t.namespace, t.tagName), d = t.properties;
-        r(h, d);
-        for (var p = t.children, f = 0; f < p.length; f++) {
-            var m = n(p[f], e);
-            m && h.appendChild(m);
-        }
-        return h;
-    }
-    var o = i(145), r = i(148), a = i(124), s = i(129), l = i(125), c = i(140);
-    t.exports = n;
-}, function(t, e, i) {
-    function n(t, e, i) {
-        for (var n in e) {
-            var a = e[n];
-            void 0 === a ? o(t, n, a, i) : l(a) ? (o(t, n, a, i), a.hook && a.hook(t, n, i ? i[n] : void 0)) : s(a) ? r(t, e, i, n, a) : t[n] = a;
-        }
-    }
-    function o(t, e, i, n) {
-        if (n) {
-            var o = n[e];
-            if (l(o)) o.unhook && o.unhook(t, e, i); else if ("attributes" === e) for (var r in o) t.removeAttribute(r); else if ("style" === e) for (var a in o) t.style[a] = ""; else "string" == typeof o ? t[e] = "" : t[e] = null;
-        }
-    }
-    function r(t, e, i, n, o) {
-        var r = i ? i[n] : void 0;
-        if ("attributes" !== n) {
-            if (r && s(r) && a(r) !== a(o)) return void (t[n] = o);
-            s(t[n]) || (t[n] = {});
-            var l = "style" === n ? "" : void 0;
-            for (var c in o) {
-                var u = o[c];
-                t[n][c] = void 0 === u ? l : u;
-            }
-        } else for (var h in o) {
-            var d = o[h];
-            void 0 === d ? t.removeAttribute(h) : t.setAttribute(h, d);
-        }
-    }
-    function a(t) {
-        return Object.getPrototypeOf ? Object.getPrototypeOf(t) : t.__proto__ ? t.__proto__ : t.constructor ? t.constructor.prototype : void 0;
-    }
-    var s = i(142), l = i(127);
-    t.exports = n;
-}, function(t, e) {
-    function i(t, e, i, o) {
-        return i && 0 !== i.length ? (i.sort(r), n(t, e, i, o, 0)) : {};
-    }
-    function n(t, e, i, r, s) {
-        if (r = r || {}, t) {
-            o(i, s, s) && (r[s] = t);
-            var l = e.children;
-            if (l) for (var c = t.childNodes, u = 0; u < e.children.length; u++) {
-                s += 1;
-                var h = l[u] || a, d = s + (h.count || 0);
-                o(i, s, d) && n(c[u], h, i, r, s), s = d;
-            }
-        }
-        return r;
-    }
-    function o(t, e, i) {
-        if (0 === t.length) return !1;
-        for (var n, o, r = 0, a = t.length - 1; r <= a; ) {
-            if (n = (a + r) / 2 >> 0, o = t[n], r === a) return o >= e && o <= i;
-            if (o < e) r = n + 1; else {
-                if (!(o > i)) return !0;
-                a = n - 1;
-            }
-        }
-        return !1;
-    }
-    function r(t, e) {
-        return t > e ? 1 : -1;
-    }
-    var a = {};
-    t.exports = i;
-}, function(t, e, i) {
-    function n(t, e, i) {
-        var n = t.type, c = t.vNode, p = t.patch;
-        switch (n) {
-          case f.REMOVE:
-            return o(e, c);
-
-          case f.INSERT:
-            return r(e, p, i);
-
-          case f.VTEXT:
-            return a(e, c, p, i);
-
-          case f.WIDGET:
-            return s(e, c, p, i);
-
-          case f.VNODE:
-            return l(e, c, p, i);
-
-          case f.ORDER:
-            return u(e, p), e;
-
-          case f.PROPS:
-            return d(e, p, c.properties), e;
-
-          case f.THUNK:
-            return h(e, i.patch(e, p, i));
-
-          default:
-            return e;
-        }
-    }
-    function o(t, e) {
-        var i = t.parentNode;
-        return i && i.removeChild(t), c(t, e), null;
-    }
-    function r(t, e, i) {
-        var n = i.render(e, i);
-        return t && t.appendChild(n), t;
-    }
-    function a(t, e, i, n) {
-        var o;
-        if (3 === t.nodeType) t.replaceData(0, t.length, i.text), o = t; else {
-            var r = t.parentNode;
-            o = n.render(i, n), r && o !== t && r.replaceChild(o, t);
-        }
-        return o;
-    }
-    function s(t, e, i, n) {
-        var o, r = m(e, i);
-        o = r ? i.update(e, t) || t : n.render(i, n);
-        var a = t.parentNode;
-        return a && o !== t && a.replaceChild(o, t), r || c(t, e), o;
-    }
-    function l(t, e, i, n) {
-        var o = t.parentNode, r = n.render(i, n);
-        return o && r !== t && o.replaceChild(r, t), r;
-    }
-    function c(t, e) {
-        "function" == typeof e.destroy && p(e) && e.destroy(t);
-    }
-    function u(t, e) {
-        for (var i, n, o, r = t.childNodes, a = {}, s = 0; s < e.removes.length; s++) n = e.removes[s],
-        i = r[n.from], n.key && (a[n.key] = i), t.removeChild(i);
-        for (var l = r.length, c = 0; c < e.inserts.length; c++) o = e.inserts[c], i = a[o.key],
-        t.insertBefore(i, o.to >= l++ ? null : r[o.to]);
-    }
-    function h(t, e) {
-        return t && e && t !== e && t.parentNode && t.parentNode.replaceChild(e, t), e;
-    }
-    var d = i(148), p = i(125), f = i(139), m = i(151);
-    t.exports = n;
-}, function(t, e, i) {
-    function n(t, e) {
-        return !(!o(t) || !o(e)) && ("name" in t && "name" in e ? t.id === e.id : t.init === e.init);
-    }
-    var o = i(125);
-    t.exports = n;
-}, function(t, e, i) {
-    var n = i(147);
-    t.exports = n;
-}, function(t, e, i) {
-    var n;
-    n = function() {
-        try {
-            var t = localStorage;
-        } catch (e) {
-            t = {
-                setItem: function() {}
-            };
-        }
-        return t;
-    }.call(e, i, e, t), !(void 0 !== n && (t.exports = n));
-}, function(t, e, i) {
-    var n, o;
-    n = [ i(14), i(155), i(157) ], o = function(t) {
-        function e() {
-            function e(t) {
-                t = t.replace(",", ".");
-                var e = parseFloat(t);
-                return t.indexOf("S") === -1 && t.indexOf("s") === -1 && t.indexOf("W") === -1 && t.indexOf("w") === -1 || (e = -e),
-                e;
-            }
-            this.help = function(t, e) {
-                var i = [];
-                return i.push("<div style='display:none;position:absolute' id='" + t + "_location'><div></div></div>"),
-                i.join("");
-            }, this.render = function(n) {
-                function o() {
-                    "function" == typeof n._item.city && n._item.city({
-                        lat: e(r._lat.val()),
-                        lon: e(r._lon.val())
-                    });
-                }
-                var r = this, a = (n.get_defaults(), t('<div class="form-location"/>'));
-                this.finder = t('<input class="form-text">');
-                var s = t("<div>").append(this.finder);
-                a.p(".country-location-help").html("<b>Please enter a country name</b><br/>You will then be able to select a location in the left column.");
-                var l = t("<div>");
-                return l.prepend(a), l.append(s), !function() {
-                    var t = [ i(157) ];
-                    (function() {
-                        r.finder.cityAutocomplete({
-                            name: "Unnamed",
-                            is_country: !0,
-                            select: function(t, e) {
-                                var i = e.item;
-                                delete r.save, n._item.country = i, console.log("item item: ", n._item, i), "function" == typeof n._item.city && n._item.city(i);
-                            },
-                            close: function(t, e) {
-                                r.save && (o(), delete r.save);
-                            },
-                            focus: function(t, e) {
-                                var i = e.item;
-                                "function" == typeof n._item.city && n._item.city(i);
-                            }
-                        });
-                    }).apply(null, t);
-                }(), l;
-            }, this.collect = function(t, e) {
-                return console.log("collect.item:", t), {
-                    country: t._item.country
-                };
-            };
-        }
-        t.addFormHandler("country_location", e, "String");
+        return n;
     }.apply(e, n), !(void 0 !== o && (t.exports = o));
 }, function(t, e, i) {
     var n, o;
-    n = [ i(14), i(32), i(156) ], o = function(t, e) {
-        var i = function() {
-            function i() {
-                return this.help = function(t) {
-                    return t.get_help();
-                }, this.check = function() {
-                    return !0;
-                }, !0;
-            }
-            function n() {
-                return this.html = function(e, i) {
-                    var n = e.get("rows") || 5, o = e.get("cols") || 20, r = t("<textarea/>").attr({
-                        rows: n,
-                        cols: o,
-                        class: "form-textarea"
-                    }).html(i);
-                    return t.fn.onScreenKeyboard && setTimeout(function() {
-                        r.onScreenKeyboard({});
-                    }, 10), r;
-                }, this;
-            }
-            function o() {
-                this.align = "right", this.check = function(t, e) {
-                    if (isNaN(e)) return t.error("Invalid number"), !1;
-                    var i = t.get_range();
-                    return !i || !(e < i[0] || e > i[1]) || (t.get_transform().value2ui, t.error("Number out of range"),
-                    !1);
-                }, this.help = function(t) {
-                    var e = t.get_help();
-                    if (e) return e;
-                    var i = t.get_range();
-                    if (i) {
-                        var n = t.get_transform().value2ui;
-                        return 'Enter a number between <span class="form-highlight">' + t.format(n(i[0])) + '</span> and <span class="form-highlight">' + t.format(n(i[1])) + "</span>.";
-                    }
-                    return "";
-                }, this.html = function(e, i) {
-                    var n = t("<input/>").attr({
-                        type: "text",
-                        class: "form-text",
-                        value: e.format(i)
-                    }).css({
-                        textAlign: this.align
-                    });
-                    return t.fn.onScreenKeyboard && setTimeout(function() {
-                        n.onScreenKeyboard({
-                            layout: "num"
-                        });
-                    }, 10), n;
-                };
-            }
-            function r() {
-                this.parse = parseInt;
-            }
-            function a() {
-                this.parse = function(t) {
-                    return parseFloat(t.replace(",", "."));
-                };
-            }
-            function s() {
-                function e(e) {
-                    this.widget = function() {
-                        var i = t("<select/>", {
-                            class: "form-select"
-                        });
-                        return e && i.attr("multiple", "multiple"), i;
-                    }, this.item = function(e, i, n) {
-                        var o = t("<option/>");
-                        return o.attr("value", e).html(i), n && o.prop("selected", "selected"), o;
-                    };
-                }
-                function i(e) {
-                    var i = h();
-                    this.widget = function() {
-                        return t("<span/>");
-                    }, this.item = function(n, o, r) {
-                        var a = h(), s = t("<span/>"), l = t("<input/>").attr({
-                            name: i,
-                            id: a,
-                            type: e ? "checkbox" : "radio",
-                            value: n
-                        }).appendTo(s);
-                        return r && l.prop("checked", "checked"), t("<label>" + o + "</label>").attr("for", a).appendTo(s),
-                        s;
-                    }, this.change = function(t, e) {
-                        t.find("input").change(function(t) {
-                            e(t.target.value);
-                        });
-                    };
-                }
-                this.render = function(n) {
-                    var o = {}, r = n.get_defaults();
-                    t.each(r, function(t, e) {
-                        o[e] = !0;
-                    });
-                    var a = n.menu() ? new e(n.multiple()) : new i(n.multiple()), s = a.widget(n);
-                    return t.each(n.get_values(), function(t, e) {
-                        var i = n.get_label(e, t);
-                        a.item(e, i, o[e]).appendTo(s);
-                    }), n.change() && a.change(s, n.change()), s;
-                }, this.collect = function(e, i) {
-                    var n = [];
-                    return t.each(i.find(":selected, :checked"), function() {
-                        n.push(t(this).val());
-                    }), e.multiple() ? n : n[0];
-                };
-            }
-            function l() {
-                this.render = function(e) {
-                    var i = {}, n = e.get_defaults();
-                    t.each(n, function(t, e) {
-                        i[e] = !0;
-                    });
-                    var o = t("<div/>").addClass("form-thumbnail-item-wrapper"), r = t("<img/>").appendTo(o);
-                    t("<br/>").appendTo(o);
-                    var a = {}, s = t("<select/>").addClass("form-thumbnail-item").appendTo(o);
-                    return t.each(e.get_values(), function(n, o) {
-                        var l = e.get_label(o), c = t("<option/>", {
-                            value: o,
-                            text: l.title,
-                            title: l.url
-                        }).appendTo(s);
-                        i[o] && (c.prop("selected", "selected"), r.attr("src", l.url), l.fetch_image && l.fetch_image(r, function(t) {
-                            a[o] = l.url = t;
-                        })), a[o] = l.url;
-                    }), s.change(function() {
-                        r.attr("src", a[s.val()]);
-                    }), s.selectImage(e._item), o;
-                }, this.collect = function(e, i) {
-                    var n = [];
-                    return t.each(i.find(":checked"), function() {
-                        n.push(this.value);
-                    }), t.each(i.find(":selected"), function() {
-                        n.push(this.value);
-                    }), e.multiple() ? n : n[0];
-                };
-            }
-            function c() {
-                this.render = function(e) {
-                    var i = e.get_defaults(), n = t("<input type='checkbox'/>");
-                    return i[0] && n.prop("checked", "checked"), n;
-                }, this.collect = function(t, e) {
-                    return e[0].checked;
-                };
-            }
-            function u(t) {
-                return t;
-            }
-            function h() {
-                return m++, "_form-random-id-" + m;
-            }
-            var d = this, p = {};
-            t.fn.form = function(i) {
-                function n(i) {
-                    this._item = i;
-                    var n = i.handler || p[i.type] || p.text;
-                    return this.value = function() {
-                        return "float" === i.type && "undefined" != typeof c[i.name] || c[i.name] ? c[i.name] : i.value;
-                    }, this.menu = function() {
-                        return i.menu;
-                    }, this.multiple = function() {
-                        return i.multiple;
-                    }, this.change = function() {
-                        return i.change;
-                    }, this.name = function() {
-                        return i.name;
-                    }, this.collect = function() {
-                        return n.collect(this, this.widget);
-                    }, this.check = function(t) {
-                        return n.check(this, t);
-                    }, this.render = function(e) {
-                        this.widget = n.render(this), this.widget.appendTo(e), t.isFunction(this._item.widget) && this._item.widget(this.widget);
-                    }, this.render_help = function(t) {
-                        var e = n.help(this);
-                        "string" == typeof e ? this.help_widget = t.html(e) : (this.help_widget = e, this.help_widget.appendTo(t));
-                    }, this.get_title = function() {
-                        for (var t = i.title; "function" == typeof t; ) t = t();
-                        return "string" == typeof t ? t : i.name;
-                    }, this.get_values = function() {
-                        return i.values;
-                    }, this.get_defaults = function() {
-                        var t = this.value;
-                        for (void 0 !== t && null !== t || (t = i.default); "function" == typeof t; ) t = t();
-                        return void 0 !== t && null !== t || (t = []), "object" == typeof t ? t : [ t ];
-                    }, this.get_help = function() {
-                        for (var t = i.help; "function" == typeof t; ) t = t();
-                        return t ? t : "";
-                    }, this.get_unit = function() {
-                        for (var t = i.unit; "function" == typeof t; ) t = t();
-                        return e.get(t ? t : "");
-                    }, this.get_precision = function() {
-                        for (var t = i.precision; "function" == typeof t; ) t = t();
-                        return null === t || void 0 === t ? 2 : t;
-                    }, this.get_range = function() {
-                        for (var t = i.range; "function" == typeof t; ) t = t();
-                        return t;
-                    }, this.get_transform = function() {
-                        for (var t = i.transform; "function" == typeof t; ) t = t();
-                        var e = {
-                            ui2value: u,
-                            value2ui: u
-                        }, n = this.get_unit();
-                        return n && (e = {
-                            ui2value: function(t) {
-                                return n.fromDisplay(t);
-                            },
-                            value2ui: function(t) {
-                                return n.toDisplay(t);
-                            }
-                        }), t ? t : e;
-                    }, this.get_label = function(e, n) {
-                        for (var o = i.labels, r = e; "function" == typeof o; ) o = o(e);
-                        return "string" == typeof o ? o : t.isArray(o) ? i.labels[n] : "object" == typeof o ? o[e] : (void 0 !== e && null !== e || (e = r,
-                        void 0 !== e && null !== e || (e = "?")), e);
-                    }, this.format = function(t) {
-                        var e = this.get_precision();
-                        "string" == typeof t && (t = parseFloat(t));
-                        for (var i = 1; e < 0; ) i /= 10, e++;
-                        for (;e > 0; ) i *= 10, e--;
-                        return Math.floor(t * i + .5) / i;
-                    }, this.error = function(t) {
-                        this.error_text.html(t);
-                    }, this.get = function(t) {
-                        return i[t];
-                    }, this;
-                }
-                function o() {
-                    var t = r();
-                    if (t.ok) return s(t.result), t.result;
-                }
-                function r() {
-                    var e = {}, i = !0;
-                    return t.each(h, function(t, n) {
-                        var o = n.collect();
-                        e[n.name()] = o, n.error(""), n.check(o) || (i = !1);
-                    }), {
-                        result: e,
-                        ok: i
-                    };
-                }
-                if ("destroy" === i) return this.find(".form").remove();
-                i = t.extend({
-                    title: null,
-                    items: [],
-                    values: {},
-                    ok: f,
-                    cancel: f,
-                    show_ok: !0,
-                    show_cancel: !0,
-                    ok_label: "OK",
-                    cancel_label: "Cancel"
-                }, i || {});
-                var a = i.items, s = i.ok, l = i.cancel, c = i.values, h = [];
-                return t.each(a, function(t, e) {
-                    e && h.push(new n(e));
-                }), this.each(function() {
-                    var e = t(this);
-                    e.closest("form").length ? e.closest("form").unbind("submit").bind("submit", function() {
-                        return o(), !1;
-                    }) : e.bind("submit", function() {
-                        o();
-                    });
-                    var n = t("<table/>").addClass("form");
-                    if (i.title) {
-                        var r = t("<tr/>").appendTo(n), a = t("<td colspan='3' class='form-title'/>").appendTo(r);
-                        a.html(i.title);
-                    }
-                    i.help && (r = t("<tr/>").appendTo(n), a = t("<td colspan='3' class='form-help'/>").appendTo(r),
-                    a.html(i.help)), t.each(h, function(e, i) {
-                        var o = t("<tr class='form-row'/>").appendTo(n), r = i.get_unit(), a = i.get_title();
-                        r && (a += " (" + r.symbolHTML() + ")"), t("<td class='form-item-title'/>").appendTo(o).html(a + ":");
-                        var s = t("<td class='form-item-value'/>").appendTo(o);
-                        i.render(s), i.error_text = t("<span class='form-error'/>").appendTo(s), i.render_help(t("<td class='form-help'/>").appendTo(o));
-                    }), r = t("<tr/>").appendTo(n), a = t("<td colspan='3' class='form-buttons'/>").appendTo(r);
-                    var s = "";
-                    i.show_cancel && t("<input type='button' id='" + s + "_cancel' value='" + i.cancel_label + "'>").appendTo(a).click(function() {
-                        l();
-                    }), i.show_ok && t("<input type='button' id='" + s + "_ok' value='" + i.ok_label + "'>").appendTo(a).click(function() {
-                        o();
-                    }), n.appendTo(e);
-                });
-            }, t.addFormHandler = function(t, e, n) {
-                e.prototype = n ? new d[n + "Handler"]() : new i(), p[t] = new e();
-            }, t.newFormItemHandler = function(t) {
-                return t.prototype = new i(), new t();
-            }, this.StringHandler = function() {
-                this.prototype = new i(), this.render = function(t) {
-                    var e = t.get_defaults(), i = t.get_transform().value2ui(e[0]);
-                    return this.html(t, i);
-                }, this.collect = function(e) {
-                    var i = e.get_transform().ui2value;
-                    return i(this.parse(t.trim(e.widget.val())));
-                }, this.parse = u, this.align = "left", this.html = function(e, i) {
-                    return t("<input/>", {
-                        type: "text",
-                        class: "form-text",
-                        value: i
-                    }).css({
-                        textAlign: this.align
-                    });
-                };
-            }, this.StringHandler.prototype = new i(), p.string = new this.StringHandler(),
-            n.prototype = new this.StringHandler(), p.text = new n(), o.prototype = new this.StringHandler(),
-            r.prototype = new o(), p.integer = new r(), a.prototype = new o(), p.float = new a(),
-            s.prototype = new i(), p.choice = new s(), l.prototype = new i(), p.thumbnail = new l(),
-            c.prototype = new i(), p.boolean = new c();
-            var f = t.noop, m = 0;
-        };
-        return new i();
-    }.apply(e, n), !(void 0 !== o && (t.exports = o));
-}, function(t, e, i) {
-    var n, o;
-    n = [ i(14) ], o = function(t) {
-        t.fn.selectImage = function(e) {
-            return this.each(function() {
-                function i() {
-                    var t = n.position();
-                    o.css({
-                        top: t.top + a.outerHeightWithMargins - 1,
-                        left: t.left,
-                        width: a.outerWidth - 2
-                    }), r.css({
-                        top: -a.outerHeight,
-                        width: a.outerWidth,
-                        height: a.outerHeight
-                    });
-                }
-                var n = t(this);
-                n.addClass("select-image");
-                var o = t("<div/>").hide().addClass("select-image-list").css({
-                    position: "absolute",
-                    overflow: "auto"
-                }).appendTo(n.parent()), r = t("<div/>").css({
-                    position: "relative",
-                    backgroundImage: "url('data:image/gif,GIF89a%01%00%01%00%80%00%00%FF%FF%FF%00%00%00!%F9%04%01%14%00%00%00%2C%00%00%00%00%01%00%01%00%00%02%02D%01%00%3B')"
-                }).appendTo(n.parent()).text(" "), a = n.dimensions();
-                i(), n.find("option").each(function() {
-                    var i = t(this), r = t("<div/>").appendTo(o).click(function() {
-                        n.val(i.attr("value")).change();
-                    }), a = t("<img/>").appendTo(t("<center/>").appendTo(r));
-                    e && e.default_src ? (a.attr("src", e.default_src), setTimeout(function() {
-                        a.attr("src", i.attr("title"));
-                    }, 100)) : a.attr("src", i.attr("title")), i.data("img", a), t("<span/>").text(i.text()).appendTo(r);
-                }), n.keydown(function(t) {
-                    t.stopImmediatePropagation(), t.preventDefault(), n.blur(), r.click();
-                }), n.click(function(t) {
-                    t.stopImmediatePropagation(), t.preventDefault(), n.blur(), r.click();
-                }), r.click(function(e) {
-                    if (n.blur(), i(), o.is(":visible")) return o.hide(), !1;
-                    var r = n.val();
-                    return n.find("option").each(function() {
-                        var e = t(this);
-                        e.attr("value") === r && setTimeout(function() {
-                            o.scrollTo(e.data("img"), {}).scrollTo("-=10px", {
-                                axis: "y"
-                            });
-                        }, 1), e.data("img").toggleClass("selected", e.attr("value") === r);
-                    }), o.show(), t(document).one("click", function() {
-                        o.hide();
-                    }), !1;
-                });
-            }), this;
-        };
-    }.apply(e, n), !(void 0 !== o && (t.exports = o));
-}, function(t, e) {
-    t.exports = city_autocomplete;
-}, function(t, e, i) {
-    var n, o;
-    n = [ i(14), i(155) ], o = function(t) {
-        function e() {
-            function e(t) {
-                t = t.replace(",", ".");
-                var e = parseFloat(t);
-                return t.indexOf("S") === -1 && t.indexOf("s") === -1 && t.indexOf("W") === -1 && t.indexOf("w") === -1 || (e = -e),
-                e;
-            }
-            this.help = function(t, e) {
-                var i = [];
-                return i.push("<div style='display:none;position:absolute' id='" + t + "_location'><div></div></div>"),
-                i.join("");
-            }, this.render = function(n) {
-                function o() {
-                    "function" == typeof n._item.city && n._item.city({
-                        lat: e(r._lat.val()),
-                        lon: e(r._lon.val())
-                    });
-                }
-                var r = this, a = n.get_defaults(), s = t('<div class="form-location"/>');
-                s.label("Latitude:"), this._lat = s.input({
-                    value: t.formatLatitude(a.lat, !0),
-                    class: "lat form-text"
-                }).css({
-                    textAlign: "right"
-                }).change(o), s.label("Longitude:"), this._lon = s.input({
-                    className: "lon form-text",
-                    value: t.formatLongitude(a.lon, !0)
-                }).css({
-                    textAlign: "right"
-                }).change(o), s.label("Altitude:"), this._alt = s.input({
-                    className: "altitude form-text",
-                    value: a.altitude,
-                    disabled: !0
-                }).css({
-                    textAlign: "right"
-                }), this.finder = t('<input class="form-text">');
-                var l = t("<div>").append(this.finder), c = t("<div>");
-                return c.prepend(s), c.append(l), c.p(".location-help").text("Please note that the lat/lon will not be updated unless an item is selected from the drop-down list, otherwise the text will be treated purely as a label"),
-                !function() {
-                    var e = [ i(157) ];
-                    (function() {
-                        r.finder.cityAutocomplete({
-                            name: "Unnamed",
-                            select: function(e, i) {
-                                var o = i.item;
-                                r._lat.val(t.formatLatitude(o.lat, !0)), r._lon.val(t.formatLongitude(o.lon, !0)),
-                                r._alt.val(o.altitude), delete r.save, "function" == typeof n._item.city && n._item.city(o);
-                            },
-                            open: function(t, e) {
-                                r.save = {
-                                    lat: r._lat.val(),
-                                    lon: r._lon.val()
-                                };
-                            },
-                            close: function(t, e) {
-                                r.save && (r._lat.val(r.save.lat), r._lon.val(r.save.lon), o(), delete r.save);
-                            },
-                            focus: function(e, i) {
-                                var o = i.item;
-                                r._lat.val(t.formatLatitude(o.lat, !0)), r._lon.val(t.formatLongitude(o.lon, !0)),
-                                "function" == typeof n._item.city && n._item.city(o);
-                            }
-                        });
-                    }).apply(null, e);
-                }(), c;
-            }, this.collect = function(t, i) {
-                return {
-                    lat: e(this._lat.val()),
-                    lon: e(this._lon.val()),
-                    city: this.finder.val(),
-                    altitude: this._alt.val()
-                };
-            };
-        }
-        t.addFormHandler("location", e, "String");
-    }.apply(e, n), !(void 0 !== o && (t.exports = o));
-}, function(t, e, i) {
-    var n, o;
-    n = [ i(13), i(14), i(160) ], o = function(t, e) {
+    n = [ i(13), i(14), i(120) ], o = function(t, e) {
         var n = {
             title: "",
             content: ""
         };
-        e.fn.helpProvider = function(t) {
+        return e.fn.helpProvider = function(t) {
             var i = e.extend({
                 getContent: function() {
                     return n;
@@ -13316,53 +12086,48 @@
             return e(this).each(function() {
                 e(this).data("helpProvider", i);
             });
-        }, e.fn.helpPanel = function(t) {
+        }, function(t) {
             var o = e.extend({
                 el: null,
-                widgetClass: null
+                id: null
             }, t || {});
-            return e(this).each(function() {
-                var t = e(this);
-                !function() {
-                    var r = [ i(162) ];
-                    (function() {
-                        function i() {
-                            e(r).trigger("loading"), e.when(o.el.helpProvider("getContent")).then(function(t) {
-                                t || (t = n), e(r).markup(t.content || "no help available").siblings(".title").find("> span").text(t.title || "No Help").trigger("loading", "false");
-                            });
-                        }
-                        if (!o.el || !o.el.data("helpProvider")) return void console.warn("helpPanel: element is not a HelpProvider", o.el);
-                        t.data("helpPanel", {
-                            active: null
-                        });
-                        var r;
-                        o.el.bind("contentChanged", i), e('body > .help-panel[name="' + o.el.parent().parent().attr("id") + '"]').orelse(function() {
-                            var t = o.el.find(".ui-icon-help");
+            return !function() {
+                var t = [ i(122) ];
+                (function() {
+                    function t() {
+                        var t = o.id || o.el.attr("id") || o.el.parent().parent().attr("id");
+                        e('body > .help-panel[name="' + t + '"]').orelse(function() {
+                            var i = o.el.find(".ui-icon-help:first");
                             return e("body").div({
-                                class: "help-panel",
-                                name: o.el.parent().parent().attr("id")
+                                className: "help-panel",
+                                name: t
                             }).html('<div class="content">Loading help ...</div>').lightDialogue({
                                 title: "<span>Dashboard Widget Help</span>",
                                 name: "dashboard_help",
                                 loader: !0,
-                                position: {
-                                    top: t.offset().top,
-                                    left: t.offset().left
-                                },
+                                position: i.offset(),
                                 zIndex: 2e3
+                            }).find(".content").each(function() {
+                                r = e(this);
                             });
-                        }).find(".content").each(function() {
-                            r = this;
-                        }), o.el.find(".ui-icon-help").unbind("click").click(function() {
-                            return i(), !1;
-                        }), i();
-                    }).apply(null, r);
-                }();
-            });
+                        });
+                    }
+                    function i() {
+                        t(), r && (r.trigger("loading"), e.when(o.el.helpProvider("getContent")).then(function(t) {
+                            t || (t = n), r.markup(t.content || "no help available").siblings(".title").find("> span").text(t.title || "No Help").trigger("loading", "false");
+                        }));
+                    }
+                    var r;
+                    return o.el && o.el.data("helpProvider") ? (o.el.bind("contentChanged", i), t(),
+                    o.el.on("click", ".ui-icon-help", function() {
+                        return i(), !1;
+                    }), void i()) : console.warn("helpPanel: element is not a HelpProvider", o.el);
+                }).apply(null, t);
+            }(), this;
         };
     }.apply(e, n), !(void 0 !== o && (t.exports = o));
 }, function(t, e, i) {
-    var n = i(161);
+    var n = i(121);
     "string" == typeof n && (n = [ [ t.id, n, "" ] ]);
     i(11)(n, {});
     n.locals && (t.exports = n.locals);
@@ -13370,7 +12135,7 @@
     e = t.exports = i(3)(), e.push([ t.id, "body>.help-panel.light-dialogue{font-weight:400;width:250px;padding:10px}body>.help-panel.light-dialogue .title{background-color:#5e77b0;background:-moz-linear-gradient(center top,#81a8ce,#5e77b0) repeat scroll 0 0 #5e77b0;background-image:-webkit-gradient(linear,center top,center bottom,from(#81a8ce),to(#5e77b0));margin:-10px -10px 0;padding:4px 4px 4px 10px;color:#fff;font-size:1.1em}body>.help-panel.light-dialogue .title .ui-button{top:5px}", "" ]);
 }, function(t, e, i) {
     var n, o;
-    n = [ i(14), i(26), i(77), i(163), i(164) ], o = function(t, e) {
+    n = [ i(14), i(26), i(77), i(123), i(124) ], o = function(t, e) {
         var i = 50, n = 0;
         t.fn.lightDialogue = function(o) {
             return o = t.extend({
@@ -13876,76 +12641,159 @@
         }), t.ui.draggable;
     });
 }, function(t, e, i) {
-    var n = i(165);
+    var n = i(125);
     "string" == typeof n && (n = [ [ t.id, n, "" ] ]);
     i(11)(n, {});
     n.locals && (t.exports = n.locals);
 }, function(t, e, i) {
-    e = t.exports = i(3)(), e.push([ t.id, ".light-dialogue{cursor:move;background:#fff;border:1px solid #888;padding:3px;position:absolute;overflow:hidden}.light-dialogue .dismiss{margin:3px;float:right}.light-dialogue .title{background:#ddd;border-width:0;border-bottom:1px solid #ccc;font-weight:700;padding:2px;margin-bottom:2px;color:#000}.light-dialogue .ui-widget-header .ui-button.close{position:absolute;top:8px;right:8px;width:16px;border:0;background:transparent}.light-dialogue .loader{height:11px;width:16px;position:absolute;top:6px;right:22px}.light-dialogue .loader.loading{background-image:url(" + i(166) + ");background-repeat:no-repeat}", "" ]);
+    e = t.exports = i(3)(), e.push([ t.id, ".light-dialogue{cursor:move;background:#fff;border:1px solid #888;padding:3px;position:absolute;overflow:hidden}.light-dialogue .dismiss{margin:3px;float:right}.light-dialogue .title{background:#ddd;border-width:0;border-bottom:1px solid #ccc;font-weight:700;padding:2px;margin-bottom:2px;color:#000}.light-dialogue .ui-widget-header .ui-button.close{position:absolute;top:8px;right:8px;width:16px;border:0;background:transparent}.light-dialogue .loader{height:11px;width:16px;position:absolute;top:6px;right:22px}.light-dialogue .loader.loading{background-image:url(" + i(126) + ");background-repeat:no-repeat}", "" ]);
 }, function(t, e) {
     t.exports = "data:image/gif;base64,R0lGODlhEAALAPQAAP///9ra2tDQ0Orq6gYGBgAAAC4uLoKCgmBgYLq6uiIiIkpKSoqKimRkZL6+viYmJgQEBE5OTubm5tjY2PT09Dg4ONzc3PLy8ra2tqCgoMrKyu7u7gAAAAAAAAAAAAAAACH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCwAAACwAAAAAEAALAAACJYSPqYvhYR4EMowhjLgZbPx1ocaNHkeC6ImlggmXbydFD4PnSQEAIfkECQsAAAAsAAAAABAACwAAAx5IVQT+0BVjSrxgVhy15Y8HhtQ3imNWpuqWoqPCsAkAIfkECQsAAAAsAAAAABAACwAABDIQyKlKUXMehI4sy1JkEpIkyBeOpImqIgm4KQDG7VnfbEbDvcnPtpINebJNByiTVS6yCAAh+QQJCwAAACwAAAAAEAALAAAFNSAgjqT4QNBTAkzTMCIURdDaOE4Tz3V55zuaDacDyIQ+YrBH+hWPzJFzOQQaeavWi7oqnVIhACH5BAkLAAAALAAAAAAQAAsAAAUyICCOZGmelaJUpjRNkqhEkWJOFDXJtF3iOl7tltsBZsNfUegjAY3I5sgFY55KqdX1GgIAIfkECQsAAAAsAAAAABAACwAABTcgII5kaZ7kYFmDqLIilmWYdV2WaONipmmZXQ4g7P2Ct2ER4AMul00kj5g0Al8tADY2w6C+4FIIACH5BAkLAAAALAAAAAAQAAsAAAUvICCOZGmepDRNkqiy7qpu2yROtA3gNa/7txxwlwv2isSacYUc+l4tADQGQ1mvpBAAIfkECQsAAAAsAAAAABAACwAABS8gII5kaZ6kNE2SqLLuqm7bJE60DeA1r/u3HHCXC/aKxJpxhRz6Xi0ANAZDWa+kEAA7";
 }, function(t, e, i) {
     var n, o;
-    n = [ i(14), i(32) ], o = function(t, e) {
-        function n() {}
-        n.prototype = {
-            tcyclone_init: function() {
-                console.log("tcyclone_init");
-                var e = this;
-                e.instance.events.bind("image-changed", function() {
-                    t.fn.wwwChartParameterBar && e.parameter_bar.wwwChartParameterBar("setItems", t.extend(o.forecast_base_time, {
-                        values: t.map(e.instance.data.availability.availability, function(t) {
-                            return t[0];
-                        }),
-                        labels: t.map(e.instance.data.availability.availability, function(t) {
-                            return new Time(t).asText();
-                        })
-                    })), e._history.update.call(e), e._metadata.update.call(e);
-                }).bind("load-end", function() {
-                    e._stop_spinner(), e.instance.error_msg ? e.bus.send("log-error", {
+    n = [ i(14), i(162), i(48), i(128), i(146), i(152), i(161), i(33), i(36), i(40), i(42) ],
+    o = function(t, e, n, o, r, a, s, l, c, u) {
+        function h() {}
+        function d(e, i) {
+            this.element = e, this.sections = {}, this.dom_tree = o("div.vdom-root"), this.element.append(this.dom_tree_root = s(this.dom_tree)),
+            this.render = t.throttle(300, this._render);
+        }
+        var p = [];
+        return h.prototype = {
+            epsgram_init: function() {
+                console.log("epsgrams_init");
+                var r = this, a = r.instance.has_widget("wmo_locations");
+                setTimeout(function() {
+                    switch (a) {
+                      case !0:
+                        i(163);
+                        break;
+
+                      case !1:
+                        i(167);
+                    }
+                }, 0), this.left = new d(t(".column-1")), a && this.left.add("location", function e(i) {
+                    return o("div.country-cities-content", [ o("h2", i.title), o("ul.country-cities", t.map(i.result, function(t) {
+                        return o("li", {
+                            onclick: function() {
+                                u.set_parameter({
+                                    meteogram_location: t[6]
+                                });
+                            }
+                        }, t[0]);
+                    })) ]);
+                }).set_state("location", JSON.parse(e.ensgram_wmo_country || "{}")), r._history.init.call(r, a),
+                r.location_handler = function(n) {
+                    console.log("location.click"), !function() {
+                        var n = [ i(93) ];
+                        (function(i) {
+                            new i({
+                                id: "location-select",
+                                title: "<h2>Location</h2>"
+                            });
+                            var n = t("#location-select").each(function() {
+                                t("#location-select").hasClass("in") && t("#location-select").modal("hide");
+                            }).modal("show"), o = {
+                                lat: -50,
+                                lon: -9
+                            }, s = t.extend(o, l.map(r.instance.variables, function(e, i) {
+                                if (~t.inArray(i, [ "lat", "lon" ])) return e.value;
+                            })), c = n.find(".modal-body");
+                            c.each(function i() {
+                                c.empty();
+                                var o = n.find(".modal-footer").empty();
+                                c.form({
+                                    items: [ {
+                                        type: a ? "country_location" : "location",
+                                        name: "location",
+                                        title: "Location",
+                                        value: s
+                                    } ],
+                                    ok: function(i) {
+                                        var o = i.location;
+                                        a ? (console.log("basicChart.location.ok: location=", o), o.country && (n.modal("hide"),
+                                        r.left.on_render(function() {
+                                            var e = t(".country-cities-content");
+                                            e.css({
+                                                backgroundColor: "#ffc"
+                                            }).delayed(1e3, function() {
+                                                e.css({
+                                                    backgroundColor: ""
+                                                });
+                                            }), r.left.on_render();
+                                        }), e.ensgram_wmo_country = JSON.stringify(o.country), r.left.set_state("location", o.country))) : (console.log("basicChart.location.ok: lat=", o.lat, " lon=", o.lon),
+                                        o && (n.modal("hide"), r._set_parameter("lat", o.lat + "")._set_parameter("lon", o.lon + "")._set_parameter("altitude", o.altitude + "")._set_parameter("station_name", o.city || "")));
+                                    },
+                                    cancel: function(t) {
+                                        n.modal("hide");
+                                    }
+                                }), c.find(".form-help, .form-item-title").remove(), c.find(".form-buttons input#_ok").addClass("btn").appendTo(o),
+                                c.find(".form-buttons input#_cancel").addClass("btn").appendTo(o), c.find(".form-buttons").remove(),
+                                c.find(".form-row").css({
+                                    background: "none"
+                                });
+                            });
+                        }).apply(null, n);
+                    }();
+                }, r.instance.on.image.subscribe(r, function() {
+                    r._history.update.call(r), r._metadata.update.call(r), r.instance.variables.location = r.instance.variables.location || new n.dynamic({
+                        name: "location",
+                        title: "Location",
+                        type: "location",
+                        values: []
+                    });
+                }), r.instance.events.bind("load-end", function() {
+                    r._stop_spinner(), r.instance.error_msg ? r.bus.send("log-error", {
                         title: "Plot failed",
-                        message: e.instance.error_msg
-                    }) : e.instance.data.is_fall_back && e.bus.send("log-warning", {
+                        message: r.instance.error_msg
+                    }) : r.instance.data.is_fall_back && r.bus.send("log-warning", {
                         title: "Fallback plot",
                         message: "The requested plot is not available. A fallback is displayed."
                     });
                 });
             },
+            epsgram_destroy: function() {},
             _history: {
-                block: t("#block-ecmwf-chart-history"),
-                content: t("#block-ecmwf-chart-history .history-content").empty().ul(".chart-history"),
-                update: function() {
-                    var e = this, i = e._history;
-                    this.instance.has_widget("epsgram") && (i.block.show(), i.content.html(t.map(e.instance.data.history, e._bind(i._render))),
-                    localStorage["ensgram-history"] = JSON.stringify(e.instance.data.history));
+                block: t(".column-1"),
+                init: function(i) {
+                    var n = this, r = n._history;
+                    r.storage = i ? "ensgram_history_wmo" : "ensgram_history", p = JSON.parse(e[r.storage] || "[]"),
+                    n.left.add("history", function e() {
+                        return o("div.history-content", [ o("h2", [ "Recently viewed" ]), o("ul.chart-history", t.map(p, n._bind(r._render_item))) ]);
+                    }), n.left.set_state("history", {});
                 },
-                _render: function(e, n) {
-                    var o = this, r = e.axis.station_name || t.formatLatitude(e.axis.lat) + " " + t.formatLongitude(e.axis.lon), a = new Time([ e.axis.base_time, 0, e.axis.base_time ]), s = e.axis.base_time ? a.base_time.format("dd mmm HH:MM") : "", l = e.axis.epsgram.replace("classical_", "");
-                    l = l.charAt(0).toUpperCase() + l.slice(1);
-                    var c = t("<li>");
-                    return c.div().div(r), c.div().div(s), c.div().addClass("epsgram-type").div(l),
-                    !function() {
-                        var t = [ i(56) ];
-                        (function() {
-                            c.modeTooltip({
-                                maxWidth: "auto",
-                                content: function() {
-                                    return r + " - " + l + (s ? " - " + a.base_time.toString() : "");
-                                }
-                            });
-                        }).apply(null, t);
-                    }(), c.click(function() {
-                        t(this).modeTooltip("close"), o._set_parameters(e.axis), o._update_page();
-                    });
+                update: function() {
+                    var t, i = this, n = i._history, o = this.instance.as_json().product;
+                    (t = this.history_exists(o)) && (p.length >= 20 && p.pop(), t > -1 && p.splice(t, 1),
+                    delete o.values.location, p.unshift({
+                        values: o.values
+                    }), e[n.storage] = JSON.stringify(p), this.left.render());
+                },
+                _render_item: function(e, i) {
+                    var n = this;
+                    e.values || (e = e.product);
+                    var r = e.values.station_name || e.values.meteogram_location;
+                    e = e.values;
+                    var a = (r || t.formatLatitude(e.lat) + " " + t.formatLongitude(e.lon)).replace("_", " "), s = new Time(e.time), l = s.base_time.format("dd mmm HH:MM"), c = e.epsgram.replace("classical_", "");
+                    return o("li", {
+                        title: a + " - " + c + (l ? " - " + s.base_time.toString() : ""),
+                        onclick: function(i) {
+                            t(i.currentTarget).tipsy("hide"), n._set_parameters(e);
+                        }
+                    }, [ o("div", [ o("div", [ a ]) ]), o("div", [ o("div", [ l ]) ]), o("div.epsgram-type", [ o("div", [ c ]) ]) ]);
                 }
             },
             _metadata: {
                 update: function() {
                     var e = this, n = e._metadata;
                     !function() {
-                        var o = [ i(159), i(85) ];
+                        var o = [ i(119), i(85) ];
                         (function() {
-                            n.block || (n.block = t("#block-ecmwf-chart-ecmwf-chart-metadata"), e.element.helpProvider({
+                            n.block || (n.block = t("#block-ecmwf-chart-ecmwf-chart-metadata").css({
+                                position: "absolute",
+                                top: 40,
+                                zIndex: 5
+                            }), e.element.helpProvider({
                                 getContent: function() {
                                     return {
                                         content: n.get_epsgram_help.call(e)
@@ -13958,35 +12806,1155 @@
                     }();
                 },
                 get_epsgram_help: function() {
-                    var i = this, n = [];
-                    if (console.log("metadata.get_epsgram_help: metadata=", i.instance.data.metadata),
-                    !i.instance.data.metadata) return "Cannot get help information.";
-                    var o = i.instance.data.metadata;
-                    if (!o.distance) return "Cannot display help information. Missing Distance data.";
-                    var r = e.get("m"), a = e.get(o.distance.distance_unit || "km"), s = o.land_sea_mask < .5 ? "sea" : "land";
-                    return o.title && n.push("### " + o.title), n.push("Location requested: **" + t.formatGeoLocation(o.requested_location) + "**.  "),
-                    n.push("Nearest ENS grid point: **" + t.formatGeoLocation(o.location) + "**."),
-                    n.push(""), "" !== o.height && o.height !== -9999 && "10_days_wave" !== o.db && (console.log("metadata.height:<", o.height, ">"),
-                    n.push("Height of requested location (based on the GTOPO30 dataset): **" + r.asHTML(o.height) + "**, "),
-                    "plumes" != o.db && (n.push("height of ENS orography at nearest grid point: **" + r.asHTML(o.eps_height) + "**, "),
-                    n.push("height of high resolution orography interpolated to ENS resolution at nearest grid point: **" + r.asHTML(o.deterministic_height) + "**.")),
-                    o.temperature_correction && (n.push(""), o.temperature_adjustment ? n.push("Temperature parameter is adjusted to the requested location by **" + t.formatCelcius(o.temperature_adjustment.deterministic_adjustement, 1) + "** in high resolution forecast curve and **" + t.formatCelcius(o.temperature_adjustment.eps_adjustement, 1) + "** in ENS forecast curves.") : n.push("Temperature parameter is adjusted to the requested location"),
-                    n.push(""))), n.push(""), n.push(""), "10_days_wave" === o.db ? n.push("The nearest ENS grid point is located at **" + a.asHTML(o.distance.distance) + " " + o.distance.direction + "** of the selected location.") : (n.push("The nearest ENS grid point is a **" + s + " point**, "),
-                    n.push("located at **" + a.asHTML(o.distance.distance) + " " + o.distance.direction + "** of the selected location.")),
-                    n.join("\n");
+                    var e = this, i = [];
+                    if (console.log("metadata.get_epsgram_help: metadata=", e.instance.data.metadata),
+                    !e.instance.data.metadata) return "Cannot get help information.";
+                    var n = e.instance.data.metadata;
+                    if (!n.distance) return "Cannot display help information. Missing Distance data.";
+                    var o = c.get("m"), r = c.get(n.distance.distance_unit || "km"), a = n.land_sea_mask < .5 ? "sea" : "land";
+                    return n.title && i.push("### " + n.title), i.push("Location requested: **" + t.formatGeoLocation(n.requested_location) + "**.  "),
+                    i.push("Nearest ENS grid point: **" + t.formatGeoLocation(n.location) + "**."),
+                    i.push(""), "" !== n.height && n.height !== -9999 && "10_days_wave" !== n.db && (console.log("metadata.height:<", n.height, ">"),
+                    i.push("Height of requested location (based on the GTOPO30 dataset): **" + o.asHTML(n.height) + "**, "),
+                    "plumes" != n.db && (i.push("height of ENS orography at nearest grid point: **" + o.asHTML(n.eps_height) + "**, "),
+                    i.push("height of high resolution orography interpolated to ENS resolution at nearest grid point: **" + o.asHTML(n.deterministic_height) + "**.")),
+                    n.temperature_correction && (i.push(""), n.temperature_adjustment ? i.push("Temperature parameter is adjusted to the requested location by **" + t.formatCelcius(n.temperature_adjustment.deterministic_adjustement, 1) + "** in high resolution forecast curve and **" + t.formatCelcius(n.temperature_adjustment.eps_adjustement, 1) + "** in ENS forecast curves.") : i.push("Temperature parameter is adjusted to the requested location"),
+                    i.push(""))), i.push(""), i.push(""), "10_days_wave" === n.db ? i.push("The nearest ENS grid point is located at **" + r.asHTML(n.distance.distance) + " " + n.distance.direction + "** of the selected location.") : (i.push("The nearest ENS grid point is a **" + a + " point**, "),
+                    i.push("located at **" + r.asHTML(n.distance.distance) + " " + n.distance.direction + "** of the selected location.")),
+                    i.join("\n");
                 },
                 block: null
+            },
+            history_exists: function(t) {
+                var e = t.values, i = 0;
+                for (var n in p) {
+                    if (p[n].values) {
+                        var o = !0;
+                        for (var r in p[n].values) {
+                            var a = JSON.stringify(p[n].values[r]);
+                            if (a != JSON.stringify(e[r])) {
+                                o = !1;
+                                break;
+                            }
+                        }
+                        if (o) return i;
+                    } else ;
+                    i++;
+                }
+                return -1;
             }
-        };
-        var o = {
-            forecast_base_time: {
-                name: "base_time",
-                title: "Forecast base time",
-                type: "retention",
-                values: []
+        }, t.widget("ui.parameterLocation", t.ui.parameterControl, {
+            options: {
+                title: "Location ..."
+            },
+            _make_html: function() {
+                var t = this.options, e = this.element.parents(".chart-column").find(".basic").basicChart("instance");
+                this.element.empty().addClass("parameter-selector").button({
+                    label: t.title
+                }).click(e.location_handler);
             }
+        }), d.prototype = {
+            add: function(t, e) {
+                return this.sections[t] = {
+                    render: e
+                }, this;
+            },
+            set_state: function(t, e) {
+                return this.sections[t].state = e, this.render(), this;
+            },
+            _render: function() {
+                var e = o("div.vdom-root", t.map(this.sections, function(t) {
+                    return t.render(t.state);
+                }));
+                this.dom_tree_root = a(this.dom_tree_root, r(this.dom_tree, e)), this.dom_tree = e,
+                this._on_render && this._on_render();
+            },
+            on_render: function(t) {
+                return this._on_render = t, this;
+            }
+        }, h;
+    }.apply(e, n), !(void 0 !== o && (t.exports = o));
+}, function(t, e, i) {
+    var n = i(129);
+    t.exports = n;
+}, function(t, e, i) {
+    "use strict";
+    function n(t, e, i) {
+        var n, a, l, c, u = [];
+        return !i && s(e) && (i = e, a = {}), a = a || e || {}, n = b(t, a), a.hasOwnProperty("key") && (l = a.key,
+        a.key = void 0), a.hasOwnProperty("namespace") && (c = a.namespace, a.namespace = void 0),
+        "INPUT" !== n || c || !a.hasOwnProperty("value") || void 0 === a.value || g(a.value) || (a.value = A(a.value)),
+        r(a), void 0 !== i && null !== i && o(i, u, n, a), new h(n, a, u, l, c);
+    }
+    function o(t, e, i, n) {
+        if ("string" == typeof t) e.push(new d(t)); else if ("number" == typeof t) e.push(new d(String(t))); else if (a(t)) e.push(t); else {
+            if (!u(t)) {
+                if (null === t || void 0 === t) return;
+                throw l({
+                    foreignObject: t,
+                    parentVnode: {
+                        tagName: i,
+                        properties: n
+                    }
+                });
+            }
+            for (var r = 0; r < t.length; r++) o(t[r], e, i, n);
+        }
+    }
+    function r(t) {
+        for (var e in t) if (t.hasOwnProperty(e)) {
+            var i = t[e];
+            if (g(i)) continue;
+            "ev-" === e.substr(0, 3) && (t[e] = _(i));
+        }
+    }
+    function a(t) {
+        return p(t) || f(t) || m(t) || v(t);
+    }
+    function s(t) {
+        return "string" == typeof t || u(t) || a(t);
+    }
+    function l(t) {
+        var e = new Error();
+        return e.type = "virtual-hyperscript.unexpected.virtual-element", e.message = "Unexpected virtual child passed to h().\nExpected a VNode / Vthunk / VWidget / string but:\ngot:\n" + c(t.foreignObject) + ".\nThe parent vnode is:\n" + c(t.parentVnode),
+        e.foreignObject = t.foreignObject, e.parentVnode = t.parentVnode, e;
+    }
+    function c(t) {
+        try {
+            return JSON.stringify(t, null, "    ");
+        } catch (e) {
+            return String(t);
+        }
+    }
+    var u = i(130), h = i(131), d = i(137), p = i(133), f = i(138), m = i(134), g = i(136), v = i(135), b = i(139), A = i(141), _ = i(142);
+    t.exports = n;
+}, function(t, e) {
+    function i(t) {
+        return "[object Array]" === o.call(t);
+    }
+    var n = Array.isArray, o = Object.prototype.toString;
+    t.exports = n || i;
+}, function(t, e, i) {
+    function n(t, e, i, n, o) {
+        this.tagName = t, this.properties = e || c, this.children = i || u, this.key = null != n ? String(n) : void 0,
+        this.namespace = "string" == typeof o ? o : null;
+        var h, d = i && i.length || 0, p = 0, f = !1, m = !1, g = !1;
+        for (var v in e) if (e.hasOwnProperty(v)) {
+            var b = e[v];
+            l(b) && b.unhook && (h || (h = {}), h[v] = b);
+        }
+        for (var A = 0; A < d; A++) {
+            var _ = i[A];
+            r(_) ? (p += _.count || 0, !f && _.hasWidgets && (f = !0), !m && _.hasThunks && (m = !0),
+            g || !_.hooks && !_.descendantHooks || (g = !0)) : !f && a(_) ? "function" == typeof _.destroy && (f = !0) : !m && s(_) && (m = !0);
+        }
+        this.count = d + p, this.hasWidgets = f, this.hasThunks = m, this.hooks = h, this.descendantHooks = g;
+    }
+    var o = i(132), r = i(133), a = i(134), s = i(135), l = i(136);
+    t.exports = n;
+    var c = {}, u = [];
+    n.prototype.version = o, n.prototype.type = "VirtualNode";
+}, function(t, e) {
+    t.exports = "2";
+}, function(t, e, i) {
+    function n(t) {
+        return t && "VirtualNode" === t.type && t.version === o;
+    }
+    var o = i(132);
+    t.exports = n;
+}, function(t, e) {
+    function i(t) {
+        return t && "Widget" === t.type;
+    }
+    t.exports = i;
+}, function(t, e) {
+    function i(t) {
+        return t && "Thunk" === t.type;
+    }
+    t.exports = i;
+}, function(t, e) {
+    function i(t) {
+        return t && ("function" == typeof t.hook && !t.hasOwnProperty("hook") || "function" == typeof t.unhook && !t.hasOwnProperty("unhook"));
+    }
+    t.exports = i;
+}, function(t, e, i) {
+    function n(t) {
+        this.text = String(t);
+    }
+    var o = i(132);
+    t.exports = n, n.prototype.version = o, n.prototype.type = "VirtualText";
+}, function(t, e, i) {
+    function n(t) {
+        return t && "VirtualText" === t.type && t.version === o;
+    }
+    var o = i(132);
+    t.exports = n;
+}, function(t, e, i) {
+    "use strict";
+    function n(t, e) {
+        if (!t) return "DIV";
+        var i = !e.hasOwnProperty("id"), n = o(t, r), s = null;
+        a.test(n[1]) && (s = "DIV");
+        var l, c, u, h;
+        for (h = 0; h < n.length; h++) c = n[h], c && (u = c.charAt(0), s ? "." === u ? (l = l || [],
+        l.push(c.substring(1, c.length))) : "#" === u && i && (e.id = c.substring(1, c.length)) : s = c);
+        return l && (e.className && l.push(e.className), e.className = l.join(" ")), e.namespace ? s : s.toUpperCase();
+    }
+    var o = i(140), r = /([\.#]?[a-zA-Z0-9\u007F-\uFFFF_:-]+)/, a = /^\.|#/;
+    t.exports = n;
+}, function(t, e) {
+
+    t.exports = function t(e) {
+        var i, n = String.prototype.split, o = /()??/.exec("")[1] === e;
+        return i = function(t, i, r) {
+            if ("[object RegExp]" !== Object.prototype.toString.call(i)) return n.call(t, i, r);
+            var a, s, l, c, u = [], h = (i.ignoreCase ? "i" : "") + (i.multiline ? "m" : "") + (i.extended ? "x" : "") + (i.sticky ? "y" : ""), d = 0, i = new RegExp(i.source, h + "g");
+            for (t += "", o || (a = new RegExp("^" + i.source + "$(?!\\s)", h)), r = r === e ? -1 >>> 0 : r >>> 0; (s = i.exec(t)) && (l = s.index + s[0].length,
+            !(l > d && (u.push(t.slice(d, s.index)), !o && s.length > 1 && s[0].replace(a, function() {
+                for (var t = 1; t < arguments.length - 2; t++) arguments[t] === e && (s[t] = e);
+            }), s.length > 1 && s.index < t.length && Array.prototype.push.apply(u, s.slice(1)),
+            c = s[0].length, d = l, u.length >= r))); ) i.lastIndex === s.index && i.lastIndex++;
+            return d === t.length ? !c && i.test("") || u.push("") : u.push(t.slice(d)), u.length > r ? u.slice(0, r) : u;
         };
-        return n;
+    }();
+}, function(t, e) {
+    "use strict";
+    function i(t) {
+        return this instanceof i ? void (this.value = t) : new i(t);
+    }
+    t.exports = i, i.prototype.hook = function(t, e) {
+        t[e] !== this.value && (t[e] = this.value);
+    };
+}, function(t, e, i) {
+    "use strict";
+    function n(t) {
+        return this instanceof n ? void (this.value = t) : new n(t);
+    }
+    var o = i(143);
+    t.exports = n, n.prototype.hook = function(t, e) {
+        var i = o(t), n = e.substr(3);
+        i[n] = this.value;
+    }, n.prototype.unhook = function(t, e) {
+        var i = o(t), n = e.substr(3);
+        i[n] = void 0;
+    };
+}, function(t, e, i) {
+    "use strict";
+    function n(t) {
+        var e = t[a];
+        return e || (e = t[a] = {}), e;
+    }
+    var o = i(144), r = "7";
+    o("ev-store", r);
+    var a = "__EV_STORE_KEY@" + r;
+    t.exports = n;
+}, function(t, e, i) {
+    "use strict";
+    function n(t, e, i) {
+        var n = "__INDIVIDUAL_ONE_VERSION_" + t, r = n + "_ENFORCE_SINGLETON", a = o(r, e);
+        if (a !== e) throw new Error("Can only have one copy of " + t + ".\nYou already have version " + a + " installed.\nThis means you cannot install version " + e);
+        return o(n, i);
+    }
+    var o = i(145);
+    t.exports = n;
+}, function(t, e) {
+    (function(e) {
+        "use strict";
+        function i(t, e) {
+            return t in n ? n[t] : (n[t] = e, e);
+        }
+        var n = "undefined" != typeof window ? window : "undefined" != typeof e ? e : {};
+        t.exports = i;
+    }).call(e, function() {
+        return this;
+    }());
+}, function(t, e, i) {
+    var n = i(147);
+    t.exports = n;
+}, function(t, e, i) {
+    function n(t, e) {
+        var i = {
+            a: t
+        };
+        return o(t, e, i, 0), i;
+    }
+    function o(t, e, i, n) {
+        if (t !== e) {
+            var o = i[n], s = !1;
+            if (y(t) || y(e)) l(t, e, i, n); else if (null == e) _(t) || (a(t, i, n), o = i[n]),
+            o = m(o, new v(v.REMOVE, t, e)); else if (b(e)) if (b(t)) if (t.tagName === e.tagName && t.namespace === e.namespace && t.key === e.key) {
+                var c = x(t.properties, e.properties);
+                c && (o = m(o, new v(v.PROPS, t, c))), o = r(t, e, i, o, n);
+            } else o = m(o, new v(v.VNODE, t, e)), s = !0; else o = m(o, new v(v.VNODE, t, e)),
+            s = !0; else A(e) ? A(t) ? t.text !== e.text && (o = m(o, new v(v.VTEXT, t, e))) : (o = m(o, new v(v.VTEXT, t, e)),
+            s = !0) : _(e) && (_(t) || (s = !0), o = m(o, new v(v.WIDGET, t, e)));
+            o && (i[n] = o), s && a(t, i, n);
+        }
+    }
+    function r(t, e, i, n, r) {
+        for (var a = t.children, s = d(a, e.children), l = s.children, c = a.length, u = l.length, h = c > u ? c : u, p = 0; p < h; p++) {
+            var f = a[p], g = l[p];
+            r += 1, f ? o(f, g, i, r) : g && (n = m(n, new v(v.INSERT, null, g))), b(f) && f.count && (r += f.count);
+        }
+        return s.moves && (n = m(n, new v(v.ORDER, t, s.moves))), n;
+    }
+    function a(t, e, i) {
+        u(t, e, i), s(t, e, i);
+    }
+    function s(t, e, i) {
+        if (_(t)) "function" == typeof t.destroy && (e[i] = m(e[i], new v(v.REMOVE, t, null))); else if (b(t) && (t.hasWidgets || t.hasThunks)) for (var n = t.children, o = n.length, r = 0; r < o; r++) {
+            var a = n[r];
+            i += 1, s(a, e, i), b(a) && a.count && (i += a.count);
+        } else y(t) && l(t, null, e, i);
+    }
+    function l(t, e, i, o) {
+        var r = w(t, e), a = n(r.a, r.b);
+        c(a) && (i[o] = new v(v.THUNK, null, a));
+    }
+    function c(t) {
+        for (var e in t) if ("a" !== e) return !0;
+        return !1;
+    }
+    function u(t, e, i) {
+        if (b(t)) {
+            if (t.hooks && (e[i] = m(e[i], new v(v.PROPS, t, h(t.hooks)))), t.descendantHooks || t.hasThunks) for (var n = t.children, o = n.length, r = 0; r < o; r++) {
+                var a = n[r];
+                i += 1, u(a, e, i), b(a) && a.count && (i += a.count);
+            }
+        } else y(t) && l(t, null, e, i);
+    }
+    function h(t) {
+        var e = {};
+        for (var i in t) e[i] = void 0;
+        return e;
+    }
+    function d(t, e) {
+        var i = f(e), n = i.keys, o = i.free;
+        if (o.length === e.length) return {
+            children: e,
+            moves: null
+        };
+        var r = f(t), a = r.keys, s = r.free;
+        if (s.length === t.length) return {
+            children: e,
+            moves: null
+        };
+        for (var l = [], c = 0, u = o.length, h = 0, d = 0; d < t.length; d++) {
+            var m, g = t[d];
+            g.key ? n.hasOwnProperty(g.key) ? (m = n[g.key], l.push(e[m])) : (m = d - h++, l.push(null)) : c < u ? (m = o[c++],
+            l.push(e[m])) : (m = d - h++, l.push(null));
+        }
+        for (var v = c >= o.length ? e.length : o[c], b = 0; b < e.length; b++) {
+            var A = e[b];
+            A.key ? a.hasOwnProperty(A.key) || l.push(A) : b >= v && l.push(A);
+        }
+        for (var _, y = l.slice(), w = 0, x = [], k = [], C = 0; C < e.length; ) {
+            var E = e[C];
+            for (_ = y[w]; null === _ && y.length; ) x.push(p(y, w, null)), _ = y[w];
+            _ && _.key === E.key ? (w++, C++) : E.key ? (_ && _.key && n[_.key] !== C + 1 ? (x.push(p(y, w, _.key)),
+            _ = y[w], _ && _.key === E.key ? w++ : k.push({
+                key: E.key,
+                to: C
+            })) : k.push({
+                key: E.key,
+                to: C
+            }), C++) : _ && _.key && x.push(p(y, w, _.key));
+        }
+        for (;w < y.length; ) _ = y[w], x.push(p(y, w, _ && _.key));
+        return x.length !== h || k.length ? {
+            children: l,
+            moves: {
+                removes: x,
+                inserts: k
+            }
+        } : {
+            children: l,
+            moves: null
+        };
+    }
+    function p(t, e, i) {
+        return t.splice(e, 1), {
+            from: e,
+            key: i
+        };
+    }
+    function f(t) {
+        for (var e = {}, i = [], n = t.length, o = 0; o < n; o++) {
+            var r = t[o];
+            r.key ? e[r.key] = o : i.push(o);
+        }
+        return {
+            keys: e,
+            free: i
+        };
+    }
+    function m(t, e) {
+        return t ? (g(t) ? t.push(e) : t = [ t, e ], t) : e;
+    }
+    var g = i(130), v = i(148), b = i(133), A = i(138), _ = i(134), y = i(135), w = i(149), x = i(150);
+    t.exports = n;
+}, function(t, e, i) {
+    function n(t, e, i) {
+        this.type = Number(t), this.vNode = e, this.patch = i;
+    }
+    var o = i(132);
+    n.NONE = 0, n.VTEXT = 1, n.VNODE = 2, n.WIDGET = 3, n.PROPS = 4, n.ORDER = 5, n.INSERT = 6,
+    n.REMOVE = 7, n.THUNK = 8, t.exports = n, n.prototype.version = o, n.prototype.type = "VirtualPatch";
+}, function(t, e, i) {
+    function n(t, e) {
+        var i = t, n = e;
+        return l(e) && (n = o(e, t)), l(t) && (i = o(t, null)), {
+            a: i,
+            b: n
+        };
+    }
+    function o(t, e) {
+        var i = t.vnode;
+        if (i || (i = t.vnode = t.render(e)), !(r(i) || a(i) || s(i))) throw new Error("thunk did not return a valid node");
+        return i;
+    }
+    var r = i(133), a = i(138), s = i(134), l = i(135);
+    t.exports = n;
+}, function(t, e, i) {
+    function n(t, e) {
+        var i;
+        for (var s in t) {
+            s in e || (i = i || {}, i[s] = void 0);
+            var l = t[s], c = e[s];
+            if (l !== c) if (r(l) && r(c)) if (o(c) !== o(l)) i = i || {}, i[s] = c; else if (a(c)) i = i || {},
+            i[s] = c; else {
+                var u = n(l, c);
+                u && (i = i || {}, i[s] = u);
+            } else i = i || {}, i[s] = c;
+        }
+        for (var h in e) h in t || (i = i || {}, i[h] = e[h]);
+        return i;
+    }
+    function o(t) {
+        return Object.getPrototypeOf ? Object.getPrototypeOf(t) : t.__proto__ ? t.__proto__ : t.constructor ? t.constructor.prototype : void 0;
+    }
+    var r = i(151), a = i(136);
+    t.exports = n;
+}, function(t, e) {
+    "use strict";
+    t.exports = function t(e) {
+        return "object" == typeof e && null !== e;
+    };
+}, function(t, e, i) {
+    var n = i(153);
+    t.exports = n;
+}, function(t, e, i) {
+    function n(t, e, i) {
+        return i = i || {}, i.patch = i.patch && i.patch !== n ? i.patch : o, i.render = i.render || c,
+        i.patch(t, e, i);
+    }
+    function o(t, e, i) {
+        var n = a(e);
+        if (0 === n.length) return t;
+        var o = u(t, e.a, n), l = t.ownerDocument;
+        i.document || l === s || (i.document = l);
+        for (var c = 0; c < n.length; c++) {
+            var h = n[c];
+            t = r(t, o[h], e[h], i);
+        }
+        return t;
+    }
+    function r(t, e, i, n) {
+        if (!e) return t;
+        var o;
+        if (l(i)) for (var r = 0; r < i.length; r++) o = h(i[r], e, n), e === t && (t = o); else o = h(i, e, n),
+        e === t && (t = o);
+        return t;
+    }
+    function a(t) {
+        var e = [];
+        for (var i in t) "a" !== i && e.push(Number(i));
+        return e;
+    }
+    var s = i(154), l = i(130), c = i(156), u = i(158), h = i(159);
+    t.exports = n;
+}, function(t, e, i) {
+    (function(e) {
+        var n, o = "undefined" != typeof e ? e : "undefined" != typeof window ? window : {}, r = i(155);
+        "undefined" != typeof document ? n = document : (n = o["__GLOBAL_DOCUMENT_CACHE@4"],
+        n || (n = o["__GLOBAL_DOCUMENT_CACHE@4"] = r)), t.exports = n;
+    }).call(e, function() {
+        return this;
+    }());
+}, function(t, e) {}, function(t, e, i) {
+    function n(t, e) {
+        var i = e ? e.document || o : o, u = e ? e.warn : null;
+        if (t = c(t).a, l(t)) return t.init();
+        if (s(t)) return i.createTextNode(t.text);
+        if (!a(t)) return u && u("Item is not a valid virtual dom node", t), null;
+        var h = null === t.namespace ? i.createElement(t.tagName) : i.createElementNS(t.namespace, t.tagName), d = t.properties;
+        r(h, d);
+        for (var p = t.children, f = 0; f < p.length; f++) {
+            var m = n(p[f], e);
+            m && h.appendChild(m);
+        }
+        return h;
+    }
+    var o = i(154), r = i(157), a = i(133), s = i(138), l = i(134), c = i(149);
+    t.exports = n;
+}, function(t, e, i) {
+    function n(t, e, i) {
+        for (var n in e) {
+            var a = e[n];
+            void 0 === a ? o(t, n, a, i) : l(a) ? (o(t, n, a, i), a.hook && a.hook(t, n, i ? i[n] : void 0)) : s(a) ? r(t, e, i, n, a) : t[n] = a;
+        }
+    }
+    function o(t, e, i, n) {
+        if (n) {
+            var o = n[e];
+            if (l(o)) o.unhook && o.unhook(t, e, i); else if ("attributes" === e) for (var r in o) t.removeAttribute(r); else if ("style" === e) for (var a in o) t.style[a] = ""; else "string" == typeof o ? t[e] = "" : t[e] = null;
+        }
+    }
+    function r(t, e, i, n, o) {
+        var r = i ? i[n] : void 0;
+        if ("attributes" !== n) {
+            if (r && s(r) && a(r) !== a(o)) return void (t[n] = o);
+            s(t[n]) || (t[n] = {});
+            var l = "style" === n ? "" : void 0;
+            for (var c in o) {
+                var u = o[c];
+                t[n][c] = void 0 === u ? l : u;
+            }
+        } else for (var h in o) {
+            var d = o[h];
+            void 0 === d ? t.removeAttribute(h) : t.setAttribute(h, d);
+        }
+    }
+    function a(t) {
+        return Object.getPrototypeOf ? Object.getPrototypeOf(t) : t.__proto__ ? t.__proto__ : t.constructor ? t.constructor.prototype : void 0;
+    }
+    var s = i(151), l = i(136);
+    t.exports = n;
+}, function(t, e) {
+    function i(t, e, i, o) {
+        return i && 0 !== i.length ? (i.sort(r), n(t, e, i, o, 0)) : {};
+    }
+    function n(t, e, i, r, s) {
+        if (r = r || {}, t) {
+            o(i, s, s) && (r[s] = t);
+            var l = e.children;
+            if (l) for (var c = t.childNodes, u = 0; u < e.children.length; u++) {
+                s += 1;
+                var h = l[u] || a, d = s + (h.count || 0);
+                o(i, s, d) && n(c[u], h, i, r, s), s = d;
+            }
+        }
+        return r;
+    }
+    function o(t, e, i) {
+        if (0 === t.length) return !1;
+        for (var n, o, r = 0, a = t.length - 1; r <= a; ) {
+            if (n = (a + r) / 2 >> 0, o = t[n], r === a) return o >= e && o <= i;
+            if (o < e) r = n + 1; else {
+                if (!(o > i)) return !0;
+                a = n - 1;
+            }
+        }
+        return !1;
+    }
+    function r(t, e) {
+        return t > e ? 1 : -1;
+    }
+    var a = {};
+    t.exports = i;
+}, function(t, e, i) {
+    function n(t, e, i) {
+        var n = t.type, c = t.vNode, p = t.patch;
+        switch (n) {
+          case f.REMOVE:
+            return o(e, c);
+
+          case f.INSERT:
+            return r(e, p, i);
+
+          case f.VTEXT:
+            return a(e, c, p, i);
+
+          case f.WIDGET:
+            return s(e, c, p, i);
+
+          case f.VNODE:
+            return l(e, c, p, i);
+
+          case f.ORDER:
+            return u(e, p), e;
+
+          case f.PROPS:
+            return d(e, p, c.properties), e;
+
+          case f.THUNK:
+            return h(e, i.patch(e, p, i));
+
+          default:
+            return e;
+        }
+    }
+    function o(t, e) {
+        var i = t.parentNode;
+        return i && i.removeChild(t), c(t, e), null;
+    }
+    function r(t, e, i) {
+        var n = i.render(e, i);
+        return t && t.appendChild(n), t;
+    }
+    function a(t, e, i, n) {
+        var o;
+        if (3 === t.nodeType) t.replaceData(0, t.length, i.text), o = t; else {
+            var r = t.parentNode;
+            o = n.render(i, n), r && o !== t && r.replaceChild(o, t);
+        }
+        return o;
+    }
+    function s(t, e, i, n) {
+        var o, r = m(e, i);
+        o = r ? i.update(e, t) || t : n.render(i, n);
+        var a = t.parentNode;
+        return a && o !== t && a.replaceChild(o, t), r || c(t, e), o;
+    }
+    function l(t, e, i, n) {
+        var o = t.parentNode, r = n.render(i, n);
+        return o && r !== t && o.replaceChild(r, t), r;
+    }
+    function c(t, e) {
+        "function" == typeof e.destroy && p(e) && e.destroy(t);
+    }
+    function u(t, e) {
+        for (var i, n, o, r = t.childNodes, a = {}, s = 0; s < e.removes.length; s++) n = e.removes[s],
+        i = r[n.from], n.key && (a[n.key] = i), t.removeChild(i);
+        for (var l = r.length, c = 0; c < e.inserts.length; c++) o = e.inserts[c], i = a[o.key],
+        t.insertBefore(i, o.to >= l++ ? null : r[o.to]);
+    }
+    function h(t, e) {
+        return t && e && t !== e && t.parentNode && t.parentNode.replaceChild(e, t), e;
+    }
+    var d = i(157), p = i(134), f = i(148), m = i(160);
+    t.exports = n;
+}, function(t, e, i) {
+    function n(t, e) {
+        return !(!o(t) || !o(e)) && ("name" in t && "name" in e ? t.id === e.id : t.init === e.init);
+    }
+    var o = i(134);
+    t.exports = n;
+}, function(t, e, i) {
+    var n = i(156);
+    t.exports = n;
+}, function(t, e, i) {
+    var n;
+    n = function() {
+        try {
+            var t = localStorage;
+        } catch (e) {
+            t = {
+                setItem: function() {}
+            };
+        }
+        return t;
+    }.call(e, i, e, t), !(void 0 !== n && (t.exports = n));
+}, function(t, e, i) {
+    var n, o;
+    n = [ i(14), i(164), i(166) ], o = function(t) {
+        function e() {
+            function e(t) {
+                t = t.replace(",", ".");
+                var e = parseFloat(t);
+                return t.indexOf("S") === -1 && t.indexOf("s") === -1 && t.indexOf("W") === -1 && t.indexOf("w") === -1 || (e = -e),
+                e;
+            }
+            this.help = function(t, e) {
+                var i = [];
+                return i.push("<div style='display:none;position:absolute' id='" + t + "_location'><div></div></div>"),
+                i.join("");
+            }, this.render = function(n) {
+                function o() {
+                    "function" == typeof n._item.city && n._item.city({
+                        lat: e(r._lat.val()),
+                        lon: e(r._lon.val())
+                    });
+                }
+                var r = this, a = (n.get_defaults(), t('<div class="form-location"/>'));
+                this.finder = t('<input class="form-text">');
+                var s = t("<div>").append(this.finder);
+                a.p(".country-location-help").html("<b>Please enter a country name</b><br/>You will then be able to select a location in the left column.");
+                var l = t("<div>");
+                return l.prepend(a), l.append(s), !function() {
+                    var t = [ i(166) ];
+                    (function() {
+                        r.finder.cityAutocomplete({
+                            name: "Unnamed",
+                            is_country: !0,
+                            select: function(t, e) {
+                                var i = e.item;
+                                delete r.save, n._item.country = i, console.log("item item: ", n._item, i), "function" == typeof n._item.city && n._item.city(i);
+                            },
+                            close: function(t, e) {
+                                r.save && (o(), delete r.save);
+                            },
+                            focus: function(t, e) {
+                                var i = e.item;
+                                "function" == typeof n._item.city && n._item.city(i);
+                            }
+                        });
+                    }).apply(null, t);
+                }(), l;
+            }, this.collect = function(t, e) {
+                return console.log("collect.item:", t), {
+                    country: t._item.country
+                };
+            };
+        }
+        t.addFormHandler("country_location", e, "String");
+    }.apply(e, n), !(void 0 !== o && (t.exports = o));
+}, function(t, e, i) {
+    var n, o;
+    n = [ i(14), i(36), i(165) ], o = function(t, e) {
+        var i = function() {
+            function i() {
+                return this.help = function(t) {
+                    return t.get_help();
+                }, this.check = function() {
+                    return !0;
+                }, !0;
+            }
+            function n() {
+                return this.html = function(e, i) {
+                    var n = e.get("rows") || 5, o = e.get("cols") || 20, r = t("<textarea/>").attr({
+                        rows: n,
+                        cols: o,
+                        class: "form-textarea"
+                    }).html(i);
+                    return t.fn.onScreenKeyboard && setTimeout(function() {
+                        r.onScreenKeyboard({});
+                    }, 10), r;
+                }, this;
+            }
+            function o() {
+                this.align = "right", this.check = function(t, e) {
+                    if (isNaN(e)) return t.error("Invalid number"), !1;
+                    var i = t.get_range();
+                    return !i || !(e < i[0] || e > i[1]) || (t.get_transform().value2ui, t.error("Number out of range"),
+                    !1);
+                }, this.help = function(t) {
+                    var e = t.get_help();
+                    if (e) return e;
+                    var i = t.get_range();
+                    if (i) {
+                        var n = t.get_transform().value2ui;
+                        return 'Enter a number between <span class="form-highlight">' + t.format(n(i[0])) + '</span> and <span class="form-highlight">' + t.format(n(i[1])) + "</span>.";
+                    }
+                    return "";
+                }, this.html = function(e, i) {
+                    var n = t("<input/>").attr({
+                        type: "text",
+                        class: "form-text",
+                        value: e.format(i)
+                    }).css({
+                        textAlign: this.align
+                    });
+                    return t.fn.onScreenKeyboard && setTimeout(function() {
+                        n.onScreenKeyboard({
+                            layout: "num"
+                        });
+                    }, 10), n;
+                };
+            }
+            function r() {
+                this.parse = parseInt;
+            }
+            function a() {
+                this.parse = function(t) {
+                    return parseFloat(t.replace(",", "."));
+                };
+            }
+            function s() {
+                function e(e) {
+                    this.widget = function() {
+                        var i = t("<select/>", {
+                            class: "form-select"
+                        });
+                        return e && i.attr("multiple", "multiple"), i;
+                    }, this.item = function(e, i, n) {
+                        var o = t("<option/>");
+                        return o.attr("value", e).html(i), n && o.prop("selected", "selected"), o;
+                    };
+                }
+                function i(e) {
+                    var i = h();
+                    this.widget = function() {
+                        return t("<span/>");
+                    }, this.item = function(n, o, r) {
+                        var a = h(), s = t("<span/>"), l = t("<input/>").attr({
+                            name: i,
+                            id: a,
+                            type: e ? "checkbox" : "radio",
+                            value: n
+                        }).appendTo(s);
+                        return r && l.prop("checked", "checked"), t("<label>" + o + "</label>").attr("for", a).appendTo(s),
+                        s;
+                    }, this.change = function(t, e) {
+                        t.find("input").change(function(t) {
+                            e(t.target.value);
+                        });
+                    };
+                }
+                this.render = function(n) {
+                    var o = {}, r = n.get_defaults();
+                    t.each(r, function(t, e) {
+                        o[e] = !0;
+                    });
+                    var a = n.menu() ? new e(n.multiple()) : new i(n.multiple()), s = a.widget(n);
+                    return t.each(n.get_values(), function(t, e) {
+                        var i = n.get_label(e, t);
+                        a.item(e, i, o[e]).appendTo(s);
+                    }), n.change() && a.change(s, n.change()), s;
+                }, this.collect = function(e, i) {
+                    var n = [];
+                    return t.each(i.find(":selected, :checked"), function() {
+                        n.push(t(this).val());
+                    }), e.multiple() ? n : n[0];
+                };
+            }
+            function l() {
+                this.render = function(e) {
+                    var i = {}, n = e.get_defaults();
+                    t.each(n, function(t, e) {
+                        i[e] = !0;
+                    });
+                    var o = t("<div/>").addClass("form-thumbnail-item-wrapper"), r = t("<img/>").appendTo(o);
+                    t("<br/>").appendTo(o);
+                    var a = {}, s = t("<select/>").addClass("form-thumbnail-item").appendTo(o);
+                    return t.each(e.get_values(), function(n, o) {
+                        var l = e.get_label(o), c = t("<option/>", {
+                            value: o,
+                            text: l.title,
+                            title: l.url
+                        }).appendTo(s);
+                        i[o] && (c.prop("selected", "selected"), r.attr("src", l.url), l.fetch_image && l.fetch_image(r, function(t) {
+                            a[o] = l.url = t;
+                        })), a[o] = l.url;
+                    }), s.change(function() {
+                        r.attr("src", a[s.val()]);
+                    }), s.selectImage(e._item), o;
+                }, this.collect = function(e, i) {
+                    var n = [];
+                    return t.each(i.find(":checked"), function() {
+                        n.push(this.value);
+                    }), t.each(i.find(":selected"), function() {
+                        n.push(this.value);
+                    }), e.multiple() ? n : n[0];
+                };
+            }
+            function c() {
+                this.render = function(e) {
+                    var i = e.get_defaults(), n = t("<input type='checkbox'/>");
+                    return i[0] && n.prop("checked", "checked"), n;
+                }, this.collect = function(t, e) {
+                    return e[0].checked;
+                };
+            }
+            function u(t) {
+                return t;
+            }
+            function h() {
+                return m++, "_form-random-id-" + m;
+            }
+            var d = this, p = {};
+            t.fn.form = function(i) {
+                function n(i) {
+                    this._item = i;
+                    var n = i.handler || p[i.type] || p.text;
+                    return this.value = function() {
+                        return "float" === i.type && "undefined" != typeof c[i.name] || c[i.name] ? c[i.name] : i.value;
+                    }, this.menu = function() {
+                        return i.menu;
+                    }, this.multiple = function() {
+                        return i.multiple;
+                    }, this.change = function() {
+                        return i.change;
+                    }, this.name = function() {
+                        return i.name;
+                    }, this.collect = function() {
+                        return n.collect(this, this.widget);
+                    }, this.check = function(t) {
+                        return n.check(this, t);
+                    }, this.render = function(e) {
+                        this.widget = n.render(this), this.widget.appendTo(e), t.isFunction(this._item.widget) && this._item.widget(this.widget);
+                    }, this.render_help = function(t) {
+                        var e = n.help(this);
+                        "string" == typeof e ? this.help_widget = t.html(e) : (this.help_widget = e, this.help_widget.appendTo(t));
+                    }, this.get_title = function() {
+                        for (var t = i.title; "function" == typeof t; ) t = t();
+                        return "string" == typeof t ? t : i.name;
+                    }, this.get_values = function() {
+                        return i.values;
+                    }, this.get_defaults = function() {
+                        var t = this.value;
+                        for (void 0 !== t && null !== t || (t = i.default); "function" == typeof t; ) t = t();
+                        return void 0 !== t && null !== t || (t = []), "object" == typeof t ? t : [ t ];
+                    }, this.get_help = function() {
+                        for (var t = i.help; "function" == typeof t; ) t = t();
+                        return t ? t : "";
+                    }, this.get_unit = function() {
+                        for (var t = i.unit; "function" == typeof t; ) t = t();
+                        return e.get(t ? t : "");
+                    }, this.get_precision = function() {
+                        for (var t = i.precision; "function" == typeof t; ) t = t();
+                        return null === t || void 0 === t ? 2 : t;
+                    }, this.get_range = function() {
+                        for (var t = i.range; "function" == typeof t; ) t = t();
+                        return t;
+                    }, this.get_transform = function() {
+                        for (var t = i.transform; "function" == typeof t; ) t = t();
+                        var e = {
+                            ui2value: u,
+                            value2ui: u
+                        }, n = this.get_unit();
+                        return n && (e = {
+                            ui2value: function(t) {
+                                return n.fromDisplay(t);
+                            },
+                            value2ui: function(t) {
+                                return n.toDisplay(t);
+                            }
+                        }), t ? t : e;
+                    }, this.get_label = function(e, n) {
+                        for (var o = i.labels, r = e; "function" == typeof o; ) o = o(e);
+                        return "string" == typeof o ? o : t.isArray(o) ? i.labels[n] : "object" == typeof o ? o[e] : (void 0 !== e && null !== e || (e = r,
+                        void 0 !== e && null !== e || (e = "?")), e);
+                    }, this.format = function(t) {
+                        var e = this.get_precision();
+                        "string" == typeof t && (t = parseFloat(t));
+                        for (var i = 1; e < 0; ) i /= 10, e++;
+                        for (;e > 0; ) i *= 10, e--;
+                        return Math.floor(t * i + .5) / i;
+                    }, this.error = function(t) {
+                        this.error_text.html(t);
+                    }, this.get = function(t) {
+                        return i[t];
+                    }, this;
+                }
+                function o() {
+                    var t = r();
+                    if (t.ok) return s(t.result), t.result;
+                }
+                function r() {
+                    var e = {}, i = !0;
+                    return t.each(h, function(t, n) {
+                        var o = n.collect();
+                        e[n.name()] = o, n.error(""), n.check(o) || (i = !1);
+                    }), {
+                        result: e,
+                        ok: i
+                    };
+                }
+                if ("destroy" === i) return this.find(".form").remove();
+                i = t.extend({
+                    title: null,
+                    items: [],
+                    values: {},
+                    ok: f,
+                    cancel: f,
+                    show_ok: !0,
+                    show_cancel: !0,
+                    ok_label: "OK",
+                    cancel_label: "Cancel"
+                }, i || {});
+                var a = i.items, s = i.ok, l = i.cancel, c = i.values, h = [];
+                return t.each(a, function(t, e) {
+                    e && h.push(new n(e));
+                }), this.each(function() {
+                    var e = t(this);
+                    e.closest("form").length ? e.closest("form").unbind("submit").bind("submit", function() {
+                        return o(), !1;
+                    }) : e.bind("submit", function() {
+                        o();
+                    });
+                    var n = t("<table/>").addClass("form");
+                    if (i.title) {
+                        var r = t("<tr/>").appendTo(n), a = t("<td colspan='3' class='form-title'/>").appendTo(r);
+                        a.html(i.title);
+                    }
+                    i.help && (r = t("<tr/>").appendTo(n), a = t("<td colspan='3' class='form-help'/>").appendTo(r),
+                    a.html(i.help)), t.each(h, function(e, i) {
+                        var o = t("<tr class='form-row'/>").appendTo(n), r = i.get_unit(), a = i.get_title();
+                        r && (a += " (" + r.symbolHTML() + ")"), t("<td class='form-item-title'/>").appendTo(o).html(a + ":");
+                        var s = t("<td class='form-item-value'/>").appendTo(o);
+                        i.render(s), i.error_text = t("<span class='form-error'/>").appendTo(s), i.render_help(t("<td class='form-help'/>").appendTo(o));
+                    }), r = t("<tr/>").appendTo(n), a = t("<td colspan='3' class='form-buttons'/>").appendTo(r);
+                    var s = "";
+                    i.show_cancel && t("<input type='button' id='" + s + "_cancel' value='" + i.cancel_label + "'>").appendTo(a).click(function() {
+                        l();
+                    }), i.show_ok && t("<input type='button' id='" + s + "_ok' value='" + i.ok_label + "'>").appendTo(a).click(function() {
+                        o();
+                    }), n.appendTo(e);
+                });
+            }, t.addFormHandler = function(t, e, n) {
+                e.prototype = n ? new d[n + "Handler"]() : new i(), p[t] = new e();
+            }, t.newFormItemHandler = function(t) {
+                return t.prototype = new i(), new t();
+            }, this.StringHandler = function() {
+                this.prototype = new i(), this.render = function(t) {
+                    var e = t.get_defaults(), i = t.get_transform().value2ui(e[0]);
+                    return this.html(t, i);
+                }, this.collect = function(e) {
+                    var i = e.get_transform().ui2value;
+                    return i(this.parse(t.trim(e.widget.val())));
+                }, this.parse = u, this.align = "left", this.html = function(e, i) {
+                    return t("<input/>", {
+                        type: "text",
+                        class: "form-text",
+                        value: i
+                    }).css({
+                        textAlign: this.align
+                    });
+                };
+            }, this.StringHandler.prototype = new i(), p.string = new this.StringHandler(),
+            n.prototype = new this.StringHandler(), p.text = new n(), o.prototype = new this.StringHandler(),
+            r.prototype = new o(), p.integer = new r(), a.prototype = new o(), p.float = new a(),
+            s.prototype = new i(), p.choice = new s(), l.prototype = new i(), p.thumbnail = new l(),
+            c.prototype = new i(), p.boolean = new c();
+            var f = t.noop, m = 0;
+        };
+        return new i();
+    }.apply(e, n), !(void 0 !== o && (t.exports = o));
+}, function(t, e, i) {
+    var n, o;
+    n = [ i(14) ], o = function(t) {
+        t.fn.selectImage = function(e) {
+            return this.each(function() {
+                function i() {
+                    var t = n.position();
+                    o.css({
+                        top: t.top + a.outerHeightWithMargins - 1,
+                        left: t.left,
+                        width: a.outerWidth - 2
+                    }), r.css({
+                        top: -a.outerHeight,
+                        width: a.outerWidth,
+                        height: a.outerHeight
+                    });
+                }
+                var n = t(this);
+                n.addClass("select-image");
+                var o = t("<div/>").hide().addClass("select-image-list").css({
+                    position: "absolute",
+                    overflow: "auto"
+                }).appendTo(n.parent()), r = t("<div/>").css({
+                    position: "relative",
+                    backgroundImage: "url('data:image/gif,GIF89a%01%00%01%00%80%00%00%FF%FF%FF%00%00%00!%F9%04%01%14%00%00%00%2C%00%00%00%00%01%00%01%00%00%02%02D%01%00%3B')"
+                }).appendTo(n.parent()).text(" "), a = n.dimensions();
+                i(), n.find("option").each(function() {
+                    var i = t(this), r = t("<div/>").appendTo(o).click(function() {
+                        n.val(i.attr("value")).change();
+                    }), a = t("<img/>").appendTo(t("<center/>").appendTo(r));
+                    e && e.default_src ? (a.attr("src", e.default_src), setTimeout(function() {
+                        a.attr("src", i.attr("title"));
+                    }, 100)) : a.attr("src", i.attr("title")), i.data("img", a), t("<span/>").text(i.text()).appendTo(r);
+                }), n.keydown(function(t) {
+                    t.stopImmediatePropagation(), t.preventDefault(), n.blur(), r.click();
+                }), n.click(function(t) {
+                    t.stopImmediatePropagation(), t.preventDefault(), n.blur(), r.click();
+                }), r.click(function(e) {
+                    if (n.blur(), i(), o.is(":visible")) return o.hide(), !1;
+                    var r = n.val();
+                    return n.find("option").each(function() {
+                        var e = t(this);
+                        e.attr("value") === r && setTimeout(function() {
+                            o.scrollTo(e.data("img"), {}).scrollTo("-=10px", {
+                                axis: "y"
+                            });
+                        }, 1), e.data("img").toggleClass("selected", e.attr("value") === r);
+                    }), o.show(), t(document).one("click", function() {
+                        o.hide();
+                    }), !1;
+                });
+            }), this;
+        };
+    }.apply(e, n), !(void 0 !== o && (t.exports = o));
+}, function(t, e) {
+    t.exports = city_autocomplete;
+}, function(t, e, i) {
+    var n, o;
+    n = [ i(14), i(164) ], o = function(t) {
+        function e() {
+            function e(t) {
+                t = t.replace(",", ".");
+                var e = parseFloat(t);
+                return t.indexOf("S") === -1 && t.indexOf("s") === -1 && t.indexOf("W") === -1 && t.indexOf("w") === -1 || (e = -e),
+                e;
+            }
+            this.help = function(t, e) {
+                var i = [];
+                return i.push("<div style='display:none;position:absolute' id='" + t + "_location'><div></div></div>"),
+                i.join("");
+            }, this.render = function(n) {
+                function o() {
+                    "function" == typeof n._item.city && n._item.city({
+                        lat: e(r._lat.val()),
+                        lon: e(r._lon.val())
+                    });
+                }
+                var r = this, a = n.get_defaults(), s = t('<div class="form-location"/>');
+                s.label("Latitude:"), this._lat = s.input({
+                    value: t.formatLatitude(a.lat, !0),
+                    class: "lat form-text"
+                }).css({
+                    textAlign: "right"
+                }).change(o), s.label("Longitude:"), this._lon = s.input({
+                    className: "lon form-text",
+                    value: t.formatLongitude(a.lon, !0)
+                }).css({
+                    textAlign: "right"
+                }).change(o), s.label("Altitude:"), this._alt = s.input({
+                    className: "altitude form-text",
+                    value: a.altitude,
+                    disabled: !0
+                }).css({
+                    textAlign: "right"
+                }), this.finder = t('<input class="form-text">');
+                var l = t("<div>").append(this.finder), c = t("<div>");
+                return c.prepend(s), c.append(l), c.p(".location-help").text("Please note that the lat/lon will not be updated unless an item is selected from the drop-down list, otherwise the text will be treated purely as a label"),
+                !function() {
+                    var e = [ i(166) ];
+                    (function() {
+                        r.finder.cityAutocomplete({
+                            name: "Unnamed",
+                            select: function(e, i) {
+                                var o = i.item;
+                                r._lat.val(t.formatLatitude(o.lat, !0)), r._lon.val(t.formatLongitude(o.lon, !0)),
+                                r._alt.val(o.altitude), delete r.save, "function" == typeof n._item.city && n._item.city(o);
+                            },
+                            open: function(t, e) {
+                                r.save = {
+                                    lat: r._lat.val(),
+                                    lon: r._lon.val()
+                                };
+                            },
+                            close: function(t, e) {
+                                r.save && (r._lat.val(r.save.lat), r._lon.val(r.save.lon), o(), delete r.save);
+                            },
+                            focus: function(e, i) {
+                                var o = i.item;
+                                r._lat.val(t.formatLatitude(o.lat, !0)), r._lon.val(t.formatLongitude(o.lon, !0)),
+                                "function" == typeof n._item.city && n._item.city(o);
+                            }
+                        });
+                    }).apply(null, e);
+                }(), c;
+            }, this.collect = function(t, i) {
+                return {
+                    lat: e(this._lat.val()),
+                    lon: e(this._lon.val()),
+                    city: this.finder.val(),
+                    altitude: this._alt.val()
+                };
+            };
+        }
+        t.addFormHandler("location", e, "String");
     }.apply(e, n), !(void 0 !== o && (t.exports = o));
 }, function(t, e, i) {
     var n = i(169);
@@ -13997,7 +13965,7 @@
     e = t.exports = i(3)(), e.push([ t.id, ".basic{position:relative;min-height:64px}.basic .fail{position:absolute;top:0;left:0;width:16px;height:16px;background-color:red;background-image:url(" + i(19) + ");border:2px solid red}.ui-icon-alert{background-position:0 -144px}.spinner{top:20px;left:20px}.parameter-selector ul.parameter-menu{max-height:600px}.ui-icon-link{background-position:-240px -112px}#chart-permalink .modal-body{padding-right:32px;margin:16px 0}#chart-permalink.modal textarea{border-color:#ccc;width:95%;padding:.5em;margin:8px 0;font-size:110%;font-family:monospace}#block-ecmwf-chart-country-cities{transition:background-color 1s}.form .form-location{margin-bottom:1em}.form .form-row .form-location label{display:block;padding-left:0;margin-top:.5em}.form p.location-help{margin-top:2em}.form p.country-location-help{margin:-1em 0 2.5em}#location-select .form td{border:0}.chart-history,.country-cities{list-style:none;padding-left:0}.chart-history>li,.country-cities>li{overflow:hidden;cursor:pointer;height:1.9em}.chart-history>li>div{display:inline-block;width:35%}.chart-history>li>div:first-child{width:40%}.chart-history>li>div.epsgram-type{width:25%}.chart-history>li>div>div,.country-cities>li{padding-right:5px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;line-height:1.9;color:#275992}.chart-history>li:hover,.country-cities>li:hover{background-color:#f2f2f2}#main .main-column-wrapper #block-ecmwf-chart-ecmwf-chart-metadata{right:0;border:0;max-width:25em}#block-ecmwf-chart-ecmwf-chart-metadata h2{display:block;font-weight:700;border:0}#main{position:relative}", "" ]);
 }, function(t, e, i) {
     var n, o;
-    n = [ i(13), i(14), i(26), i(171), i(29) ], o = function(t, e) {
+    n = [ i(13), i(14), i(26), i(171), i(33) ], o = function(t, e) {
         function i(t) {
             c = t, l = 439 * Math.pow(1.3, c);
         }
@@ -14540,12 +14508,12 @@
                     t.apply(this, e), n = !1;
                 });
             }
-            var O, N = {}, L = "object" == typeof self && self.self === self && self || "object" == typeof i && i.global === i && i || this;
-            null != L && (O = L.async), N.noConflict = function() {
-                return L.async = O, N;
+            var O, N = {}, z = "object" == typeof self && self.self === self && self || "object" == typeof i && i.global === i && i || this;
+            null != z && (O = z.async), N.noConflict = function() {
+                return z.async = O, N;
             };
-            var z = Object.prototype.toString, G = Array.isArray || function(t) {
-                return "[object Array]" === z.call(t);
+            var L = Object.prototype.toString, G = Array.isArray || function(t) {
+                return "[object Array]" === L.call(t);
             }, U = function(t) {
                 var e = typeof t;
                 return "function" === e || "object" === e && !!t;
@@ -15095,7 +15063,7 @@
     };
 }, function(t, e, i) {
     var n, o;
-    n = [ i(13), i(14), i(29), i(33), i(170), i(171), i(177), i(178) ], o = function(t, e, i, n) {
+    n = [ i(13), i(14), i(33), i(37), i(170), i(171), i(177), i(178) ], o = function(t, e, i, n) {
         e.module("chartAnimator", function(e) {
             var o = 0, r = this;
             this.Animator = function i() {
@@ -15121,51 +15089,51 @@
                     return e.animation_loader ? void (t ? e.animation_loader.show() : e.animation_loader.hide()) : ((e._complete || e._paused || !e._active) && (t = !1),
                     void (e._loader != t && (e._chart.clip.loader(t ? "progress" : "complete"), e._loader = t)));
                 }, this._fetchFrame = function(i) {
-                    function n(r, a) {
-                        function s(t) {
+                    function o(a, s) {
+                        function l(t) {
                             return t.is_fall_back ? (console.warn("chartAnimator.success: plot failed, got fallback"),
-                            o.pause(), l()) : (t.values && t.values.step && t.values.step != i.step && (console.warn("chartAnimator.success: step mismatch", t.values.step, " != ", i.step),
-                            o.pause()), o._active ? o._chart.product.validate_plot && !o._chart.product.validate_plot(t) ? (console.error("plot validation failed: ", o._chart.product.error_msg),
-                            o.pause(), l()) : (o._fr[i.key].ready = !0, o._count = 0, o._complete = !0, e.each(o._frames, function(t, e) {
-                                o._fr[e.key].ready ? o._count++ : o._complete = !1;
-                            }), o._notify("chart-frame-loaded", [ i, t.result ]), o._frame_ready(i), o._update_loader(),
-                            void (o._complete && (o._complete = !0, o._notify("chart-animation-load-complete", [ o._frames ]),
-                            o._load_complete(), o._show_loader(!1)))) : void o._show_loader(!1));
+                            r.pause(), c()) : (t.values && t.values.step && t.values.step != i.step && (console.warn("chartAnimator.success: step mismatch", t.values.step, " != ", i.step),
+                            r.pause()), r._active ? r._chart.product.validate_plot && !r._chart.product.validate_plot(t) ? (console.error("plot validation failed: ", r._chart.product.error_msg),
+                            r.pause(), c()) : (r._fr[i.key].ready = !0, r._count = 0, r._complete = !0, e.each(r._frames, function(t, e) {
+                                r._fr[e.key].ready ? r._count++ : r._complete = !1;
+                            }), r._notify("chart-frame-loaded", [ i, t.result ]), r._frame_ready(i), r._update_loader(),
+                            void (r._complete && (r._complete = !0, r._notify("chart-animation-load-complete", [ r._frames ]),
+                            r._load_complete(), r._show_loader(!1)))) : void r._show_loader(!1));
                         }
-                        function l() {
-                            o._active && !o._paused && setTimeout(function() {
-                                o._active && n(r, a);
+                        function c() {
+                            r._active && !r._paused && setTimeout(function() {
+                                r._active && o(a, s);
                             }, 1e4);
                         }
-                        function c(t, e, i) {
+                        function u(t, e, i) {
                             var n = t["django.total"];
-                            o._calltimes.plot += n, i && (o._calltimes.network += i.total - n);
+                            r._calltimes.plot += n, i && (r._calltimes.network += i.total - n);
                         }
-                        e.ajaxQueue({
-                            url: o._chart.product.url || t.options.ajax.backend.get_chart,
-                            data: JSON.stringify(o._chart.product.data && ("instance" === o._chart.product.data.kind || o._chart.instance) ? e.extend(!0, {
+                        n({
+                            url: r._chart.product.url || t.options.ajax.backend.get_chart,
+                            data: JSON.stringify(r._chart.product.data && ("instance" === r._chart.product.data.kind || r._chart.instance) ? e.extend(!0, {
                                 animate: !0
-                            }, o._chart.product.as_json(o._chart._viewport ? o._chart._viewport() : void 0, i)) : {
-                                product: o._chart.product.as_json(o._chart._viewport ? o._chart._viewport() : null, i),
-                                animate: a ? {
-                                    start: o._current,
-                                    frames: o._frames
+                            }, r._chart.product.as_json(r._chart._viewport ? r._chart._viewport() : void 0, i)) : {
+                                product: r._chart.product.as_json(r._chart._viewport ? r._chart._viewport() : null, i),
+                                animate: s ? {
+                                    start: r._current,
+                                    frames: r._frames
                                 } : null
                             }),
-                            success: s,
-                            error: l,
+                            success: l,
+                            error: c,
                             cache: 43200,
                             priority: "normal",
                             statistics: !0,
                             logErrors: "Load frame (" + i.key + ")",
-                            tag: o._tag,
-                            call_times: c,
-                            img: r
+                            tag: r._tag,
+                            call_times: u,
+                            img: a
                         });
                     }
-                    var o = this;
-                    o._fr[i.key].submitted || (o._fr[i.key].submitted = !0, o._fr[i.key].image = o._get_frame_img(),
-                    n(o._fr[i.key].image, o._first), o._first = !1);
+                    var r = this;
+                    r._fr[i.key].submitted || (r._fr[i.key].submitted = !0, r._fr[i.key].image = r._get_frame_img(),
+                    o(r._fr[i.key].image, r._first), r._first = !1);
                 }, this._frame_ready = function(t) {}, this._update_loader = function() {}, this._load_complete = function() {},
                 this.frameReady = function(t) {
                     var e = this;
@@ -15849,25 +15817,25 @@
     }.apply(e, n), !(void 0 !== o && (t.exports = o));
 }, function(t, e, i) {
     var n, o;
-    n = [ i(13), i(14), i(33), i(199), i(207), i(48), i(210), i(29), i(192), i(176), i(104), i(25), i(178), i(211) ],
-    o = function(t, e, i, n, o, r, a, s) {
+    n = [ i(13), i(14), i(37), i(26), i(199), i(207), i(48), i(210), i(33), i(192), i(176), i(104), i(25), i(178), i(211) ],
+    o = function(t, e, i, n, o, r, a, s, l) {
         "use strict";
-        function l() {
+        function c() {
             this.set_img = function(t) {};
         }
-        function c(t, i, n) {
+        function u(t, i, n) {
             this.img = t, this.set_img = function(t) {
                 this.img.attr("src", t).css(e.extend({}, n(), i()));
             };
         }
-        function u() {
+        function h() {
             this.set = function(t) {
                 return this["_" + t] = !0, this;
             }, this.get = function(t) {
                 return this._all || this["_" + t];
             };
         }
-        function h(t) {
+        function d(t) {
             return {
                 top: t.top,
                 left: t.left,
@@ -15875,7 +15843,7 @@
                 right: t.left + t.width
             };
         }
-        function d(t) {
+        function p(t) {
             return {
                 top: t.top,
                 left: t.left,
@@ -15883,19 +15851,19 @@
                 height: t.bottom - t.top
             };
         }
-        var p = 0;
+        var f = 0;
         t.Chart || (t.Chart = {});
-        var f = e.import_("chartAnimator");
+        var m = e.import_("chartAnimator");
         t.Chart.Prototype = {
             options: {
                 product: "empty",
                 projection: void 0,
                 time: null,
                 distance: 10,
-                messageBus: e.getMessageBus(),
+                messageBus: n.get_bus(),
                 mousewheel: null,
-                touch: m,
-                gesture: g,
+                touch: g,
+                gesture: v,
                 frame_count: 3,
                 expand_on_resize: !0,
                 title: e(),
@@ -15918,23 +15886,23 @@
             },
             _create: function() {
                 this.plugins = [];
-                for (var t in v) {
-                    var e = new v[t](this);
+                for (var t in b) {
+                    var e = new b[t](this);
                     e && (e.name = t, this.plugins.push(e));
                 }
             },
             _init: function() {
                 function t(t) {
-                    (o.mousewheel = t !== !1) ? i.element.mousewheel(function(t, e) {
+                    (n.mousewheel = t !== !1) ? i.element.mousewheel(function(t, e) {
                         i.mouseWheel(t, e);
                     }) : i.element.unmousewheel();
                 }
-                var i = this, o = i.options;
-                o.touch || this._mouseInit(), p++;
-                var r = "map_" + p;
-                this.zoom_level = o.zoom_level, this.image_pool = [], i.in_destroy = !1, i.bus = o.messageBus,
-                this.element.addClass("chart"), null === o.mousewheel && (o.mousewheel = e.getUserPreference("chart__enable_scrollwheel")),
-                i.title = o.title.css({
+                var i = this, n = i.options;
+                n.touch || this._mouseInit(), f++;
+                var r = "map_" + f;
+                this.zoom_level = n.zoom_level, this.image_pool = [], i.in_destroy = !1, i.bus = n.messageBus,
+                this.element.addClass("chart"), null === n.mousewheel && (n.mousewheel = e.getUserPreference("chart__enable_scrollwheel")),
+                i.title = n.title.css({
                     overflow: "hidden"
                 }) || null;
                 var a = e('<div class="chart-clip"/>').prependTo(this.element).css({
@@ -15949,22 +15917,22 @@
                 }).appendTo(a);
                 i.name = r, i.product = ProductFactory({
                     owner: r,
-                    product: o.product,
-                    projection: o.projection,
-                    use_product_projection: o.use_product_projection,
-                    values: o.values
+                    product: n.product,
+                    projection: n.projection,
+                    use_product_projection: n.use_product_projection,
+                    values: n.values
                 }), i._promises = {
                     size: new e.Deferred()
-                }, i.renderer = new c(s, function() {
+                }, i.renderer = new u(s, function() {
                     return i.product.size();
                 }, function() {
                     return i._viewport();
-                }), i.plugins_v2 = e.map(o.plugins, function(t) {
+                }), i.plugins_v2 = e.map(n.plugins, function(t) {
                     return "function" == typeof t && (t = {
                         mixin: t
                     }), new t.mixin(i, t.options);
-                }), i.img = s, i.clip = a, i.current_tool = o.editable ? "pan" : "select", i.zoom = {},
-                i.drag = {}, i.time = o.time, f && new f.Controller(i, o.preload_animations, o.animation_loader),
+                }), i.img = s, i.clip = a, i.current_tool = n.editable ? "pan" : "select", i.zoom = {},
+                i.drag = {}, i.time = n.time, m && new m.Controller(i, n.preload_animations, n.animation_loader),
                 i.matrix = function() {
                     var t = e.debounce(500, function() {
                         this.transformMap(this.matrix.magics), this._pinch_gesture = !1, this._drag_gesture = !1;
@@ -15973,7 +15941,7 @@
                         magics: null,
                         screen: null,
                         reset: function() {
-                            this.magics = n.Matrix.I(3), this.screen = n.Matrix.I(3);
+                            this.magics = o.Matrix.I(3), this.screen = o.Matrix.I(3);
                         },
                         transform: function(t, e, i) {
                             var n = $M([ [ 1 / i, 0, 0 ], [ 0, 1 / i, 0 ], [ 0, 0, 1 ] ]), o = $M([ [ i, 0, 0 ], [ 0, i, 0 ], [ 0, 0, 1 ] ]), r = $M([ [ 1, 0, -t ], [ 0, 1, -e ], [ 0, 0, 1 ] ]), a = $M([ [ 1, 0, t ], [ 0, 1, e ], [ 0, 0, 1 ] ]);
@@ -15989,7 +15957,7 @@
                                 y: i.bottom
                             };
                             return n = $V([ n.x, n.y, 1 ]), o = $V([ o.x, o.y, 1 ]), n = this.screen.x(n), o = this.screen.x(o),
-                            e.img.css(e.zoom.view = d({
+                            e.img.css(e.zoom.view = p({
                                 left: n.e(1),
                                 top: n.e(2),
                                 right: o.e(1),
@@ -15997,15 +15965,15 @@
                             })), t.call(e), this;
                         }
                     };
-                }(), i.matrix.reset(), i.matrix.self = this, i.checkAvailability(o.availability),
-                o.touch && console.warn("MAP TOUCH " + o.touch), i._listen("city-select", function(t, e) {
+                }(), i.matrix.reset(), i.matrix.self = this, i.checkAvailability(n.availability),
+                n.touch && console.warn("MAP TOUCH " + n.touch), i._listen("city-select", function(t, e) {
                     i._push_undo(), i.product.show_city(e), i._clear()._redraw();
                 })._listen("send-magics-stuff", function(t, e) {
                     i.mail = !0, i._clear()._redraw(), i.mail = !1;
                 })._listen("collect-report-info", function(t, e) {
                     e.chart = i;
                 })._listen("tool-clear-click", function() {
-                    i.setProduct("empty"), o.messageBus.send("chart-availability-invalidated");
+                    i.setProduct("empty"), n.messageBus.send("chart-availability-invalidated");
                 })._listen("tool-full-map", function() {
                     i.setProjection(i.product.full_map_projection_name());
                 })._listen("vertical-longitude-select", function(t, e) {
@@ -16040,7 +16008,7 @@
                     i._push_undo(), i.product.layerDelete(e.layer_id), i._clear()._redraw(function() {
                         i._notifyProductChange();
                     });
-                }), o.messageBus.listen(i, "layer-options-change", function(t, e) {
+                }), n.messageBus.listen(i, "layer-options-change", function(t, e) {
                     i._push_undo(), i.product.layerOptions(e.layer_id, e.options), i._clear()._redraw(function() {
                         i._notifyProductChange();
                     });
@@ -16100,20 +16068,20 @@
                         n && i._set_time(n);
                     }
                 }).listen(i, "preferences-changed", function() {
-                    o.show_latlong && (e.getUserPreference("show_latlong") ? i.latlong.length || i.element.div().latlong({
+                    n.show_latlong && (e.getUserPreference("show_latlong") ? i.latlong.length || i.element.div().latlong({
                         chart: i
                     }) : (i.latlong.remove(), i.latlong = e()));
-                    var n;
-                    (n = e.getUserPreference("chart__enable_scrollwheel")) !== o.mousewheel && t(n),
+                    var o;
+                    (o = e.getUserPreference("chart__enable_scrollwheel")) !== n.mousewheel && t(o),
                     i._redraw();
                 }), i.product.api > 1 && i.product.variables.time.subscribe(i, function(t) {
                     i.time = t.value, this.prev && i._clear()._redraw();
-                }), o.mousewheel && this.element.mousewheel && t(), this.resize(i.options.size || {
+                }), n.mousewheel && this.element.mousewheel && t(), this.resize(i.options.size || {
                     width: i.element.width(),
                     height: i.element.height()
                 }, function() {
                     i._notifyProductChange();
-                }), i.latlong = o.show_latlong && (e.getUserPreference || e.getUserPreference("show_latlong")) ? this.element.div().latlong({
+                }), i.latlong = n.show_latlong && (e.getUserPreference || e.getUserPreference("show_latlong")) ? this.element.div().latlong({
                     chart: i
                 }) : e(), i._mouse = {
                     pan: {
@@ -16141,7 +16109,7 @@
                 var e = this;
                 e._clear(), e.time = t, e.product.api > 1 ? e.product.variables.time.set(t) : this._redraw(function() {
                     e.options.messageBus.send("chart-time-select", e.time);
-                }, new u().set("time"));
+                }, new h().set("time"));
             },
             _viewport: function() {
                 var t = 0, e = 0, i = this.element.width(), n = this.element.height(), o = this.element.width(), r = this.element.height(), a = this.product.get_view({
@@ -16162,7 +16130,7 @@
                 };
             },
             _rect: function() {
-                return h(this._viewport());
+                return d(this._viewport());
             },
             resize: function(t, e) {
                 var i = this, n = {};
@@ -16179,7 +16147,7 @@
                             var l = this._viewport();
                             i.product.projection(i.product.resize(l.width, l.height));
                         }
-                        n.width && n.height && i._clear()._redraw(e, new u().set("size"));
+                        n.width && n.height && i._clear()._redraw(e, new h().set("size"));
                     }
                 }, this.resize(t, e);
             },
@@ -16189,11 +16157,13 @@
             },
             _redraw: function(i, n) {
                 var o = this, r = o.options;
-                o.__redraw_queued || (o.__redraw_queued = !0, o._promises.size.done(function(s) {
-                    var l = n || new u().set("all");
-                    delete o.zoom.view, o.times = null, o.product.get_chart({
+                o.__redraw_queued || (o.__redraw_queued = !0, o._promises.size.done(function(a) {
+                    var l = n || new h().set("all");
+                    delete o.zoom.view, o.times = null, o.in_destroy && (console.warn("chart._redraw: in destroy"),
+                    console.trace()), o.product || (console.warn("chart._redraw: no product"), console.trace()),
+                    o.product.get_chart({
                         json: {
-                            product: o.product.as_json(s, o.time, o.mail, r.format),
+                            product: o.product.as_json(a, o.time, o.mail, r.format),
                             animate: null
                         },
                         name: o.name,
@@ -16273,7 +16243,7 @@
                         },
                         error: function(n) {
                             o.matrix.reset();
-                            var r = "<h4>The chart could not be produced</h4>({error})\nYou may choose to {retry}, reset the {projection} " + (a.length() ? ", {revert} to the previous state " : "") + "or {clear} the map.";
+                            var r = "<h4>The chart could not be produced</h4>({error})\nYou may choose to {retry}, reset the {projection} " + (s.length() ? ", {revert} to the previous state " : "") + "or {clear} the map.";
                             t.inform(o.element, {
                                 offset_top: 50,
                                 level: "error",
@@ -16340,7 +16310,7 @@
             _mouseStart: function(t) {
                 var e = this, i = e.options;
                 if (i.editable) return e._clear(), e.mouse_tool = t.shiftKey ? "zoom" : e.current_tool,
-                e.drag = {}, s.run.apply(e, [ e._mouse[e.mouse_tool].start, [ t ] ])[0];
+                e.drag = {}, l.run.apply(e, [ e._mouse[e.mouse_tool].start, [ t ] ])[0];
             },
             _clearRequestQueue: function() {
                 i.cancelByTag(this.name);
@@ -16397,7 +16367,7 @@
             },
             _mouseDrag: function(t) {
                 var e = this, i = e.options;
-                if (i.editable) return s.run.apply(e, [ e._mouse[e.mouse_tool].drag, [ t ] ])[0];
+                if (i.editable) return l.run.apply(e, [ e._mouse[e.mouse_tool].drag, [ t ] ])[0];
             },
             _mouseDrag_pan: function(t) {
                 var e, i = this, n = i.drag.start, o = {
@@ -16482,7 +16452,7 @@
             },
             redraw: function() {
                 var t = this;
-                t._redraw(function() {
+                t.in_destroy || t._redraw(function() {
                     t._notifyProductChange();
                 });
             },
@@ -16514,7 +16484,7 @@
                     r = n.width / 2, a = n.height / 2, i.zoom.view || (i._clearRequestQueue(), i._clear(),
                     i.zoom.view = n, i.img.css(i.zoom.view), i.matrix.delta = 0, i.matrix.pinch_magics = i.matrix.magics,
                     i.matrix.pinch_screen = i.matrix.screen), i.matrix.delta += e, i.matrix.transform(r, a, 1 + i.matrix.delta / 10),
-                    s.run.apply(i, [ i._mouse.wheel, [ t, e ] ]);
+                    l.run.apply(i, [ i._mouse.wheel, [ t, e ] ]);
                 }), this;
             },
             pinch: function(t) {
@@ -16522,14 +16492,14 @@
                 return e._promises.size.done(function(i) {
                     var n = e.img.offset(), o = -n.left, r = -n.top;
                     o = i.width / 2, r = i.height / 2, e.zoom.view || (e._clearRequestQueue(), e._clear(),
-                    e.zoom.view = i, e.img.css(e.zoom.view)), e.matrix.transform(o, r, t), s.run.apply(e, [ e._mouse.pinch, [ t ] ]);
+                    e.zoom.view = i, e.img.css(e.zoom.view)), e.matrix.transform(o, r, t), l.run.apply(e, [ e._mouse.pinch, [ t ] ]);
                 }), this;
             },
             _push_undo: function() {
                 var t = this, e = t.options;
                 if (e.enable_undo) {
                     var i = t.product.get_save_state(!0), n = t.time;
-                    a.store(t, function() {
+                    s.store(t, function() {
                         var e = t.product.get_save_state(!0), o = t.time;
                         return t.time = n, t.product = ProductFactory({
                             owner: t,
@@ -16728,20 +16698,20 @@
                 if (!e.findWhere(this.plugins, {
                     name: t
                 })) {
-                    var i = new v[t](this);
+                    var i = new b[t](this);
                     return i && (i.name = t, this.plugins.push(i)), !0;
                 }
                 return !1;
             }
         };
-        var m = !1, g = !1;
-        m ? e.widget("ui.chart", t.Chart.Prototype) : e.widget("ui.chart", e.ui.mouse, t.Chart.Prototype);
-        var v = {};
+        var g = !1, v = !1;
+        g ? e.widget("ui.chart", t.Chart.Prototype) : e.widget("ui.chart", e.ui.mouse, t.Chart.Prototype);
+        var b = {};
         e.chartRegisterPlugin = function(t, e) {
-            v[t] = e;
+            b[t] = e;
         }, e.chartGetPlugins = function() {
-            return v;
-        }, c.prototype = new l();
+            return b;
+        }, u.prototype = new c();
     }.apply(e, n), !(void 0 !== o && (t.exports = o));
 }, function(t, e, i) {
     var n, o;
@@ -18110,7 +18080,7 @@
     }, t.exports = n.Segment;
 }, function(t, e, i) {
     var n, o;
-    n = [ i(13), i(14), i(33), i(47), i(48), i(208), i(209), i(35) ], o = function(t, e, i, n, o, r, a) {
+    n = [ i(13), i(14), i(37), i(47), i(48), i(208), i(209), i(28) ], o = function(t, e, i, n, o, r, a) {
         function s(t) {
             return function(n, o) {
                 return i(e.extend({
@@ -18151,7 +18121,8 @@
                     if (o.api > 1) {
                         var a = e.extend(!0, {}, n.json.product);
                         if (delete a.time, delete a.layers, delete a.magics_viewport, delete a.use_product_projection,
-                        delete a.projection, delete a.viewport.top, delete a.viewport.left, JSON.stringify(a) === JSON.stringify(o.__prev_request)) return console.log("product.get_chart: ignoring duplicate request");
+                        console.log("product.get_chart: projection=", a.projection), delete a.viewport.top,
+                        delete a.viewport.left, JSON.stringify(a) === JSON.stringify(o.__prev_request)) return console.log("product.get_chart: ignoring duplicate request");
                         o.__prev_request = a;
                     }
                     i(e.extend({
@@ -18791,7 +18762,7 @@
     }.call(e, i, e, t), !(void 0 !== n && (t.exports = n));
 }, function(t, e, i) {
     var n, o;
-    n = [ i(13), i(14), i(33), i(32) ], o = function(t, e, i, n) {
+    n = [ i(13), i(14), i(37), i(36) ], o = function(t, e, i, n) {
         function o(o) {
             return this.get_title = function() {
                 var t = o.title;
@@ -19049,7 +19020,7 @@
     }.apply(e, n), !(void 0 !== o && (t.exports = o));
 }, function(t, e, i) {
     var n, o;
-    n = [ i(13), i(14), i(33), i(32), i(93), i(158), i(163) ], o = function(t, e, i, n, o) {
+    n = [ i(13), i(14), i(37), i(36), i(93), i(167), i(123) ], o = function(t, e, i, n, o) {
         e.widget("ui.meteogramOverlay", {
             options: {
                 time: {},
@@ -19290,7 +19261,7 @@
     }.apply(e, n), !(void 0 !== o && (t.exports = o));
 }, function(t, e, i) {
     var n, o;
-    n = [ i(13), i(14), i(33), i(153), i(26), i(29), i(25) ], o = function(t, e, i, n, o) {
+    n = [ i(13), i(14), i(37), i(162), i(26), i(33), i(25) ], o = function(t, e, i, n, o) {
         var r = 0, a = !0, s = {
             score: t.options.product_scoring || !1,
             cache_expire_mins: t.options.thumbnail_cache || 10
@@ -19443,51 +19414,52 @@
                     package: t
                 });
             }, this.fetch = function(t, n) {
-                var o = this;
-                return !n && e.isFunction(t) && (n = t, t = null), o.products ? n(o.products) : (o.__fetch_callbacks = o.__fetch_callbacks || [],
-                o.__fetch_callbacks.push(n), void (o.__fetch_callbacks.length > 1 || (console.log("products.fetch query=", o.query),
-                i({
+                function o(i) {
+                    r.products = e.map(i.records, function(t) {
+                        if (r.validate([ [ "not empty", function() {
+                            return t;
+                        } ], [ "has name", function() {
+                            return t.name;
+                        } ], [ "has title", function() {
+                            return t.title;
+                        } ], [ "has no empty facets", function() {
+                            if (t.tags) for (var i in t.tags) e.isArray(t.tags[i]) && !t.tags[i].length && (console.warn("product.validate: product error: " + t.name + ": tag is empty array (" + i + ")"),
+                            delete t.tags[i]);
+                            return !0;
+                        } ], [ "path has no trailing slash", function() {
+                            if (e.isArray(t.path)) for (var i in t.path) {
+                                var n = t.path[i];
+                                (t.path[i] = t.path[i].replace(/\/$/, "")) !== n && console.warn("path has trailing slash: ", n, t.name);
+                            }
+                            return !0;
+                        } ], [ "has keywords", function() {
+                            return t.keywords || (t.keywords = " ");
+                        } ] ])) {
+                            var i = new l(t);
+                            if (!a || i.cache.score.apply(i) > -1) return i;
+                        }
+                    }), r.products.length ? console.log("n_products=", r.products.length, " (", i.query_count - r.products.length, " rejected)") : console.log("no products found for:", t || r.query),
+                    r.packages(function() {
+                        if (r.__fetch_callbacks) {
+                            for (;r.__fetch_callbacks.length; ) {
+                                var t = r.__fetch_callbacks.shift();
+                                t(r.products);
+                            }
+                            delete r.__fetch_callbacks;
+                        }
+                    });
+                }
+                var r = this;
+                return !n && e.isFunction(t) && (n = t, t = null), r.products ? n(r.products) : (r.__fetch_callbacks = r.__fetch_callbacks || [],
+                r.__fetch_callbacks.push(n), void (r.__fetch_callbacks.length > 1 || (console.log("products.fetch query=", r.query),
+                window._ECMWF && window._ECMWF.products ? o({
+                    records: window._ECMWF.products
+                }) : i({
                     url: "/plots/find-product/",
                     json: e.extend({}, {
-                        query: t || o.query
+                        query: t || r.query
                     }),
-                    complete: function(i) {
-                        o.products = e.map(i.records, function(t) {
-                            if (o.validate([ [ "not empty", function() {
-                                return t;
-                            } ], [ "has name", function() {
-                                return t.name;
-                            } ], [ "has title", function() {
-                                return t.title;
-                            } ], [ "has no empty facets", function() {
-                                if (t.tags) for (var i in t.tags) e.isArray(t.tags[i]) && !t.tags[i].length && delete t.tags[i];
-                                return !0;
-                            } ], [ "path has no trailing slash", function() {
-                                if (e.isArray(t.path)) for (var i in t.path) {
-                                    var n = t.path[i];
-                                    (t.path[i] = t.path[i].replace(/\/$/, "")) !== n && console.warn("path has trailing slash: ", n, t.name);
-                                }
-                                return !0;
-                            } ], [ "bogus tag", function() {
-                                if (t.tags) for (var e in t.tags) "title" === e && delete t.tags[e];
-                                return !0;
-                            } ], [ "has keywords", function() {
-                                return t.keywords || (t.keywords = " ");
-                            } ] ])) {
-                                var i = new l(t);
-                                if (!a || i.cache.score.apply(i) > -1) return i;
-                            }
-                        }), o.products.length ? console.log("n_products=", o.products.length, " (", i.query_count - o.products.length, " rejected)") : console.log("no products found for:", t),
-                        o.packages(function() {
-                            if (o.__fetch_callbacks) {
-                                for (;o.__fetch_callbacks.length; ) {
-                                    var t = o.__fetch_callbacks.shift();
-                                    t(o.products);
-                                }
-                                delete o.__fetch_callbacks;
-                            }
-                        });
-                    }
+                    complete: o
                 }))));
             }, this.facets = function() {
                 var t = this;
@@ -19502,24 +19474,24 @@
                         return e;
                     }).sort();
                 })), this._facets;
-            }, this.sorted_facets = function(t, i) {
-                var n = this;
-                this.products.length && this.packages(function() {
-                    n.facets();
-                    var o = t.facets || [], r = o.length ? e.map(n._facets, function(t, i) {
-                        return {
-                            name: i,
+            }, this.sorted_facets = function(t, i, n) {
+                var o = this;
+                2 === arguments.length && (n = i, i = []), this.products.length && this.packages(function() {
+                    o.facets();
+                    var r = t.facets || [], a = r.length ? e.map(o._facets, function(t, n) {
+                        if (!~e.inArray(n, i)) return {
+                            name: n,
                             values: t,
-                            order: e.inArray(i, o)
+                            order: e.inArray(n, r)
                         };
-                    }) : e.map(n._facets, function(t, e) {
-                        return {
-                            name: e,
+                    }) : e.map(o._facets, function(t, n) {
+                        if (!~e.inArray(n, i)) return {
+                            name: n,
                             values: t,
                             order: 0
                         };
                     });
-                    i(r.sort(function(t, e) {
+                    n(a.sort(function(t, e) {
                         return t.order - e.order;
                     }));
                 });
@@ -19667,7 +19639,7 @@
     }.apply(e, n), !(void 0 !== o && (t.exports = o));
 }, function(t, e, i) {
     var n, o;
-    n = [ i(14), i(33) ], o = function(t, e) {
+    n = [ i(14), i(37) ], o = function(t, e) {
         return {
             title_lookup: function(t) {
                 for (var e in this.list) if (this.list[e][0] === t) return this.list[e][1];
@@ -19689,7 +19661,7 @@
     }.apply(e, n), !(void 0 !== o && (t.exports = o));
 }, function(t, e, i) {
     var n, o;
-    n = [ i(222), i(29) ], o = function(t, e) {
+    n = [ i(222), i(33) ], o = function(t, e) {
         var i = null;
         return new t({
             name: "text",
@@ -19745,7 +19717,7 @@
     }.apply(e, n), !(void 0 !== o && (t.exports = o));
 }, function(t, e, i) {
     var n, o;
-    n = [ i(153) ], o = function(t) {
+    n = [ i(162) ], o = function(t) {
         function e(t, e) {
             e.widgetName || console.warn("Storable: widgetName not set"), this.db = e.widgetName,
             this.name = t, i[this.db] = null;
@@ -19790,7 +19762,7 @@
     }.apply(e, n), !(void 0 !== o && (t.exports = o));
 }, function(t, e, i) {
     var n, o;
-    n = [ i(13), i(14), i(26), i(226), i(23), i(222), i(33), i(220), i(228), i(29), i(41), i(232), i(236), i(67) ],
+    n = [ i(13), i(14), i(26), i(226), i(23), i(222), i(37), i(220), i(228), i(33), i(41), i(232), i(236), i(67) ],
     o = function(t, e, n, o, r, a, s) {
         var l = [ "groups", "thumbs", "details", "list" ];
         e.widget("ui.grid", e.extend({
@@ -19818,8 +19790,8 @@
                     });
                 }
                 var n = this, o = n.options;
-                this.widgetName = "grid", o.size_fits_content && (o.container = !1), console.log("GRID: fit=", o.size_fits_content),
-                n.n_filter_runs = 0, e.map(r.filters, this.bind(n.add_filter)), n._pending = {
+                this.widgetName = "grid", o.size_fits_content && (o.container = !1), n.n_filter_runs = 0,
+                e.map(r.filters, this.bind(n.add_filter)), n._pending = {
                     sizing: !0,
                     view: !0
                 }, e.extend(n._pending, {
@@ -19853,9 +19825,9 @@
                     wheelSpeed: t.wheelspeed || 10
                 }).scroll(e.throttle(200, function(t) {
                     n.container.catalogueView && n.container.catalogueView("scroll", -n.container.parent().scrollTop());
-                })).ensure(".grid-items").empty(), n._ready = e.Deferred(function(t) {
+                })).ensure(".grid-items"), n._ready = e.Deferred(function(t) {
                     setTimeout(t.resolve, 400);
-                }), n._resize = e.debounce(300, function() {
+                }), n._resize = e.debounce(200, function() {
                     var t = this;
                     this.container.catalogueView && this.container.catalogueView("resize"), delete this._pending.sizing,
                     this._update(), t.container.scroll();
@@ -20120,7 +20092,7 @@
     i(11)(n, {});
     n.locals && (t.exports = n.locals);
 }, function(t, e, i) {
-    e = t.exports = i(3)(), e.push([ t.id, "#content ul li{background:none}.catalogue-grid h3{margin-bottom:4px;padding-left:4px}.catalogue-grid .scrollable{overflow:hidden;position:relative}.catalogue-grid .grid-items{position:relative;background-color:#fff;width:100%}.catalogue-grid .grid-items .vdom-root>div,.catalogue-grid .grid-items>div{position:absolute}.catalogue-grid>div{margin:8px 0}.catalogue-grid .head{background-color:#f5f5f5;padding:5px}.catalogue-grid .head select{margin-right:10px}.catalogue-grid .head .product-types{display:inline-block}.catalogue-grid .foot{background-color:#f5f5f5;padding:5px}.catalogue-grid .thumbnail-list-filter{margin:2px 0 0;float:left}.catalogue-grid input{padding-left:.3em;width:376px}.catalogue-grid .status{margin-bottom:8px}.catalogue-grid .status a{color:#000;border-bottom:0}.catalogue-grid .status .disabled{color:#ccc}.catalogue-grid .status .type{color:#333;background-color:#eee;padding:0 .4em .2em;margin:0 .4em 0 .8em}.catalogue-grid .status .disabled .type{color:#aaa}.catalogue-grid .grid-items .empty{display:none}.catalogue-grid .thumbs .thumbnail-wrapper{border:2px solid #fff;padding:6px 2px;width:127px}.catalogue-grid .thumbs .thumbnail-wrapper:hover{border:2px solid #ddd}.catalogue-grid .thumbs .thumbnail-wrapper.selected{border:2px solid #9cf}.catalogue-grid .thumbs .thumbnail{cursor:pointer;overflow:hidden;height:64px}.catalogue-grid .thumbs .thumbnail-img{max-width:none;-webkit-transition:visibility .2s linear,opacity .2s linear;transition:visibility .2s linear,opacity .2s linear}.catalogue-grid .thumbs .title{text-align:center;text-overflow:ellipsis;overflow:hidden;line-height:1.3;height:2.6em;margin-top:4px}.catalogue-grid .details{max-width:480px}.catalogue-grid .details .col-title{position:absolute;top:0;left:70px;white-space:nowrap;line-height:1em;margin-bottom:.4em}.catalogue-grid .details .col-description{position:absolute;top:1em;left:70px;white-space:nowrap;color:#666}.catalogue-grid .details .img-wrapper{width:64px;height:34px;overflow:hidden;color:#fff}.catalogue-grid .details .not-available{color:#aaa}.catalogue-grid .details .selected{background-color:#ffc}.catalogue-grid .details .selected:hover{background-color:#ffd}.catalogue-grid .details .detailItem{margin-left:4px;width:100%;cursor:pointer}.catalogue-grid .details .detailItem:hover{background-color:#e9f0ff}.catalogue-grid .details .detailItem img{white-space:nowrap}.catalogue-grid .list-view{max-width:480px}.catalogue-grid .list-view .list-item{padding:3px 0;cursor:pointer;width:100%;text-align:left}.catalogue-grid .list-view .list-item:hover{background-color:#f8f8f8}.catalogue-grid .list-view .col-title{white-space:nowrap;font-size:12.7px}.catalogue-grid .list-view .selected{background-color:#ffc}.catalogue-grid .list-view .selected:hover{background-color:#ffd}.catalogue-grid .groups{overflow:auto}.catalogue-grid .groups h2{clear:both}.catalogue-grid .groups .thumbnail-wrapper{position:static;float:left;width:128px;height:64px}.fade-in-out{opacity:0;-webkit-transition:visibility .3s linear,opacity .3s linear;transition:visibility 0s linear,opacity .3s linear}.smooth-width{-webkit-transition:width 2.3s linear;transition:width 2.3s linear}.catalogue-grid .progress-bar{position:absolute;top:-10px;left:0;width:0;height:5px;background-color:#2b619e;background-image:url(" + i(230) + ")}.catalogue-grid .thumb-progress-bar{position:absolute;top:7px;left:1px;width:1%;height:5px;background-color:#bbb;opacity:.5;min-width:10%;background-image:url(" + i(230) + ")}#left-column .keywords ul{height:200px;overflow:auto}.burger{float:right;padding:4px 2px;border-radius:4px;position:relative}.burger:hover{background-color:#f3f3f3;cursor:pointer}.burger .layer{background-color:#bbb;display:block;width:20px;height:2px;border-radius:1px;margin:4px}.filter-status{min-height:34px}.filter-status .ui-icon{height:16px;width:16px;opacity:0}.filter-status .ui-button:hover .ui-icon{opacity:1}.filter-status .ui-button{border:1px solid #ddd;border-radius:4px}.filter-status .ui-button:hover{background-color:#fafafa}.burger .ui-menu{position:absolute;right:-1px;top:28px;border:1px solid #eee;padding:5px;text-align:left;min-width:120px;background-color:#fff;z-index:100;box-shadow:0 1px 0 rgba(0,0,0,.05);-moz-box-shadow:0 1px 0 rgba(0,0,0,.05);border-radius:2px}.catalogue-grid .head{border:1px solid #ddd;padding:4px 8px}.view-type-button.ui-button{border:0;width:16px;height:16px;padding:2px;margin:0}.view-type-button.ui-button:hover{background-color:#f0f0f0}.view-type-button .ui-icon{background:url(" + i(231) + ") no-repeat;opacity:.4}.view-type-button .icon-thumbs{background-position:0 0}.view-type-button .icon-list{background-position:-16px 0}.view-type-button .icon-details{background-position:-32px 0}.view-type-button .icon-groups{background-position:-48px 0}.clear{clear:both;display:block;height:0}.catalogue-grid .group-labels h3{position:absolute;white-space:nowrap;margin:0;cursor:pointer}#chart-select .head{margin-top:-5px}#chart-select .variables{margin-bottom:-8px}#chart-select .modal-header{border:0}#chart-select .modal-body{font-size:inherit;padding-top:0}#chart-select .catalogue-grid{background-color:#f5f5f5;margin-left:-25px;margin-right:-15px;padding-left:25px;padding-right:15px}.ui-icon-closethick{background-position:-96px -128px}.ui-icon-circle-close{background-position:-32px -192px}.ui-button{border:1px solid #ddd}.unselectable{-moz-user-select:-moz-none;-webkit-user-select:none;-o-user-select:none;user-select:none}.catalogue-grid .hidden{display:none}.catalogue-grid .status{background-image:none;background-color:transparent}", "" ]);
+    e = t.exports = i(3)(), e.push([ t.id, "#content ul li{background:none}.catalogue-grid .scrollable{overflow:hidden;position:relative}.catalogue-grid .grid-items{position:relative;background-color:#fff;width:100%}.catalogue-grid .grid-items .vdom-root>div,.catalogue-grid .grid-items>div{position:absolute}.catalogue-grid>div{margin:8px 0}.catalogue-grid .head{background-color:#f5f5f5;padding:5px}.catalogue-grid .head select{margin-right:10px}.catalogue-grid .head .product-types{display:inline-block}.catalogue-grid .foot{background-color:#f5f5f5;padding:5px}.catalogue-grid .thumbnail-list-filter{margin:2px 0 0;float:left}.catalogue-grid input{padding-left:.3em;width:376px}.catalogue-grid .status{margin-bottom:8px}.catalogue-grid .status a{color:#000;border-bottom:0}.catalogue-grid .status .disabled{color:#ccc}.catalogue-grid .status .type{color:#333;background-color:#eee;padding:0 .4em .2em;margin:0 .4em 0 .8em}.catalogue-grid .status .disabled .type{color:#aaa}.catalogue-grid .grid-items .empty{display:none}.catalogue-grid .thumbs .thumbnail-wrapper{border:2px solid #fff;padding:6px 2px;width:127px}.catalogue-grid .thumbs .thumbnail-wrapper:hover{border:2px solid #ddd}.catalogue-grid .thumbs .thumbnail-wrapper.selected{border:2px solid #9cf}.catalogue-grid .thumbs .thumbnail{cursor:pointer;overflow:hidden;height:64px}.catalogue-grid .thumbs .thumbnail-img{max-width:none;transition:visibility .2s linear,opacity .2s linear}.catalogue-grid .thumbs .title{text-align:center;text-overflow:ellipsis;overflow:hidden;line-height:1.3;height:2.6em;margin-top:4px}.catalogue-grid .details{max-width:480px}.catalogue-grid .details .col-title{position:absolute;top:0;left:70px;white-space:nowrap;line-height:1em;margin-bottom:.4em}.catalogue-grid .details .col-description{position:absolute;top:1em;left:70px;white-space:nowrap;color:#666}.catalogue-grid .details .img-wrapper{width:64px;height:34px;overflow:hidden;color:#fff}.catalogue-grid .details .not-available{color:#aaa}.catalogue-grid .details .selected{background-color:#ffc}.catalogue-grid .details .selected:hover{background-color:#ffd}.catalogue-grid .details .detailItem{margin-left:4px;width:100%;cursor:pointer}.catalogue-grid .details .detailItem:hover{background-color:#e9f0ff}.catalogue-grid .details .detailItem img{white-space:nowrap}.catalogue-grid .list-view{max-width:480px}.catalogue-grid .list-view .list-item{padding:3px 0;cursor:pointer;width:100%;text-align:left}.catalogue-grid .list-view .list-item:hover{background-color:#f8f8f8}.catalogue-grid .list-view .col-title{white-space:nowrap;font-size:12.7px}.catalogue-grid .list-view .selected{background-color:#ffc}.catalogue-grid .list-view .selected:hover{background-color:#ffd}.catalogue-grid .groups{overflow:auto}.catalogue-grid .groups h2{clear:both}.catalogue-grid .groups .thumbnail-wrapper{position:static;float:left;width:128px;height:64px}.fade-in-out{opacity:0;transition:visibility 0s linear,opacity .3s linear}.smooth-width{transition:width 2.3s linear}.catalogue-grid .progress-bar{position:absolute;top:-10px;left:0;width:0;height:5px;background-color:#2b619e;background-image:url(" + i(230) + ")}.catalogue-grid .thumb-progress-bar{position:absolute;top:7px;left:1px;width:1%;height:5px;background-color:#bbb;opacity:.5;min-width:10%;background-image:url(" + i(230) + ")}#left-column .keywords ul{height:200px;overflow:auto}.burger{float:right;padding:4px 2px;border-radius:4px;position:relative}.burger:hover{background-color:#f3f3f3;cursor:pointer}.burger .layer{background-color:#bbb;display:block;width:20px;height:2px;border-radius:1px;margin:4px}.filter-status{min-height:34px}.filter-status .ui-icon{height:16px;width:16px;opacity:0}.filter-status .ui-button:hover .ui-icon{opacity:1}.filter-status .ui-button{border:1px solid #ddd;border-radius:4px}.filter-status .ui-button:hover{background-color:#fafafa}.burger .ui-menu{position:absolute;right:-1px;top:28px;border:1px solid #eee;padding:5px;text-align:left;min-width:120px;background-color:#fff;z-index:100;box-shadow:0 1px 0 rgba(0,0,0,.05);-moz-box-shadow:0 1px 0 rgba(0,0,0,.05);border-radius:2px}.catalogue-grid .head{border:1px solid #ddd;padding:4px 8px}.view-type-button.ui-button{border:0;width:16px;height:16px;padding:2px;margin:0}.view-type-button.ui-button:hover{background-color:#f0f0f0}.view-type-button .ui-icon{background:url(" + i(231) + ") no-repeat;opacity:.4}.view-type-button .icon-thumbs{background-position:0 0}.view-type-button .icon-list{background-position:-16px 0}.view-type-button .icon-details{background-position:-32px 0}.view-type-button .icon-groups{background-position:-48px 0}.clear{clear:both;display:block;height:0}.catalogue-grid .group-labels h3{position:absolute;white-space:nowrap;margin:0;cursor:pointer;padding:8px}.catalogue-grid .group-labels h3:hover{background-color:#f6f6f6}#chart-select .head{margin-top:-5px}#chart-select .variables{margin-bottom:-8px}#chart-select .modal-header{border:0}#chart-select .modal-body{font-size:inherit;padding-top:0}#chart-select .catalogue-grid{background-color:#f5f5f5;margin-left:-25px;margin-right:-15px;padding-left:25px;padding-right:15px}.unselectable{-moz-user-select:-moz-none;-webkit-user-select:none;-o-user-select:none;user-select:none}.catalogue-grid .hidden{display:none}.catalogue-grid .status{background-image:none;background-color:transparent}", "" ]);
 }, function(t, e) {
     t.exports = "data:image/gif;base64,R0lGODlhFAAoAOYAAGi46me36ma26WW16GS05mOz5WGx5GCw4l6u4V2t31ur3WCo1Fqp3GCo1V+n01+n1Fio2l6m0l6m012l0lam2V2l0Vyk0VWl11yk0Fujz1Oj1lmhzlKi1FmhzVGh01igzFigzVCg0laey1aeyk+f0VWcyFubxFqbw1qbxE6e0FWcyVmbw1mawlObx1ObyFiZwViawleZwVGZxVaXwFeXwFGZxlCYxVCYxFWWvlSWvlSVvU6Ww06WwlOVvU2VwVKTu02VwlGSulCSukuTwEuTv0qSvkqSv0+QuE6QuEmRvUmRvk6Ot0iQvE2Ot0ePvEePu0yNtUaOu0uNtUaOukqLtEmKskiKskeIsEaIsEaHr0WHr0WFrkSFrkOErEKDq0GDq0GCqkGBqkCBqkCCqv4BAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH/C05FVFNDQVBFMi4wAwEAAAAh+QQFAABkACwAAAAAFAAoAAAH/4ANCw2CCwsoJiiIJoyJDQALDg8PDpUrJyuXJ5uYDwGSEhIRozAsMKUsqaYSAhGiExWxMS8xsy+3tBMDFbATGL8zNDPBNMXCFgQYFsoWGRk5ODnQONTRGQXO2RkdPTo93Trh3hsGHRvm5x0/6+ztIAcfIPHyHx9BQkJB+vpCIggjIgAGHDFCCBIkRxImRKIiQQkVDyGWKIGwyZKLF5u4UNDCRUePLVpYbAKlZEkpNRjIqLGSpQwZUqBIkUKlZk0bEG7Y0Lnzxg2bNasItbKDAo8dR5Hy4GGlipWmVa5cwQLkgg8gV7H68IFlalepWbQM0UBkSFmzRIhoCbs2i1suRv84FDEyl26RIly2cMm7pe8WJR6SKBE8OEmSLogTKw7BpLHjxl+8fInspbJkJk+cZNb85MkYMGM+gxkN2gmJKFOioJ4yRUwYMa7DyH4dJcWUzZ09gxZNeozpzI+ZRJ5sufIXJowbFz6suDlgwYLv4tXL1y9cuXSNGEm7Vktbt2HHlj1LhKtXqeipWsUKRGvTp0LjEzWKdIdSHkDz49TJ0+fPmSadlNJKLb0EExQWYbSERhx55AJIIi2o0EINPRTRRBQdcdA+9/gDkEAEFXRPPu7AIw8I9HzQzjrh9ECOOeh0IGM334hjDTbaZAONNNXgMAMyyjDzCwbBDGNMMbrwwgsiLLLQYgsuMbQiSiijRFDKKaqkAoMEkkhCiSWYaMLJCp4EAgAh+QQFAABkACwAAAAAFAAoAAAH/4AAZIOECwuEiGQmKImDDg6NgycrZAGJERGRZCwwZAKJFRWaLzFkA4kYGJo0M2QEiRkZmjg5ZAWJHR2aOj1kBokfH5o/P2QHjSOaQUJkCMiaR0hkCY0lJZFLTWQKjS0tkVBSZAyNMjKRVFRkEI03N5FVVmQUjTw8kVdYZBeNPj6RWbSQ0dCICJFIW7iQ4dCoSJFIXbqQ8dAoSRJNX8iEaMSEiSYvZEg0evJEE5gxKRpNmaIpjJhIJE2OCZmo48eMGxFZ1BRxYiKHmhIuTGRQU8CBifxpyrcvkT1N8ea105Ru3VRw4sglModNG7dE3iJFm1btWqNlzZAla0TMWKNgkSV4+WqUKxItW41iRWLlqlGqSKRMNQqlqdOnS5kisajU6JGmSYEAACH5BAUAAGQALAAAAAAUACgAAAfogA0AZISFZAuGiSgBiYQOjYUrD5ARkIQwEgKNFZZkMRMDjRidMxYEjRmdORkFjR2dPRsGjR+dPyAHjSOdQiIIjSWdSCoJnZBNLgqQLZZSNQyQMpZUNhCQN5ZWOxSQPJZYQBeQPpZaQxqQRJZcRhyQRZZdSh6QSZZfTCGQTJZjTiSQnnSKkgLSlE5iADYS2M/Jvk749CWyF29eI3jr2jVSV+5cI3LfwjXylm1bI2zTqjWS1uyZsUbIlDViBmlYMWCWev3SZelWLlqWYs1yZWlVK1SWSp0SZelTqE2WMGlqVAmSJEaNHlkKBAAh+QQFAABkACwAAAAAFAAoAAAH6oAoDQBkhYZkC4eKDwGKhQ6OhisCkRGRhTASkRWXZDETA44YnTMWBI4ZnTkZBY4dnT0bBo4fnT8gB44jnUIiCI4lnUgqCY4tnU0uCp2RUjUMkTKXVDYQkTeXVjsUkTyXWEAXkT6XWkMakUSXXEYckUWXXUoekUmXX0whkUyXY04kkZ5cEhMlRaQpnf4F7DRGnyN+9yAqshdvniN469o5UlfunCNy38I58pZtmyNs06o5knbJGTRFxy4lW8ZM0bBiwC71+qXr0q1ctC7FmuXq0qpWqC6VOiXq0qdQjjhFykTJkaVIKxhFghQpEAAh+QQFAABkACwAAAAAFAAoAAAH7IBkKA0AZIaHZAuIiCsPAYuGDpCHEgKTEZOGMAOTFZlkMROTGJ8zFgSQGZ85GQWQHZ89GwaQH58/IAeQI59CIgiQJZ9IKgmQLZ9NLgqQMp9SNQyfk1Q2EJM3mVY7FJM8mVhAF5M+mVpDGpNEmVxGHJNFmV1KHpNJmV9MIZNMmWNOJCY9ySQmSopJU/wBFPhJH79PX+pBuidPCbxP7d4tWmcOHaRy4MRB+qaNG6RsmapdW+QsEzRpi5BlUsZskbBMxIxNW+QL2K5MuHTVyiSL1qtMrFylymQKFSRSk0JxguRpEoxKlzI1egRJEqRAACH5BAUAAGQALAAAAAAUACgAAAfvgGRkKA0AgoeCC4iIKw8Bi4IOkIIwEgKTEZOCEwOTFZpkMQSTGKAzFpMZoDkZBZAdoD0bBpAfoD8gB5AjoEIiCJAloEgqCZAtoE0uCpAyoFI1DJA3oFQ2EKCTVjsUkzyaWEAXkz6aWkMak0SaXEYck0WaXUoek0maX0whk0yaY04kJj3RJCZKiklT/AEUiE8fP1D07IHq8g5SPHZG1IE6l25ROXDiIH3TtK3bImqarGFb5EwTNGmLkGlSxmyRME3EjC3ipckXsGyLcOmqpUkWrVeaWLmCpGrSqVGQSk2KwcmTpkqXIGWa1OgRJEmLAgEAIfkEBQAAZAAsAAAAABQAKAAAB++AZIIoDQCCh4ILiIgrDwGLgg6QgjASApMRk2QxEwOTFZpkFgSTGKEzBZMZoTmrkB2hPRsGkB+hPyAHkCOhQiIIkCWhSCoJkC2hTS4KkDKhUjUMkDehVDYQkDyhVjsUoZNYQBeTPppaQxqTRJpcRhyTRZpdSh6TSZpfTCGTTJpjTiQmPdEkJkqKSVP8ARSITx8/efTshXIHLxSXdJDWmRtCLlS4cYu0aeLmbRE1TdawLXKmCZq0Rcg0KWO2SJgmYsYW8dLkC9giW5pw6fq2SBatV5papYLkCtKMUaU0cfIECdSkSpcgZZrU6BEkSYgCAQAh+QQFAABkACwAAAAAFAAoAAAH64BkgmQoDQCDiAuIiCsPAYuCDpCCMBICkxGTZDETA5MVmjMWBJMYoRkFkxmaZDkGkx2sPRuTH6w/IAeQI6xCIgiQJaxIKgmQLaxNLgqQMqxSNQyQN6xUNhCQPKxWOxSQPqxYQBesk1pDGpNEmlxGHJNFml1KHpNJml9MIZNMmmNOJCY90SQmSopJU/wBFIhPHz959OyxcwePFTp1rLSQ+xYOyCRtmrh5W0RNkzVsi5xpgiZtETJNypgtEqaJmLFFvDT5ArbIliZcuhbF0jTrVblFOVCpCjWqlCZOniCBmlTpEqRMkxo9giRpUCAAIfkEBQAAZAAsAAAAABQAKAAAB/CAZIKCKA0Ag4gLiIgrDwGLgg6QgjASApMRk2QxEwOTFZozFgSTGJo5GQWTGacbBpMdmmQ9B5Mfsj8gkyOyQiIIkCWySCoJkC2yTS4KkDKyUjUMkDeyVDYQkDyyVjsUkD6yWEAXkESyWkMaspNcRhyTRZpdSh6TSZpfTCGTTJpjTiQmPdEkJkqKSVP8ARSITx8/efTsaWr3DlK8SejUlZM1bhI4TVi8Zdu2YxI1TdawLXKmCZq0Rcg0KWO2SJgmYsYW8dLkC9iiW5py1VoUS1MPV5BYnUq1DpIoUpBMTeLkCRKoSZUuQco0qdEjSJIEBQIAIfkEBQAAZAAsAAAAABQAKAAAB+6AZIKDKA0Ag4gLiIgrDwGLgg6QgjASApMRk2QxEwOTFZozFgSTGJo5GQWTGZo9GwaTHa0gB5MfmmQ/CJMjuEIikyW4SCoJkC24TS4KkDK4UjUMkDe4VDYQkDy4VjsUkD64WEAXkES4WkMakEW4XEYcuJNdSh6TSZpfTCGTTJpjTiQmPdEkJkqKSVP8ARSITx8/TfPqQbo3yR28dZrQqSunSRy5b7i6TdKmyQq2adVsTHKmCZq0Rcg0KWO2SJgmYsYW9dL0a9eiW5p+0IIkq9UrSKxOpYJkKtSoeJA4eYIEalKlS5AyTWr0CJIkMoEAACH5BAUAAGQALAAAAAAUACgAAAfogGSCg2QoDQCEgwuJgysPAYxkDpFkMBICkRGUMRMDkRWUMxYEkRiUORkFkRmUPRsGkR2UPyAHkR+zIgiRI5RkQgmRJb5IKpEtvk0uCowyvlI1DIw3vlQ2EIw8vlY7FIw+vlhAF4xEvlpDGoxFvlxGHIxJvl1KHr6RX0whkUyUY04kIj2hJCZKikhT/AEUSCnfPkb9ItGzF4+SO3jrKKFTV46SOHLfKHHzls3XtUjUKFGR1uxZjWPJljEaRqlYsES9KAnRxQjXrFqMZLV6xYjVqVSMTIUaxQjUpk73GFnCxEhTJEeQGE0KBAAh+QQFAABkACwAAAAAFAAoAAAH54BkgoOCKA0AhIMLiYMrDwGMZA6RZDASApERlDETA5EVlDMWBJEYlDkZBZEZlD0bBpEdlD8gB5EflEIiCJEjuSoJkSWUZEgKkS3ETS6RMsRSNQyMN8RUNhCMPMRWOxSMPsRYQBeMRMRaQxqMRcRcRhyMScRdSh6MTMRfTCHEkWNOJCI9oSQmSopIUyj9C8hoYCR9/O5RomcvHiV38NZRQqeuHCVx5L5R4uYtGyVr2KYRi9bs2TFGySgtE0YMCTBGvnLtYoRrVi1Gslq9YsTqVCpGpkKNYgRqUydGmihZwtQvkSNIjBwEAgAh+QQFAABkACwAAAAAFAAoAAAH6YBkgoODKA0AhIMLiYMrDwGMZA6RZDASApERlDETA5EVlDMWBJEYlDkZBZEZlD0bBpEdlD8gB5EflEIiCJEjlEgqCZElvy4KkS2UZE0MkTLKUjWRN8pUNhCMPMpWOxSMPspYQBeMRMpaQxqMRcpcRhyMScpdSh6MTMpfTCGMT8pjTkgoiyQmSopIUygBFNiPkj5+9yjRsxePkjt46yihU1eOkjhy3yhx85aNkjVsjKhFitaM0TNKxpApayKMEbFfKnop08UrEa5ZtRjJavWKEatTqRiZCjWKEahNnRhpomQJU6JJlBxBYhQIACH5BAUAAGQALAAAAAAUACgAAAfngAtkg4SEKA0AhYqLZCsPAYwOjGQwEgKMEZMxEwOMFZMzFgSMGJM5GQWMGZM9GwaMHZM/IAeMH5NCIgiMI5NIKgmMJZNNLgqMLcQ1DIwyk2RSEIw3z1Q2jDzPVjsUiz7PWEAXi0TPWkMai0XPXEYci0nPXUoei0zPX0whi0/PY04kFk15JiZKimeM/gXkNynfPnuT5tWDN6ndO3WTzqUjNyncOG+TtnVblI2RNWmLqDGSsqwZMWPIngET9gzJrkW9cImw9WxWLUWxWLlatMoUqkWlQIla9EkTp0WZJlW6pEjSJEeQFAUCACH5BAUAAGQALAAAAAAUACgAAAflgGQLZISFhSgNAIaEDouGKw8BjpOFMBICkxGUMRMDkxWUMxYEkxiUORkFkxmUPRsGkx2UPyAHkx+UQiIIkyOUSCoJkyWUTS4Kky2UUjUMkzLLNhCTN5RkVBSTPNZWO5M+1lhAF45E1lpDGo5F1lxGHI5J1l1KHo5M1l9MIY5P1mNOSDiaYk1MlBT9/gW0Nkkfv3uU6NmLR8kdvHWU0KkrR0kcOUfgJnXL5mjbJCrSqC1r9qzYsWS/gg2ztquXNSG2HOGaBSKWNVewFrE6lcqRqVCjHIHa1MmRJkqWMC1qRAmSJEOBAAAh+QQFAABkACwAAAAAFAAoAAAH4oBkZAuChYYoDQCGgg6LhisPAY4RjoUwEgKVmmQxEwOVFZozFgSVGJo5GQWVGZo9GwaVHZo/IAeVH5pCIgiVI5pIKgmVJZpNLgqVLZpSNQyVMppUNhCVN5s7FJU8m1YXlT6bWECVRJtaQxqORZtcRhyOSZtdSh6OTJtfTCGOT5tjTkg4mrJJTJQU/f4FvJdv36ZK9OzF0+QO3jpN6NQ5Mldp3DdH4SpZybZNGjVrzJxBM4ZMGTBhxHTx8rXJFq5NP2I5muVqA6tNqVYtOiWKlKNQmjp9WkRJ06VMixppgiSpUCAAIfkEBQAAZAAsAAAAABQAKAAAB96AZIILgoWGKA0AhoIOi4YrDwGOEY6FMBICjhWVgjETA5ycMxYElRicORkFlRmcPRsGlR2cPyAHlR+cQiIIlSOcSCoJlSWcTS4KlS2cUjUMlTKcVDYQlTecVjsUlTyhQBeVPqFYGpVEoVpDlUWhXEYcjkmhXUoejkyhX0whjk+hY05IOJoSSkyUFP3+BbyXb1+8efVCVXIHzxG7SunKOTpXCcu3cNi0cZNGzRozZ9CMIVMGTBgxXbx80bKFKxQsWaF6rHLUClXPRadEkdIUyhOoRZQ4Xcq0qBEnSJIEBQIAIfkEBQAAZAAsAAAAABQAKAAAB96AZIJkC4OGgigNAIdkDoyDKw8BjBGPgjASAowVlmQxEwOMGJ0zFgSdjzkZBY8Zlj0bBo8dlj8gB48flkIiCI8jlkgqCY8llk0uCo8tllI1DI8yllQ2EI83llY7FI88llhAF48+nUMaj0SdWhyPRZ1cRo9JnV1KHoxMnV9MIYxPnWOckGA0pZOYKCn8ARSITx8/RvMs1bt3yJ0leOxQHdJiDt23cOOybes2rdq1Zs+iHUu2LNiwYrt6/ap1K9erWLM6rWrVKccpUaQsPOJk6VOoQ5UsYdJ0yJGlSJPIBAIAIfkEBQAAZAAsAAAAABQAKAAAB/GAZIKCC4OGgigNAIdkDoyDKw8BjBGPgjASAowVlmQxEwOMGJ0zFgSMGZ05GQWdjz0bBo8dlj8gB48flkIiCI8jlkgqCY8llk0uCo8tllI1DI8yllQ2EI83llY7FI88llhAF48+llpDGo9EnUYcj0WdXB6PSZ1dSo9MnV9MIYxPnWOckGA0pZOYKCn8ARTIKJ+lff0O0bNkT96hd5a4sGOkrtw5V4zAiWNE7pE2boy8PaJmjRG2R86gMZL2CJkyRsweCSPGyNgjXr4YAXtkCxcjXa9izbK0qhWqTqYejbI0I9SmTp8eVbKESdMhR5YiTQoEACH5BAUAAGQALAAAAAAUACgAAAfsgGSCgwuDhoIoDQCHZA6MgysPAYwRj4IwEgKMFZZkMRMDjBidMxYEjBmdORkFjB2dPRsGnY8/IAePH5ZCIgiPI5ZIKgmPJZZNLgqPLZZSNQyPMpZUNhCPN5ZWOxSPPJZYQBePPpZaQxqPRJZcRhyPRZ1KHo9JnV0hj0ydX/qMT51jnJBgNKWTmCgp/AEUyKjfI374DtWz1EUeI3jr2jFSV+4cI3LfwtFipI0bI2+PqFljhO2RM2iMpD1CpowRs0fCiDEy9oiXL0bAat3KZSnWLFeWVrVCZanUKVGdQD3iZCmGJkqdMD1yZClSgEAAOw==";
 }, function(t, e) {
@@ -20270,7 +20242,7 @@
                         height: t.element.parent().height()
                     };
                     t.n_columns = Math.floor(o.width / (t.item_width + t.padding.x)), t.n_columns || (t.n_columns = 5,
-                    "prod"), t.cache.n_cells = t.n_columns * (Math.round(o.height / (t.item_height + t.padding.y)) + r.overscan),
+                    window.is_node || console.warn("failed to calculate number of columns")), t.cache.n_cells = t.n_columns * (Math.round(o.height / (t.item_height + t.padding.y)) + r.overscan),
                     t.n_columns === n && t.cache.n_cells === t._old_n_visible_items || (t.__post_resize_assignment(),
                     e.have_filtering.done(function() {
                         t._assign_fresh(), t._set_scrollbar_size();
@@ -20317,7 +20289,7 @@
     }.apply(e, n), !(void 0 !== o && (t.exports = o));
 }, function(t, e, i) {
     var n, o;
-    n = [ i(13), i(14), i(33), i(240) ], o = function(t, e, i) {
+    n = [ i(13), i(14), i(37), i(240) ], o = function(t, e, i) {
         return e.widget("ui.thumbItem", e.ui.viewItemBase, {
             options: {
                 item: null,
@@ -20437,7 +20409,7 @@
     }.apply(e, n), !(void 0 !== o && (t.exports = o));
 }, function(t, e, i) {
     var n, o;
-    n = [ i(13), i(14), i(33), i(226), i(23), i(238), i(29) ], o = function(t, e, i, n, o, r) {
+    n = [ i(13), i(14), i(37), i(226), i(23), i(238), i(33) ], o = function(t, e, i, n, o, r) {
         e.widget("ui.viewBase", e.extend({
             options: {
                 grid: null,
@@ -20586,7 +20558,9 @@
                 var t = this, e = t.options, i = e.grid.element;
                 if (!e.grid.options.size_fits_content) return console.error("WHY??????"), void console.trace();
                 if (o.filtered.length <= this.max_items()) {
-                    var n = this.natural_height() + parseInt(e.grid.outer.css("marginTop"), 10) + parseInt(e.grid.outer.css("marginBottom"), 10) + e.grid.widgets.foot.outerHeight(!0), r = parseInt(i.css("height"), 10);
+                    var n = this.natural_height() + parseInt(e.grid.outer.css("marginTop"), 10) + parseInt(e.grid.outer.css("marginBottom"), 10) + e.grid.widgets.foot.outerHeight(!0);
+                    console.log("natural_height=", this.cache.natural_height), console.log("******** resize_to_content: (show all) height=", n, i);
+                    var r = parseInt(i.css("height"), 10);
                     n !== r && (i.css({
                         height: n
                     }).attr({
@@ -20623,7 +20597,6 @@
             },
             select_by_idx: function(t) {
                 var e = this;
-                e.options;
                 o.have_filtering.done(function() {
                     var i = o.items[t];
                     i && e.select(i);
@@ -20732,8 +20705,7 @@
                 }, 6e3), e;
             },
             _destroy: function() {
-                var t = this;
-                t.element.empty().removeClass("details"), this._super();
+                this.element.empty().removeClass("details"), this._super();
             },
             _on_select: function(t, e) {
                 console.log("details._on_select", t), this.options.click(t);
@@ -20832,6 +20804,9 @@
                         }).attr("src", i || t);
                     }), e.existing = i.item.name();
                 }
+            },
+            select: function() {
+                this._super();
             }
         }), {
             widgetName: "detailItem",
@@ -20933,23 +20908,25 @@
     }.apply(e, n), !(void 0 !== o && (t.exports = o));
 }, function(t, e, i) {
     var n, o;
-    n = [ i(14), i(33), i(23), i(239), i(119), i(137), i(143), i(152), i(220), i(40), i(241) ],
-    o = function(t, e, i, n, o, r, a, s, l, c) {
-        var u = !0, h = {};
+    n = [ i(14), i(37), i(23), i(239), i(128), i(146), i(152), i(161), i(247), i(220), i(40), i(241) ],
+    o = function(t, e, i, n, o, r, a, s, l, c, u) {
+        var h = !0, d = {};
         t.widget("ui.groups", t.ui.viewBase, {
             _create: function() {
                 var e = this, i = (e.options, t.ui.viewBase.prototype._create.apply(this, arguments));
-                return this.ItemView = n, this.item_height = 80 + (u ? 38 : 0), this.item_width = 127,
+                this.ItemView = n, this.item_height = 80 + (h ? 38 : 0), this.item_width = 127,
                 this.padding = {
                     x: 8,
                     y: 16
-                }, this.n_columns = 0, this.group_label_height = 34, u && (this.item_options.show_title = !0),
-                this.element.addClass("thumbs"), e.dom_tree = o("div.vdom-root"), e.element.append(e.dom_tree_root = s(e.dom_tree)),
-                this._queue_redraw = t.throttle(1e3, function() {
+                }, this.n_columns = 0, this.group_label_height = 34, h && (this.item_options.show_title = !0),
+                this.element.addClass("thumbs");
+                var r = e.element.find(".vdom-root");
+                return r.length ? e.dom_tree = l(e.dom_tree_root = r[0]) : (e.dom_tree = o("div.vdom-root"),
+                e.element.append(e.dom_tree_root = s(e.dom_tree))), this._queue_redraw = t.throttle(100, function() {
                     e._redraw();
                 }), e.element.find(".vdom-root").on("click", function(i) {
                     console.log("groups.click");
-                    var n = t(i.target), o = l.product_by_name(n.attr("name") || n.find("img.thumbnail-img").attr("name"));
+                    var n = t(i.target), o = c.product_by_name(n.attr("name") || n.find("img.thumbnail-img").attr("name"));
                     e.item_options.on_click(o);
                 }), i;
             },
@@ -20979,34 +20956,34 @@
                 e._results_by_group_all(function(t) {
                     o += e.item_height + e.padding.y, t.y = o;
                 }, function(r, a, s, l) {
-                    o = l.y + i + Math.floor(s / e.n_columns) * e.item_height, l.height = i + Math.ceil((s + 1) / e.n_columns) * e.item_height;
-                    var c = e.element.parent().height(), u = e.element.parent().scrollTop(), h = d.overscan * e.item_height, p = o > u - h && o < u + c + h;
-                    !n && p && (n = !0, e._first = a), r[e.eventNamespace] = r[e.eventNamespace] || {},
+                    o = l.y + i + Math.floor(s / e.n_columns) * e.item_height, l.height = i + Math.ceil((s + 1) / e.n_columns) * e.item_height + e.padding.y;
+                    var c = e.element.parent().height(), u = e.element.parent().scrollTop(), h = p.overscan * e.item_height, d = o > u - h && o < u + c + h;
+                    !n && d && (n = !0, e._first = a), r[e.eventNamespace] = r[e.eventNamespace] || {},
                     t.extend(r[e.eventNamespace], {
                         ig: s,
                         y: o,
-                        visible: p
+                        visible: d
                     });
                 }), this._positions_valid = !0;
             },
             _redraw: function() {
                 var e = this;
                 e.options;
-                l.cancel_thumbnails(), this.groups_valid || this._update_groups(), this._positions_valid || e._calc_positions(),
+                c.cancel_thumbnails(), this.groups_valid || this._update_groups(), this._positions_valid || e._calc_positions(),
                 labels = [], items = [];
                 e.groups.length > 1 ? e.group_label_height : 0, -(e.item_height + e.padding.y);
                 e._results_by_group(function(t) {
                     e.groups.length > 1 && labels.push(o("h3", {
                         style: {
-                            top: t.y + "px"
+                            top: t.y - 8 + "px"
                         },
                         onclick: function(e) {
-                            c.add_state(), facets = i.lookup_filter_by_name("facets"), facets.set([ "Product group", t.name ], !0),
+                            u.add_state(), facets = i.lookup_filter_by_name("facets"), facets.set([ "Product group", t.name ], !0),
                             e.stopPropagation();
                         }
                     }, [ t.name ]));
                 }, function(i, n, r, a, s) {
-                    var l = i[e.eventNamespace], c = a % e.n_columns, d = h[i.name()] || i.cache.thumbnail.call(i);
+                    var l = i[e.eventNamespace], c = a % e.n_columns, u = d[i.name()] || i.cache.thumbnail.call(i);
                     items.push(o("div.item.thumbnail-wrapper" + (l.selected ? ".selected" : ""), {
                         style: {
                             top: l.y + "px",
@@ -21016,8 +20993,8 @@
                         alt: i.title_(),
                         title: t("<div>").html(i.data.description).text() || i.title_(),
                         name: i.name(),
-                        src: d || ECMWF.blank_gif,
-                        style: d ? {
+                        src: u || ECMWF.blank_gif,
+                        style: u ? {
                             visibility: "visible",
                             opacity: 1
                         } : {
@@ -21025,11 +21002,11 @@
                             opacity: 0
                         },
                         onclick: function() {}
-                    }) ]), o("div" + (u ? ".title" : ".hidden") + (i.has_widget("clickable") ? ".clickable" : ""), i.title_()) ])),
-                    !d && i.thumbnail && i.thumbnail({
+                    }) ]), o("div" + (h ? ".title" : ".hidden") + (i.has_widget("clickable") ? ".clickable" : ""), i.title_()) ])),
+                    !u && i.thumbnail && i.thumbnail({
                         tag: i.name() + e.eventNamespace
                     }, function(t, n, o) {
-                        o || (n && (h[i.name()] = n), e._queue_redraw());
+                        o || (n && (d[i.name()] = n), e._queue_redraw());
                     });
                 }), items.push(o("div.group-labels", labels));
                 var n = o("div.vdom-root", items);
@@ -21103,7 +21080,7 @@
                         height: t.element.parent().height()
                     };
                     t.n_columns = Math.floor(o.width / (t.item_width + t.padding.x)), t.n_columns || (t.n_columns = 5,
-                    console.warn("failed to calculate number of columns")), t.cache.n_cells = t.n_columns * (Math.round(o.height / (t.item_height + t.padding.y)) + d.overscan),
+                    console.warn("failed to calculate number of columns")), t.cache.n_cells = t.n_columns * (Math.round(o.height / (t.item_height + t.padding.y)) + p.overscan),
                     t.n_columns === n && t.cache.n_cells === t._old_n_visible_items || (t.__post_resize_assignment(),
                     i.have_filtering.done(function() {
                         t._assign_fresh(), t._set_scrollbar_size();
@@ -21138,13 +21115,62 @@
                 return {};
             }
         });
-        var d = {
+        var p = {
             overscan: 2
         };
     }.apply(e, n), !(void 0 !== o && (t.exports = o));
 }, function(t, e, i) {
+    function n(t, e) {
+        return e = e || null, 1 == t.nodeType ? a(t, e) : 3 == t.nodeType ? o(t, e) : 8 == t.nodeType ? r(t, e) : void 0;
+    }
+    function o(t) {
+        return new c(t.nodeValue);
+    }
+    function r(t) {
+        return new u(t.nodeValue);
+    }
+    function a(t) {
+        for (var e = t.tagName, i = "http://www.w3.org/1999/xhtml" == t.namespaceURI ? null : t.namespaceURI, o = s(t), r = [], a = 0; a < t.childNodes.length; a++) r.push(n(t.childNodes[a]));
+        return new l(e, o, r, null, i);
+    }
+    function s(t) {
+        for (var e = {}, i = 0; i < h.length; i++) {
+            var n = h[i];
+            if (t[n]) if ("style" != n) {
+                if ("img" !== t.tagName.toLowerCase() || "href" !== n) if ("attributes" != n) "tabIndex" == n && t.tabIndex === -1 || "contentEditable" == n && "inherit" === t[n] || "object" != typeof t[n] && (e[n] = t[n]); else {
+                    for (var o = Array.prototype.slice.call(t[n]), r = {}, a = 0; a < o.length; a++) {
+                        var s = o[a].name;
+                        e[s] || e[d[s]] || (r[s] = t.getAttribute(s));
+                    }
+                    e[n] = r;
+                }
+            } else {
+                var l, c = {};
+                if ("undefined" != typeof t.style.length) for (var u = 0; u < t.style.length; u++) l = t.style[u],
+                c[l] = t.style.getPropertyValue(l); else for (var l in t.style) t.style[l] && t.style.hasOwnProperty(l) && (c[l] = t.style[l]);
+                Object.keys(c).length && (e[n] = c);
+            }
+        }
+        return e;
+    }
+
+    var l = i(131), c = i(137), u = i(248);
+    t.exports = n;
+    var h = t.exports.properties = [ "accept", "accessKey", "action", "alt", "async", "autoComplete", "autoPlay", "cellPadding", "cellSpacing", "checked", "className", "colSpan", "content", "contentEditable", "controls", "crossOrigin", "data", "defer", "dir", "download", "draggable", "encType", "formNoValidate", "href", "hrefLang", "htmlFor", "httpEquiv", "icon", "id", "label", "lang", "list", "loop", "max", "mediaGroup", "method", "min", "multiple", "muted", "name", "noValidate", "pattern", "placeholder", "poster", "preload", "radioGroup", "readOnly", "rel", "required", "rowSpan", "sandbox", "scope", "scrollLeft", "scrolling", "scrollTop", "selected", "span", "spellCheck", "src", "srcDoc", "srcSet", "start", "step", "style", "tabIndex", "target", "title", "type", "value", "autoCapitalize", "autoCorrect", "property", "attributes" ], d = t.exports.attrBlacklist = {
+        class: "className"
+    };
+}, function(t, e) {
+    function i(t) {
+        this.text = String(t);
+    }
+    t.exports = i, i.prototype.type = "Widget", i.prototype.init = function() {
+        return document.createComment(this.text);
+    }, i.prototype.update = function(t, e) {
+        this.text !== t.text && (e.nodeValue = this.text);
+    };
+}, function(t, e, i) {
     var n, o;
-    n = [ i(14), i(29), i(24), i(119), i(137), i(143), i(152), i(248) ], o = function(t, e, i, n, o, r, a) {
+    n = [ i(14), i(33), i(24), i(128), i(146), i(152), i(161), i(250) ], o = function(t, e, i, n, o, r, a) {
         t.widget("ui.facets", {
             options: {
                 products: null,
@@ -21157,7 +21183,7 @@
             },
             _init: function() {
                 var n = this, o = n.options;
-                n._tree = [], n._active = {}, n._cache_view = {}, n._initial_render_done = !1, n._count_totals(),
+                n._tree = [], n._active = {}, n._cache_view = {}, n._initial_render_done = !1, n._total = null,
                 n.vdom = {
                     root: n.element.find("> ul").orelse(function() {
                         return n.element.ul();
@@ -21166,20 +21192,18 @@
                 }, this.change = t.extend(new i(), {
                     have: {
                         timeout: t.Deferred(function(t) {
-                            setTimeout(t.resolve, 1e3);
+                            setTimeout(t.resolve, 0);
                         }),
-                        filter_pending: !0,
-                        updates_pending: !1
+                        update_queued: !1
                     },
                     req: function() {
-                        this.have.filter_pending || this.have.updates_pending || (this.have.updates_pending = !0,
-                        this.have.timeout.done(function() {
+                        this.have.update_queued || (this.have.update_queued = !0, this.have.timeout.done(function() {
                             n.change.emit();
                         }));
                     }
                 }), n.change.subscribe(function() {
-                    n._on_filter_change(), this.have.updates_pending = !1;
-                }), e.n_properties(o.selection) && (n._analyze(), n._create_dom());
+                    n._on_filter_change(), this.have.update_queued = !1;
+                }), e.n_properties(o.selection) && (n._analyze(), n._create_dom()), this.change.req();
             },
             clear: function() {
                 this.element.find("input[type=checkbox]").prop("checked", !1), this._active = {};
@@ -21189,7 +21213,7 @@
             },
             _create_dom: function() {
                 var i = this, n = i.options;
-                i._tree.length || (t.each(n.facets, function(e, o) {
+                i._tree.length || (i._count_totals(), t.each(n.facets, function(e, o) {
                     var r = o.name, a = o.values, s = {
                         name: r,
                         vals: []
@@ -21206,7 +21230,7 @@
             },
             on_filter_change: function() {
                 var t = this;
-                this.change.have.filter_pending = !1, setTimeout(function() {
+                t.change.have.update_queued || setTimeout(function() {
                     t.change.req();
                 }, 200);
             },
@@ -21218,7 +21242,7 @@
                     for (var r in o.vals) if (o.vals[r][0] === n) return o.vals[r];
                 }
                 var i = this, a = i.options;
-                console.log("facets.on_filter_change: uuid=", i.uuid), i._analyze(), i._create_dom();
+                i._analyze(), i._create_dom();
                 var l = 0, c = [];
                 t.each(i._tree, function(o, r) {
                     var u = {
@@ -21253,14 +21277,13 @@
                                 s.find("li :checked").length ? (i._active[c] || (i._active[c] = !0), u.has_selection = !0) : (delete i._active[c],
                                 u.has_selection = s.find(":checked").length);
                                 var h = e(r.name, c);
-                                h[1] = l, i.change.have.filter_pending = !0, a.on_change(r.name, c, l);
+                                h[1] = l, a.on_change(r.name, c, l);
                             }
                         }), n("label", {
                             attributes: {
                                 for: b
-                            },
-                            style: {}
-                        }, [ l[0] + " (", n("span.count", "" + A), ")" ]) ])), p++;
+                            }
+                        }, [ n("span", [ l[0] + " (" + A + ")" ]) ]) ])), p++;
                     }), (r.has_selection || f > 1) && ++l, f < p && h.push(n("a", {
                         href: "#see-all",
                         onclick: function(t) {
@@ -21272,8 +21295,9 @@
                     c.push(m);
                 });
                 var u = i.render(c);
-                i._initial_render_done || i.element.find("ul").empty(), i.vdom.root = r(i.vdom.root, o(i.vdom.tree, u)),
-                i.vdom.tree = u, i._initial_render_done = !0, l ? i._no_facets && i._no_facets.remove() : i._no_facets = i._no_facets || i.element.p(".disabled").text("No facets");
+                i._initial_render_done || i.element.find("ul").empty(), console.log("facets: patching..."),
+                i.vdom.root = r(i.vdom.root, o(i.vdom.tree, u)), i.vdom.tree = u, i._initial_render_done = !0,
+                l ? i._no_facets && i._no_facets.remove() : i._no_facets = i._no_facets || i.element.p(".disabled").text("No facets");
             },
             _analyze: function() {
                 var e = this, i = e.options;
@@ -21316,15 +21340,15 @@
         var s = 0;
     }.apply(e, n), !(void 0 !== o && (t.exports = o));
 }, function(t, e, i) {
-    var n = i(249);
+    var n = i(251);
     "string" == typeof n && (n = [ [ t.id, n, "" ] ]);
     i(11)(n, {});
     n.locals && (t.exports = n.locals);
 }, function(t, e, i) {
-    e = t.exports = i(3)(), e.push([ t.id, ".facets h3{cursor:default;margin:5px 10px 5px -5px;padding:5px}.facets h3:hover{background-color:#f6f6f6}.facets>ul>li.disabled{display:none}.facets .disabled{color:#ccc}.facets h3{margin-left:-20px;padding-left:20px;position:relative}.facets h3 .ui-icon{position:absolute;left:2px;top:50%;margin-top:-8px;display:none}.facets h3 .ui-icon.ui-icon-triangle-1-e,.facets h3:hover .ui-icon{display:block}.facets li li{overflow-y:hidden;transition:max-height .5s ease-in-out;-moz-transition:max-height .5s ease-in-out}.facets a{margin-left:27px;line-height:2.5}.facets .disabled label{display:none}.styled label:before{margin-left:-18px}.styled input:checked+label:after{margin-left:-17px}.styled label{padding-left:7px}", "" ]);
+    e = t.exports = i(3)(), e.push([ t.id, ".facets h3{cursor:default;margin:5px 10px 5px -5px;padding:5px}.facets h3:hover{background-color:#f6f6f6}.facets>ul>li.disabled{display:none}.facets .disabled{color:#ccc}.facets h3{margin-left:-20px;padding-left:20px;position:relative}.facets h3 .ui-icon{position:absolute;left:2px;top:50%;margin-top:-8px;display:none}.facets h3 .ui-icon.ui-icon-triangle-1-e,.facets h3:hover .ui-icon{display:block}.facets li li{overflow-y:hidden;transition:max-height .5s ease-in-out;-moz-transition:max-height .5s ease-in-out}.facets a{margin-left:27px;line-height:1.9}.facets .disabled label{display:none}.facets label{max-width:calc(100% - 16px);line-height:20px}.facets label span{max-width:100%;white-space:nowrap;display:inline-block;overflow:hidden;text-overflow:ellipsis}.styled label:before{margin-left:-18px}.styled input:checked+label:after{margin-left:-17px}.styled label{padding-left:7px}", "" ]);
 }, function(t, e, i) {
     var n, o;
-    n = [ i(13), i(14), i(26), i(61), i(251) ], o = function(t, e, i) {
+    n = [ i(13), i(14), i(26), i(61), i(253) ], o = function(t, e, i) {
         var n, o = 0, r = "log-info log-warning log-error log-message";
         e.widget("ui.messages", {
             options: {
@@ -21408,12 +21432,12 @@
 	 */
     !(void 0 !== o && (t.exports = o));
 }, function(t, e, i) {
-    var n = i(252);
+    var n = i(254);
     "string" == typeof n && (n = [ [ t.id, n, "" ] ]);
     i(11)(n, {});
     n.locals && (t.exports = n.locals);
 }, function(t, e, i) {
-    e = t.exports = i(3)(), e.push([ t.id, ".messages{font-weight:700;vertical-align:middle;padding:0;padding-left:20px;background-image:url(" + i(253) + ");background-repeat:no-repeat;position:relative}.messages .clickable{width:16px;height:16px;position:absolute;left:0}.messages .close{float:right}.log-error{background:url(" + i(254) + ") 0 50% no-repeat;color:red}.log-warning{background:url(" + i(255) + ") 0 50% no-repeat}.log-info{background-image:url(" + i(256) + ");background-repeat:no-repeat}.log-message{background:url(" + i(253) + ") 0 50% no-repeat}.messages .menu-pane{display:block;padding-left:30px;border:1px solid #ddd;overflow:hidden}.messages .menu-pane h4{margin:0 20px 0 0}.messages .menu-pane p{font-weight:400;margin:0}.messages .menu-pane .close{text-decoration:none}.messages .menu-pane.log-error{background-image:url(" + i(254) + ");background-color:#fcc}.messages .menu-pane.log-error,.messages .menu-pane.log-warning{background-repeat:no-repeat;background-position:5px 5px;color:#333}.messages .menu-pane.log-warning{background-image:url(" + i(255) + ");background-color:#ffc}div.messages.messages-type-popup{height:0;border:0;padding:0;overflow:hidden;background:none;position:absolute;top:0}", "" ]);
+    e = t.exports = i(3)(), e.push([ t.id, ".messages{font-weight:700;vertical-align:middle;padding:0;padding-left:20px;background-image:url(" + i(255) + ");background-repeat:no-repeat;position:relative}.messages .clickable{width:16px;height:16px;position:absolute;left:0}.messages .close{float:right}.log-error{background:url(" + i(256) + ") 0 50% no-repeat;color:red}.log-warning{background:url(" + i(257) + ") 0 50% no-repeat}.log-info{background-image:url(" + i(258) + ");background-repeat:no-repeat}.log-message{background:url(" + i(255) + ") 0 50% no-repeat}.messages .menu-pane{display:block;padding-left:30px;border:1px solid #ddd;overflow:hidden}.messages .menu-pane h4{margin:0 20px 0 0}.messages .menu-pane p{font-weight:400;margin:0}.messages .menu-pane .close{text-decoration:none}.messages .menu-pane.log-error{background-image:url(" + i(256) + ");background-color:#fcc}.messages .menu-pane.log-error,.messages .menu-pane.log-warning{background-repeat:no-repeat;background-position:5px 5px;color:#333}.messages .menu-pane.log-warning{background-image:url(" + i(257) + ");background-color:#ffc}div.messages.messages-type-popup{height:0;border:0;padding:0;overflow:hidden;background:none;position:absolute;top:0}", "" ]);
 }, function(t, e) {
     t.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAxlBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVFRUWFhYXFxdMTExtbW1wcHBzc3N1dXWRkZGSkpKUlJSVlZWWlpaYmJiampqbm5utra2urq6ysrK2trbExMTLy8vNzc3Q0NDS0tLY2NjZ2dnb29ve3t7f39/h4eHi4uLj4+Pk5OTl5eXm5ubo6Ojp6enq6urr6+vs7Ozt7e3u7u7v7+/w8PDx8fHy8vLz8/P09PT29vb39/f7+/v///+r6QX3AAAADHRSTlMAJipFWmqaqtTg5PsgISXGAAAArklEQVQY042PMUsDURAGZ9/bqHhaGIMoRBGi//8HaRpJoyIXBS/x7u1+NsHaqWeKMQCvpZAZDTCos25+WTX2/TAFhnfXV2ZStti+Dc3t5P58bSYptfTNt88Wp/Z4MNrxfHS/QE9mWglB515qltUhkWrxbCXW9vAs6VaKtKObRbUCqciMz1efPhbxYqC7zBj7yQUsDRSK4X0vByh7XG233U2BA/1Xa/p7OQN+Ivk/v8xZbBahI5M4AAAAAElFTkSuQmCC";
 }, function(t, e) {
@@ -21423,23 +21447,23 @@
 }, function(t, e) {
     t.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAC7klEQVQ4jW2TT2gcdRTHP7/fzM7MbuJqsqFJmo02BRWMEYOQNMVDD4KIELRNe1K8iFBP3rM3e1ZEm0D1qKC0ikaLiAqKEGKohNpE3DRbo7ubbtv9k0n2z+zM7jwPDZsEffDlweP7fbzHe18lIhwMlUwdAaaBCZQ6gYgHrOzhsuQulA7xDzZQydQZLOvS8ORo7wunHuXkk/20QmFx9Q7f/bxBfnmtiO+fl9yFKx2RiCAiMDQ7F5m8KB/+lJdi1Zds2ZNs2ZNcsSbpQk2uZ6vy1ic3xZi8KAzNznV0e+IZa2pO0oW6lGuB/J6ryvd/VMQPWiIi8uO1tCxcL8nVGyVJffW3qGfeF4Zmz4gIWiVTCSxr/t23p3FMxV9Fj1oz5M5OQDpXYnu3zo1MgdtuQK4SMNxjM/HSFFjWJZVMHTGBs8dOjvU9/1SC9bsezZawWfIwtWLxH6GxtkkQf5iK63fWnno8wa/HR3r5Mz1tKqXGn50cYTVfJ1Ns4DbaFHYCXn7C5tToAI41yNdLN/km0z50rdhAgkZaTZiGY48fHYzz6bUiVX+f9MFik6dHehmwTGoNjy3XPNSguz+B79gnzIhjO4WdgF82qjwYNYhaukMKw/vZC0JuuwEisN1oUam3cHd9bMf2zIhjL2Xz7ljNB9droRUYWmFoaO/9SN0P2bjn0w4PrBB4aMde0RHHXs5lK4z02XTZBlHLwDI1ht6fRCmFEzHosu/joZhJNGgScewVbTr2wk72XtkI28QdTczah0IBYGo6tbij6TYEXd4umo592ahmvqy999lapln3zw0+ksDUCkMr3jmdZCz5AKah6e+JYamAW+WQRFeE8noemsFrW9+++lvHC8dnvpize7vPHxs9imkZiOfSrLogEDE1WkM7OsDm6hbNSm3+1pXTb/7HTI+9cnVGm3q+b7inL5GI0R13ANh1PcrlOsVspRy2wjfWP37x8/91I8Do6z8kgLPA+B4cYAlYBhbWPnru7kH+v/KWZbuyS5A6AAAAAElFTkSuQmCC";
 }, function(t, e, i) {
-    var n = i(258);
-    "string" == typeof n && (n = [ [ t.id, n, "" ] ]);
-    i(11)(n, {});
-    n.locals && (t.exports = n.locals);
-}, function(t, e, i) {
-    e = t.exports = i(3)(), e.push([ t.id, "#content-heading h1{color:#fff}#content-heading h1.ready{color:#000}.fullscreen .main-column-wrapper{width:calc(100% - 316px);position:relative;min-height:400px}.column.column-2{display:none;position:absolute;z-index:19;top:0;left:0;right:0;box-shadow:0 4px 3px -3px #646464}.column-1 .show-results{width:100%;box-sizing:border-box;text-align:left}.column-1 .show-results span{padding-left:8px}.col2-control{padding-bottom:11px;overflow:auto}.col2-control h2{float:left;font-size:14px;margin:0}.col2-control a{float:right;overflow:hidden}.col2-control a div{margin:-10px -30px;padding:10px 30px;float:right}.col2-control a:hover{cursor:pointer}.column-2 .ps-container .ps-scrollbar-y-rail{opacity:.6;background-color:#eee}.column-2 .additional-links{border-top:1px solid #eee;margin-top:32px}.column-2 .additional-links h3{margin:1em 0;padding-left:4px}.column-2 .additional-links ul{list-style:none;padding:24px 0 0;overflow:auto;margin-left:-7px}.column-2 .additional-links li{float:left;width:128px;margin:0 7px}.column-2 .additional-links img{width:128px;height:64px}.column-2 .additional-links .title{height:2.6em;line-height:1.3;text-align:center;text-overflow:ellipsis;color:#000}.column-2 .additional-links a{text-decoration:none}.chart-column h2{font-weight:700;margin:0 0 10px}.product-text{margin-top:20px;-webkit-column-width:24em;-moz-column-width:24em;column-width:24em;-webkit-column-gap:4em;-moz-column-gap:4em;column-gap:4em;-webkit-column-rule:1px solid #eee;-moz-column-rule:1px solid #eee;column-rule:1px solid #eee}.product-text>:first-child{margin-top:0}.product-text h2:first-child{padding:1em 0}.catalogue-grid .head{display:none}.ui-autocomplete{z-index:100000}.button-next{width:32px;height:50%;position:absolute;right:0;top:15%;opacity:.5;cursor:pointer}.button-next:hover{background:#f4f4f4 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABkklEQVQoz+3RQW3DQBCGUUMIlEohUAiFECiFUAiBEAiGEAiFUAbuRvKpahTv7Gyjdd9I38GSD6v/TcuyTHpeRgAAQAAACAAAAQAgAAAEAIAAABAAAAIAQAAACAAAAQAgAAC0Z4Dj8XgozaWldL19Tw0HoB7gvI6/ZCAAqAeYfwA0IQCoBzj9AhBGAFD7oHKZCAACAJkIAIIAWQgAGgBWhI8WBACNACvCOYoAIAGgBQFAEkAUAUAiQAQBQDJALQKADgA1CAA6AWxFANARYAsCgM4AoyPsAmBkhN0AjIqwK4AHCBcAfwPwcgdgBtAZYB3/6w7ACUBHgBHH3w3AqOPvAmDk8YcHeDT+7R8AnQC2jA+gE8DW8QF0AKgZH0AyQO34ABIBIuMDSAKIjg8gAaBlfACNAGXgQ+kzOj6ABoB1/GvL+ACCAFnjAwiUOT6AGMAla3wAMYA5a3wAMYC3rPEBRB5Uroz+Wnq/YUyNB0AAAAgAAAEAIAAABACAAAAQAAACAACAEQAAEAAAAgBAAAAIwD/qG5XegI8D0sP/AAAAAElFTkSuQmCC) -32px 50% no-repeat}body>.messages{display:none}", "" ]);
-}, function(t, e, i) {
     var n = i(260);
     "string" == typeof n && (n = [ [ t.id, n, "" ] ]);
     i(11)(n, {});
     n.locals && (t.exports = n.locals);
 }, function(t, e, i) {
-    e = t.exports = i(3)(), e.push([ t.id, '.fullscreen .column.column-1{z-index:10}.fullscreen .column-1,.fullscreen .column.chart-column{margin-bottom:30px}.fullscreen .column.chart-column .scrollable{overflow:hidden;position:relative}.fullscreen #main .main-column-wrapper{float:right;overflow:hidden}.fullscreen .main-column-wrapper{box-sizing:border-box}.fullscreen .main-column-wrapper>.column{width:100%;box-sizing:border-box;margin-left:0;margin-right:0}.column.column-1{padding-left:15px;padding-right:15px}.column.column-2{width:674px;overflow:hidden;padding:20px}.column.panel.column-2{box-shadow:none;border:0;padding:0;minHeight:600px}.column.column-2 .foot{padding:0}.column.column-2 .scrollable{margin:0}.table{display:table;width:100%}.row{display:table-row}.cell{display:table-cell}.column-1 input[type=text]{width:calc(100% - 20px)}.thumbnail-list-filter .search-icon{margin:4px 2px 0 0}.column-1 .facets{position:relative}.column-1 .facets>ul{padding-left:0}.column-1 .facets>ul ul{padding-left:1em}.column-1 .facets>h2{display:none}.column-1 .facets h3{margin-right:-15px}.column-2 .catalogue-grid .outer{Xheight:112px}.column .catalogue-grid{position:relative;padding-top:1px}.column .catalogue-grid .foot{margin-top:0}.column .catalogue-grid .filter-status{min-height:28px;margin-bottom:0}.chart-column{width:678px;padding-top:15px;padding-bottom:15px;position:relative;display:none}.chart-column .chart{height:320px;min-height:128px;margin-bottom:8px}.chart-column h2{padding:0 2px 10px;font-size:13px;font-weight:400;color:#333;border-bottom:1px solid #eee}.chart-column .controls{border-bottom:1px solid #eee;margin-bottom:10px;padding-bottom:10px;display:none}.chart-controls .bar-2{float:right}.chart-controls .www-chart-parameter-bar{float:left;Xheight:22px;white-space:nowrap}.chart-column .controls>.parameter-control{margin-bottom:0;margin-top:0}.chart-column .controls>div{margin:0 0 5px}.chart-column .controls>div>label{display:inline-block;min-width:10em}.chart-column .controls .parameter-select-plus select{min-width:18em;margin-right:10px}.chart-column .controls .ui-button:hover{background-color:#fafafa}.chart-column .catalogue-grid .outer{margin:20px 0}.chart-column .catalogue-grid .outer .scrollable{margin-right:6px}.chart-column .catalogue-grid .mask{position:absolute;height:460px;width:24px;top:0;right:0;background-color:#fff}.ps-scrollbar-x-rail,.ps-scrollbar-y-rail{z-index:100}.table .cell{padding-top:12px;padding-bottom:12px;border-bottom:1px solid #f0f0f0}.table .row:last-child .cell{border-bottom:0}.column>.group{padding-bottom:12px;border-bottom:1px solid #f0f0f0;margin-right:10px;margin-bottom:12px}.group.packages label{display:block}.group.packages select{width:100%}.column .group .thumbnail-list-filter input{width:calc(100% - 8px)}.column .catalogue-grid .head{position:absolute;top:0;right:0;background:transparent}.column .catalogue-grid .head .burger{padding-right:0}#time-navigator{padding:0;height:33px;margin-top:10px;display:none;min-height:32px}.www-chart-image-wrapper{min-height:100px}.www-chart-image-wrapper .toolbar-wrapper{display:none}.fullscreen .scrollable{-webkit-transition:height .3s linear;transition:height .3s linear}.controls .parameter-time{display:block}.product-name{margin-right:1.5em}.preview.light-dialogue{border-color:#f0f0f0;padding:40px;-webkit-transition:visibility .1s linear;transition:visibility .1s linear;-webkit-transition:opacity .1s linear;transition:opacity .1s linear}.preview.light-dialogue .title{background-color:transparent;border-bottom:1px solid #f0f0f0;padding:10px 0;margin:0 0 10px}.preview.light-dialogue .ui-icon{background-image:url(/static/frontend/contrib/jquery.ui/1.10.4/css/ui-lightness/images/ui-icons_222222_256x240.png)}.preview.drop-shadow-small{box-shadow:2px 2px 2px rgba(31,31,31,.4)}.chart-column .messages{position:absolute;opacity:0}.menu-pane{padding:5px;min-width:100px;max-width:600px}.menu-pane h4{white-space:nowrap}.menu-pane-tip-down{display:none}.column-2.overlay{height:311px}.column-2 .messages{display:none}.col-2-message{z-index:100}.breadcrumbs{position:relative;top:-12px;line-height:6px}.breadcrumbs a{text-decoration:none;padding:0 .4em}.breadcrumbs a:first-child{padding-left:0}.layer-title{margin-bottom:10px}.layer-title h3{font-size:14px;margin:8px 0 0}.layer-title h4{font-weight:400;text-transform:none;margin:0 0 8px;padding-bottom:8px;border-bottom:1px solid #eee}.burger .ui-menu-item a{padding-right:1em}.chart-controls .ui-menu.results-menu{width:320px;right:0;margin-right:-1px;overflow:hidden}.results-menu .foot,.results-menu .head{display:none}#location-overlay{transition:top 0s;width:850px;margin:-450px 0 0 -400px}#location-overlay #left-overlay{width:150px;height:900px;float:left}#location-overlay #left-overlay a{text-decoration:none}#location-overlay #right-overlay{height:900px;margin-left:155px;position:relative}#location-overlay table.form{margin-top:0}#location-overlay .form-help,#location-overlay .form-item-title{display:none}#location-overlay .form-item-value{width:100%}#location-overlay form td{padding:0}#location-overlay .form-item-value label{padding-left:0}#location-overlay .form-item-value{border-bottom:0;padding-top:12px}#location-overlay .form-item-value input{box-sizing:border-box;width:100%;border:1px solid #ccc;margin-bottom:5px}#location-overlay .form-location input.altitude{background-color:#fff}#location-overlay .form-buttons{text-align:left;padding-bottom:12px}#location-overlay #right-overlay img{max-width:10000px}.ui-resizable-s{height:10px}.fade-in{opacity:1}.fade-out{opacity:0}.metadata-help{z-index:1000;position:absolute;background:#d8d8d8;width:600px}#metadata{margin-top:15px;cursor:pointer}#main .chart-column #block-ecmwf-chart-ecmwf-chart-metadata{float:right;margin:20px 0 24px 24px;padding:0 0 0 24px;border:solid #eee;border-width:0 0 0 1px}#chart-legends>div{overflow:auto;margin-left:-40px}#chart-legends>div>div{width:504px;float:left}#chart-legends span{display:inline-block;padding-top:15px}.clickable:before{content:"";display:block;width:18px;height:14px;background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAIAAACQKrqGAAAABmJLR0QA/wD/AP+gvaeTAAAAzklEQVQokZXSMQqEMBAF0D+yIIiF17BQEAttchMri1TeIbfxAB7AQhsRBFvvYSwkJFsERHcXdH81hFf8IUOcczyL89BdKGOMMfaIaq2LoqiqKgiCGyqlBBBFkRAiy7J7CsDzvLIsOee+799QmzRNhRBJkhwvr2Patu1M53lelkVKSUTGmAtd19UOxhgicl23bdvfBZRS+773fd91HYAwDOM4/k0BjONY13XTNLbMuSgAOn+s4zhaawB5niulpmmyLT/XAmAdgGEY8JU/buANeDpWiDs6tjYAAAAASUVORK5CYII=") no-repeat}.grid-items .clickable:before{margin-bottom:-2px;display:inline-block}#admin-menu{display:none}html body.html.admin-menu{margin-top:0!important}', "" ]);
+    e = t.exports = i(3)(), e.push([ t.id, "#content-heading h1{color:#fff}#content-heading h1.ready{color:#000}.fullscreen .main-column-wrapper{width:calc(100% - 316px);position:relative;min-height:400px}.column.column-2{display:none;position:absolute;z-index:19;top:0;left:0;right:0;box-shadow:0 4px 3px -3px #646464}.column-1 .text-filter-row>.cell{padding:0;border:0}.col2-control{padding-bottom:11px;overflow:auto}.col2-control h2{float:left;font-size:14px;margin:0}.col2-control a{float:right;overflow:hidden}.col2-control a div{margin:-10px -30px;padding:10px 30px;float:right}.col2-control a:hover{cursor:pointer}.column-2 .ps-container .ps-scrollbar-y-rail{opacity:.6;background-color:#eee}.column-2 .additional-links{border-top:1px solid #eee;margin-top:16px}.column-2 .additional-links h3{margin:1em 0;padding-left:4px}.column.column-2 .additional-links ul{padding:24px 0 1px;overflow:auto;margin-left:-7px}.column-2 .additional-links li{float:left;width:128px;margin:0 7px}.column-2 .additional-links img{width:128px;height:64px}.column-2 .additional-links .title{height:2.6em;line-height:1.3;text-align:center;text-overflow:ellipsis;color:#000}.column-2 .additional-links a{text-decoration:none}.chart-column h2{font-weight:700;margin:0 0 10px}.product-text>:first-child{margin-top:0}.product-text h2:first-child{padding:1em 0}.product-text *{max-width:10000px}.column-2 .catalogue-grid{Xheight:652px;max-height:20000px;Xmax-height:470px}.catalogue-grid .head{display:none}.ui-autocomplete{z-index:100000}.button-next{width:32px;height:50%;position:absolute;right:0;top:15%;opacity:.5;cursor:pointer}.button-next:hover{background:#f4f4f4 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAABkklEQVQoz+3RQW3DQBCGUUMIlEohUAiFECiFUAiBEAiGEAiFUAbuRvKpahTv7Gyjdd9I38GSD6v/TcuyTHpeRgAAQAAACAAAAQAgAAAEAIAAABAAAAIAQAAACAAAAQAgAAC0Z4Dj8XgozaWldL19Tw0HoB7gvI6/ZCAAqAeYfwA0IQCoBzj9AhBGAFD7oHKZCAACAJkIAIIAWQgAGgBWhI8WBACNACvCOYoAIAGgBQFAEkAUAUAiQAQBQDJALQKADgA1CAA6AWxFANARYAsCgM4AoyPsAmBkhN0AjIqwK4AHCBcAfwPwcgdgBtAZYB3/6w7ACUBHgBHH3w3AqOPvAmDk8YcHeDT+7R8AnQC2jA+gE8DW8QF0AKgZH0AyQO34ABIBIuMDSAKIjg8gAaBlfACNAGXgQ+kzOj6ABoB1/GvL+ACCAFnjAwiUOT6AGMAla3wAMYA5a3wAMYC3rPEBRB5Uroz+Wnq/YUyNB0AAAAgAAAEAIAAABACAAAAQAAACAACAEQAAEAAAAgBAAAAIwD/qG5XegI8D0sP/AAAAAElFTkSuQmCC) -32px 50% no-repeat}body>.messages{display:none}", "" ]);
+}, function(t, e, i) {
+    var n = i(262);
+    "string" == typeof n && (n = [ [ t.id, n, "" ] ]);
+    i(11)(n, {});
+    n.locals && (t.exports = n.locals);
+}, function(t, e, i) {
+    e = t.exports = i(3)(), e.push([ t.id, '.fullscreen .column.column-1{z-index:10}.fullscreen .column-1,.fullscreen .column.chart-column{margin-bottom:30px}.fullscreen .column.chart-column .scrollable{overflow:hidden;position:relative}.fullscreen #main .main-column-wrapper{float:right;overflow:hidden}.fullscreen .main-column-wrapper{box-sizing:border-box}.fullscreen .main-column-wrapper>.column{width:100%;box-sizing:border-box;margin-left:0;margin-right:0}.column.column-1{padding-left:15px;padding-right:15px}.column.column-2{width:674px;overflow:hidden;padding:20px}.column.panel.column-2{box-shadow:none;border:0;padding:0;minHeight:600px}.column.column-2 .foot{padding:0}.column.column-2 .scrollable{margin:0}.table{width:100%}.column-1 input[type=text]{width:calc(100% - 22px)}.thumbnail-list-filter .search-icon{margin:2px 4px 0 0}.column-1 .facets{position:relative}.column-1 .facets>ul{padding-left:0}.column-1 .facets>ul ul{padding-left:1em}.column-1 .facets>h2{display:none}.column-1 .facets h3{margin-right:-15px}.column-2 .catalogue-grid .outer{Xheight:112px}.column .catalogue-grid{position:relative;padding-top:1px}.column .catalogue-grid .foot{margin-top:0}.column .catalogue-grid .filter-status{min-height:28px;margin-bottom:0}.chart-column{width:678px;padding-top:15px;padding-bottom:15px;position:relative;display:none}.chart-column .chart{height:320px;min-height:128px;margin-bottom:8px}.chart-column h2{padding:0 2px 10px;font-size:13px;font-weight:400;color:#333;border-bottom:1px solid #eee}.chart-column .controls{border-bottom:1px solid #eee;margin-bottom:10px;padding-bottom:10px;display:none}.chart-controls .bar-2{float:right}.chart-controls .www-chart-parameter-bar{float:left;Xheight:22px;white-space:nowrap}.chart-column .controls>.parameter-control{margin-bottom:0;margin-top:0}.chart-column .controls>div{margin:0 0 5px}.chart-column .controls>div>label{display:inline-block;min-width:10em}.chart-column .controls .parameter-select-plus select{min-width:18em;margin-right:10px}.chart-column .controls .ui-button:hover{background-color:#fafafa}.chart-column .catalogue-grid .outer{margin:20px 0}.chart-column .catalogue-grid .outer .scrollable{margin-right:6px}.chart-column .catalogue-grid .mask{position:absolute;height:460px;width:24px;top:0;right:0;background-color:#fff}.ps-scrollbar-x-rail,.ps-scrollbar-y-rail{z-index:100}.table .cell{padding-top:12px;padding-bottom:12px;border-bottom:1px solid #f0f0f0}.table .row:last-child .cell{border-bottom:0}.column>.group{padding-bottom:12px;border-bottom:1px solid #f0f0f0;margin-right:10px;margin-bottom:12px}.group.packages label{display:block}.group.packages select{width:100%}.column .group .thumbnail-list-filter input{width:calc(100% - 8px)}.column .catalogue-grid .head{position:absolute;top:0;right:0;background:transparent}.column .catalogue-grid .head .burger{padding-right:0}#time-navigator{padding:0;height:33px;margin-top:10px;display:none;min-height:32px}.www-chart-image-wrapper{min-height:100px}.www-chart-image-wrapper .toolbar-wrapper{display:none}.fullscreen .scrollable{transition:height .3s linear}.controls .parameter-time{display:block}.product-name{margin-right:1.5em}.preview.light-dialogue{border-color:#f0f0f0;padding:40px;transition:visibility .1s linear;transition:opacity .1s linear}.preview.light-dialogue .title{background-color:transparent;border-bottom:1px solid #f0f0f0;padding:10px 0;margin:0 0 10px}.preview.light-dialogue .ui-icon{background-image:url(/static/frontend/contrib/jquery.ui/1.10.4/css/ui-lightness/images/ui-icons_222222_256x240.png)}.preview.drop-shadow-small{box-shadow:2px 2px 2px rgba(31,31,31,.4)}.chart-column .messages{position:absolute;opacity:0}.menu-pane{padding:5px;min-width:100px;max-width:600px}.menu-pane h4{white-space:nowrap}.menu-pane-tip-down{display:none}.column-2.overlay{height:311px}.column-2 .messages{display:none}.col-2-message{z-index:100}.breadcrumbs{position:relative;top:-12px;line-height:6px}.breadcrumbs a{text-decoration:none;padding:0 .4em}.breadcrumbs a:first-child{padding-left:0}.layer-title{margin-bottom:10px}.layer-title h3{font-size:14px;margin:8px 0 0}.layer-title h4{font-weight:400;text-transform:none;margin:0 0 8px;padding-bottom:8px;border-bottom:1px solid #eee}.burger .ui-menu-item a{padding-right:1em}.chart-controls .ui-menu.results-menu{width:320px;right:0;margin-right:-1px;overflow:hidden}.results-menu .foot,.results-menu .head{display:none}#location-overlay{transition:top 0s;width:850px;margin:-450px 0 0 -400px}#location-overlay #left-overlay{width:150px;height:900px;float:left}#location-overlay #left-overlay a{text-decoration:none}#location-overlay #right-overlay{height:900px;margin-left:155px;position:relative}#location-overlay table.form{margin-top:0}#location-overlay .form-help,#location-overlay .form-item-title{display:none}#location-overlay .form-item-value{width:100%}#location-overlay form td{padding:0}#location-overlay .form-item-value label{padding-left:0}#location-overlay .form-item-value{border-bottom:0;padding-top:12px}#location-overlay .form-item-value input{box-sizing:border-box;width:100%;border:1px solid #ccc;margin-bottom:5px}#location-overlay .form-location input.altitude{background-color:#fff}#location-overlay .form-buttons{text-align:left;padding-bottom:12px}#location-overlay #right-overlay img{max-width:10000px}.ui-resizable-s{height:10px}.fade-in{opacity:1}.fade-out{opacity:0}.metadata-help{z-index:1000;position:absolute;background:#d8d8d8;width:600px}#metadata{margin-top:15px;cursor:pointer}#main .chart-column #block-ecmwf-chart-ecmwf-chart-metadata{float:right;margin:20px 0 24px 24px;padding:0 0 0 24px;border:solid #eee;border-width:0 0 0 1px}#chart-legends>div{overflow:auto}#chart-legends>div>div{width:504px;float:left;margin-left:-40px}#chart-legends span{display:inline-block;padding-top:15px}.clickable:before{content:"";display:block;width:18px;height:14px;background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAIAAACQKrqGAAAABmJLR0QA/wD/AP+gvaeTAAAAzklEQVQokZXSMQqEMBAF0D+yIIiF17BQEAttchMri1TeIbfxAB7AQhsRBFvvYSwkJFsERHcXdH81hFf8IUOcczyL89BdKGOMMfaIaq2LoqiqKgiCGyqlBBBFkRAiy7J7CsDzvLIsOee+799QmzRNhRBJkhwvr2Patu1M53lelkVKSUTGmAtd19UOxhgicl23bdvfBZRS+773fd91HYAwDOM4/k0BjONY13XTNLbMuSgAOn+s4zhaawB5niulpmmyLT/XAmAdgGEY8JU/buANeDpWiDs6tjYAAAAASUVORK5CYII=") no-repeat}.grid-items .clickable:before{margin-bottom:-2px;display:inline-block}#admin-menu{display:none}html body.html.admin-menu{margin-top:0!important}', "" ]);
 }, function(t, e, i) {
     var n, o;
     n = [], o = function() {
-        return $(".column-1 > .table").remove(), $(".column-1").css({
+        return $(".column-1 .filters").remove(), $(".column-1").css({
             border: 0
         }), {
             layout: function() {
@@ -21454,22 +21478,26 @@
                     });
                 }, 0);
             },
-            remove: function() {}
+            remove: function() {
+                console.log("epsgram.remove"), $(".column-1 .history-content").parent().remove();
+            }
         };
     }.apply(e, n), !(void 0 !== o && (t.exports = o));
 }, function(t, e, i) {
     var n, o;
-    n = [ i(13), i(14), i(33), i(29), i(26), i(263) ], o = function(t, e, n, o, r, a) {
-        t.options.ajax.backend.get_chart = "/plots/get-map/", t.options.ajax.backend.print_chart || (t.options.ajax.backend.print_chart = "/plots/get-map/"),
-        t.browser.msie || e.extend(n.options, o.same_origin() || {
+    n = [ i(13), i(14), i(37), i(33), i(26), i(265), i(266) ], o = function(t, e, n, o, r, a, s) {
+        t.options.ajax.backend.print_chart || (t.options.ajax.backend.print_chart = "/plots/get-map/"),
+        e.extend(n.options, {
+            cache: a
+        }, o.same_origin() || {
             host: t.options.backend_host
         }, o.same_origin() || t.options.have_cors || {
             dataType: "jsonp"
-        }), t.browser.msie9 && ![ i(267) ];
-        var s = !1;
-        a.history || i(264), !function() {
-            var n = [ i(220), i(221), i(40), i(226), i(39), i(268), i(227), i(247), i(56), i(185), i(25), i(250), i(270) ];
-            (function(n, o, a, l, c) {
+        }), t.browser.msie9 && ![ i(270) ];
+        var l = !1;
+        s.history || i(267), !function() {
+            var n = [ i(220), i(221), i(40), i(226), i(39), i(271), i(227), i(249), i(56), i(185), i(25), i(252), i(273) ];
+            (function(n, o, a, s, c) {
                 function u(i) {
                     var n = {
                         tokens: i.replace(/\/$/, "").split("/")
@@ -21478,7 +21506,7 @@
                     var o = -1;
                     if (t.chart_app && t.chart_app.base_url) o = t.chart_app.base_url.split("/").length - 1; else if (n.tokens.length > 1 && "tcyclone" === n.tokens[1]) o = 1; else {
                         var r = e.map(n.tokens, function(t, i) {
-                            if (~e.inArray(t, [ "charts", "browser" ])) return i;
+                            if (~e.inArray(t, [ "charts", "charts-beta", "browser" ])) return i;
                         });
                         o = r.length ? r[0] : -1;
                     }
@@ -21489,7 +21517,7 @@
                 if (a.original_path = location.pathname, tokens = u(location.pathname), !tokens.app) throw new Error("cannot parse url");
                 a.set_base_path(tokens.base_path), a.app_path = "/" + tokens.app + "/", "tcyclone" === tokens.chart_package && (tokens.app = tokens.chart_package),
                 t.load_app(tokens.app, function(n) {
-                    function l(i) {
+                    function s(i) {
                         if (t.chart_app && g.config.enable_hierarchy) {
                             var n = i.params.product_path.slice(0);
                             n.unshift("charts");
@@ -21505,20 +21533,17 @@
                             });
                         }
                     }
-                    r.get_bus().send("event-start", [ "page start" ]), e.getUserPreference = e.noop,
-                    t.wheelspeed = t.browser.mozilla ? 10 : 1;
-                    var h = e(t.options.dom.main || "#main"), d = h.find(".column-1").find(".table").orelse(function() {
-                        return h.find(".column-1").div(".table");
-                    }), p = h.find(".column-2"), f = h.find(".chart-column").orelse(function() {
+                    e.getUserPreference = e.noop, t.wheelspeed = t.browser.mozilla ? 10 : 1;
+                    var h = e(t.options.dom.main || "#main"), d = h.find(".column-1"), p = h.find(".column-2"), f = h.find(".chart-column").orelse(function() {
                         return h.div(".column chart-column");
                     });
-                    s || d.show();
+                    l || d.show();
                     var m = function(t) {
                         e.extend(this, t), this.widgets = {
                             col1: d,
                             col2: p,
                             col3: f
-                        }, this.centered = s, this.query = {}, this._package = tokens.chart_package, this.show = function() {
+                        }, this.centered = l, this.query = {}, this._package = tokens.chart_package, this.show = function() {
                             this.widgets.col2.panel(e.extend({}, this.config.panel, this.config.col2.panel)),
                             this.widgets.col3.panel(this.config.panel), this.col1.call(g, {
                                 el: d
@@ -21549,15 +21574,7 @@
                     }).bind("layout", function(t, e) {
                         g.layout.mode = 1060 === parseInt(h.css("minWidth"), 10) ? "normal" : "wide", g.do_layout();
                     });
-                    var v = [ [ "/en/forecasts/charts/all", "Charts" ], [ "/en/forecasts/charts/tcyclone", "Tropical cyclones" ], [ "/plots/browser", "Chart browser" ], [ "http://eccharts.ecmwf.int/forecaster/", "Eccharts" ], [ "http://eccharts.ecmwf.int/dashboard/", "Dashboard" ] ];
-                    e("#page-wrapper > .navigation").ul().each(function() {
-                        var t = e(this);
-                        e.each(v, function(e, i) {
-                            t.li().a({
-                                href: i[0]
-                            }).text(i[1]);
-                        });
-                    }), a.route("*", function t(e, i) {
+                    a.route("*", function t(e, i) {
                         e.query = c.parse(e.querystring), i();
                     }).route("/:app", function(t, i) {
                         e("body.not-front").length && t.pathname !== a.original_path && (location.href = t.pathname);
@@ -21568,7 +21585,7 @@
                             n = n.tokens, n.shift();
                             var r = "/" !== t.params[0][t.params[0].length - 1];
                             t.params.product = r && n.pop() || null, t.params.package = o;
-                            var s = {
+                            var l = {
                                 pkg: o !== g._package,
                                 product: {
                                     url: (a._path.page || null) !== t.params.product
@@ -21580,15 +21597,15 @@
                                     return console.log("ROUTE: qparam changed:", r), r;
                                 }()
                             };
-                            return t.params.product_path = n, a.params = t.params, (e.isEmptyObject(a._path) || s.product.url || s.pkg || s.q) && g.on_url_change(t, s),
-                            l(t), void (g.prev = {
+                            return t.params.product_path = n, a.params = t.params, (e.isEmptyObject(a._path) || l.product.url || l.pkg || l.q) && g.on_url_change(t, l),
+                            s(t), void (g.prev = {
                                 product: t.params.product
                             });
                         }
                         return t.path.indexOf("/auth/login") > -1 ? void (location.href = t.path) : (console.log("route not found"),
                         void (location.href = t.canonicalPath));
                     }).start(), !function() {
-                        var t = [ i(271) ];
+                        var t = [ i(274) ];
                         (function() {
                             var t = !1, n = r.get_bus();
                             e(document).shortcuts({
@@ -21611,7 +21628,7 @@
                                     key: 51,
                                     callback: function() {
                                         !function() {
-                                            var t = [ i(272) ];
+                                            var t = [ i(275) ];
                                             (function(t) {
                                                 var n = e.fn.chart && e(".chart").chart("instance") || e.fn.basicChart && e(".basic").basicChart("instance");
                                                 n && n.add_plugin("Timers", t) ? !function() {
@@ -21632,7 +21649,7 @@
                                     key: 61,
                                     callback: function() {
                                         !function() {
-                                            var t = [ i(272) ];
+                                            var t = [ i(275) ];
                                             (function(t) {
                                                 var i = e.fn.chart && e(".chart").chart("instance");
                                                 i && i.add_plugin("Timers", t) ? (i.options.messageBus.clear().listen_once("chart-content-update", function() {
@@ -21659,6 +21676,59 @@
                 });
             }).apply(null, n);
         }();
+    }.apply(e, n), !(void 0 !== o && (t.exports = o));
+}, function(t, e, i) {
+    var n, o;
+    n = [ i(14) ], o = function(t) {
+        function e() {
+            var t = new Date(), e = [];
+            for (var i in o) {
+                var n = [], r = 0;
+                for (var a in o[i]) {
+                    var s = o[i][a];
+                    if (r++, s.timeout && "forever" !== s.timeout) {
+                        var l = (t.getTime() - s.inserted.getTime()) / 1e3;
+                        l > s.timeout && n.push(a);
+                    }
+                    n.length == r && e.push(i);
+                    for (var c in n) delete o[i][n[c]];
+                }
+                for (c in e) delete o[e[c]];
+            }
+        }
+        function i(e) {
+            return "undefined" == typeof e || t.isEmptyObject(e) ? 0 : JSON.stringify(e).length;
+        }
+        function n(e) {
+            return "string" == typeof e ? e : t.makeCacheKey(e);
+        }
+        var o = new function t() {}();
+        return setInterval(e, 3e5), t(document).bind("debug", function() {
+            console.log("Caches: " + ECMWF.prettyJSON(o));
+        }), {
+            get: function(e, i) {
+                o[e] || (o[e] = {}), i = n(i);
+                var r = o[e][i];
+                if (r) {
+                    if (r.timeout && "forever" !== r.timeout) {
+                        var a = new Date(), s = (a.getTime() - r.inserted.getTime()) / 1e3;
+                        if (s > r.timeout) return void delete o[e][i];
+                    }
+                    return t.cloneObject(r.value);
+                }
+            },
+            put: function(e, i, r, a) {
+                o[e] || (o[e] = {}), i = n(i), o[e][i] = {
+                    value: t.cloneObject(r),
+                    timeout: a,
+                    inserted: new Date()
+                };
+            },
+            clear: function() {
+                var t = i(o);
+                return o = {}, t;
+            }
+        };
     }.apply(e, n), !(void 0 !== o && (t.exports = o));
 }, function(t, e) {
 
@@ -21741,7 +21811,7 @@
     (function(t) {
 
         !function(a) {
-            if (i(266).amd) {
+            if (i(269).amd) {
                 if ("undefined" != typeof requirejs) {
                     var s = requirejs, l = "[history" + new Date().getTime() + "]", c = s.onError;
                     a.toString = function() {
@@ -21764,8 +21834,8 @@
                     var s = r._pathname, l = r._protocol;
                     t = "" + t, t = /^(?:\w+\:)?\/\//.test(t) ? 0 === t.indexOf("/") ? l + t : t : l + "//" + r._host + (0 === t.indexOf("/") ? t : 0 === t.indexOf("?") ? s + t : 0 === t.indexOf("#") ? s + r._search + t : s.replace(/[^\/]+$/g, "") + t);
                 }
-                z.href = t;
-                var c = o.exec(z.href), u = c[2] + (c[3] ? ":" + c[3] : ""), h = c[4] || "/", d = c[5] || "", p = "#" === c[6] ? "" : c[6] || "", f = h + d + p, m = h.replace(new RegExp("^" + N.basepath, "i"), N.type) + d;
+                L.href = t;
+                var c = o.exec(L.href), u = c[2] + (c[3] ? ":" + c[3] : ""), h = c[4] || "/", d = c[5] || "", p = "#" === c[6] ? "" : c[6] || "", f = h + d + p, m = h.replace(new RegExp("^" + N.basepath, "i"), N.type) + d;
                 return {
                     _href: c[1] + "//" + u + f,
                     _protocol: c[1],
@@ -21787,7 +21857,7 @@
             function n() {
                 var t;
                 try {
-                    t = b.sessionStorage, t.setItem(L + "t", "1"), t.removeItem(L + "t");
+                    t = b.sessionStorage, t.setItem(z + "t", "1"), t.removeItem(z + "t");
                 } catch (e) {
                     t = {
                         getItem: function(t) {
@@ -21801,12 +21871,12 @@
                     };
                 }
                 try {
-                    K = x.parse(t.getItem(L)) || {};
+                    K = x.parse(t.getItem(z)) || {};
                 } catch (t) {
                     K = {};
                 }
                 F(Q + "unload", function() {
-                    t.setItem(L, x.stringify(K));
+                    t.setItem(z, x.stringify(K));
                 }, !1);
             }
             function o(e, i, n, o) {
@@ -21982,7 +22052,7 @@
                 redirect: 0,
                 type: "/",
                 init: 0
-            }, L = "__historyAPI__", z = _.createElement("a"), G = k.href, U = "", W = 1, Y = !1, q = 0, K = {}, J = {}, Z = _.title, V = {
+            }, z = "__historyAPI__", L = _.createElement("a"), G = k.href, U = "", W = 1, Y = !1, q = 0, K = {}, J = {}, Z = _.title, V = {
                 onhashchange: null,
                 onpopstate: null
             }, X = function(t, e) {
@@ -22073,7 +22143,7 @@
             };
             return v() ? (E.emulate = !T, b[D] = a, b[P] = s, b[H] = l, E) : void 0;
         });
-    }).call(e, i(265)(t));
+    }).call(e, i(268)(t));
 }, function(t, e) {
     t.exports = function(t) {
         return t.webpackPolyfill || (t.deprecate = function() {}, t.paths = [], t.children = [],
@@ -22087,7 +22157,7 @@
     console.trace = function() {};
 }, function(t, e, i) {
     var n, o;
-    n = [ i(14), i(26), i(119), i(137), i(143), i(152), i(269), i(270) ], o = function(t, e, i, n, o, r) {
+    n = [ i(14), i(26), i(128), i(146), i(152), i(161), i(272), i(273) ], o = function(t, e, i, n, o, r) {
         function a() {
             var t = window.getSelection ? window.getSelection() : document.selection ? document.selection : null;
             t && (t.empty ? t.empty() : t.removeAllRanges());
@@ -22770,7 +22840,7 @@
     }.apply(e, n), !(void 0 !== o && (t.exports = o));
 }, function(t, e, i) {
     var n, o;
-    n = [ i(14), i(173), i(47), i(273) ], o = function(t, e, i) {
+    n = [ i(14), i(173), i(47), i(276) ], o = function(t, e, i) {
         t.chartRegisterPlugin("Timers", function(n) {
             function o(t, e) {
                 function i(t) {
@@ -22796,7 +22866,7 @@
     }.apply(e, n), !(void 0 !== o && (t.exports = o));
 }, function(t, e, i) {
     var n, o;
-    n = [ i(14), i(33) ], o = function(t, e) {
+    n = [ i(14), i(37) ], o = function(t, e) {
         e.add_callback(function(e, i) {
             function n(e, i) {
                 i.push(e.task), t.each(e.timers, function(t, e) {
