@@ -9,7 +9,7 @@ This repository contains a build of the application. The source files can be fou
 
 ### setup
 
- * The widget will take over the whole page. By default the widget will look for two divs which the page must provide: '.column-1' and '.column-2'
+ * By default the widget will use the '#chart-browser' element. You can specify a different selector in ECMWF.options.dom.main
  * The widget will inspect the url to determine what to display. For example the url /somepath/charts/s2s/ which cause the 's2s' chart package to be displayed.
  * Ideally your webserver should serve the same page for all paths under, for example, /somepath/charts/. This is so that users can go directly to a specific chart rather than the chart listing.
 
